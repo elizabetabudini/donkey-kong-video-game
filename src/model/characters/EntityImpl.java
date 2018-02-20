@@ -1,6 +1,6 @@
 package model.characters;
 
-public class EntityImpl implements Entity {
+public abstract class EntityImpl implements Entity {
 
     private int x;
     private int y;
@@ -35,10 +35,7 @@ public class EntityImpl implements Entity {
     }
 
     @Override
-    public void move(Direction dir) {
-        // TODO Auto-generated method stub
-
-    }
+    abstract public void move(Direction dir);
 
     @Override
     public Direction currentDirection() {

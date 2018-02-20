@@ -5,9 +5,9 @@ public class EntityImpl implements Entity {
     private int x;
     private int y;
     private Direction lastDirection = Direction.RIGHT;
-    private boolean isClimbing = false;
-    private boolean isJumping = false;
-    private boolean isAlive = true;
+    private boolean climbing;
+    private boolean jumping;
+    private boolean alive = true;
 
     public EntityImpl(final int x, final int y) {
         this.x = x;
@@ -52,17 +52,17 @@ public class EntityImpl implements Entity {
 
     @Override
     public boolean isClimbing() {
-        return isClimbing;
+        return climbing;
     }
 
     @Override
     public boolean isJumping() {
-        return isJumping;
+        return jumping;
     }
 
     @Override
     public boolean isAlive() {
-        return isAlive;
+        return alive;
     }
 
 }

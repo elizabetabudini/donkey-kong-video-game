@@ -65,7 +65,14 @@ public interface Entity {
      * @return True if the character is climbing, false otherwise.
      */
     boolean isClimbing();
-
+    
+    /**
+     * Returns whether or not the character is jumping.
+     * 
+     * @return True if the character is jumping, false otherwise.
+     */
+    boolean isJumping();
+    
     /**
      * Returns whether or not the character is still alive.
      * 

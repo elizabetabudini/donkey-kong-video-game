@@ -1,26 +1,14 @@
 package model.entities;
 
+import model.game.GameElement;
+
 /**
  * An interface modeling a basic Entity with methods to return and set the current position/direction.
  *
  */
 
-public interface Entity {
-
-    /**
-     * Returns the X coordinate of the entity.
-     * 
-     * @return The X coordinate
-     */
-    int getX();
-
-    /**
-     * Returns the Y coordinate of the entity.
-     * 
-     * @return The Y coordinate
-     */
-    int getY();
-
+public interface Entity extends GameElement {
+    
     /**
      * Sets the new coordinate for the X.
      * 
@@ -50,7 +38,7 @@ public interface Entity {
      * 
      * @return The current direction.
      */
-    Direction currentDirection();
+    Direction getCurrentDirection();
 
     /*
      * Sets the new direction for the entity

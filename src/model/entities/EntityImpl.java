@@ -1,6 +1,10 @@
 package model.entities;
 
-public abstract class EntityImpl implements Entity {
+import java.awt.Dimension;
+
+import model.game.GameElementImpl;
+
+public abstract class EntityImpl extends GameElementImpl implements Entity {
 
     private int x;
     private int y;
@@ -9,9 +13,8 @@ public abstract class EntityImpl implements Entity {
     private boolean jumping;
     private boolean alive = true;
 
-    public EntityImpl(final int x, final int y) {
-        this.x = x;
-        this.y = y;
+    public EntityImpl(final int x, final int y, final Dimension dim ) {
+        super(x, y, dim);
     }
 
     @Override
@@ -38,7 +41,7 @@ public abstract class EntityImpl implements Entity {
     abstract public void move(Direction dir);
 
     @Override
-    public Direction currentDirection() {
+    public Direction getCurrentDirection() {
         return lastDirection;
     }
 

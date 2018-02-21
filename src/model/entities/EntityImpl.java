@@ -1,4 +1,4 @@
-package model.characters;
+package model.entities;
 
 public abstract class EntityImpl implements Entity {
 

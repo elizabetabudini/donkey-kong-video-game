@@ -1,4 +1,4 @@
-package model.characters;
+package model.entities;
 
 /**
  * An interface modeling a basic Entity with methods to return and set the current position/direction.

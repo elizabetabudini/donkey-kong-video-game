@@ -3,7 +3,7 @@ package model.game;
 import java.awt.Rectangle;
 
 /**
- * An interface modeling a basic game element with methods to return and set the current position.
+ * An interface modeling a basic game element with methods to return current position/hitbox.
  *
  */
 
@@ -23,7 +23,7 @@ public interface GameElement {
     int getY();
     
     /**
-     * This methods returns the element's hitbox geometric figure 
+     * This methods returns the element's hitbox. 
      * 
      * @return A geometric figure representing the element's hitbox.
      */

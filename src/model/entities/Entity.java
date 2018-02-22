@@ -31,36 +31,22 @@ public interface Entity extends GameElement {
      * @param dir
      *            The direction chosen.
      */
-    void move(Direction dir);
+    void move(Movement dir);
 
     /**
      * Returns the current direction.
      * 
      * @return The current direction.
      */
-    Direction getCurrentDirection();
+    Movement getCurrentDirection();
 
     /*
      * Sets the new direction for the entity
      * 
      * @param dir The new direction.
      */
-    void setDirection(Direction dir);
+    void setDirection(Movement dir);
 
-    /**
-     * Returns whether or not the character is climbing stairs.
-     * 
-     * @return True if the character is climbing, false otherwise.
-     */
-    boolean isClimbing();
-    
-    /**
-     * Returns whether or not the character is jumping.
-     * 
-     * @return True if the character is jumping, false otherwise.
-     */
-    boolean isJumping();
-    
     /**
      * Returns whether or not the character is still alive.
      * 

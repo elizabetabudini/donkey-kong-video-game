@@ -8,9 +8,7 @@ public abstract class EntityImpl extends GameElementImpl implements Entity {
 
     private int x;
     private int y;
-    private Direction lastDirection = Direction.RIGHT;
-    private boolean climbing;
-    private boolean jumping;
+    private Movement lastDirection = Movement.RIGHT;
     private boolean alive = true;
 
     public EntityImpl(final int x, final int y, final Dimension dim ) {
@@ -28,36 +26,32 @@ public abstract class EntityImpl extends GameElementImpl implements Entity {
     }
 
     @Override
-    public void setX(int x) {
+    public void setX(final int x) {
         this.x = x;
     }
 
     @Override
-    public void setY(int y) {
+    public void setY(final int y) {
         this.y = y;
     }
 
+    //template method to compute moving
     @Override
-    abstract public void move(Direction dir);
+    public void move(final Movement dir) {
+        tryToMove(dir);
+    }
+    
+    
+    protected abstract void tryToMove(final Movement dir);
 
     @Override
-    public Direction getCurrentDirection() {
+    public Movement getCurrentDirection() {
         return lastDirection;
     }
 
     @Override
-    public void setDirection(Direction dir) {
+    public void setDirection(final Movement dir) {
         this.lastDirection = dir;
-    }
-
-    @Override
-    public boolean isClimbing() {
-        return climbing;
-    }
-
-    @Override
-    public boolean isJumping() {
-        return jumping;
     }
 
     @Override

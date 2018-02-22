@@ -1,13 +1,27 @@
 package model.entities;
 
-import model.game.GameElement;
+import java.awt.Rectangle;
 
 /**
- * An interface modeling a basic Entity with methods to return and set the current position/direction.
+ * An interface modeling a basic game element with methods to return current position/hitbox.
  *
  */
 
-public interface Entity extends GameElement {
+public interface Entity {
+    
+    /**
+     * This methods returns the current X coordinate of the element.
+     * 
+     * @return An integer representing the X coord.
+     */
+    int getX();
+
+    /**
+     * This methods returns the current Y coordinate of the element.
+     * 
+     * @return An integer representing the Y coord.
+     */
+    int getY();
     
     /**
      * Sets the new coordinate for the X.
@@ -24,34 +38,12 @@ public interface Entity extends GameElement {
      *            The new Y.
      */
     void setY(int y);
-
+    
     /**
-     * Moves the character in the dir direction.
+     * This methods returns the element's hitbox. 
      * 
-     * @param dir
-     *            The direction chosen.
+     * @return A geometric figure representing the element's hitbox.
      */
-    void move(Movement dir);
-
-    /**
-     * Returns the current direction.
-     * 
-     * @return The current direction.
-     */
-    Movement getCurrentDirection();
-
-    /*
-     * Sets the new direction for the entity
-     * 
-     * @param dir The new direction.
-     */
-    void setDirection(Movement dir);
-
-    /**
-     * Returns whether or not the character is still alive.
-     * 
-     * @return True if the character is alive, false otherwise.
-     */
-    boolean isAlive();
+    Rectangle getHitbox();
 
 }

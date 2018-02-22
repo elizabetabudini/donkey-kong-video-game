@@ -1,30 +1,29 @@
 package model.entities;
 
 import java.awt.Dimension;
+import java.awt.Rectangle;
 
-import model.game.GameElementImpl;
-
-public abstract class EntityImpl extends GameElementImpl implements Entity {
-
+public class EntityImpl implements Entity{
     private int x;
     private int y;
-    private Movement lastDirection = Movement.RIGHT;
-    private boolean alive = true;
-
-    public EntityImpl(final int x, final int y, final Dimension dim ) {
-        super(x, y, dim);
+    private Dimension hitboxDim;
+    
+    public EntityImpl(final int x, final int y, final Dimension dim) {
+        this.x = x;
+        this.y = y;
+        this.hitboxDim = dim;
     }
 
     @Override
     public int getX() {
-        return this.x;
+        return x;
     }
 
     @Override
     public int getY() {
-        return this.y;
+        return y;
     }
-
+    
     @Override
     public void setX(final int x) {
         this.x = x;
@@ -35,28 +34,9 @@ public abstract class EntityImpl extends GameElementImpl implements Entity {
         this.y = y;
     }
 
-    //template method to compute moving
     @Override
-    public void move(final Movement dir) {
-        tryToMove(dir);
-    }
-    
-    
-    protected abstract void tryToMove(final Movement dir);
-
-    @Override
-    public Movement getCurrentDirection() {
-        return lastDirection;
-    }
-
-    @Override
-    public void setDirection(final Movement dir) {
-        this.lastDirection = dir;
-    }
-
-    @Override
-    public boolean isAlive() {
-        return alive;
+    public Rectangle getHitbox() {
+        return (Rectangle) this.hitboxDim.clone();
     }
 
 }

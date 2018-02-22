@@ -8,12 +8,4 @@ public class Princess extends EntityImpl{
         super(x, y, dim);
     }
 
-    
-    @Override
-    protected void tryToMove(Movement dir) {
-        return;
-    }
-
-  
-
 }

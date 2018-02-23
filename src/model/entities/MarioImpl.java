@@ -22,10 +22,9 @@ public class MarioImpl extends DynamicEntityImpl implements Mario{
         } else if (dir == Movement.RIGHT) {
             this.setDeltaX(this.getDeltaX() + 1);
         }
-        if (dir == Movement.JUMP) {
-            if (this.getDeltaY() == 0) {
+        if (dir == Movement.JUMP && this.getDeltaY() == 0) {
                 jump();
-            }
+            
         }
     }
 
@@ -38,20 +37,17 @@ public class MarioImpl extends DynamicEntityImpl implements Mario{
 
     @Override
     public boolean isClimbing() {
-        // TODO Auto-generated method stub
         return isClimbing;
     }
 
     @Override
     public boolean isJumping() {
-        // TODO Auto-generated method stub
         return isJumping;
     }
 
     @Override
     protected void update() {
-        // TODO Auto-generated method stub
-        
+      
     }
 
 }

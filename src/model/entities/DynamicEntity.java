@@ -6,6 +6,7 @@ package model.entities;
  */
 
 public interface DynamicEntity extends Entity {
+    
 
     /**
      * Moves the character in the dir direction.

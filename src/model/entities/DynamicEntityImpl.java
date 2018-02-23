@@ -2,6 +2,8 @@ package model.entities;
 
 import java.awt.Dimension;
 
+import javax.activation.UnsupportedDataTypeException;
+
 public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEntity {
 
     private boolean isAffectedByGravity;
@@ -23,10 +25,15 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     //template method to compute moving
     @Override
     public void move(final Movement dir) {
+        update();
         tryToMove(dir);
+        this.setX(this.getX()+deltaX);
+        this.setY(this.getY()+deltaY);
     }
     
     protected abstract void tryToMove(final Movement dir);
+    
+    protected abstract void update();
 
     @Override
     public Movement getCurrentDirection() {
@@ -39,7 +46,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     }
     
     @Override
-    public void setState(boolean alive) {
+    public void setState(final boolean alive) {
        this.alive = alive;
     }
 
@@ -47,5 +54,22 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     public boolean isAlive() {
         return alive;
     }
-
+    
+    protected double getDeltaX() {
+        return this.deltaX;
+    }
+    
+    protected double getDeltaY() {
+        return this.deltaY;
+    }
+    
+    protected void setDeltaY(final double dY) {
+        this.deltaY = dY;
+    }
+    
+    protected void setDeltaX(final double dX) {
+        this.deltaY = dX;
+    }
+    
+    
 }

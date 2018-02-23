@@ -16,7 +16,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     static final double GAME_GRAVITY = 0.30;
     
     
-    public DynamicEntityImpl(final int x, final int y, final Dimension dim, final boolean gravity) {
+    public DynamicEntityImpl(final Double x, final Double y, final Dimension dim, final boolean gravity) {
         super(x, y, dim);
         this.isAffectedByGravity = gravity;
     }

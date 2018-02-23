@@ -2,8 +2,6 @@ package model.entities;
 
 import java.awt.Dimension;
 
-import getStarted.Movement;
-
 public class MarioImpl extends DynamicEntityImpl implements Mario{
     
     private boolean isClimbing;
@@ -12,7 +10,7 @@ public class MarioImpl extends DynamicEntityImpl implements Mario{
     private final int xBorder = 200;
     
     
-    public MarioImpl(final int x,final int y, final Dimension dim) {
+    public MarioImpl(final Double x,final Double y, final Dimension dim) {
         super(x, y, dim, true);
     }
 

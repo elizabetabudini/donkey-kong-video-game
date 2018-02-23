@@ -14,14 +14,14 @@ public interface Entity {
      * 
      * @return An integer representing the X coord.
      */
-    int getX();
+    Double getX();
 
     /**
      * This methods returns the current Y coordinate of the element.
      * 
      * @return An integer representing the Y coord.
      */
-    int getY();
+    Double getY();
     
     /**
      * Sets the new coordinate for the X.
@@ -29,7 +29,7 @@ public interface Entity {
      * @param x
      *            The new X.
      */
-    void setX(int x);
+    void setX(Double x);
 
     /**
      * Sets the new coordinate for the Y.
@@ -37,7 +37,7 @@ public interface Entity {
      * @param y
      *            The new Y.
      */
-    void setY(int y);
+    void setY(Double y);
     
     /**
      * This methods returns the element's hitbox. 

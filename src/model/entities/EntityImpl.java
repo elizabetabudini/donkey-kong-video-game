@@ -4,33 +4,33 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 
 public class EntityImpl implements Entity{
-    private int x;
-    private int y;
+    private Double x;
+    private Double y;
     private Dimension hitboxDim;
     
-    public EntityImpl(final int x, final int y, final Dimension dim) {
+    public EntityImpl(final Double x, final Double y, final Dimension dim) {
         this.x = x;
         this.y = y;
         this.hitboxDim = dim;
     }
 
     @Override
-    public int getX() {
+    public Double getX() {
         return x;
     }
 
     @Override
-    public int getY() {
+    public Double getY() {
         return y;
     }
     
     @Override
-    public void setX(final int x) {
+    public void setX(final Double x) {
         this.x = x;
     }
 
     @Override
-    public void setY(final int y) {
+    public void setY(final Double y) {
         this.y = y;
     }
 

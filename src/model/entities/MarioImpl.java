@@ -6,6 +6,8 @@ public class MarioImpl extends DynamicEntityImpl implements Mario{
     
     private boolean isClimbing;
     private boolean isJumping;
+    private static double JUMP_DISTANCE = 2;
+    
     // da cambiare e prendere da model.game
     private final int xBorder = 200;
     
@@ -23,16 +25,14 @@ public class MarioImpl extends DynamicEntityImpl implements Mario{
             this.setDeltaX(this.getDeltaX() + 1);
         }
         if (dir == Movement.JUMP && this.getDeltaY() == 0) {
-                jump();
-            
+            this.jump();
         }
     }
 
     private void jump() {
         isJumping = true;
-        this.setDeltaY(2);
+        this.setDeltaY(JUMP_DISTANCE);
         this.setDeltaX(this.getDeltaX()*1.5);
-
     }
 
     @Override

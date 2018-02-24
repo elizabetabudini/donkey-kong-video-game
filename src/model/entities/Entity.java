@@ -3,7 +3,7 @@ package model.entities;
 import java.awt.Rectangle;
 
 /**
- * An interface modeling a basic game element with methods to return current position/hitbox.
+ * An interface modeling a basic game entity with methods to return current position/hitbox.
  *
  */
 

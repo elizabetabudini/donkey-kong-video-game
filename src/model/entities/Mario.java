@@ -14,6 +14,10 @@ public interface Mario {
      */
     boolean isJumping();
     
-    
-    
+    /**
+     * Tells Mario to stop moving in the dir direction.
+     * If mario is currently not moving, the method does nothing.
+     */
+    void stopMoving(Movement dir);
+ 
 }

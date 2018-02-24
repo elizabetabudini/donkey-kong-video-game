@@ -2,7 +2,6 @@ package model.entities;
 
 import java.awt.Dimension;
 
-import javax.activation.UnsupportedDataTypeException;
 
 public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEntity {
 
@@ -66,7 +65,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     }
     
     protected void setDeltaX(final double dX) {
-        this.deltaY = dX;
+        this.deltaX = dX;
     }
     
     

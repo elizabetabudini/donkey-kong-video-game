@@ -2,26 +2,33 @@ package model.entities;
 
 import java.awt.Dimension;
 
-public class MarioImpl extends DynamicEntityImpl implements Mario {
+public class MarioImpl extends DynamicEntityImpl implements Mario,DynamicEntity {
 
     private boolean climbing;
     private boolean jumping;
     private final static double JUMP_DISTANCE = 2;
+    private final static double STEP = 1;
 
     // da cambiare e prendere da model.game
     private final int xBorder = 200;
 
     public MarioImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
+        if(x<0 || x>xBorder) {
+            throw new IllegalArgumentException("The character can only be spawned inside game border");
+        }
     }
 
     @Override
     protected void tryToMove(final Movement dir) {
         this.setDirection(dir);
         if (dir == Movement.LEFT) {
-            this.setDeltaX(this.getDeltaX() - 1);
+            this.setDeltaX(-STEP);
         } else if (dir == Movement.RIGHT) {
-            this.setDeltaX(this.getDeltaX() + 1);
+            this.setDeltaX(STEP);
+        }
+        if(!isWithinBorder()) {
+            stopMoving(dir);
         }
         if (dir == Movement.JUMP && this.getDeltaY() == 0) {
             this.jump();
@@ -47,6 +54,22 @@ public class MarioImpl extends DynamicEntityImpl implements Mario {
     @Override
     protected void update() {
 
+    }
+    
+    private boolean isWithinBorder() {
+        final double newCoord = this.getX()+this.getDeltaX();
+        return newCoord>0 && newCoord<=xBorder;
+    }
+    
+
+    @Override
+    public void stopMoving(final Movement dir) {
+        if (dir == Movement.LEFT || dir == Movement.RIGHT) {
+            this.setDeltaX(0);
+        }
+        if((dir == Movement.UP || dir == Movement.DOWN)&& !jumping){
+            this.setDeltaY(0);
+        }
     }
 
 }

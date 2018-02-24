@@ -2,18 +2,17 @@ package model.entities;
 
 import java.awt.Dimension;
 
-public class MarioImpl extends DynamicEntityImpl implements Mario{
-    
-    private boolean isClimbing;
-    private boolean isJumping;
-    private static double JUMP_DISTANCE = 2;
-    
+public class MarioImpl extends DynamicEntityImpl implements Mario {
+
+    private boolean climbing;
+    private boolean jumping;
+    private final static double JUMP_DISTANCE = 2;
+
     // da cambiare e prendere da model.game
     private final int xBorder = 200;
-    
-    
-    public MarioImpl(final Double x,final Double y, final Dimension dim) {
-        super(x, y, dim, true);
+
+    public MarioImpl(final Double x, final Double y, final Dimension dim) {
+        super(x, y, dim);
     }
 
     @Override
@@ -30,24 +29,24 @@ public class MarioImpl extends DynamicEntityImpl implements Mario{
     }
 
     private void jump() {
-        isJumping = true;
+        jumping = true;
         this.setDeltaY(JUMP_DISTANCE);
-        this.setDeltaX(this.getDeltaX()*1.5);
+        this.setDeltaX(this.getDeltaX() * 1.5);
     }
 
     @Override
     public boolean isClimbing() {
-        return isClimbing;
+        return climbing;
     }
 
     @Override
     public boolean isJumping() {
-        return isJumping;
+        return jumping;
     }
 
     @Override
     protected void update() {
-      
+
     }
 
 }

@@ -6,19 +6,17 @@ import javax.activation.UnsupportedDataTypeException;
 
 public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEntity {
 
-    private boolean isAffectedByGravity;
-    private double deltaX = 0;
-    private double deltaY = 0;
+    private double deltaX ;
+    private double deltaY ;
     private Movement lastDirection = Movement.RIGHT;
     private boolean alive = true;
     
     //da muovere in model.game
-    static final double GAME_GRAVITY = 0.30;
+    private static final double GAME_GRAVITY = 0.30;
     
     
-    public DynamicEntityImpl(final Double x, final Double y, final Dimension dim, final boolean gravity) {
+    public DynamicEntityImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
-        this.isAffectedByGravity = gravity;
     }
 
 

@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 public class EntityImpl implements Entity{
     private Double x;
     private Double y;
-    private Dimension hitboxDim;
+    private final Dimension hitboxDim;
     
     public EntityImpl(final Double x, final Double y, final Dimension dim) {
         this.x = x;

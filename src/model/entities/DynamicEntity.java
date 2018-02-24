@@ -1,5 +1,7 @@
 package model.entities;
 
+import java.util.Optional;
+
 /**
  * An interface modeling a dynamic entity with methods to manage the current position/direction.
  *
@@ -14,7 +16,7 @@ public interface DynamicEntity extends Entity {
      * @param dir
      *            The direction chosen.
      */
-    void move(Movement dir);
+    void move(final Optional<Movement> dir);
 
     /**
      * Returns the current direction.

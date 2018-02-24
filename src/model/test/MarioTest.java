@@ -1,6 +1,8 @@
 package model.test;
 
 import java.awt.Dimension;
+import java.util.Optional;
+
 import static org.junit.Assert.*;
 import org.junit.jupiter.api.Test;
 
@@ -15,12 +17,12 @@ public class MarioTest {
     @Test
     public void testMarioMovement() {
         final MarioImpl tester = new MarioImpl(10.0, 20.0, new Dimension());
-        tester.move(Movement.LEFT);
+        tester.move(Optional.of(Movement.LEFT));
         assertEquals(Double.valueOf(9.0), Double.valueOf(tester.getX()));
-        tester.move(Movement.RIGHT);
+        tester.move(Optional.of(Movement.RIGHT));
         assertEquals(Double.valueOf(10.0), Double.valueOf(tester.getX()));
         for(int i=0; i<500;i++) {
-            tester.move(Movement.RIGHT);
+            tester.move(Optional.of(Movement.RIGHT));
         }
         //Mario is not supposed to go over game borders.
         assertEquals(Double.valueOf(200.0), Double.valueOf(tester.getX()));

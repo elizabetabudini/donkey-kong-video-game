@@ -1,6 +1,7 @@
 package model.entities;
 
 import java.awt.Dimension;
+import java.util.Optional;
 
 
 public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEntity {
@@ -21,9 +22,12 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
 
     //template method to compute moving
     @Override
-    public void move(final Movement dir) {
+    public void move(final Optional<Movement> dir) {
         update();
-        tryToMove(dir);
+        if(!dir.isPresent()) {
+            return;
+        }
+        tryToMove(dir.get());
         this.setX(this.getX()+deltaX);
         this.setY(this.getY()+deltaY);
     }

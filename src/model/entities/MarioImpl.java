@@ -56,6 +56,10 @@ public class MarioImpl extends DynamicEntityImpl implements Mario,DynamicEntity 
 
     }
     
+    /**
+     * Checks whether or not Mario is trying to move outside game's borders.
+     * @return true if Mario is still within borders, false otherwise.
+     */
     private boolean isWithinBorder() {
         final double newCoord = this.getX()+this.getDeltaX();
         return newCoord>0 && newCoord<=xBorder;

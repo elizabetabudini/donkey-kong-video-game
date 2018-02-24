@@ -16,7 +16,7 @@ public interface Mario {
     
     /**
      * Tells Mario to stop moving in the dir direction.
-     * If mario is currently not moving, the method does nothing.
+     * If Mario is currently not moving, the method does nothing.
      */
     void stopMoving(Movement dir);
  

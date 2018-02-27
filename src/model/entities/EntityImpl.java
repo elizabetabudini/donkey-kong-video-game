@@ -2,11 +2,13 @@ package model.entities;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.geom.Point2D;
 
 public class EntityImpl implements Entity{
     private Double x;
     private Double y;
     private final Dimension hitboxDim;
+    final private Point2D position;
     
     /**
      * Constructor for a generic Entity inside the game.
@@ -18,6 +20,7 @@ public class EntityImpl implements Entity{
         this.x = x;
         this.y = y;
         this.hitboxDim = dim;
+        this.position = new Point2D.Double(x, y);
     }
 
     @Override
@@ -43,6 +46,11 @@ public class EntityImpl implements Entity{
     @Override
     public Rectangle getHitbox() {
         return (Rectangle) this.hitboxDim.clone();
+    }
+
+    @Override
+    public Point2D getPosition() {
+        return position;
     }
 
 }

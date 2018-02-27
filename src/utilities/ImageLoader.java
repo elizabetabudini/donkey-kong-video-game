@@ -23,7 +23,7 @@ public final class ImageLoader {
 
 	/**
 	 * In order to guarantee fully thread-safeness, the SINGLETON instance's definition is nested inside the main class ImageLoader.
-	 * The Singleton will be created upon the first call to ImageLoader().
+	 * The Singleton will be created upon the first call to getInstance().
 	 */
 	private static class LoaderSingleton {
 	       private static final ImageLoader INSTANCE = new ImageLoader();
@@ -39,9 +39,9 @@ public final class ImageLoader {
 	
 
 	/**
-	 * This method is used to return the ImageIcon represented by the path.
+	 * This method is used to return an ImageIcon out of the file represented by the path.
 	 * @param path The image's path inside the project folder.
-	 * @return The ImageIcon represented by the path.
+	 * @return An imageicon of the input image.
 	 */
 	public ImageIcon getImage(final String path) {
 		if (!this.loadedImages.containsKey(path)) {

@@ -6,6 +6,7 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 import org.junit.jupiter.api.Test;
 
+import model.entities.Mario;
 import model.entities.MarioImpl;
 import model.entities.Movement;
 
@@ -16,7 +17,7 @@ public class MarioTest {
      */
     @Test
     public void testMarioMovement() {
-        final MarioImpl tester = new MarioImpl(10.0, 20.0, new Dimension());
+        final Mario tester = new MarioImpl(10.0, 20.0, new Dimension());
         tester.move(Optional.of(Movement.LEFT));
         assertEquals(Double.valueOf(9.0), Double.valueOf(tester.getX()));
         tester.move(Optional.of(Movement.RIGHT));
@@ -26,7 +27,9 @@ public class MarioTest {
         }
         //Mario is not supposed to go over game borders.
         assertEquals(Double.valueOf(200.0), Double.valueOf(tester.getX()));
-        
+        tester.move(Optional.empty());
+        //If direction is empty, Mario should not move.
+        assertEquals(Double.valueOf(200.0), Double.valueOf(tester.getX()));
     }
     
     /*

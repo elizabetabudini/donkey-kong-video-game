@@ -1,6 +1,6 @@
 package model.entities;
 
-public interface Mario {
+public interface Mario extends DynamicEntity{
     
     /**
      * Returns whether or not Mario is climbing.

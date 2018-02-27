@@ -19,9 +19,9 @@ public interface DynamicEntity extends Entity {
     void move(final Optional<Movement> dir);
 
     /**
-     * Returns the current direction.
+     * This methods returns  the current direction.
      * 
-     * @return The current direction.
+     * @return A movement representing the current direction.
      */
     Movement getCurrentDirection();
 

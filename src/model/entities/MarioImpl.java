@@ -19,6 +19,7 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
         }
     }
 
+    //da aggiungere climbing status 
     @Override
     protected void tryToMove(final Movement dir) {
         this.setDirection(dir);

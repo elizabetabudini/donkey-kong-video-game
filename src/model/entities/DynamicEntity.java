@@ -25,7 +25,7 @@ public interface DynamicEntity extends Entity {
      */
     Movement getCurrentDirection();
 
-    /*
+    /**
      * Sets the new direction for the entity
      * 
      * @param dir The new direction.

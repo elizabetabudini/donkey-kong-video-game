@@ -16,7 +16,7 @@ public enum Movement {
      * The character tries to climb DOWN.
      */
     DOWN,
-    /*
+    /**
      * The character tries to move right.
      */
     RIGHT,

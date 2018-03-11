@@ -6,10 +6,10 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
 
     private boolean climbing;
     private boolean jumping;
-    private final static double JUMP_DISTANCE = 2;
+    private final static double JUMP_DISTANCE = -2;
     private final static double STEP = 1;
 
-    // da cambiare e prendere da model.game
+    // da cambiare e prendere da model.game (bordo della mappa)
     private final int xBorder = 200;
 
     public MarioImpl(final Double x, final Double y, final Dimension dim) {

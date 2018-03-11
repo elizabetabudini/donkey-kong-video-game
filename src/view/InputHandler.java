@@ -18,8 +18,11 @@ import model.entities.Movement;
 public final class InputHandler extends KeyAdapter {
 
     private final Map<Movement, Boolean> activeInputs;
-    private final Map<Integer, Movement> registeredInputs = new HashMap<>();
+    private final Map<Integer, Movement> registeredKeys = new HashMap<>();
 
+    /**
+     * A constructor for the Inputhandler, it initializes all inputs to false and builds the register of all recognized keys.
+     */
     public InputHandler() {
         super();
         activeInputs = EnumSet.allOf(Movement.class).stream().collect(Collectors.toMap(e -> e, e -> false));
@@ -27,15 +30,15 @@ public final class InputHandler extends KeyAdapter {
     }
 
     private void buildRegisteredInputs() {
-        registeredInputs.put(KeyEvent.VK_DOWN, Movement.DOWN); // Move Down
-        registeredInputs.put(KeyEvent.VK_S, Movement.DOWN);
-        registeredInputs.put(KeyEvent.VK_RIGHT, Movement.RIGHT); // Move Right
-        registeredInputs.put(KeyEvent.VK_D, Movement.RIGHT);
-        registeredInputs.put(KeyEvent.VK_UP, Movement.UP); // Move Up
-        registeredInputs.put(KeyEvent.VK_W, Movement.UP);
-        registeredInputs.put(KeyEvent.VK_LEFT, Movement.LEFT); // Move Left
-        registeredInputs.put(KeyEvent.VK_A, Movement.LEFT);
-        registeredInputs.put(KeyEvent.VK_SPACE, Movement.JUMP); // Plant a bomb
+        registeredKeys.put(KeyEvent.VK_DOWN, Movement.DOWN); // Move Down
+        registeredKeys.put(KeyEvent.VK_S, Movement.DOWN);
+        registeredKeys.put(KeyEvent.VK_RIGHT, Movement.RIGHT); // Move Right
+        registeredKeys.put(KeyEvent.VK_D, Movement.RIGHT);
+        registeredKeys.put(KeyEvent.VK_UP, Movement.UP); // Move Up
+        registeredKeys.put(KeyEvent.VK_W, Movement.UP);
+        registeredKeys.put(KeyEvent.VK_LEFT, Movement.LEFT); // Move Left
+        registeredKeys.put(KeyEvent.VK_A, Movement.LEFT);
+        registeredKeys.put(KeyEvent.VK_SPACE, Movement.JUMP); // Plant a bomb
     }
 
     /**
@@ -47,8 +50,8 @@ public final class InputHandler extends KeyAdapter {
      */
     @Override
     public void keyPressed(final KeyEvent e) {
-        if (registeredInputs.containsKey(e.getKeyCode())) {
-            this.activeInputs.replace(registeredInputs.get(e.getKeyCode()), true);
+        if (registeredKeys.containsKey(e.getKeyCode())) {
+            this.activeInputs.replace(registeredKeys.get(e.getKeyCode()), true);
         }
     }
 
@@ -61,8 +64,8 @@ public final class InputHandler extends KeyAdapter {
      */
     @Override
     public void keyReleased(final KeyEvent e) {
-        if (registeredInputs.containsKey(e.getKeyCode())) {
-            this.activeInputs.replace(registeredInputs.get(e.getKeyCode()), false);
+        if (registeredKeys.containsKey(e.getKeyCode())) {
+            this.activeInputs.replace(registeredKeys.get(e.getKeyCode()), false);
         }
     }
 

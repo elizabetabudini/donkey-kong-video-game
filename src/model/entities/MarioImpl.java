@@ -19,7 +19,7 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
         }
     }
 
-    //da aggiungere climbing status 
+    //da aggiungere climbing status e metodo istouchingground()
     @Override
     protected void tryToMove(final Movement dir) {
         this.setDirection(dir);
@@ -31,7 +31,7 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
         if (!isWithinBorder()) {
             stopMoving(dir);
         }
-        if (dir == Movement.JUMP && this.getDeltaY() == 0) {
+        if (dir == Movement.JUMP && isTouchingGround() == 0) {
             this.jump();
         }
     }

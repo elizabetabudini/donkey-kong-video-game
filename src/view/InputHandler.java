@@ -77,7 +77,7 @@ public final class InputHandler extends KeyAdapter {
      * Parses all the registered inputs
      * 
      * @param inputState
-     *            True to check all active inputs, false otherwise.
+     *            True to find all active inputs, false otherwise.
      * @return A set containing all the inputs matching the @param inputState.
      */
     public Set<Movement> parser(final boolean inputState) {

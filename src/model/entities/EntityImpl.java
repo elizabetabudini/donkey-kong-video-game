@@ -45,7 +45,7 @@ public class EntityImpl implements Entity{
 
     @Override
     public Rectangle getHitbox() {
-        return (Rectangle) this.hitboxDim.clone();
+        return new Rectangle((int)this.x, (int)this.y, hitboxDim.width, hitboxDim.height);
     }
 
     @Override

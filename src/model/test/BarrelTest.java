@@ -19,9 +19,9 @@ public class BarrelTest {
     @Test
     public void testBarrel() {
         final BarrelFactory bf = new BarrelFactoryImpl();
-        final Barrel simpleBarrel = bf.createSimpleBarrel(10.0, 20.0, new Dimension());
-        final Mario tester = new MarioImpl(10.0, 20.0, new Dimension());
-        //tester.move(Optional.of(Movement.RIGHT));
+        final Barrel simpleBarrel = bf.createSimpleBarrel(10.0, 20.0, new Dimension(100,100));
+        final Mario tester = new MarioImpl(9.0, 20.0, new Dimension(100,100));
+        tester.move(Optional.of(Movement.RIGHT));
         assertTrue("The barrel was supposed to hit Mario", simpleBarrel.isColliding(tester));
     }
 

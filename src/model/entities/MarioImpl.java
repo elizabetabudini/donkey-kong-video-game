@@ -31,7 +31,7 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
         if (!isWithinBorder()) {
             stopMoving(dir);
         }
-        if (dir == Movement.JUMP && isTouchingGround() == 0) {
+        if (dir == Movement.JUMP && isTouchingGround()) {
             this.jump();
         }
     }

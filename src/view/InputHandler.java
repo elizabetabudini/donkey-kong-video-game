@@ -38,7 +38,7 @@ public final class InputHandler extends KeyAdapter {
         registeredKeys.put(KeyEvent.VK_W, Movement.UP);
         registeredKeys.put(KeyEvent.VK_LEFT, Movement.LEFT); // Move Left
         registeredKeys.put(KeyEvent.VK_A, Movement.LEFT);
-        registeredKeys.put(KeyEvent.VK_SPACE, Movement.JUMP); // Plant a bomb
+        registeredKeys.put(KeyEvent.VK_SPACE, Movement.JUMP); // Jump
     }
 
     /**

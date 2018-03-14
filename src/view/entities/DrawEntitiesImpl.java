@@ -12,13 +12,13 @@ public class DrawEntitiesImpl implements DrawEntities{
     }
 
     
-    
+    //metodo da chiamare per tutte le entità da disegnare sulla bufferedimage
     @Override
     public void draw(final Map<Entity, String> entitiesToDraw) {
         
     }
     
-    //return a bufferedImage
+    //return a bufferedImage, da usare in paintcomponent()
     public void getImage() {
         
     }

@@ -1,6 +1,7 @@
 package model.entities;
 
 import java.awt.Dimension;
+import java.util.Optional;
 
 public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity {
 
@@ -21,17 +22,20 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
 
     //da aggiungere climbing status e metodo istouchingground()
     @Override
-    protected void tryToMove(final Movement dir) {
-        this.setDirection(dir);
-        if (dir == Movement.LEFT) {
+    protected void tryToMove(final Optional<Movement> dir) {
+        if(!dir.isPresent()) {
+            return;
+        }
+        this.setDirection(dir.get());
+        if (dir.get() == Movement.LEFT) {
             this.setDeltaX(-STEP);
-        } else if (dir == Movement.RIGHT) {
+        } else if (dir.get() == Movement.RIGHT) {
             this.setDeltaX(STEP);
         }
         if (!isWithinBorder()) {
-            stopMoving(dir);
+            stopMoving(dir.get());
         }
-        if (dir == Movement.JUMP && isTouchingGround()) {
+        if (dir.get() == Movement.JUMP && isTouchingGround()) {
             this.jump();
         }
     }
@@ -44,6 +48,7 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
 
     @Override
     protected void update() {
+        this.setDeltaY(this.getDeltaY()-GAME.GRAVITY);
 
     }
 

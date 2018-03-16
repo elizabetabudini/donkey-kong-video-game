@@ -30,9 +30,9 @@ public class BarrelImpl extends DynamicEntityImpl implements Barrel, DynamicEnti
         }
         this.setDirection(dir.get());
         if (dir.get() == Movement.LEFT) {
-            this.setDeltaX(-STEP);
+            this.setDeltaY(-STEP);
         } else if (dir.get() == Movement.RIGHT) {
-            this.setDeltaX(STEP);
+            this.setDeltaY(STEP);
         }
         /*TODO*/
     }

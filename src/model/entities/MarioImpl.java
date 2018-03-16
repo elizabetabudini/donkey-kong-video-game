@@ -71,7 +71,7 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
         }
         if ((dir == Movement.UP || dir == Movement.DOWN) && !jumping) {
             this.setDeltaY(0);
-        }
+        }       
     }
 
     @Override

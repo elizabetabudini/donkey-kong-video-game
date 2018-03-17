@@ -9,7 +9,7 @@ public class DonkeyKong extends EntityImpl implements StaticEntity {
     
     private final BarrelFactory bf ;
     private final AgentBarrels barrels;
-    private volatile List<Barrel> barrelsList;
+    private List<Barrel> barrelsList;
 
     public DonkeyKong(Double x, Double y, Dimension dim) {
         super(x, y, dim);

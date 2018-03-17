@@ -11,10 +11,10 @@ import model.entities.DonkeyKong;
 public class DonkeyKongTest {
 
     @Test
-    public void testBarrelsCreation(){
+    public void testBarrelsCreation() throws InterruptedException {
         final DonkeyKong dk = new DonkeyKong(9.0, 9.0, new Dimension(20, 20));
-        List<Barrel> l = dk.getBarrelsList();
-        assertEquals(1, dk.getBarrelsList().size(),"One barrel bas supposed to be created");
-        
+        final List<Barrel> l = dk.getBarrelsList();
+        Thread.sleep(200);
+        assertEquals(1, dk.getBarrelsList().size(), "One barrel was supposed to be created");
     }
 }

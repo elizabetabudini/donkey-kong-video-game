@@ -2,8 +2,7 @@ package utilities;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.swing.ImageIcon;
+import javafx.scene.image.Image;
 
 
 
@@ -12,7 +11,7 @@ import javax.swing.ImageIcon;
  * Since we only need one object of this class, this class was designed using the Singleton pattern to avoid copies.
  */
 public final class ImageLoader {
-	private final Map<String, ImageIcon> loadedImages = new HashMap<>();
+	private final Map<String, Image> loadedImages = new HashMap<>();
 	
 	/**
 	 * Since the class was designed using Singleton pattern, the constructor is private.
@@ -39,13 +38,13 @@ public final class ImageLoader {
 	
 
 	/**
-	 * This method is used to return an ImageIcon out of the file represented by the path.
+	 * This method is used to return an Image out of the file represented by the path.
 	 * @param path The image's path inside the project folder.
-	 * @return An imageicon of the input image.
+	 * @return An image of the input image.
 	 */
-	public ImageIcon getImage(final String path) {
+	public Image getImage(final String path) {
 		if (!this.loadedImages.containsKey(path)) {
-			this.loadedImages.put(path, new ImageIcon("res/" + path));
+			this.loadedImages.put(path, new Image("res/" + path));
 		}
 		return this.loadedImages.get(path);
 	}

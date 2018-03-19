@@ -24,7 +24,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
         if (!dir.isPresent()) {
             return;
         }
-        tryToMove(dir.get());
+        tryToMove(dir);
         this.setX(this.getX() + deltaX);
         this.setY(this.getY() + deltaY);
     }
@@ -36,7 +36,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      * @param dir
      *            The direction in which the entity wants to move.
      */
-    protected abstract void tryToMove(final Movement dir);
+    protected abstract void tryToMove(final Optional<Movement> dir);
 
     /**
      * Method to update the entity : e.g: apply gravity.

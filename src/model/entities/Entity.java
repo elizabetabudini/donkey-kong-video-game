@@ -13,14 +13,14 @@ public interface Entity {
     /**
      * This methods returns the current X coordinate of the element.
      * 
-     * @return An integer representing the X coord.
+     * @return A double representing the X coord.
      */
     Double getX();
 
     /**
      * This methods returns the current Y coordinate of the element.
      * 
-     * @return An integer representing the Y coord.
+     * @return A double representing the Y coord.
      */
     Double getY();
     

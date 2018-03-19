@@ -43,7 +43,7 @@ public final class ImageLoader {
 	 * @param path The image's path inside the project folder.
 	 * @return An imageicon of the input image.
 	 */
-	public ImageIcon getImage(final String path) {
+	public ImageIcon getIcon(final String path) {
 		if (!this.loadedImages.containsKey(path)) {
 			this.loadedImages.put(path, new ImageIcon("res/" + path));
 		}

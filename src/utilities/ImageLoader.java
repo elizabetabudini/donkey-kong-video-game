@@ -42,7 +42,9 @@ public final class ImageLoader {
 	 * @param path The image's path inside the project folder.
 	 * @return An image of the input image.
 	 */
+
 	public Image getImage(final String path) {
+
 		if (!this.loadedImages.containsKey(path)) {
 			this.loadedImages.put(path, new Image("res/" + path));
 		}

@@ -48,8 +48,9 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
 
     @Override
     protected void update() {
+        if(!isTouchingGround()) {
         this.setDeltaY(this.getDeltaY()-GAME.GRAVITY);
-
+        }
     }
 
     /**
@@ -69,7 +70,7 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
         }
         if ((dir == Movement.UP || dir == Movement.DOWN) && !jumping) {
             this.setDeltaY(0);
-        }
+        }       
     }
 
     @Override

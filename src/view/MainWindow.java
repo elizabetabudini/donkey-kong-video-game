@@ -1,16 +1,12 @@
 package view;
-
-import java.awt.Toolkit;
-
 import javafx.application.Application;
-import javafx.geometry.Dimension2D;
 import javafx.stage.Stage;
 import utilities.ImageLoader;
 
 
 public class MainWindow extends Application{
-    private static final double WIDTH = 700;
-    private static final double HEIGHT = 700;
+    private static final double WIDTH = 600;
+    private static final double HEIGHT = 600;
     private final Stage mainWindow = new Stage();
 
     /**
@@ -20,16 +16,17 @@ public class MainWindow extends Application{
     }
 
     /**
-     * It starts the JavaFX application.
+     * It starts the general application.
      */
     @Override
     public void start(final Stage primaryStage) {
-       /*primaryStage.getIcons().add(ImageLoader.getInstance().getImage("donkeyIcon.png"));*/
+        primaryStage.getIcons().add(ImageLoader.getLoader().getImage("icons/donkeyIcon.png"));
         primaryStage.setHeight(HEIGHT);
         primaryStage.setWidth(WIDTH);
         primaryStage.setTitle("Donkey Kong");
         primaryStage.centerOnScreen();
         primaryStage.setResizable(false);
+        
         primaryStage.setScene(MainMenu.get(this.mainWindow));
         primaryStage.show();
     }

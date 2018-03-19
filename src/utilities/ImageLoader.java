@@ -47,7 +47,7 @@ public final class ImageLoader {
                 }
                 return this.loadedImages.get(path);
         } catch (final Exception e) {
-                System.out.println("Error while loading " + path);
+                System.out.println("Error loading file: " + path);
         }
         return null;
 	}

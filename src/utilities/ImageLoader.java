@@ -4,37 +4,33 @@ import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.image.Image;
 
-
-
 /**
- * This class is used to obtain a new ImageIcon from the filename.
- * Since we only need one object of this class, this class was designed using the Singleton pattern to avoid copies.
+ * This class is used to obtain a new Image from the filename.
+ * Since we only need one object of this class, this class is designed using the Singleton pattern to avoid copies.
  */
 public final class ImageLoader {
-	private final Map<String, Image> loadedImages = new HashMap<>();
+        private static ImageLoader imgl;
+	private final Map<String, Image> loadedImages;
 	
 	/**
-	 * Since the class was designed using Singleton pattern, the constructor is private.
-	 */
-	private ImageLoader() {
-		
-	}
-
-	/**
-	 * In order to guarantee fully thread-safeness, the SINGLETON instance's definition is nested inside the main class ImageLoader.
-	 * The Singleton will be created upon the first call to getInstance().
-	 */
-	private static class LoaderSingleton {
-	       private static final ImageLoader INSTANCE = new ImageLoader();
-	    }
-	
-	/**
-	 * Upon the first call, this method will create a new Singleton instance.
-	 * @return The Singleton instance of the ImageLoader.
-	 */
-	public static ImageLoader getInstance() {
-        return LoaderSingleton.INSTANCE;
-    }
+         * Creates a new ImageLoader.
+         */
+        private ImageLoader() {
+                this.loadedImages = new HashMap<>();
+        }
+        
+        /**
+         * Returns the Singleton instance of the ImageLoader. If it's the
+         * first call creates a new instance.
+         *
+         * @return the Singleton instance of the ImageLoader.
+         */
+        public static ImageLoader getLoader() {
+                if (ImageLoader.imgl == null) {
+                        ImageLoader.imgl = new ImageLoader();
+                }
+                return ImageLoader.imgl;
+        }
 	
 
 	/**
@@ -45,10 +41,15 @@ public final class ImageLoader {
 
 	public Image getImage(final String path) {
 
-		if (!this.loadedImages.containsKey(path)) {
-			this.loadedImages.put(path, new Image("res/" + path));
-		}
-		return this.loadedImages.get(path);
+	    try {
+                if (!this.loadedImages.containsKey(path)) {
+                        this.loadedImages.put(path, new Image(ImageLoader.class.getResourceAsStream("/" + path)));
+                }
+                return this.loadedImages.get(path);
+        } catch (final Exception e) {
+                System.out.println("Error while loading " + path);
+        }
+        return null;
 	}
 
 }

@@ -51,7 +51,6 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
         if(!isTouchingGround()) {
         this.setDeltaY(this.getDeltaY()-GAME.GRAVITY);
         }
-
     }
 
     /**

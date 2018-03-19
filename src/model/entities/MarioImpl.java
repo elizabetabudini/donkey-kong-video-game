@@ -3,16 +3,15 @@ package model.entities;
 import java.awt.Dimension;
 import java.util.Optional;
 
+import model.ModelImpl;
+
 public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity {
 
     private boolean climbing;
     private boolean jumping;
     private final static double JUMP_DISTANCE = -2;
     private final static double STEP = 1;
-
-    // da cambiare e prendere da model.game (bordo della mappa)
-    private final int xBorder = 200;
-
+    
     public MarioImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
         if (x < 0 || x > xBorder) {
@@ -49,7 +48,7 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
     @Override
     protected void update() {
         if(!isTouchingGround()) {
-        this.setDeltaY(this.getDeltaY()-GAME.GRAVITY);
+        this.setDeltaY(this.getDeltaY()-ModelImpl.GRAVITY);
         }
     }
 
@@ -60,7 +59,7 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
      */
     private boolean isWithinBorder() {
         final double newCoord = this.getX() + this.getDeltaX();
-        return newCoord > 0 && newCoord <= xBorder;
+        return newCoord > 0 && newCoord <= ModelImpl.WIDTH;
     }
 
     @Override

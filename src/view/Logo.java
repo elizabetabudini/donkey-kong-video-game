@@ -10,7 +10,7 @@ import utilities.ImageLoader;
 public final class Logo {
 
     private final ImageLoader imageLoader = ImageLoader.getLoader();
-    private final ImageView logo = new ImageView(this.imageLoader.getImage("images/logo.png"));
+    private final ImageView logo = new ImageView(this.imageLoader.getImageFromPath("images/logo.png"));
 
     /**
      * Constructor of the class. It set ups the size of the logo.

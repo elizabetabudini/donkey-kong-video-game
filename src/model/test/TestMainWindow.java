@@ -1,5 +1,6 @@
-package view;
+package model.test;
 import javafx.application.Application;
+import view.MainWindow;
 
 public class TestMainWindow {
         

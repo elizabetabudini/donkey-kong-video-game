@@ -4,7 +4,7 @@ import javafx.stage.Stage;
 import utilities.ImageLoader;
 
 
-public class MainWindow extends Application{
+public class MainWindow extends Application {
     private static final double WIDTH = 600;
     private static final double HEIGHT = 600;
     private final Stage mainWindow = new Stage();
@@ -20,7 +20,7 @@ public class MainWindow extends Application{
      */
     @Override
     public void start(final Stage primaryStage) {
-        primaryStage.getIcons().add(ImageLoader.getLoader().getImage("icons/donkeyIcon.png"));
+        //primaryStage.getIcons().add(ImageLoader.getLoader().getImage("icons/donkeyIcon.png"));
         primaryStage.setHeight(HEIGHT);
         primaryStage.setWidth(WIDTH);
         primaryStage.setTitle("Donkey Kong");

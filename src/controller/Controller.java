@@ -24,16 +24,8 @@ public class Controller implements ControllerInterface {
 
     }
 
-    @Override
-    public void abortGameLoop() {
-        if (this.gameloop.isPresent()) {
-            this.gameloop.get().abort();
-            this.gameloop = Optional.empty();
-        }
-    }
-    @Override
-    public boolean isGameLoopRunning() {
-        return this.gameloop.isPresent();
-    }
+
+
+
 
 }

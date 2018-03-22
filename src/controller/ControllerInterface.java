@@ -17,12 +17,5 @@ public interface ControllerInterface {
      */
     void startGameLoop();
     
-    /**
-     * Checks if the game loop is running.
-     *
-     * @return True if there is a running GameLoop, false otherwise.
-     */
-    boolean isGameLoopRunning();
-
-    void abortGameLoop();
+   
 }

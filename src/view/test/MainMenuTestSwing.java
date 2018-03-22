@@ -1,10 +1,10 @@
 package view.test;
 
-import view.MenuSwing;
+import view.MainMenu;
 
 public class MainMenuTestSwing {
     public static void main(String[] args){
-        new MenuSwing();
+        new MainMenu();
 }
 
 }

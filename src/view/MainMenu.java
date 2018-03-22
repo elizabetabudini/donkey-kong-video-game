@@ -1,78 +1,93 @@
 package view;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import view.Logo;
+import java.awt.*;
+import java.util.stream.IntStream;
 
+import javax.swing.*;
 
-public class MainMenu extends Scene {
-    private static final double WIDTH = 500;
-    private static final double HEIGHT = 500;
-    private static final double BUTTON_WIDTH = 250;
-
-    private static final double WIDTH_LOGO = 600;
-    private static final double HEIGHT_LOGO = 200;
-    private static final MainMenu MAINSCENE = new MainMenu();
-
-    private static Stage mainStage;
-    private final Button newGame = new Button("New Game");
-    private final Button highScores = new Button("High Scores");
-    private final Button options = new Button("Options");
-    private final Button info = new Button("Info");
-    private final Button exit = new Button("Exit");
-
-    /**
-     * Constructor of the class. It sets up the Scene.
-     */
-    private MainMenu() {
-        super(new StackPane(), WIDTH, HEIGHT);
+public class MainMenu extends JFrame{
+    
+    private static final Insets TITLE_INSETS = new Insets(20, 0, 20, 0);
+    private static final Insets BUTTON_INSETS = new Insets(-15, 20, 20, 20);
+    private static final Insets IMAGE_INSETS = new Insets(20, 20, 20, 40);
+    private static final Double HIGH = 0.4;
+    private static final Double WIDGHT = 0.6;
+//    private final Dimension s;
+    private final JButton newGame;
+    private final JButton highscores;
+    private final JButton info;
+    private final JButton exit;
+    private static final int NUM_BUTTONS = 4;
+    
+    public MainMenu() {
         
-        final StackPane logoBox = new StackPane();
-        final Logo logo = new Logo(WIDTH_LOGO, HEIGHT_LOGO);
-        logoBox.setAlignment(Pos.TOP_CENTER);
-        logoBox.getChildren().add(logo.getLogo());
-        logoBox.setPadding(new Insets(60));
-
-        final VBox vbox = new VBox(newGame, highScores, options, info, exit);
-        vbox.setPrefWidth(BUTTON_WIDTH);
-        vbox.setAlignment(Pos.BOTTOM_CENTER);
-        vbox.setSpacing(15);
-        vbox.setPadding(new Insets(200));
-
-        this.newGame.setMinWidth(vbox.getPrefWidth());
-        this.highScores.setMinWidth(vbox.getPrefWidth());
-        this.options.setMinWidth(vbox.getPrefWidth());
-        this.info.setMinWidth(vbox.getPrefWidth());
-        this.exit.setMinWidth(vbox.getPrefWidth());
-        this.exit.setOnAction(e->{
+        //inizializza bottoni
+        newGame= new JButton("New Game");
+        newGame.setIcon(new ImageIcon("res/icons/jump_right.png"));
+        highscores=new JButton("High Scores");
+        info= new JButton("Info");
+        exit= new JButton("Exit");
+        exit.addActionListener(e->{
             System.exit(0);
         });
-        //aggiungere action listener degli altri bottoni
+        
+        JFrame frame = new JFrame();
+        frame.setTitle("Main Menu - DonkeyKong");
+        frame.setSize(500, 550);
+        //frame.setIconImage(new Image("res/icons/donkeyIcon.png"));
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //frame.setSize(Toolkit.getDefaultToolkit().get, height);
+        
+     // imposta gridbag layout
+        final JPanel panel = new JPanel();
+        panel.setBackground(Color.BLACK);
+        final GridBagLayout gblPanel = new GridBagLayout();
+        gblPanel.columnWeights = new double[]{2.0, 1.0};
+        gblPanel.rowWeights = new double[]{2.0, 1.0};
+        panel.setLayout(gblPanel);
+        
+        // setta i constraints
+        final GridBagConstraints cnst = new GridBagConstraints();
+        cnst.gridx = 0;
+        cnst.gridy = 0;
+        cnst.fill = GridBagConstraints.BOTH;
 
-        final StackPane layout = new StackPane();
-        layout.getChildren().addAll(logoBox, vbox);
+        // Sets title menu
+        final JLabel lblTitle = new JLabel();
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTitle.setIcon(new ImageIcon("res/images/logo.png"));
+        cnst.gridwidth = 2;
+        cnst.insets = TITLE_INSETS;
+        panel.add(lblTitle, cnst);
+        cnst.gridy++;
 
-        this.setRoot(layout);
+        // Sets buttons
+        cnst.gridwidth = 1;
+        cnst.insets = BUTTON_INSETS;
+        
+        panel.add(newGame, cnst);
+        cnst.gridy++;
+        panel.add(highscores, cnst);
+        cnst.gridy++;
+        panel.add(info, cnst);
+        cnst.gridy++;
+        panel.add(exit, cnst);
+      
+
+        // Sets image
+        final JLabel lblImage = new JLabel();
+        lblImage.setIcon(new ImageIcon("res/icons/donkey-kong.gif"));
+        cnst.gridheight = NUM_BUTTONS;
+        cnst.insets = IMAGE_INSETS;
+        cnst.gridx = 1;
+        cnst.gridy = 1;
+        panel.add(lblImage, cnst);
+
+        this.setLayout(new BorderLayout());
+        
+        frame.add(panel);
+        frame.setVisible(true);
     }
 
-    /**
-     * Getter of this Scene.
-     * 
-     * @param mainWindow
-     *            The Stage to place this Scene.
-     * @return The current Scene.
-     */
-    static MainMenu get(final Stage mainWindow) {
-        mainStage = mainWindow;
-        mainStage.setWidth(WIDTH);
-        mainStage.setHeight(HEIGHT);
-        mainStage.centerOnScreen();
-        mainStage.setTitle("Donkey Kong - Menu");
-        return MAINSCENE;
-    }
+
 }

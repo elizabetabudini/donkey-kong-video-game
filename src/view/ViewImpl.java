@@ -19,7 +19,7 @@ public class ViewImpl implements ViewInterface {
     }
 
     public void startView() {
-        Application.launch(MainWindow.class);
+        new MainMenu();
     }
     
   

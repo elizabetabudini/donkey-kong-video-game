@@ -1,4 +1,4 @@
-package model.test;
+package view.test;
 import javafx.application.Application;
 import view.MainWindow;
 

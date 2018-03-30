@@ -20,7 +20,6 @@ public final class ImageLoader {
      * private.
      */
     private ImageLoader() {
-
     }
 
     /**

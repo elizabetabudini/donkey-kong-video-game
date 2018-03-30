@@ -8,6 +8,8 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
+import utilities.ImageLoader;
+
 
 public class DrawableCanvas {
 
@@ -33,7 +35,7 @@ public class DrawableCanvas {
     }
 
     private void initBackGround() {
-        Graphics2D g = backGround.createGraphics();
+        final Graphics2D g = backGround.createGraphics();
         drawOnLayer(g, loader.getImage(backGroundPath).getImage(), new Point(0, 0), new Dimension(width, height));
     }
 
@@ -50,8 +52,8 @@ public class DrawableCanvas {
      * @param x The entity 's X coordinate.
      * @param y The entity 's Y coordinate.
      */
-    public void drawentity(Image toDraw, final int x, final int y) {
-        Graphics2D g = foreGround.createGraphics();
+    public void drawentity(final Image toDraw, final int x, final int y) {
+        final Graphics2D g = foreGround.createGraphics();
         drawOnLayer(g, toDraw, new Point(x, y), new Dimension(20, 20));
     }
 

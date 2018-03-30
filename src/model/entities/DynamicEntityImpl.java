@@ -3,6 +3,11 @@ package model.entities;
 import java.awt.Dimension;
 import java.util.Optional;
 
+/**
+ * An implementation of a DynamicEntity, this class extends a basic entity and
+ * adds methods to manage movements.
+ * 
+ */
 public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEntity {
 
     private double deltaX;
@@ -10,16 +15,19 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     private Movement lastDirection = Movement.RIGHT;
     private boolean alive = true;
 
-    // da muovere in model.game
-    private static final double GAME_GRAVITY = 0.30;
-
+    /**
+     * A constructor for a dynamic entity.
+     * @param x The starting x Coordinate.
+     * @param y The starting Y Coordinate.
+     * @param dim Dimension of the Entity's hitbox
+     */
     public DynamicEntityImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
     }
 
     // template method to compute moving and update the entity.
     @Override
-    public void move(final Optional<Movement> dir) {
+    public final void move(final Optional<Movement> dir) {
         tryToMove(dir);
         this.setX(this.getX() + deltaX);
         this.setY(this.getY() + deltaY);
@@ -33,7 +41,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      * @param dir
      *            The direction in which the entity wants to move.
      */
-    protected abstract void tryToMove(final Optional<Movement> dir);
+    protected abstract void tryToMove(Optional<Movement> dir);
 
     /**
      * Method to update the entity : e.g: apply gravity.
@@ -41,22 +49,22 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     protected abstract void update();
 
     @Override
-    public Movement getCurrentDirection() {
+    public final Movement getCurrentDirection() {
         return lastDirection;
     }
 
     @Override
-    public void setDirection(final Movement dir) {
+    public final void setDirection(final Movement dir) {
         this.lastDirection = dir;
     }
 
     @Override
-    public void setState(final boolean alive) {
+    public final void setState(final boolean alive) {
         this.alive = alive;
     }
 
     @Override
-    public boolean isAlive() {
+    public final boolean isAlive() {
         return alive;
     }
 
@@ -79,7 +87,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     }
 
     /**
-     * Sets a new X increment for the coordinate
+     * Sets a new X increment for the coordinate.
      * 
      * @param dX
      *            The new increment.
@@ -89,7 +97,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     }
 
     /**
-     * Sets a new Y increment for the coordinate
+     * Sets a new Y increment for the coordinate.
      * 
      * @param dY
      *            The new increment.

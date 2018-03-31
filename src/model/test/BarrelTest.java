@@ -30,7 +30,6 @@ public class BarrelTest {
         for(int i=0; i < 100; i++) {
             simpleBarrel.move(Optional.of(Movement.RIGHT));
             tester.move(Optional.of(Movement.RIGHT));
-            /*TODO CORRECT the return value description in Entity class*/
         }
         assertEquals("The barrel was supposed to be in the right position",Double.valueOf(110.0), Double.valueOf(simpleBarrel.getX()));
         assertTrue("The barrel was supposed to hit Mario", simpleBarrel.isColliding(tester));

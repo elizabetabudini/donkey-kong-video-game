@@ -8,7 +8,6 @@ import view.ViewInputs;
 /**
  * A Functional Interface for converting concrete Keyboard inputs into abstract
  * model movements.
- * 
  *
  */
 @FunctionalInterface

@@ -28,6 +28,7 @@ public final class InputHandler extends KeyAdapter {
         buildRegisteredInputs();
     }
 
+
     private void buildRegisteredInputs() {
         registeredKeys.put(KeyEvent.VK_DOWN, ViewInputs.ARROW_DOWN); // Move Down
         registeredKeys.put(KeyEvent.VK_S, ViewInputs.ARROW_DOWN);
@@ -50,7 +51,7 @@ public final class InputHandler extends KeyAdapter {
     @Override
     public void keyPressed(final KeyEvent e) {
         if (registeredKeys.containsKey(e.getKeyCode())) {
-            this.activeInputs.replace(registeredKeys.get(e.getKeyCode()), true);
+            this.activeInputs.put(registeredKeys.get(e.getKeyCode()), true);
         }
     }
 
@@ -64,7 +65,7 @@ public final class InputHandler extends KeyAdapter {
     @Override
     public void keyReleased(final KeyEvent e) {
         if (registeredKeys.containsKey(e.getKeyCode())) {
-            this.activeInputs.replace(registeredKeys.get(e.getKeyCode()), false);
+            this.activeInputs.put(registeredKeys.get(e.getKeyCode()), false);
         }
     }
 

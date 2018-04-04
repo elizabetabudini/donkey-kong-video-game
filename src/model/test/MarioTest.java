@@ -12,6 +12,11 @@ import model.entities.Mario;
 import model.entities.MarioImpl;
 import model.entities.Movement;
 
+/**
+ * Testing class for the main character's features.
+ * @author Luca
+ *
+ */
 public class MarioTest {
 
     /**

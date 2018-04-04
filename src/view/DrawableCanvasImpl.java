@@ -63,7 +63,7 @@ public final class DrawableCanvasImpl implements DrawableCanvas {
     @Override
     public void drawentity(final Image toDraw, final int x, final int y) {
         final Graphics2D g = foreGround.createGraphics();
-        drawOnLayer(g, toDraw, new Point(x, y), new Dimension(20, 20) );
+        drawOnLayer(g, toDraw, new Point(x, y), new Dimension(20, 20));
     }
 
     @Override

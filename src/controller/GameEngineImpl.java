@@ -14,33 +14,20 @@ public class GameEngineImpl implements GameEngine {
     private final long period = 20;
     private final Entity mario;
     private final List<Barrel> barrels;
+    private final GameLoop gameLoop;
  
     public GameEngineImpl(Entity mario, List<Barrel> barrels) {
         super();
        // this.board = new Board(barrels.get(0));
         this.mario = mario;
         this.barrels = barrels;
+        this.gameLoop = new GameLoop();
         
     }
 
     @Override
     public void startGame() {
-        this.gameLoop();
-    }
-
-    @Override
-    public void gameLoop() {
-        long lastLoopTime = System.currentTimeMillis();
-        /* TODO modify with a gameover condition */
-        while(true) {
-            long currentTime = System.currentTimeMillis();
-            long elapsedTime = currentTime - lastLoopTime;
-            processInput();
-            updateGame(elapsedTime);
-            render();
-            waitNextFrame(currentTime);
-        }
-
+        this.gameLoop.start();
     }
 
     /**
@@ -71,6 +58,26 @@ public class GameEngineImpl implements GameEngine {
     private void processInput() {
         // TODO Auto-generated method stub
         
+    }
+    
+    private class GameLoop extends Thread {
+            
+            public GameLoop() {
+                    }
+            
+            public void run() {
+                long lastLoopTime = System.currentTimeMillis();
+                /* TODO modify with a gameover condition */
+                while(true) {
+                    long currentTime = System.currentTimeMillis();
+                    long elapsedTime = currentTime - lastLoopTime;
+                    processInput();
+                    updateGame(elapsedTime);
+                    render();
+                    waitNextFrame(currentTime);
+                }
+            }
+    
     }
 
 }

@@ -31,7 +31,7 @@ public class DonkeyKong extends EntityImpl implements StaticEntity {
         protected AgentBarrels() {
         }
 
-        public void run() { /*?*/
+        public void run() { 
 
             while(creatingBarrels) {
                 this.barrel = DonkeyKong.this.bf.createSimpleBarrel(10.0, 10.0, new Dimension(10,10));

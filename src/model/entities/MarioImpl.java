@@ -5,24 +5,34 @@ import java.util.Optional;
 
 import model.ModelImpl;
 
-public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity {
+/**
+ * An Implementation of Mario, the main character of the game.
+ *
+ */
+public final class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity {
 
     private boolean climbing;
     private boolean jumping;
-    private final static double JUMP_DISTANCE = -2;
-    private final static double STEP = 1;
-    
+    private static final double JUMP_DISTANCE = -2;
+    private static final double STEP = 1;
+
+    /**
+     * A constructor for the main character of the game, the character cannot be spawned outside the game bounds.
+     * @param x The starting x Coordinate.
+     * @param y The starting Y Coordinate.
+     * @param dim Dimension of Mario's hitbox
+     */
     public MarioImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
-        if (x < 0 || x > xBorder) {
+        if (x < 0 || x > ModelImpl.WIDTH) {
             throw new IllegalArgumentException("The character can only be spawned inside game border");
         }
     }
 
-    //da aggiungere climbing status e metodo istouchingground()
+    // da aggiungere climbing status e metodo istouchingground()
     @Override
     protected void tryToMove(final Optional<Movement> dir) {
-        if(!dir.isPresent()) {
+        if (!dir.isPresent()) {
             return;
         }
         this.setDirection(dir.get());
@@ -34,9 +44,9 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
         if (!isWithinBorder()) {
             stopMoving(dir.get());
         }
-        if (dir.get() == Movement.JUMP && isTouchingGround()) {
+      /*  if (dir.get() == Movement.JUMP && isTouchingGround()) {
             this.jump();
-        }
+        }*/
     }
 
     private void jump() {
@@ -47,9 +57,9 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
 
     @Override
     protected void update() {
-        if(!isTouchingGround()) {
-        this.setDeltaY(this.getDeltaY()-ModelImpl.GRAVITY);
-        }
+        /*if (!isTouchingGround()) {
+            this.setDeltaY(this.getDeltaY() - ModelImpl.GRAVITY);
+        }*/
     }
 
     /**
@@ -69,7 +79,7 @@ public class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity
         }
         if ((dir == Movement.UP || dir == Movement.DOWN) && !jumping) {
             this.setDeltaY(0);
-        }       
+        }
     }
 
     @Override

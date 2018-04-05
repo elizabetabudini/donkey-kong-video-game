@@ -36,8 +36,8 @@ public class GameEngineImpl implements GameEngine {
      *   
      * @param currentTime the current time
      */
-    private void waitNextFrame(long currentTime) {
-       long delta = System.currentTimeMillis();
+    private void waitNextFrame(final long currentTime) {
+       final long delta = System.currentTimeMillis() - currentTime;
        if (delta < this.period) {
            try {
                Thread.sleep(period - delta);
@@ -66,11 +66,11 @@ public class GameEngineImpl implements GameEngine {
                     }
             
             public void run() {
-                long lastLoopTime = System.currentTimeMillis();
+                final long lastLoopTime = System.currentTimeMillis();
                 /* TODO modify with a gameover condition */
                 while(true) {
-                    long currentTime = System.currentTimeMillis();
-                    long elapsedTime = currentTime - lastLoopTime;
+                    final long currentTime = System.currentTimeMillis();
+                    final long elapsedTime = currentTime - lastLoopTime;
                     processInput();
                     updateGame(elapsedTime);
                     render();

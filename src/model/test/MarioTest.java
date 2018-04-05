@@ -6,7 +6,6 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 import org.junit.jupiter.api.Test;
 
-import model.Model;
 import model.ModelImpl;
 import model.entities.Mario;
 import model.entities.MarioImpl;

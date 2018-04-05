@@ -38,7 +38,7 @@ public class MainMenu extends JFrame{
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         //frame.setSize(Toolkit.getDefaultToolkit().get, height);
         
-     // imposta gridbag layout
+        // sets gridbag layout
         final JPanel panel = new JPanel();
         panel.setBackground(Color.BLACK);
         final GridBagLayout gblPanel = new GridBagLayout();
@@ -46,7 +46,7 @@ public class MainMenu extends JFrame{
         gblPanel.rowWeights = new double[]{2.0, 1.0};
         panel.setLayout(gblPanel);
         
-        // setta i constraints
+        // sets constraints
         final GridBagConstraints cnst = new GridBagConstraints();
         cnst.gridx = 0;
         cnst.gridy = 0;

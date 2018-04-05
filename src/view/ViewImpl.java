@@ -22,12 +22,5 @@ public class ViewImpl implements ViewInterface {
         new MainMenu();
     }
     
-  
-
-    @Override
-    public void updateScore(int score) {
-        Platform.runLater(() -> ViewImpl.gameScreen.updateScore(score));
-        
-    }
 
 }

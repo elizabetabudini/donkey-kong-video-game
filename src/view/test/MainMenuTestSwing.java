@@ -1,6 +1,6 @@
 package view.test;
 
-import view.MainMenu;
+import view.menu.MainMenu;
 
 public class MainMenuTestSwing {
     public static void main(String[] args){

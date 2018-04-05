@@ -3,6 +3,7 @@ package view;
 import javafx.application.Application;
 import javafx.application.Platform;
 import view.GameScreen;
+import view.menu.MainMenu;
 
 public class ViewImpl implements ViewInterface {
     

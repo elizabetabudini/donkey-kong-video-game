@@ -1,4 +1,4 @@
-package view;
+package view.menu;
 
 import java.awt.*;
 import java.util.stream.IntStream;
@@ -8,8 +8,8 @@ import javax.swing.*;
 public class MainMenu extends JFrame{
     
     private static final Insets TITLE_INSETS = new Insets(20, 0, 20, 0);
-    private static final Insets BUTTON_INSETS = new Insets(-15, 20, 20, 20);
-    private static final Insets IMAGE_INSETS = new Insets(20, 20, 20, 40);
+    private static final Insets BUTTONS_INSETS = new Insets(10, 20, 20, 20);
+    private static final Insets IMAGES_INSETS = new Insets(20, 20, 20, 40);
     private static final Double HIGH = 0.4;
     private static final Double WIDGHT = 0.6;
 //    private final Dimension s;
@@ -40,7 +40,6 @@ public class MainMenu extends JFrame{
         
         // sets gridbag layout
         final JPanel panel = new JPanel();
-        panel.setBackground(Color.BLACK);
         final GridBagLayout gblPanel = new GridBagLayout();
         gblPanel.columnWeights = new double[]{2.0, 1.0};
         gblPanel.rowWeights = new double[]{2.0, 1.0};
@@ -63,7 +62,7 @@ public class MainMenu extends JFrame{
 
         // Sets buttons
         cnst.gridwidth = 1;
-        cnst.insets = BUTTON_INSETS;
+        cnst.insets = BUTTONS_INSETS;
         
         panel.add(newGame, cnst);
         cnst.gridy++;
@@ -78,7 +77,7 @@ public class MainMenu extends JFrame{
         final JLabel lblImage = new JLabel();
         lblImage.setIcon(new ImageIcon("res/icons/donkey-kong.gif"));
         cnst.gridheight = NUM_BUTTONS;
-        cnst.insets = IMAGE_INSETS;
+        cnst.insets = IMAGES_INSETS;
         cnst.gridx = 1;
         cnst.gridy = 1;
         panel.add(lblImage, cnst);

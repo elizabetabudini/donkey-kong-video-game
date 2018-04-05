@@ -3,6 +3,7 @@ package view;
 import javafx.application.Application;
 import javafx.application.Platform;
 import view.GameScreen;
+import view.menu.MainMenu;
 
 public class ViewImpl implements ViewInterface {
     
@@ -19,15 +20,8 @@ public class ViewImpl implements ViewInterface {
     }
 
     public void startView() {
-        Application.launch(MainWindow.class);
+        new MainMenu();
     }
     
-  
-
-    @Override
-    public void updateScore(int score) {
-        Platform.runLater(() -> ViewImpl.gameScreen.updateScore(score));
-        
-    }
 
 }

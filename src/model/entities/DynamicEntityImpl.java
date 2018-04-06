@@ -17,9 +17,13 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
 
     /**
      * A constructor for a dynamic entity.
-     * @param x The starting x Coordinate.
-     * @param y The starting Y Coordinate.
-     * @param dim Dimension of the Entity's hitbox
+     * 
+     * @param x
+     *            The starting x Coordinate.
+     * @param y
+     *            The starting Y Coordinate.
+     * @param dim
+     *            Dimension of the Entity's hitbox
      */
     public DynamicEntityImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
@@ -29,7 +33,6 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     @Override
     public final void move(final Optional<Movement> dir) {
         tryToMove(dir);
-        update();
         this.setX(this.getX() + deltaX);
         this.setY(this.getY() + deltaY);
     }
@@ -43,10 +46,8 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      */
     protected abstract void tryToMove(Optional<Movement> dir);
 
-    /**
-     * Method to update the entity : e.g: apply gravity.
-     */
-    protected abstract void update();
+    @Override
+    public abstract void update();
 
     @Override
     public final Movement getCurrentDirection() {

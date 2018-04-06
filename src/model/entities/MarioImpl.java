@@ -56,7 +56,7 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
     }
 
     @Override
-    protected void update() {
+    public void update() {
         /*if (!isTouchingGround()) {
             this.setDeltaY(this.getDeltaY() - ModelImpl.GRAVITY);
         }*/

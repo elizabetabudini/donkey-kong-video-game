@@ -12,50 +12,52 @@ public enum Sprites {
     /**
      * The gorilla sprite.
      */
-    GORILLA("gorilla.png"), 
+    GORILLA("gorilla.png", 1), 
     /**
      * The princess sprite.
      */
-    PRINCESS("princess.png"), 
+    PRINCESS("princess.png", 1), 
     /**
      * The main character sprite, facing right..
      */
-    MARIO_FACING_RIGHT("mario.png"),
+    MARIO_FACING_RIGHT("mario.png", 1),
     /**
      * The main character sprite, facing left.
      */
-    MARIO_FACING_LEFT("mario.png"),
+    MARIO_FACING_LEFT("mario.png", 1),
     /**
      * The main character sprite, jumping right.
      */
-    MARIO_JUMPING_RIGHT("mario.png"),
+    MARIO_JUMPING_RIGHT("mario.png", 1),
     /**
      * The main character sprite, jumping left.
      */
-    MARIO_JUMPING_LEFT("mario.png"),
+    MARIO_JUMPING_LEFT("mario.png", 1),
     /**
      * The main character sprite, walking right.
      */
-    MARIO_WALKING_RIGHT("mario.png"),
+    MARIO_WALKING_RIGHT("mario.png", 1),
     /**
      * The main character sprite, walking left.
      */
-    MARIO_WALKING_LEFT("mario.png"),
+    MARIO_WALKING_LEFT("mario.png", 1),
     /**
      * The barrel sprite, rotating right.
      */
-    BARREL_RIGHT("barrel.png"),
+    BARREL_RIGHT("barrel.png", 1),
     /**
      * The barrel sprite, rotating left.
      */
-    BARREL_LEFT("barrel.png");
+    BARREL_LEFT("barrel.png", 1);
 
     private static final String SPRITES_FOLDER = "sprites/";
     private final String imagePath;
+    private final int scaleFactor;
     private final ImageLoader loader = ImageLoader.getInstance();
 
-    Sprites(final String path) {
+    Sprites(final String path, final int scale) {
         this.imagePath = path;
+        this.scaleFactor = scale;
     }
 
     /**

@@ -67,6 +67,14 @@ public interface ModelInterface {
      * @return a game status defined in the enum {@link GameStatus}.
      */
     GameStatus getGameStatus();
+    
+    /**
+     * The main function that update the game itself.
+     * 
+     * @param time
+     *          the elapsed time from a previous update
+     */
+    void updateGame(long elapsedTime);
 
 
 }

@@ -4,6 +4,8 @@ import model.entities.DonkeyKong;
 import model.entities.Mario;
 import model.entities.Princess;
 import model.levels.BasicLevel;
+import model.levels.BasicLevelImpl;
+import model.levels.Level1st;
 
 import java.util.List;
 
@@ -21,11 +23,12 @@ public class ModelImpl implements ModelInterface{
     
     //game info
     private GameStatus gameStatus;
-    private BasicLevel currentLevel;
+    /*to change*/
+    private Level1st currentLevel;
     
     //player info
     private int score;
-    private int PlayerLivesLeft;
+    private int playerLivesLeft;
     
     //entities info
     private Mario mario;
@@ -33,44 +36,65 @@ public class ModelImpl implements ModelInterface{
     private Princess princess;
     private List<Barrel> barrel;
     
+    public ModelImpl() {
+        this.score = 0;
+        this.playerLivesLeft = PLAYER_LIFE;
+        
+        /*just for test, to edit*/
+        this.currentLevel = new Level1st();
+    }
+    
     @Override
     public BasicLevel getCurrentLevel() {
         // TODO Auto-generated method stub
         return null;
     }
+    
     @Override
     public int getScore() {
         // TODO Auto-generated method stub
         return 0;
     }
+    
     @Override
     public int getLife() {
         // TODO Auto-generated method stub
         return 0;
     }
+    
     @Override
     public Mario getPaddle() {
         // TODO Auto-generated method stub
         return null;
     }
+    
     @Override
     public Mario getDonkeyKong() {
         // TODO Auto-generated method stub
         return null;
     }
+    
     @Override
     public Mario getPrincess() {
         // TODO Auto-generated method stub
         return null;
     }
+    
     @Override
     public List<Barrel> getBalls() {
         // TODO Auto-generated method stub
         return null;
     }
+    
     @Override
     public GameStatus getGameStatus() {
         // TODO Auto-generated method stub
         return null;
     }
+    
+    public void updateGame(long elapsedTime) {
+        
+    }
+    
+    
 }

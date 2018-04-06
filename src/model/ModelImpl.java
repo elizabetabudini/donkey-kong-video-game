@@ -32,4 +32,45 @@ public class ModelImpl implements ModelInterface{
     private DonkeyKong donkeyKong;
     private Princess princess;
     private List<Barrel> barrel;
+    
+    @Override
+    public BasicLevel getCurrentLevel() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public int getScore() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+    @Override
+    public int getLife() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+    @Override
+    public Mario getPaddle() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public Mario getDonkeyKong() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public Mario getPrincess() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public List<Barrel> getBalls() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public GameStatus getGameStatus() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

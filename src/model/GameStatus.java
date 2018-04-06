@@ -24,6 +24,7 @@ public enum GameStatus {
      */
     Dead,
 
+    //watch later, unused
     /**
      * Game paused.
      */

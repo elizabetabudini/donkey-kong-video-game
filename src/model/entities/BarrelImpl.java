@@ -23,7 +23,7 @@ public class BarrelImpl extends DynamicEntityImpl implements Barrel, DynamicEnti
     }
 
     @Override
-    protected void tryToMove(Optional<Movement> dir) {
+    protected void tryToMove(final Optional<Movement> dir) {
         /*Factorize this part with MarioImpl*/
         if(!dir.isPresent()) {
             return;
@@ -32,7 +32,7 @@ public class BarrelImpl extends DynamicEntityImpl implements Barrel, DynamicEnti
         if (dir.get() == Movement.LEFT) {
             this.setDeltaY(-STEP);
         } else if (dir.get() == Movement.RIGHT) {
-            this.setDeltaY(STEP);
+            this.setDeltaX(STEP);
         }
         /*TODO*/
     }

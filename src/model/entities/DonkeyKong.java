@@ -4,31 +4,36 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class DonkeyKong extends EntityImpl implements StaticEntity {
     
     private final BarrelFactory bf ;
-    private final AgentBarrels barrels;
-    private List<Barrel> barrelsList;
+    private final AgentBarrelsCreator barrels;
+    private final List<Barrel> barrelsList;
+    private final MovingBarrels barrelsMovement;
 
-    public DonkeyKong(Double x, Double y, Dimension dim) {
+    public DonkeyKong(final Double x, final Double y,final Dimension dim) {
         super(x, y, dim);
         this.bf = new BarrelFactoryImpl();
-        this.barrels = new AgentBarrels();
+        this.barrels = new AgentBarrelsCreator();
         this.barrelsList = new ArrayList<>();
         this.barrels.start();
+        this.barrelsMovement = new MovingBarrels();
+        barrelsMovement.start();
     }
 
     public List<Barrel> getBarrelsList(){
         return Collections.unmodifiableList(this.barrelsList);
     }
 
-    private class AgentBarrels extends Thread {
+    private class AgentBarrelsCreator extends Thread {
 
         private volatile boolean creatingBarrels = true;
         private Barrel barrel;
 
-        protected AgentBarrels() {
+        protected AgentBarrelsCreator() {
+            super();
         }
 
         public void run() { 
@@ -48,6 +53,28 @@ public class DonkeyKong extends EntityImpl implements StaticEntity {
         private void checkBarrels() {
         }
     }
+    /**
+     * 
+     * An inner class responsible of moving each barrels actually created 
+     * with a dedicated independent Thread
+     *
+     */
+    private class MovingBarrels extends Thread {
+
+        protected MovingBarrels() {
+            super();
+        }
+
+        public void run() {    
+            while(true) {
+                        DonkeyKong.this.getBarrelsList().forEach(br -> br.move(Optional.of(Movement.RIGHT)));
+                try {
+                    Thread.sleep(10);
+                } catch (Exception ex) {
+                }
+            }
+        }
+        }
 
 }
 

@@ -1,5 +1,7 @@
 package model;
 
+
+
 public class ModelImpl implements ModelInterface{
     public final static int HEIGHT = 540;
     public final static int WIDTH = 460;

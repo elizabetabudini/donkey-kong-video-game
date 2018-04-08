@@ -3,7 +3,9 @@ package model;
 import java.util.List;
 
 import model.entities.Barrel;
+import model.entities.DonkeyKong;
 import model.entities.Mario;
+import model.entities.Princess;
 import model.levels.BasicLevel;
 
 /**
@@ -38,28 +40,28 @@ public interface ModelInterface {
      * 
      * @return the main entity controlled by the player.
      */
-    Mario getPaddle();
+    Mario getMario();
     
     /**
      * Getter for DonkeyKong.
      * 
      * @return the entity controlled by the game.
      */
-    Mario getDonkeyKong();
+    DonkeyKong getDonkeyKong();
     
     /**
      * Getter for Princess.
      * 
      * @return the entity that sign the victory.
      */
-    Mario getPrincess();
+    Princess getPrincess();
 
     /**
      * Getter for the Barrels.
      * 
      * @return the list of all the active barrels.
      */
-    List<Barrel> getBalls();
+    List<Barrel> getBarrels();
 
     /**
      * Getter for the Game Status.
@@ -71,10 +73,7 @@ public interface ModelInterface {
     /**
      * The main function that update the game itself.
      * 
-     * @param time
-     *          the elapsed time from a previous update
      */
-    void updateGame(long elapsedTime);
-
+    void updateGame();
 
 }

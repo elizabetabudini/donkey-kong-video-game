@@ -4,14 +4,18 @@ import model.entities.DonkeyKong;
 import model.entities.Mario;
 import model.entities.Princess;
 import model.levels.BasicLevel;
-import model.levels.BasicLevelImpl;
 import model.levels.Level1st;
+import utilities.Pair;
 
+import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.entities.Barrel;
+import model.entities.BarrelFactory;
+import model.entities.BarrelFactoryImpl;
 
-public class ModelImpl implements ModelInterface{
+public abstract class ModelImpl implements ModelInterface{
     
 
     public final static int HEIGHT = 540;
@@ -19,82 +23,103 @@ public class ModelImpl implements ModelInterface{
     
     public final static double GRAVITY = 0.030;
 
-    public final static int PLAYER_LIFE = 3;
+    private final static int PLAYER_LIFE = 3;
     
     //game info
     private GameStatus gameStatus;
-    /*to change*/
+    //TODO to edit later, just for test
     private Level1st currentLevel;
     
     //player info
-    private int score;
-    private int playerLivesLeft;
+    private final int score;
+    private final int playerLivesLeft;
     
-    //entities info
+    //entities
     private Mario mario;
     private DonkeyKong donkeyKong;
     private Princess princess;
-    private List<Barrel> barrel;
+    private List<Barrel> barrels;
+    
+    private BarrelFactory barrelFactory;
+    
+    
     
     public ModelImpl() {
         this.score = 0;
         this.playerLivesLeft = PLAYER_LIFE;
-        
-        /*just for test, to edit*/
+        this.barrels = new ArrayList<>();
+        //TODO just for test, to edit
         this.currentLevel = new Level1st();
+        this.barrelFactory = new BarrelFactoryImpl();
+       
     }
     
     @Override
     public BasicLevel getCurrentLevel() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.currentLevel;
     }
     
     @Override
     public int getScore() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.score;
     }
     
     @Override
     public int getLife() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.playerLivesLeft;
     }
     
     @Override
-    public Mario getPaddle() {
-        // TODO Auto-generated method stub
-        return null;
+    public Mario getMario() {
+        return this.mario;
     }
     
     @Override
-    public Mario getDonkeyKong() {
-        // TODO Auto-generated method stub
-        return null;
+    public DonkeyKong getDonkeyKong() {
+        return this.donkeyKong;
     }
     
     @Override
-    public Mario getPrincess() {
-        // TODO Auto-generated method stub
-        return null;
+    public Princess getPrincess() {
+        return this.princess;
     }
     
     @Override
-    public List<Barrel> getBalls() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Barrel> getBarrels() {
+        return this.barrels;
+    }
+    
+    //TODO to watch later, need enum for Barrels
+    /**
+     * Adder for new barrels.
+     * 
+     * @param coord
+     *          a Pair of double that hold the initial position of the barrel.
+     *
+     * @param dim
+     *          the hitbox of the barrel   
+     */
+    public void addBarrel(final Pair<Double, Double> coord, final Dimension dim) {
+        this.barrels.add(barrelFactory.createSimpleBarrel(coord.getX(), coord.getY(), dim));
+    }
+    
+    /**
+     * Remover for the dead barrels.
+     * 
+     * @param barrel
+     *          the barrel to remove.
+     */
+    public void removeBarrel(final Barrel barrel) {
+        this.barrels.remove(barrel);
     }
     
     @Override
     public GameStatus getGameStatus() {
+        return this.gameStatus;
+    }
+    
+    public void updateGame() {
         // TODO Auto-generated method stub
-        return null;
     }
-    
-    public void updateGame(long elapsedTime) {
-        
-    }
-    
     
 }

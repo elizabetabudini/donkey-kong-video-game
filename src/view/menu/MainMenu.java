@@ -36,7 +36,7 @@ public class MainMenu extends JFrame{
         //set frame 
         JFrame frame = new JFrame();
         frame.setTitle("Main Menu - DonkeyKong");
-        frame.setLocationRelativeTo(null);
+        //frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         //frame.setIconImage(new Image("res/icons/donkeyIcon.png"));
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);

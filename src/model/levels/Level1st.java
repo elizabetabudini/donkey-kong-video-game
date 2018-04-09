@@ -46,6 +46,7 @@ public final class Level1st extends BasicLevelImpl{
     private static final List<Pair<Pair<Double,Double>, Dimension>> STAIRS = Collections.unmodifiableList(new ArrayList<>(Arrays.asList(STAIR_1,STAIR_2,STAIR_3,STAIR_4)));
  
     public Level1st() {
+        super(MARIO.getX());
         super.setLevelName(new String(NAME));
         super.setImageDirectory(new String(IMAGE_DIRECTORY));
         super.setGravity(new Double(GRAVITY));

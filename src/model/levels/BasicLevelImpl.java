@@ -7,6 +7,7 @@ import model.entities.FloorTileImpl;
 import model.entities.Mario;
 import model.entities.Princess;
 import model.entities.StairImpl;
+import utilities.Pair;
 
 
 
@@ -28,8 +29,12 @@ public abstract class BasicLevelImpl implements BasicLevel{
     private  List<FloorTileImpl> floor;
     private List<StairImpl> stairs;
     
-
+    private Pair<Double,Double> marioSpawn;
     
+    public BasicLevelImpl(Pair<Double, Double> marioSpawn) {
+        this.marioSpawn = marioSpawn;
+    }
+
     //level
     protected void setLevelName(final String name) {
         this.name = name;
@@ -62,6 +67,10 @@ public abstract class BasicLevelImpl implements BasicLevel{
     
     public Mario getMario() {
         return this.mario;
+    }
+    
+    public Pair<Double,Double> getMarioSpawn(){
+        return this.marioSpawn;
     }
     
     //donkeyKong
@@ -99,18 +108,5 @@ public abstract class BasicLevelImpl implements BasicLevel{
     public List<StairImpl> getStairs(){
         return this.stairs;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

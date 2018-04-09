@@ -71,15 +71,24 @@ public interface ModelInterface {
     GameStatus getGameStatus();
     
     /**
+     * set GameStatus to running.
+     */
+    void start();
+    
+    /**
+     * set GameStatus to pause.
+     */
+    void pause();
+    
+    /**
+     * set GameStatus to Over.
+     */
+    void gameOver();
+    
+    /**
      * The main function that update the entities and the game itself.
      * 
      */
     abstract void updateGame();
-    
-    /**
-     * The function that checks collisions between all the entities.
-     * 
-     */
-    abstract void checkCollisions();
 
 }

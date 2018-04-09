@@ -26,7 +26,7 @@ public abstract class ModelImpl implements ModelInterface{
    
     //player info
     private final int score;
-    private final int playerLivesLeft;
+    protected int currentLives;
     
     //entities
     private List<Barrel> barrels;
@@ -34,7 +34,7 @@ public abstract class ModelImpl implements ModelInterface{
     
     public ModelImpl() {
         this.score = 0;
-        this.playerLivesLeft = PLAYER_LIFE;
+        this.currentLives = PLAYER_LIFE;
         this.barrels = new ArrayList<>();
         //TODO just for test, to edit
         this.currentLevel = new Level1st();
@@ -52,7 +52,7 @@ public abstract class ModelImpl implements ModelInterface{
     
     @Override
     public int getLife() {
-        return this.playerLivesLeft;
+        return this.currentLives;
     }
 
     @Override
@@ -72,9 +72,10 @@ public abstract class ModelImpl implements ModelInterface{
     
     @Override
     public List<Barrel> getBarrels() {
-        return this.barrels;
+        return this.getDonkeyKong().getBarrelsList();
     }
     
+    //TODO could be removed
     /**
      * Remover for the dead barrels.
      * 
@@ -85,8 +86,38 @@ public abstract class ModelImpl implements ModelInterface{
         this.barrels.remove(barrel);
     }
     
+    /**
+     * The function that checks collisions between all the entities.
+     * 
+     */
+    protected abstract void checkCollisions();
+    
     public GameStatus getGameStatus() {
         return this.gameStatus;
+    }
+    
+    public void start() {
+        this.gameStatus = GameStatus.Running;
+    }
+    
+    public void pause() {
+        this.gameStatus = GameStatus.Pause;
+    }
+    
+    public void gameOver() {
+        this.gameStatus = GameStatus.Over ;
+    }
+    
+    public void victory() {
+        this.gameStatus = GameStatus.Won ;
+    }
+    
+    protected void setGameStatus(GameStatus currentStatus) {
+        this.gameStatus = currentStatus;
+    }
+    
+    public Boolean isOver() {
+        return this.getLife() <= 0;
     }
     
 }

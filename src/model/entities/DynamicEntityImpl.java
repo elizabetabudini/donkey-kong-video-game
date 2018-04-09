@@ -14,6 +14,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     private double deltaY;
     private Movement lastDirection = Movement.RIGHT;
     private boolean alive = true;
+    
 
     /**
      * A constructor for a dynamic entity.
@@ -106,5 +107,4 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     protected void setDeltaY(final double dY) {
         this.deltaY = dY;
     }
-
 }

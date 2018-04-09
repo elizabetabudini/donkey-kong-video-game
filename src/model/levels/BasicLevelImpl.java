@@ -3,10 +3,12 @@ package model.levels;
 import java.util.List;
 
 import model.entities.DonkeyKong;
-import model.entities.FloorTile;
+import model.entities.FloorTileImpl;
 import model.entities.Mario;
 import model.entities.Princess;
-import model.entities.Stair;
+import model.entities.StairImpl;
+
+
 
 /**
  * Implementation of a basic level
@@ -23,13 +25,13 @@ public abstract class BasicLevelImpl implements BasicLevel{
     private DonkeyKong donkeyKong;
     private Princess princess;
     
-    private  List<FloorTile> floor;
-    private List<Stair> stairs;
+    private  List<FloorTileImpl> floor;
+    private List<StairImpl> stairs;
     
 
     
     //level
-    public void setLevelName(final String name) {
+    protected void setLevelName(final String name) {
         this.name = name;
     }
     
@@ -37,7 +39,7 @@ public abstract class BasicLevelImpl implements BasicLevel{
         return this.name;
     }
     
-    public void setImageDirectory(final String imageDirectory) {
+    protected void setImageDirectory(final String imageDirectory) {
         this.imageDirectory = imageDirectory;
     }
     
@@ -45,7 +47,7 @@ public abstract class BasicLevelImpl implements BasicLevel{
         return this.imageDirectory;
     }
     
-    public void setGravity(final Double gravity) {
+    protected void setGravity(final Double gravity) {
         this.gravity = gravity;
     }
     
@@ -54,7 +56,7 @@ public abstract class BasicLevelImpl implements BasicLevel{
     }
     
     //mario
-    public void setMario(final Mario mario) {
+    protected void setMario(final Mario mario) {
         this.mario = mario;
     }
     
@@ -63,7 +65,7 @@ public abstract class BasicLevelImpl implements BasicLevel{
     }
     
     //donkeyKong
-    public void setDonkeyKong(final DonkeyKong donkeyKong) {
+    protected void setDonkeyKong(final DonkeyKong donkeyKong) {
         this.donkeyKong = donkeyKong;
     }
     
@@ -72,7 +74,7 @@ public abstract class BasicLevelImpl implements BasicLevel{
     }
     
     //princess
-    public void setPrincess(final Princess princess) {
+    protected void setPrincess(final Princess princess) {
         this.princess = princess;
     }
     
@@ -81,20 +83,20 @@ public abstract class BasicLevelImpl implements BasicLevel{
     }
     
     //floor
-    public void setFloor(final List<FloorTile> floor) {
+    protected void setFloor(final List<FloorTileImpl> floor) {
         this.floor = floor;
     }
     
-    public List<FloorTile> getFloor(){
+    public List<FloorTileImpl> getFloor(){
         return this.floor;
     }
     
     //stairs
-    public void setStairs(final List<Stair> stairs) {
+    protected void setStairs(final List<StairImpl> stairs) {
         this.stairs = stairs;
     }
     
-    public List<Stair> getStairs(){
+    public List<StairImpl> getStairs(){
         return this.stairs;
     }
     

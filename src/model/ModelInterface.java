@@ -71,9 +71,15 @@ public interface ModelInterface {
     GameStatus getGameStatus();
     
     /**
-     * The main function that update the game itself.
+     * The main function that update the entities and the game itself.
      * 
      */
-    void updateGame();
+    abstract void updateGame();
+    
+    /**
+     * The function that checks collisions between all the entities.
+     * 
+     */
+    abstract void checkCollisions();
 
 }

@@ -10,9 +10,13 @@ import utilities.ImageLoader;
  */
 public enum Sprites {
     /**
-     * The gorilla sprite.
+     * The gorilla sprite in idle position.
      */
-    GORILLA("gorilla.png", 1), 
+    GORILLA_IDLE("gorilla_idle.png", 1), 
+    /**
+     * The gorilla sprite, facing right.
+     */
+    GORILLA_FACING_RIGHT("gorilla_r.png", 1), 
     /**
      * The princess sprite.
      */
@@ -20,44 +24,42 @@ public enum Sprites {
     /**
      * The main character sprite, facing right..
      */
-    MARIO_FACING_RIGHT("mario.png", 1),
+    MARIO_FACING_RIGHT("mario_fr.png", 1),
     /**
      * The main character sprite, facing left.
      */
-    MARIO_FACING_LEFT("mario.png", 1),
+    MARIO_FACING_LEFT("mario_fl.png", 1),
     /**
      * The main character sprite, jumping right.
      */
-    MARIO_JUMPING_RIGHT("mario.png", 1),
+    MARIO_JUMPING_RIGHT("mario_jr.png", 1),
     /**
      * The main character sprite, jumping left.
      */
-    MARIO_JUMPING_LEFT("mario.png", 1),
+    MARIO_JUMPING_LEFT("mario_jl.png", 1),
     /**
      * The main character sprite, walking right.
      */
-    MARIO_WALKING_RIGHT("mario.png", 1),
+    MARIO_WALKING_RIGHT("mario_r.png", 1),
     /**
      * The main character sprite, walking left.
      */
-    MARIO_WALKING_LEFT("mario.png", 1),
+    MARIO_WALKING_LEFT("mario_l.png", 1),
     /**
      * The barrel sprite, rotating right.
      */
-    BARREL_RIGHT("barrel.png", 1),
+    BARREL_RIGHT("barrel_b1.png", 1),
     /**
      * The barrel sprite, rotating left.
      */
-    BARREL_LEFT("barrel.png", 1);
+    BARREL_LEFT("barrel_b2.png", 1);
 
     private static final String SPRITES_FOLDER = "sprites/";
     private final String imagePath;
-    private final int scaleFactor;
     private final ImageLoader loader = ImageLoader.getInstance();
 
     Sprites(final String path, final int scale) {
         this.imagePath = path;
-        this.scaleFactor = scale;
     }
 
     /**

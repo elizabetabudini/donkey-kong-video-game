@@ -4,26 +4,45 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import model.entities.Barrel;
+import model.entities.DonkeyKong;
 import model.entities.Mario;
 import model.entities.Movement;
+import view.DrawableCanvas;
 import view.InputHandler;
+import view.Sprites;
 
 public class GameEngineImpl implements GameEngine {
     
     private final static long PERIOD = 20;
+    
     private final Mario mario;
     private final List<Barrel> barrels;
+    private final DonkeyKong dk;
+    
     private final GameLoop gameLoop;
-    private final InputTranslator translator;
+    private InputTranslator translator;
     private final InputHandler handler  = new InputHandler();
+    private final DrawableCanvas drawer;
  
-    public GameEngineImpl(final Mario mario, final List<Barrel> barrels) {
+    public GameEngineImpl(final DrawableCanvas drawer, final DonkeyKong dk, final Mario mario, final List<Barrel> barrels) {
         super();
        // this.board = new Board(barrels.get(0));
         this.mario = mario;
         this.barrels = barrels;
+        this.dk = dk;
+        this.drawer = drawer;
         this.gameLoop = new GameLoop();
-        translator = input->{
+        this.translateInputs();
+        /* ***in the view addKeyListener(handler); */     
+    }
+
+    @Override
+    public void startGame() {
+        this.gameLoop.start();      
+    }
+    
+    private void translateInputs() {
+        this.translator = input->{
             switch (input) {
             case ARROW_DOWN: return Movement.DOWN;
             case ARROW_LEFT: return Movement.LEFT;
@@ -33,12 +52,6 @@ public class GameEngineImpl implements GameEngine {
             default: return null;
             }
         };
-        /* ***in the view addKeyListener(handler); */     
-    }
-
-    @Override
-    public void startGame() {
-        this.gameLoop.start();      
     }
 
     /**
@@ -57,7 +70,25 @@ public class GameEngineImpl implements GameEngine {
     }
 
     private void render() {
-        // TODO Auto-generated method stub
+        //intValue or cast
+        if(this.mario.getCurrentDirection().equals(Movement.RIGHT)) {
+            this.drawer.drawEntity(Sprites.MARIO_WALKING_RIGHT, this.mario.getX().intValue(), this.mario.getY().intValue());
+            if(this.mario.isJumping()) {
+                this.drawer.drawEntity(Sprites.MARIO_JUMPING_RIGHT, this.mario.getX().intValue(), this.mario.getY().intValue());
+            } else {
+                this.drawer.drawEntity(Sprites.MARIO_FACING_RIGHT, this.mario.getX().intValue(), this.mario.getY().intValue());
+            }
+        } else {
+            this.drawer.drawEntity(Sprites.MARIO_WALKING_LEFT, this.mario.getX().intValue(), this.mario.getY().intValue());
+            if(this.mario.isJumping()) {
+                this.drawer.drawEntity(Sprites.MARIO_JUMPING_LEFT, this.mario.getX().intValue(), this.mario.getY().intValue());
+            } else {
+                this.drawer.drawEntity(Sprites.MARIO_FACING_LEFT, this.mario.getX().intValue(), this.mario.getY().intValue());
+            }
+        }
+        
+        this.drawer.drawEntity(Sprites.GORILLA, this.dk.getX().intValue(), this.dk.getY().intValue());
+        //barrels
     }
 
     private void updateGame(long elapsedTime) {
@@ -87,7 +118,7 @@ public class GameEngineImpl implements GameEngine {
     
     private class GameLoop extends Thread {
             
-            private GameLoop() {
+            protected GameLoop() {
                     super();
                    }
             

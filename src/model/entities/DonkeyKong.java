@@ -8,7 +8,7 @@ import java.util.List;
  * It has a method to get the current barrels list
  *
  */
-public interface DonkeyKong {
+public interface DonkeyKong extends Entity {
     
     /**
      * A method to get all the barrels created by Donkey Kong 

@@ -3,27 +3,44 @@ package model.entities;
 import java.awt.Dimension;
 import java.util.Optional;
 
+/**
+ * 
+ * An implementation of a {@link Barrel}
+ *
+ */
 public class BarrelImpl extends DynamicEntityImpl implements Barrel, DynamicEntity {
 
     private final static double STEP = 1;
     
+    /**
+     * A constructor for a Barrel
+     * @param x The starting x Coordinate.
+     * @param y The starting Y Coordinate.
+     * @param dim Dimension of a barrel's hitbox
+     */
     public BarrelImpl(final Double x, final Double y, final Dimension dim) {
         super(x,y,dim);
     }
 
     @Override
-    protected void update() {
+    public void update() {
         // TODO Auto-generated method stub
         
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isColliding(final Entity entity) {
         return this.getHitbox().intersects(entity.getHitbox());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void tryToMove(Optional<Movement> dir) {
+    protected void tryToMove(final Optional<Movement> dir) {
         /*Factorize this part with MarioImpl*/
         if(!dir.isPresent()) {
             return;
@@ -32,7 +49,7 @@ public class BarrelImpl extends DynamicEntityImpl implements Barrel, DynamicEnti
         if (dir.get() == Movement.LEFT) {
             this.setDeltaY(-STEP);
         } else if (dir.get() == Movement.RIGHT) {
-            this.setDeltaY(STEP);
+            this.setDeltaX(STEP);
         }
         /*TODO*/
     }

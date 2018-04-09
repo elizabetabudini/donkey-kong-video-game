@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 /**
@@ -14,13 +13,25 @@ public interface DrawableCanvas {
      * Used to draw an entity in the foreground layer .
      * 
      * @param toDraw
-     *            The entity's icon.
+     *            The entity's sprite.
      * @param x
      *            The entity 's X coordinate.
      * @param y
      *            The entity 's Y coordinate.
      */
-    void drawentity(Image toDraw, int x, int y);
+    void drawEntity(Sprites toDraw, int x, int y);
+
+    /**
+     * Used to draw something on the canvas's background.
+     * 
+     * @param toDraw
+     *            The entity's sprite
+     * @param x
+     *            The entity 's X coordinate.
+     * @param y
+     *            The entity 's Y coordinate.
+     */
+    void drawOnBackground(Sprites toDraw, int x, int y);
 
     /**
      * Gets the current Foreground layer and prepares it for a new drawing.

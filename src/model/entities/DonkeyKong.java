@@ -12,6 +12,7 @@ public class DonkeyKong extends EntityImpl implements StaticEntity {
     private final AgentBarrelsCreator barrels;
     private final List<Barrel> barrelsList;
     private final MovingBarrels barrelsMovement;
+    //TODO interface!
 
     public DonkeyKong(final Double x, final Double y,final Dimension dim) {
         super(x, y, dim);

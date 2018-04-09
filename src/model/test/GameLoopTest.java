@@ -24,16 +24,17 @@ import view.Sprites;
 public class GameLoopTest {
 
     @Test
-    public void testLoop() {
+    public void testLoop() throws InterruptedException {
         final Mario mario = new MarioImpl(10.0, 20.0, new Dimension());
         final BarrelFactory bf = new BarrelFactoryImpl();
         final List<Barrel> simpleBarrels = new ArrayList<>();
         final DonkeyKong dk = new DonkeyKongImpl(5.0, 5.0, new Dimension());
         simpleBarrels.add(bf.createSimpleBarrel(10.0, 20.0, new Dimension(100,100)));
         final GameEngineImpl ge = new GameEngineImpl(null, null, mario, simpleBarrels);
-        ge.startGame();
         mario.move(Optional.of(Movement.RIGHT));
-        assertEquals("Mario was supposed to walk right", Sprites.MARIO_WALKING_RIGHT, ge.getMarioSpriteTest());
+        ge.startGame();
+        Thread.sleep(200);
+        assertEquals("Mario was supposed to face right", Sprites.MARIO_FACING_RIGHT, ge.getMarioSpriteTest());
     }
     
 }

@@ -21,25 +21,29 @@ import view.menu.MainMenu;
  *
  */
 
-public class GameScreen extends JFrame{
+public class GameScreen extends JPanel{
     
     private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
-    private static final Double HEIGHT = 0.7;
-    private static final Double WIDHT = 0.4;
+    private static final Double HEIGHT_SCALE = 0.5;
+    private static final Double WIDHT_SCALE = 0.25;
+    private Dimension gameDimension;
     
     public GameScreen() {
-        JFrame jf = new JFrame();
-        JPanel jp = new JPanel();
-        jp.setBackground(Color.black);
-        
-        jf.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        jf.setSize((int) (screenRes.getWidth()*WIDHT) ,(int) (screenRes.getHeight()*HEIGHT)); 
-        jf.add(jp);
-        jf.setVisible(true);
+        this.gameDimension = new Dimension((int)(screenRes.getWidth()*WIDHT_SCALE), (int)(screenRes.getHeight()*HEIGHT_SCALE));    
+        this.setSize(gameDimension); 
     }
     
     public static void main(String[] args){
         new GameScreen();
+    }
+    
+    /**
+     * Method to update what's drawn on the gameScreen according to the canvas passed as argument.
+     * @param canvas The canvas containing the new graphics to draw.
+     */
+    public void updateScreen(final DrawableCanvas canvas) {
+        this.getGraphics();
+        
     }
 
 //  private final DrawEntities drawEntities = new DrawEntities(GameWidth, GameHeight);

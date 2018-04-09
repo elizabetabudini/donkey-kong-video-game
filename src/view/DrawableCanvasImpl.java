@@ -2,11 +2,15 @@ package view;
 
 import java.awt.AlphaComposite;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+
+import javax.swing.JPanel;
+
 
 import utilities.ImageLoader;
 
@@ -16,8 +20,10 @@ import utilities.ImageLoader;
  * reason.
  * 
  */
-public final class DrawableCanvasImpl implements DrawableCanvas {
+public final class DrawableCanvasImpl extends JPanel implements DrawableCanvas  {
 
+
+    private static final long serialVersionUID = 1525660872049449414L;
     private BufferedImage foreGround;
     private BufferedImage backGround;
     private final ImageLoader loader = ImageLoader.getInstance();
@@ -36,8 +42,10 @@ public final class DrawableCanvasImpl implements DrawableCanvas {
      *            The path of the current background image.
      */
     public DrawableCanvasImpl(final int width, final int height, final String backGroundPath) {
+        super();
         this.height = height;
         this.width = width;
+        this.setPreferredSize(new Dimension(width, height));
         foreGround = getEmptyLayer();
         this.backGroundPath = backGroundPath;
         initBackGround();
@@ -91,5 +99,12 @@ public final class DrawableCanvasImpl implements DrawableCanvas {
         initBackGround();
     }
 
- 
+    @Override
+    protected void paintComponent(final Graphics g) {
+        super.paintComponent(g);
+        final Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(this.getBackGround(), 0, 0, width, height - 50, null);
+        g2d.drawImage(this.getforeGround(), 0, 0, width, height - 50, null);
+    }
+
 }

@@ -16,6 +16,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
     private final AgentBarrelsCreator barrels;
     private final List<Barrel> barrelsList;
     private final MovingBarrels barrelsMovement;
+    private boolean launchingBarrel;
 
     public DonkeyKongImpl(final Double x, final Double y,final Dimension dim) {
         super(x, y, dim);
@@ -27,12 +28,14 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
         barrelsMovement.start();
     }
 
-    /**
-     * {@inheritDoc}
-     * 
-     */
+    @Override
     public List<Barrel> getBarrelsList(){
         return Collections.unmodifiableList(this.barrelsList);
+    }
+    
+    @Override
+    public boolean isLaunchingBarrel() {
+        return this.launchingBarrel;
     }
     
     /**

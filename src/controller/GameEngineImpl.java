@@ -23,6 +23,7 @@ public class GameEngineImpl implements GameEngine {
     private InputTranslator translator;
     private final InputHandler handler  = new InputHandler();
     private final DrawableCanvas drawer;
+    private Sprites marioSprite;
  
     public GameEngineImpl(final DrawableCanvas drawer, final DonkeyKong dk, final Mario mario, final List<Barrel> barrels) {
         super();
@@ -72,23 +73,40 @@ public class GameEngineImpl implements GameEngine {
     private void render() {
         //intValue or cast
         if(this.mario.getCurrentDirection().equals(Movement.RIGHT)) {
-            this.drawer.drawEntity(Sprites.MARIO_WALKING_RIGHT, this.mario.getX().intValue(), this.mario.getY().intValue());
+            this.marioSprite = Sprites.MARIO_WALKING_RIGHT;
             if(this.mario.isJumping()) {
-                this.drawer.drawEntity(Sprites.MARIO_JUMPING_RIGHT, this.mario.getX().intValue(), this.mario.getY().intValue());
+                this.marioSprite = Sprites.MARIO_JUMPING_RIGHT;
             } else {
-                this.drawer.drawEntity(Sprites.MARIO_FACING_RIGHT, this.mario.getX().intValue(), this.mario.getY().intValue());
+                this.marioSprite = Sprites.MARIO_FACING_RIGHT;
             }
         } else {
-            this.drawer.drawEntity(Sprites.MARIO_WALKING_LEFT, this.mario.getX().intValue(), this.mario.getY().intValue());
+            this.marioSprite = Sprites.MARIO_WALKING_LEFT;
             if(this.mario.isJumping()) {
-                this.drawer.drawEntity(Sprites.MARIO_JUMPING_LEFT, this.mario.getX().intValue(), this.mario.getY().intValue());
+                this.marioSprite = Sprites.MARIO_JUMPING_LEFT;
             } else {
-                this.drawer.drawEntity(Sprites.MARIO_FACING_LEFT, this.mario.getX().intValue(), this.mario.getY().intValue());
+                this.marioSprite = Sprites.MARIO_FACING_LEFT;
             }
         }
+        this.drawer.drawEntity(this.marioSprite, this.mario.getX().intValue(), this.mario.getY().intValue());
         
-        this.drawer.drawEntity(Sprites.GORILLA, this.dk.getX().intValue(), this.dk.getY().intValue());
-        //barrels
+        //DonkeyKong
+        if(this.dk.isLaunchingBarrel()) {
+            this.drawer.drawEntity(Sprites.GORILLA, this.dk.getX().intValue(), this.dk.getY().intValue());
+        } else {
+            //TODO change with Sprites.GORILLA_LAUNCHING
+            this.drawer.drawEntity(Sprites.GORILLA, this.dk.getX().intValue(), this.dk.getY().intValue());
+        }
+        
+        this.dk.getBarrelsList().forEach(br -> drawer.drawEntity
+                (Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue()));
+        //Barrels
+        this.barrels.stream().forEach(br -> {
+            if(br.getCurrentDirection().equals(Movement.RIGHT)) {
+                this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
+            } else {
+                this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
+            }
+        });
     }
 
     private void updateGame(long elapsedTime) {
@@ -134,7 +152,10 @@ public class GameEngineImpl implements GameEngine {
                     waitNextFrame(currentTime);
                 }
             }
-    
     }
 
+    /*just for the GameLoopTest*/
+    public Sprites getMarioSpriteTest() {
+        return this.marioSprite;
+    }
 }

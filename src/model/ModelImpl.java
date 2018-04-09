@@ -2,6 +2,7 @@ package model;
 
 import model.entities.DonkeyKong;
 import model.entities.Mario;
+import model.entities.MarioImpl;
 import model.entities.Princess;
 import model.levels.BasicLevel;
 import model.levels.Level1st;
@@ -51,7 +52,8 @@ public abstract class ModelImpl implements ModelInterface{
         //TODO just for test, to edit
         this.currentLevel = new Level1st();
         this.barrelFactory = new BarrelFactoryImpl();
-       
+        
+        
     }
     
     @Override

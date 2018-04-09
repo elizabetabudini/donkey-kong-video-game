@@ -1,83 +1,114 @@
 package model.levels;
 
-import java.awt.Dimension;
 import java.util.List;
 
-import utilities.Pair;
+import model.entities.DonkeyKong;
+import model.entities.FloorTile;
+import model.entities.Mario;
+import model.entities.Princess;
+import model.entities.Stair;
+
+/**
+ * Implementation of a basic level
+ */
 
 public abstract class BasicLevelImpl implements BasicLevel{
     
-    private Pair<Integer,Integer> marioSpawn;
-    private Pair<Integer,Integer> donkeyKongSpawn;
-    private Pair<Integer,Integer> princessSpawn;    
+    private String name;
+    private String imageDirectory;
     
-    private List<Pair<Pair<Integer,Integer>,Dimension>> floorComponents;
-    private List<Pair<Pair<Integer,Integer>,Dimension>> stairsComponents;
+    private Double gravity;
+    
+    private Mario mario;
+    private DonkeyKong donkeyKong;
+    private Princess princess;
+    
+    private  List<FloorTile> floor;
+    private List<Stair> stairs;
+    
+
+    
+    //level
+    public void setLevelName(final String name) {
+        this.name = name;
+    }
+    
+    public String getLevelName() {
+        return this.name;
+    }
+    
+    public void setImageDirectory(final String imageDirectory) {
+        this.imageDirectory = imageDirectory;
+    }
+    
+    public String getImageDirectory() {
+        return this.imageDirectory;
+    }
+    
+    public void setGravity(final Double gravity) {
+        this.gravity = gravity;
+    }
+    
+    public Double getGravity() {
+        return this.gravity;
+    }
     
     //mario
-    protected void setMarioSpawn(final Pair<Integer,Integer> marioSpawn) {
-        this.marioSpawn = marioSpawn;
+    public void setMario(final Mario mario) {
+        this.mario = mario;
     }
     
-    /**
-     * a getter for the coordinates of Mario
-     * @return a Pair that contains the coordinates
-     */
-    public Pair<Integer,Integer> getMarioSpawn() {
-        return marioSpawn;
+    public Mario getMario() {
+        return this.mario;
     }
     
-    //DonkeyKong
-    protected void setDonkeyKongSpawn(final Pair<Integer,Integer> donkeyKongSpawn) {
-        this.donkeyKongSpawn = donkeyKongSpawn;
-    }
-
-    /**
-     * a getter for the coordinates of DonkeyKong
-     * @return a Pair that contains the coordinates
-     */
-    public Pair<Integer,Integer> getDonkeyKongSpawn() {
-        return donkeyKongSpawn;
+    //donkeyKong
+    public void setDonkeyKong(final DonkeyKong donkeyKong) {
+        this.donkeyKong = donkeyKong;
     }
     
-    //Princess
-    protected void setPrincessSpawn(final Pair<Integer,Integer> princessSPawn) {
-        this.princessSpawn = princessSPawn;
+    public DonkeyKong getDonkeyKong() {
+        return this.donkeyKong;
     }
     
-    /**
-     * a getter for the coordinates of the Princess
-     * @return a Pair<Integer,Integer> that contains the coordinates
-     */
-    public Pair<Integer,Integer> getPrincessSpawn() {
-        return princessSpawn;
+    //princess
+    public void setPrincess(final Princess princess) {
+        this.princess = princess;
     }
     
-    //environment
-    protected void setFloorComponents(final List<Pair<Pair<Integer,Integer>, Dimension>> floorComponents) {
-        this.floorComponents = floorComponents;
+    public Princess getPrincess() {
+        return this.princess;
     }
     
-    /**
-     * a getter for the components of all the floor tiles
-     * @return a List of Pair containing the coordinates and the hitbox for every Floor Tile
-     */
-    public List<Pair<Pair<Integer,Integer>,Dimension>> getFloorComponents(){
-        return floorComponents;
+    //floor
+    public void setFloor(final List<FloorTile> floor) {
+        this.floor = floor;
+    }
+    
+    public List<FloorTile> getFloor(){
+        return this.floor;
+    }
+    
+    //stairs
+    public void setStairs(final List<Stair> stairs) {
+        this.stairs = stairs;
+    }
+    
+    public List<Stair> getStairs(){
+        return this.stairs;
     }
     
     
-    protected void setStairComponents(final List<Pair<Pair<Integer,Integer>, Dimension>> stairsComponents) {
-        this.stairsComponents = stairsComponents;
-    }
     
-    /**
-     * a getter for the components of all the floor tiles
-     * @return a List of Pair containing the coordinates and the hitbox for every Stair Tile
-     */
-    public List<Pair<Pair<Integer,Integer>,Dimension>> getStairsComponents(){
-        return stairsComponents;
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 }

@@ -1,24 +1,53 @@
 package model.levels;
 
-import java.awt.Dimension;
 import java.util.List;
 
-import utilities.Pair;
+import model.entities.DonkeyKong;
+import model.entities.FloorTile;
+import model.entities.Mario;
+import model.entities.Princess;
+import model.entities.Stair;
 
 /**
- * Interface that specify the basic properties of a level
+ * Interface that specify the basic properties of a basic level
  */
 
-public interface BasicLevel {
+public interface BasicLevel extends GameLevel{
     
-    public Pair<Integer,Integer> getMarioSpawn();
+    /**
+     * 
+     * @return an integer containing the value of the gravity
+     */
+    public Double getGravity();
     
-    public Pair<Integer,Integer> getDonkeyKongSpawn();
+    /**
+     * 
+     * @return the list containing all components of the floor
+     */
+    public List<FloorTile> getFloor();
     
-    public Pair<Integer,Integer> getPrincessSpawn();
+    /**
+     * 
+     * @return the entity of mario
+     */
+    public Mario getMario();
     
-    public List<Pair<Pair<Integer,Integer>,Dimension>> getFloorComponents();
+    /**
+     * 
+     * @return the entity of donkeyKong
+     */
+    public DonkeyKong getDonkeyKong();
     
-    public List<Pair<Pair<Integer,Integer>,Dimension>> getStairsComponents();
+    /**
+     * 
+     * @return the entity of the princess
+     */
+    public Princess getPrincess();
+    
+    /**
+     * 
+     * @return the list containing all the stairs
+     */
+    public List<Stair> getStairs();
 
 }

@@ -22,7 +22,7 @@ public enum EntityStatus {
     CanClimbUp,
 
     /**
-     * The entity is on a stair (so is not touching the floor too).
+     * The entity is on a stair (so is not touching the floor).
      */
     Climbing,
 

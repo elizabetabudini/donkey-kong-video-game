@@ -3,6 +3,7 @@ package model.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.awt.Canvas;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,8 @@ import model.entities.DonkeyKongImpl;
 import model.entities.Mario;
 import model.entities.MarioImpl;
 import model.entities.Movement;
+import view.DrawableCanvasImpl;
+import view.GameScreen;
 import view.Sprites;
 
 public class GameLoopTest {
@@ -30,7 +33,7 @@ public class GameLoopTest {
         final List<Barrel> simpleBarrels = new ArrayList<>();
         final DonkeyKong dk = new DonkeyKongImpl(5.0, 5.0, new Dimension());
         simpleBarrels.add(bf.createSimpleBarrel(10.0, 20.0, new Dimension(100,100)));
-        final GameEngineImpl ge = new GameEngineImpl(null, null, mario, simpleBarrels);
+        final GameEngineImpl ge = new GameEngineImpl(new GameScreen(new DrawableCanvasImpl(200, 200, "")));
         mario.move(Optional.of(Movement.RIGHT));
         ge.startGame();
         Thread.sleep(200);

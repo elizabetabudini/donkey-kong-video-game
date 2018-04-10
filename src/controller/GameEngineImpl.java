@@ -26,12 +26,13 @@ public class GameEngineImpl implements GameEngine {
     private DrawableCanvas drawer;
     private Sprites marioSprite;
     private GameScreen gameScreen;
+    private final BasicModel model = new BasicModel();
  
-    public GameEngineImpl(final GameScreen gameScreen, final DonkeyKong dk, final Mario mario, final List<Barrel> barrels) {
+    public GameEngineImpl(final GameScreen gameScreen) {
         super();
-        this.mario = mario;
-        this.barrels = barrels;
-        this.dk = dk;
+        this.mario = this.model.getMario();
+        this.barrels = this.model.getBarrels();
+        this.dk = this.model.getDonkeyKong();
         this.gameLoop = new GameLoop();
         this.translateInputs();
         this.gameScreen = gameScreen;

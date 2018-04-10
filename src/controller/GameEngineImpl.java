@@ -8,6 +8,7 @@ import model.entities.DonkeyKong;
 import model.entities.Mario;
 import model.entities.Movement;
 import view.DrawableCanvas;
+import view.GameScreen;
 import view.InputHandler;
 import view.Sprites;
 
@@ -22,24 +23,28 @@ public class GameEngineImpl implements GameEngine {
     private final GameLoop gameLoop;
     private InputTranslator translator;
     private final InputHandler handler  = new InputHandler();
-    private final DrawableCanvas drawer;
+    private DrawableCanvas drawer;
     private Sprites marioSprite;
+    private GameScreen gameScreen;
  
-    public GameEngineImpl(final DrawableCanvas drawer, final DonkeyKong dk, final Mario mario, final List<Barrel> barrels) {
+    public GameEngineImpl(final GameScreen gameScreen, final DonkeyKong dk, final Mario mario, final List<Barrel> barrels) {
         super();
-       // this.board = new Board(barrels.get(0));
         this.mario = mario;
         this.barrels = barrels;
         this.dk = dk;
-        this.drawer = drawer;
         this.gameLoop = new GameLoop();
         this.translateInputs();
+        this.gameScreen = gameScreen;
         /* ***in the view addKeyListener(handler); */     
     }
 
     @Override
     public void startGame() {
         this.gameLoop.start();      
+    }
+    
+    public void setCanvas(final DrawableCanvas drawer) {
+        this.drawer = drawer;
     }
     
     private void translateInputs() {
@@ -76,7 +81,7 @@ public class GameEngineImpl implements GameEngine {
             this.marioSprite = Sprites.MARIO_WALKING_RIGHT;
             if(this.mario.isJumping()) {
                 this.marioSprite = Sprites.MARIO_JUMPING_RIGHT;
-            } else {
+            } else if(this.mario.isMoving()){
                 this.marioSprite = Sprites.MARIO_FACING_RIGHT;
             }
         } else {
@@ -91,10 +96,10 @@ public class GameEngineImpl implements GameEngine {
         
         //DonkeyKong
         if(this.dk.isLaunchingBarrel()) {
-            this.drawer.drawEntity(Sprites.GORILLA, this.dk.getX().intValue(), this.dk.getY().intValue());
+            this.drawer.drawEntity(Sprites.GORILLA_FACING_RIGHT, this.dk.getX().intValue(), this.dk.getY().intValue());
         } else {
             //TODO change with Sprites.GORILLA_LAUNCHING
-            this.drawer.drawEntity(Sprites.GORILLA, this.dk.getX().intValue(), this.dk.getY().intValue());
+            this.drawer.drawEntity(Sprites.GORILLA_IDLE, this.dk.getX().intValue(), this.dk.getY().intValue());
         }
         
         this.dk.getBarrelsList().forEach(br -> drawer.drawEntity

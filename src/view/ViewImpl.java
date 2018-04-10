@@ -6,16 +6,16 @@ import view.menu.MainMenu;
 
 public class ViewImpl implements ViewInterface {
     
+    private static GameEngine gameEngine;
+    //private final InputHandler inputHandler;
     private static GameScreen gameScreen;
     private static GameEngine controller;
     
-    /**
-     * Setter for the Game Screen. 
-     * 
-     * @param gamescreen
-     *            The GameScreen
-     */
-    static void setGameScreen(final GameScreen gamescreen) {
+
+    public ViewImpl(final GameEngine gameEngine) {
+        this.gameEngine=gameEngine;
+    }
+    static void setView(final GameScreen gamescreen) {
         ViewImpl.gameScreen = gamescreen;
     }
 

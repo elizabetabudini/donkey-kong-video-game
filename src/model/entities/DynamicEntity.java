@@ -47,7 +47,7 @@ public interface DynamicEntity extends Entity {
      * @return True if the character is alive, false otherwise.
      */
     boolean isAlive();
-    
+
     /**
      * Method to update the entity : e.g: apply gravity.
      */

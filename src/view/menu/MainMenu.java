@@ -3,6 +3,9 @@ package view.menu;
 import java.awt.*;
 import javax.swing.*;
 
+import view.DrawableCanvas;
+import view.GameScreen;
+
 public class MainMenu extends JFrame{
     
     /**
@@ -26,8 +29,11 @@ public class MainMenu extends JFrame{
         //inizializza bottoni
         newGame= new JButton("New Game");
         newGame.setIcon(new ImageIcon("res/icons/jump_right.png"));
+        newGame.addActionListener(e->{
+        });
         highscores=new JButton("High Scores");
         info= new JButton("Info");
+        
         exit= new JButton("Exit");
         exit.addActionListener(e->{
             System.exit(0);

@@ -1,23 +1,17 @@
 package view;
 
-import javafx.application.Application;
-import javafx.application.Platform;
 import view.GameScreen;
+import controller.Controller;
+import controller.GameEngineImpl;
 import view.menu.MainMenu;
 
 public class ViewImpl implements ViewInterface {
     
+    private static Controller controller;
+    //private final InputHandler inputHandler;
     private static GameScreen gameScreen;
     
-    /**
-     * Setter for the Game Screen. 
-     * 
-     * @param gamescreen
-     *            The GameScreen
-     */
-    static void setGameScreen(final GameScreen gamescreen) {
-        ViewImpl.gameScreen = gamescreen;
-    }
+
 
     public void startView() {
         new MainMenu();

@@ -61,5 +61,10 @@ public class EntityImpl implements Entity {
     public final Point2D getPosition() {
         return position;
     }
+    
+    @Override
+    public boolean isColliding(final Entity entity) {
+        return this.getHitbox().intersects(entity.getHitbox());
+    }
 
 }

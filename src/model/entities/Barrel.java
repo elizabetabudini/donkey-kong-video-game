@@ -7,13 +7,6 @@ package model.entities;
  *
  */
 public interface Barrel extends DynamicEntity {
-
-    /**
-     * A method to determine if an {@link Entity} is colliding with a {@link Barrel}
-     * @param entity The Entity is thought to collide with a Barrel
-     * @return True if a collision happens, false otherwise
-     */
-    boolean isColliding(Entity entity);
     
-    //public void update(long time);
+    void update();
 }

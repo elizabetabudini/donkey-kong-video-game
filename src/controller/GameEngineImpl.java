@@ -3,6 +3,8 @@ package controller;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+
+import model.BasicModel;
 import model.entities.Barrel;
 import model.entities.DonkeyKong;
 import model.entities.Mario;
@@ -44,6 +46,7 @@ public class GameEngineImpl implements GameEngine {
         this.gameLoop.start();      
     }
     
+    @Override
     public void setCanvas(final DrawableCanvas drawer) {
         this.drawer = drawer;
     }
@@ -116,8 +119,7 @@ public class GameEngineImpl implements GameEngine {
     }
 
     private void updateGame(long elapsedTime) {
-      // this.mario.update(elapsedTime); //??
-       //this.barrels.forEach(br -> br.update(elapsedTime)); 
+      this.model.updateGame();
     }
 
     /**

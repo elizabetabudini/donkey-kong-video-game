@@ -13,8 +13,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     private double deltaX;
     private double deltaY;
     private Movement lastDirection = Movement.RIGHT;
-    private boolean alive = true;
-    
+    private EntityStatus currentStatus = EntityStatus.OnTheFloor;
 
     /**
      * A constructor for a dynamic entity.
@@ -48,7 +47,12 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     protected abstract void tryToMove(Optional<Movement> dir);
 
     @Override
-    public abstract void update();
+    public void update() {
+        /*if (!isTouchingGround()) {
+            this.setDeltaY(this.getDeltaY() - ModelImpl.GRAVITY);
+        }*/
+    }
+
 
     @Override
     public final Movement getCurrentDirection() {
@@ -61,13 +65,13 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     }
 
     @Override
-    public final void setState(final boolean alive) {
-        this.alive = alive;
+    public final EntityStatus getStatus() {
+        return currentStatus;
     }
 
     @Override
-    public final boolean isAlive() {
-        return alive;
+    public final void setStatus(final EntityStatus status) {
+        this.currentStatus = status;
     }
 
     /**

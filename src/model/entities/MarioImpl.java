@@ -17,10 +17,15 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
     private static final double STEP = 1;
 
     /**
-     * A constructor for the main character of the game, the character cannot be spawned outside the game bounds.
-     * @param x The starting x Coordinate.
-     * @param y The starting Y Coordinate.
-     * @param dim Dimension of Mario's hitbox
+     * A constructor for the main character of the game, the character cannot be
+     * spawned outside the game bounds.
+     * 
+     * @param x
+     *            The starting x Coordinate.
+     * @param y
+     *            The starting Y Coordinate.
+     * @param dim
+     *            Dimension of Mario's hitbox
      */
     public MarioImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
@@ -44,22 +49,17 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
         if (!isWithinBorder()) {
             stopMoving(dir.get());
         }
-      /*  if (dir.get() == Movement.JUMP && isTouchingGround()) {
-            this.jump();
-        }*/
+        /*
+         * if (dir.get() == Movement.JUMP && isTouchingGround()) {
+         *  this.jump();
+            }
+         */
     }
 
     private void jump() {
         jumping = true;
         this.setDeltaY(JUMP_DISTANCE);
         this.setDeltaX(this.getDeltaX() * 1.5);
-    }
-
-    @Override
-    public void update() {
-        /*if (!isTouchingGround()) {
-            this.setDeltaY(this.getDeltaY() - ModelImpl.GRAVITY);
-        }*/
     }
 
     /**

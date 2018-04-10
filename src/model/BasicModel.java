@@ -9,6 +9,7 @@ import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
 import model.entities.EntityStatus;
 import model.entities.Mario;
+import model.entities.Movement;
 import model.entities.Princess;
 import model.levels.BasicLevel;
 import model.levels.Level1st;
@@ -79,7 +80,7 @@ public class BasicModel extends ModelImpl{
         
         if(this.getGameStatus().equals(GameStatus.Running)) {
             checkCollisions();
-            getMario().update(); 
+            getMario().update();
             getBarrels().forEach(X -> X.update());
         }
         

@@ -1,12 +1,6 @@
 package model;
 
-import java.util.List;
-
-import model.entities.Barrel;
-import model.entities.DonkeyKong;
-import model.entities.Mario;
-import model.entities.Princess;
-import model.levels.BasicLevel;
+import java.util.logging.Level;
 
 /**
  * The interface that defines the main methods to build the game.
@@ -19,7 +13,7 @@ public interface ModelInterface {
      * 
      * @return the current level.
      */
-    BasicLevel getCurrentLevel();
+    Level getCurrentLevel();
 
     /**
      * Getter for the Score.
@@ -34,34 +28,6 @@ public interface ModelInterface {
      * @return the number of the lives the player can lose before game over.
      */
     int getLife();
-
-    /**
-     * Getter for Mario.
-     * 
-     * @return the main entity controlled by the player.
-     */
-    Mario getMario();
-    
-    /**
-     * Getter for DonkeyKong.
-     * 
-     * @return the entity controlled by the game.
-     */
-    DonkeyKong getDonkeyKong();
-    
-    /**
-     * Getter for Princess.
-     * 
-     * @return the entity that sign the victory.
-     */
-    Princess getPrincess();
-
-    /**
-     * Getter for the Barrels.
-     * 
-     * @return the list of all the active barrels.
-     */
-    List<Barrel> getBarrels();
 
     /**
      * Getter for the Game Status.

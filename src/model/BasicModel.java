@@ -1,23 +1,25 @@
 package model;
 
 import java.util.List;
+import java.util.Optional;
 
 import model.entities.Barrel;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
 import model.entities.EntityStatus;
+import model.entities.FloorTile;
 import model.entities.Mario;
 import model.entities.Princess;
 import model.levels.BasicLevel;
 import model.levels.Level1st;
 
 public class BasicModel extends ModelImpl{
-    
+
     public BasicModel() {
         super();
        setCurrentLevel(new Level1st());
     }
-    
+
     /**
      * Getter for Mario.
      * 
@@ -26,7 +28,7 @@ public class BasicModel extends ModelImpl{
     public Mario getMario() {
         return this.getCurrentLevel().getMario();
     }
-    
+
     /**
      * Getter for DonkeyKong.
      * 
@@ -35,7 +37,7 @@ public class BasicModel extends ModelImpl{
     public DonkeyKong getDonkeyKong() {
         return this.getCurrentLevel().getDonkeyKong();
     }
-    
+
     /**
      * Getter for Princess.
      * 
@@ -44,7 +46,7 @@ public class BasicModel extends ModelImpl{
     public Princess getPrincess() {
         return this.getCurrentLevel().getPrincess();
     }
-    
+
     /**
      * Getter for the Barrels.
      * 
@@ -53,12 +55,11 @@ public class BasicModel extends ModelImpl{
     public List<Barrel> getBarrels() {
         return this.getDonkeyKong().getBarrelsList();
     }
-    
-    
+
     public BasicLevel getCurrentLevel() {
         return (BasicLevel) super.getCurrentLevel();
     }
-    
+
     //TODO could be removed
     /**
      * Remover for the dead barrels.
@@ -69,7 +70,6 @@ public class BasicModel extends ModelImpl{
     public void removeBarrel(final Barrel barrel) {
         this.getDonkeyKong().getBarrelsList().remove(barrel);
     }
-    
 
     public void checkCollisions() {
         this.isOnTheFloor(this.getMario());
@@ -78,7 +78,6 @@ public class BasicModel extends ModelImpl{
         this.checkVictory(this.getMario());
     }
 
-
     public void updateGame() {
         
         if(this.getGameStatus().equals(GameStatus.Running)) {
@@ -86,44 +85,54 @@ public class BasicModel extends ModelImpl{
             getMario().update();
             getBarrels().forEach(X -> X.update());
         }
-        
+
         if(this.getMario().getStatus().equals(EntityStatus.Dead)) {
             if(!this.isOver()) {
                 currentLives--;
                 getMario().setX(this.getCurrentLevel().getMarioSpawn().getX());
                 getMario().setY(this.getCurrentLevel().getMarioSpawn().getX());
+                getMario().setStatus(EntityStatus.OnTheFloor);
                 start();
             }
             else {
                 gameOver();
             }   
         }
-        
+
         //TODO to complete
         if(this.getGameStatus().equals(GameStatus.Won)) {
             
         }
     } 
-    
+
     private void isOnTheFloor(final DynamicEntity entity) {
-        if(this.getCurrentLevel().getFloor().stream().map(X -> entity.isColliding(X)).filter(Y -> Y == true).findFirst().isPresent()) {
+        Optional<? extends FloorTile> floorTile = Optional.empty();
+        floorTile = this.getCurrentLevel().getFloor().stream().filter(X -> entity.isColliding(X) == true).findFirst();
+        if(floorTile.isPresent()) {
             entity.setStatus(EntityStatus.OnTheFloor);
+            fixHeight(entity, floorTile.get());
         }
     }
-    
+
     private void isMarioAlive(final Mario mario) {
         if(this.getBarrels().stream().map(X -> mario.isColliding(X)).findFirst().isPresent()) {
             mario.setStatus(EntityStatus.Dead);
         }
     }
-    
+
     private void processBarrels(final List<Barrel> barrels) {
         barrels.stream().forEach(X -> this.isOnTheFloor(X));
     }
-    
+
     private void checkVictory(final Mario mario) {
         if(mario.isColliding(getPrincess())) {
             this.victory();
+        }
+    }
+
+    private void fixHeight(final DynamicEntity entity, final FloorTile floorTile) {
+        if(entity.getY() < floorTile.getHitbox().getHeight()+floorTile.getY()) {
+            entity.setY(floorTile.getHitbox().getHeight()+floorTile.getY());
         }
     }
 }

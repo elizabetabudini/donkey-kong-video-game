@@ -21,7 +21,6 @@ public final class Level1st extends BasicLevelImpl{
     private static final String NAME = new String("Level1st");
     //TODO to edit, directory not chosen yet
     private static final String IMAGE_DIRECTORY = new String("imageDirectory/imageName.ext");
-    private static final Double GRAVITY = new Double(0.0);
    
     //entities
     private static final Pair<Pair<Double,Double>, Dimension> MARIO = new Pair<>(new Pair<>(0.0,0.0), new Dimension());
@@ -49,7 +48,6 @@ public final class Level1st extends BasicLevelImpl{
         super(MARIO.getX());
         super.setLevelName(new String(NAME));
         super.setImageDirectory(new String(IMAGE_DIRECTORY));
-        super.setGravity(new Double(GRAVITY));
         
         super.setMario(new MarioImpl(MARIO.getX().getX(), MARIO.getX().getY(), MARIO.getY()));
         super.setDonkeyKong(new DonkeyKongImpl(DONKEYKONG.getX().getX(), DONKEYKONG.getX().getY(), DONKEYKONG.getY()));

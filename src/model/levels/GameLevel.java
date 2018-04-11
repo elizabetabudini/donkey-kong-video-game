@@ -17,11 +17,5 @@ public interface GameLevel {
      * @return the string containing image directory.
      */
     String getImageDirectory();
-    
-    /**
-     * 
-     * @return the double containing the gravity value.
-     */
-    Double getGravity();
 
 }

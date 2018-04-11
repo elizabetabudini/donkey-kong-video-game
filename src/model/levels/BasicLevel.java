@@ -17,12 +17,6 @@ public interface BasicLevel extends GameLevel{
     
     /**
      * 
-     * @return an integer containing the value of the gravity
-     */
-    Double getGravity();
-    
-    /**
-     * 
      * @return the list containing all components of the floor
      */
     List<FloorTileImpl> getFloor();

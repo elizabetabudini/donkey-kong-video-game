@@ -20,8 +20,6 @@ public abstract class BasicLevelImpl implements BasicLevel{
     private String name;
     private String imageDirectory;
     
-    private Double gravity;
-    
     private Mario mario;
     private DonkeyKong donkeyKong;
     private Princess princess;
@@ -50,14 +48,6 @@ public abstract class BasicLevelImpl implements BasicLevel{
     
     public String getImageDirectory() {
         return this.imageDirectory;
-    }
-    
-    protected void setGravity(final Double gravity) {
-        this.gravity = gravity;
-    }
-    
-    public Double getGravity() {
-        return this.gravity;
     }
     
     //mario

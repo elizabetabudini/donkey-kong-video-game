@@ -1,15 +1,12 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import model.entities.Barrel;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
 import model.entities.EntityStatus;
 import model.entities.Mario;
-import model.entities.Movement;
 import model.entities.Princess;
 import model.levels.BasicLevel;
 import model.levels.Level1st;
@@ -18,6 +15,7 @@ public class BasicModel extends ModelImpl{
     
     public BasicModel() {
         super();
+       setCurrentLevel(new Level1st());
     }
     
     /**
@@ -26,7 +24,7 @@ public class BasicModel extends ModelImpl{
      * @return the main entity controlled by the player.
      */
     public Mario getMario() {
-        return this.currentLevel.getMario();
+        return this.getCurrentLevel().getMario();
     }
     
     /**
@@ -35,7 +33,7 @@ public class BasicModel extends ModelImpl{
      * @return the entity controlled by the game.
      */
     public DonkeyKong getDonkeyKong() {
-        return this.currentLevel.getDonkeyKong();
+        return this.getCurrentLevel().getDonkeyKong();
     }
     
     /**
@@ -44,7 +42,7 @@ public class BasicModel extends ModelImpl{
      * @return the entity that sign the victory.
      */
     public Princess getPrincess() {
-        return this.currentLevel.getPrincess();
+        return this.getCurrentLevel().getPrincess();
     }
     
     /**
@@ -54,6 +52,11 @@ public class BasicModel extends ModelImpl{
      */
     public List<Barrel> getBarrels() {
         return this.getDonkeyKong().getBarrelsList();
+    }
+    
+    
+    public BasicLevel getCurrentLevel() {
+        return (BasicLevel) super.getCurrentLevel();
     }
     
     //TODO could be removed

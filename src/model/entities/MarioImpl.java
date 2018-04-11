@@ -92,4 +92,9 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
         return jumping;
     }
 
+    @Override
+    public boolean isMoving() {
+        return this.getDeltaX() != 0;
+    }
+
 }

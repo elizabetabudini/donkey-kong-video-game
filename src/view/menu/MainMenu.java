@@ -3,6 +3,12 @@ package view.menu;
 import java.awt.*;
 import javax.swing.*;
 
+import controller.GameEngine;
+import controller.GameEngineImpl;
+import view.DrawableCanvas;
+import view.DrawableCanvasImpl;
+import view.GameScreen;
+
 public class MainMenu extends JFrame{
     
     /**
@@ -12,9 +18,16 @@ public class MainMenu extends JFrame{
     private static final Insets TITLE_INSETS = new Insets(20, 0, 20, 0);
     private static final Insets BUTTONS_INSETS = new Insets(10, 20, 20, 20);
     private static final Insets IMAGES_INSETS = new Insets(20, 20, 20, 30);
-    private static final Double HEIGHT = 0.5;
-    private static final Double WIDHT = 0.25;
+    private static final Double HEIGHT = 0.6;
+    private static final Double WIDHT = 0.5;
     private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
+    private static GameScreen gameScreen;
+    private static GameEngine gameEngine;
+    private final DrawableCanvas canvas;
+    
+    private int fHeight;
+    private int fWidht;
+    
     private final JButton newGame;
     private final JButton highscores;
     private final JButton info;
@@ -22,11 +35,22 @@ public class MainMenu extends JFrame{
     private static final int NUM_BUTTONS = 4;
     
     public MainMenu() {
+        this.fHeight=(int)(screenRes.height*HEIGHT);
+        this.fWidht=(int)(screenRes.width*WIDHT);
+        this.canvas=new DrawableCanvasImpl(fWidht, fHeight, "res/images/game_bg.png");
+        this.gameScreen= new GameScreen(canvas);
+        this.gameEngine= new GameEngineImpl(gameScreen);
+        
         
         //inizializza bottoni
         newGame= new JButton("New Game");
         newGame.setIcon(new ImageIcon("res/icons/jump_right.png"));
         newGame.addActionListener(e->{
+           
+            this.gameEngine.setCanvas(canvas);
+            gameEngine.startGame();
+            this.dispose();
+            
         });
         highscores=new JButton("High Scores");
         info= new JButton("Info");

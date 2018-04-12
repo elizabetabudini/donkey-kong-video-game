@@ -3,9 +3,6 @@ package view.menu;
 import java.awt.*;
 import javax.swing.*;
 
-import view.DrawableCanvas;
-import view.GameScreen;
-
 public class MainMenu extends JFrame{
     
     /**
@@ -15,8 +12,8 @@ public class MainMenu extends JFrame{
     private static final Insets TITLE_INSETS = new Insets(20, 0, 20, 0);
     private static final Insets BUTTONS_INSETS = new Insets(10, 20, 20, 20);
     private static final Insets IMAGES_INSETS = new Insets(20, 20, 20, 30);
-    private static final Double HEIGHT = 0.7;
-    private static final Double WIDHT = 0.4;
+    private static final Double HEIGHT = 0.5;
+    private static final Double WIDHT = 0.25;
     private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
     private final JButton newGame;
     private final JButton highscores;

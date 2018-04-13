@@ -116,6 +116,7 @@ public class GameEngineImpl implements GameEngine {
                 this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
             }
         });
+        gameScreen.updateScreen();
     }
 
     private void updateGame(long elapsedTime) {

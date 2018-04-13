@@ -24,7 +24,7 @@ public class GameEngineImpl implements GameEngine {
     
     private final GameLoop gameLoop;
     private InputTranslator translator;
-    private final InputHandler handler  = new InputHandler();
+    private InputHandler handler;
     private DrawableCanvas drawer;
     private Sprites marioSprite;
     private GameScreen gameScreen;
@@ -49,6 +49,11 @@ public class GameEngineImpl implements GameEngine {
     @Override
     public void setCanvas(final DrawableCanvas drawer) {
         this.drawer = drawer;
+    }
+    
+    @Override
+    public void setHandler(final InputHandler handler) {
+        this.handler = handler;     
     }
     
     private void translateInputs() {
@@ -167,4 +172,5 @@ public class GameEngineImpl implements GameEngine {
     public Sprites getMarioSpriteTest() {
         return this.marioSprite;
     }
+
 }

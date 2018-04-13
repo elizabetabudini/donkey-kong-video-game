@@ -16,15 +16,16 @@ public class GameFrame extends JFrame {
     private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
     private GameScreenPanel gsPanel;
     private DrawableCanvas canvas;
+ 
     
-    public GameFrame(DrawableCanvas drawableCanvas) {
-        this.canvas = drawableCanvas;
+    public GameFrame(GameScreenPanel gamescreen) {
         this.setSize(500, 600);//prova
         this.setTitle("Game Donkey Kong");
-        this.gsPanel= new GameScreenPanel(drawableCanvas);
+        this.gsPanel= gamescreen;
         this.add(gsPanel);
         this.setVisible(true);
-
+        this.setFocusable(true);
+        this.setResizable(false);
     }
    
     

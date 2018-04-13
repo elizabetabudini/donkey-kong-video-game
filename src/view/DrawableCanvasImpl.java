@@ -68,7 +68,7 @@ public final class DrawableCanvasImpl  implements DrawableCanvas  {
     @Override
     public void drawEntity(final Sprites toDraw, final int x, final int y) {
         final Graphics2D g = foreGround.createGraphics();
-        drawOnLayer(g, toDraw.getIcon().getImage(), new Point(x, y), new Dimension(20, 20));
+        drawOnLayer(g, toDraw.getIcon().getImage(), new Point(x, y), new Dimension(20*toDraw.getScale(), 20*toDraw.getScale()));
     }
 
     @Override

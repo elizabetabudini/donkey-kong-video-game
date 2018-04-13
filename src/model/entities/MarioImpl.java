@@ -54,6 +54,8 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
          *  this.jump();
             }
          */
+        System.out.println("DEBUG: La coordinata X di mario è "+this.getX());
+        System.out.println("DEBUG: La coordinata Y di mario è "+this.getY());
     }
 
     private void jump() {

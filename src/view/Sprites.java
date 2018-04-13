@@ -12,11 +12,11 @@ public enum Sprites {
     /**
      * The gorilla sprite in idle position.
      */
-    GORILLA_IDLE("gorilla_idle.png", 1), 
+    GORILLA_IDLE("gorilla_idle.png", 3), 
     /**
      * The gorilla sprite, facing right.
      */
-    GORILLA_FACING_RIGHT("gorilla_r.png", 1), 
+    GORILLA_FACING_RIGHT("gorilla_r.png", 3), 
     /**
      * The princess sprite.
      */
@@ -57,17 +57,24 @@ public enum Sprites {
     private static final String SPRITES_FOLDER = "sprites/";
     private final String imagePath;
     private final ImageLoader loader = ImageLoader.getInstance();
+    private final int scale;
 
     Sprites(final String path, final int scale) {
         this.imagePath = path;
+        this.scale = scale;
     }
 
     /**
      * Load an ImageIcon out of the stored image path.
+     * 
      * @return An imageIcon representing the entity's sprite.
      */
     public ImageIcon getIcon() {
         return this.loader.getImage(SPRITES_FOLDER + imagePath);
+    }
+
+    public int getScale() {
+        return scale;
     }
 
 }

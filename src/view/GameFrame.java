@@ -1,4 +1,5 @@
 package view;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -16,11 +17,11 @@ public class GameFrame extends JFrame {
     private GameScreenPanel gsPanel;
     private DrawableCanvas canvas;
     
-    public GameFrame() {
-        this.setSize(400, 400);//prova
+    public GameFrame(DrawableCanvas drawableCanvas) {
+        this.canvas = drawableCanvas;
+        this.setSize(500, 600);//prova
         this.setTitle("Game Donkey Kong");
-        this.canvas= new DrawableCanvasImpl((int)(screenRes.getHeight()*HEIGHT), (int)(screenRes.getWidth()*WIDTH), "/res/images/game_bg.png");
-        this.gsPanel= new GameScreenPanel(canvas);
+        this.gsPanel= new GameScreenPanel(drawableCanvas);
         this.add(gsPanel);
         this.setVisible(true);
 

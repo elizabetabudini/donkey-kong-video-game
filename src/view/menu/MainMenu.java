@@ -22,13 +22,10 @@ public class MainMenu extends JFrame{
     private static final Double HEIGHT = 0.6;
     private static final Double WIDHT = 0.5;
     private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
-    private static GameScreenPanel gameScreen;
-    private static GameEngine gameEngine;
-    private final DrawableCanvas canvas;
+    private  final GameScreenPanel gameScreen;
+    private final GameEngine gameEngine;
     private GameFrame gameFrame;
-    
-    private int fHeight;
-    private int fWidht;
+
     
     private final JButton newGame;
     private final JButton highscores;
@@ -36,24 +33,18 @@ public class MainMenu extends JFrame{
     private final JButton exit;
     private static final int NUM_BUTTONS = 4;
     
-    public MainMenu() {
-        this.fHeight=(int)(screenRes.height*HEIGHT);
-        this.fWidht=(int)(screenRes.width*WIDHT);
-        this.canvas=new DrawableCanvasImpl(fWidht, fHeight, "res/images/game_bg.png");
-        //this.gameScreen= new GameScreenPanel(canvas);
-        
+    public MainMenu(GameScreenPanel gameScreen) {
+        this.gameScreen = gameScreen;
         this.gameEngine= new GameEngineImpl(gameScreen);
-        
-        
         //inizializza bottoni
         newGame= new JButton("New Game");
+        gameEngine.setCanvas(gameScreen.getCanvas());
+        gameEngine.setHandler(gameScreen.getHandler());
         newGame.setIcon(new ImageIcon("res/icons/jump_right.png"));
         newGame.addActionListener(e->{
-           
-            this.gameEngine.setCanvas(canvas);
+         
             gameEngine.startGame();
-            this.gameFrame= new GameFrame();
-            this.dispose();
+            this.gameFrame= new GameFrame(gameScreen.getCanvas());
             
         });
         highscores=new JButton("High Scores");

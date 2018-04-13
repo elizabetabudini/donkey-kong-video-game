@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -23,12 +24,16 @@ public class GameScreenPanel extends JPanel {
     private static final Double WIDHT_SCALE = 0.25;
     private final Dimension gameDimension;
     private final DrawableCanvas canvas;
+    private InputHandler handler = new InputHandler();
 
     public GameScreenPanel(DrawableCanvas canvas) {
-        this.gameDimension = new Dimension((int) (screenRes.getWidth() * WIDHT_SCALE),
-                (int) (screenRes.getHeight() * HEIGHT_SCALE));
+        super();
+        this.gameDimension = new Dimension(500,600);
         this.setSize(gameDimension);
         this.canvas = canvas;
+        this.addKeyListener(handler);
+        this.setBackground(Color.BLACK);
+        this.setVisible(true);
     }
 
     /**
@@ -39,16 +44,27 @@ public class GameScreenPanel extends JPanel {
     }
 
     @Override
-    protected final void paintComponent(final Graphics g) {
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        doDrawing(g);
+    }
+   
+    private void doDrawing(final Graphics g) {
         final Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(canvas.getBackGround(), 0, 0, gameDimension.width, gameDimension.height - 50, null);
         g2d.drawImage(canvas.getforeGround(), 0, 0, gameDimension.width, gameDimension.height - 50, null);
-
     }
-
+    
+    public DrawableCanvas getCanvas() {
+        return this.canvas;
+    }
+    
+    public InputHandler getHandler() {
+        return this.handler;
+    }
     // private final DrawEntities drawEntities = new DrawEntities(GameWidth,
     // GameHeight);
+
 
     // fare metodo per la vittoria
     // fare metodo che richiama drawentities

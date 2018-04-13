@@ -80,9 +80,10 @@ public class BasicModel extends ModelImpl{
 
     public void updateGame() {
         
-        if(this.getGameStatus().equals(GameStatus.Running)) {
+        /*if(this.getGameStatus().equals(GameStatus.Running)) {
             checkCollisions();
             getMario().update();
+            if(!getBarrels().isEmpty())
             getBarrels().forEach(X -> X.update());
         }
 
@@ -102,7 +103,7 @@ public class BasicModel extends ModelImpl{
         //TODO to complete
         if(this.getGameStatus().equals(GameStatus.Won)) {
             
-        }
+        }*/
     } 
 
     private void isOnTheFloor(final DynamicEntity entity) {

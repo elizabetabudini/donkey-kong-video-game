@@ -7,7 +7,8 @@ import controller.GameEngine;
 import controller.GameEngineImpl;
 import view.DrawableCanvas;
 import view.DrawableCanvasImpl;
-import view.GameScreen;
+import view.GameFrame;
+import view.GameScreenPanel;
 
 public class MainMenu extends JFrame{
     
@@ -21,9 +22,10 @@ public class MainMenu extends JFrame{
     private static final Double HEIGHT = 0.6;
     private static final Double WIDHT = 0.5;
     private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
-    private static GameScreen gameScreen;
+    private static GameScreenPanel gameScreen;
     private static GameEngine gameEngine;
     private final DrawableCanvas canvas;
+    private GameFrame gameFrame;
     
     private int fHeight;
     private int fWidht;
@@ -38,7 +40,8 @@ public class MainMenu extends JFrame{
         this.fHeight=(int)(screenRes.height*HEIGHT);
         this.fWidht=(int)(screenRes.width*WIDHT);
         this.canvas=new DrawableCanvasImpl(fWidht, fHeight, "res/images/game_bg.png");
-        this.gameScreen= new GameScreen(canvas);
+        //this.gameScreen= new GameScreenPanel(canvas);
+        
         this.gameEngine= new GameEngineImpl(gameScreen);
         
         
@@ -49,6 +52,7 @@ public class MainMenu extends JFrame{
            
             this.gameEngine.setCanvas(canvas);
             gameEngine.startGame();
+            this.gameFrame= new GameFrame();
             this.dispose();
             
         });

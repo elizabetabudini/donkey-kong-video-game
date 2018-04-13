@@ -10,7 +10,7 @@ import model.entities.DonkeyKong;
 import model.entities.Mario;
 import model.entities.Movement;
 import view.DrawableCanvas;
-import view.GameScreen;
+import view.GameScreenPanel;
 import view.InputHandler;
 import view.Sprites;
 
@@ -28,10 +28,10 @@ public class GameEngineImpl implements GameEngine {
     private InputHandler handler;
     private DrawableCanvas drawer;
     private Sprites marioSprite;
-    private GameScreen gameScreen;
+    private GameScreenPanel gameScreen;
     private final BasicModel model = new BasicModel();
  
-    public GameEngineImpl(final GameScreen gameScreen) {
+    public GameEngineImpl(final GameScreenPanel gameScreen) {
         super();
         this.mario = this.model.getMario();
         this.barrels = this.model.getBarrels();

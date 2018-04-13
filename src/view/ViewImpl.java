@@ -5,13 +5,13 @@ import java.awt.Toolkit;
 
 import controller.GameEngine;
 import controller.GameEngineImpl;
-import view.GameScreen;
+import view.GameScreenPanel;
 import view.menu.MainMenu;
 
 public class ViewImpl implements ViewInterface {
     
     //private final InputHandler inputHandler;
-    private static GameScreen gameScreen;
+    private static GameScreenPanel gameScreen;
     private static GameEngine gameEngine;
     private final DrawableCanvas canvas;
     private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
@@ -22,17 +22,18 @@ public class ViewImpl implements ViewInterface {
     
     
 
-    public ViewImpl(final GameEngine gameEngine) {
+    public ViewImpl() {
         this.fHeight=(int) (screenRes.getHeight()*HEIGHT);
         this.fWidht=(int) (screenRes.getWidth()*WIDHT);
         this.canvas=new DrawableCanvasImpl(fWidht, fHeight, "res/images/game_bg.png");
-        this.gameScreen= new GameScreen(canvas);
-        this.gameEngine= new GameEngineImpl(gameScreen);
-        this.gameEngine.setCanvas(canvas);
+        this.gameScreen= new GameScreenPanel(canvas);
         
     }
-    static void setView(final GameScreen gamescreen) {
+    static void setView(final GameScreenPanel gamescreen) {
         ViewImpl.gameScreen = gamescreen;
+    }
+    static void setGameEngine(final GameEngine gameEngine) {
+        ViewImpl.gameEngine = gameEngine;
     }
 
     public void startView() {

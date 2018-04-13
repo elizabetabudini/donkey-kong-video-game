@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  *
  */
 
-public class GameScreen extends JPanel {
+public class GameScreenPanel extends JPanel {
 
 
     private static final long serialVersionUID = -6769386766627070108L;
@@ -24,7 +24,7 @@ public class GameScreen extends JPanel {
     private final Dimension gameDimension;
     private final DrawableCanvas canvas;
 
-    public GameScreen(DrawableCanvas canvas) {
+    public GameScreenPanel(DrawableCanvas canvas) {
         this.gameDimension = new Dimension((int) (screenRes.getWidth() * WIDHT_SCALE),
                 (int) (screenRes.getHeight() * HEIGHT_SCALE));
         this.setSize(gameDimension);

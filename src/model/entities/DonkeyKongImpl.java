@@ -14,7 +14,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
     
     private final BarrelFactory bf ;
     private final AgentBarrelsCreator barrels;
-    private final List<Barrel> barrelsList;
+    private volatile List<Barrel> barrelsList;
     private final MovingBarrels barrelsMovement;
     private boolean launchingBarrel;
 
@@ -85,7 +85,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
 
         public void run() {    
             while(true) {
-                        DonkeyKongImpl.this.getBarrelsList().forEach(br -> br.move(Optional.of(Movement.RIGHT)));
+                        DonkeyKongImpl.this.getBarrelsList().stream().forEach(br -> br.move(Optional.of(Movement.RIGHT)));
                 try {
                     Thread.sleep(10);
                 } catch (Exception ex) {

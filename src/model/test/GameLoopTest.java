@@ -22,6 +22,7 @@ import model.entities.MarioImpl;
 import model.entities.Movement;
 import view.DrawableCanvasImpl;
 import view.GameScreenPanel;
+//import view.GameScreenPanel;
 import view.Sprites;
 
 public class GameLoopTest {
@@ -37,7 +38,24 @@ public class GameLoopTest {
         mario.move(Optional.of(Movement.RIGHT));
         ge.startGame();
         Thread.sleep(200);
-        assertEquals("Mario was supposed to face right", Sprites.MARIO_FACING_RIGHT, ge.getMarioSpriteTest());
+        assertEquals("Mario was supposed to face right", Sprites.MARIO_WALKING_RIGHT, ge.getMarioSpriteTest());
+        /*
+        mario.move(Optional.of(Movement.JUMP));
+        Thread.sleep(200);
+        assertEquals("Mario was supposed to jump", Sprites.MARIO_JUMPING_RIGHT, ge.getMarioSpriteTest());
+        
+        mario.move(Optional.of(Movement.LEFT));
+        Thread.sleep(500);
+        assertEquals("Mario was supposed to walk left", Sprites.MARIO_FACING_LEFT, ge.getMarioSpriteTest());
+    
+        Thread.sleep(200);
+        if(dk.isLaunchingBarrel()) {
+            assertEquals("DonkeyKong was supposed to launch barrels", Sprites.GORILLA_FACING_RIGHT, ge.getDonkeySpriteTest());
+        }else {
+            assertEquals("DonkeyKong was not supposed to launch barrels", Sprites.GORILLA_IDLE, ge.getDonkeySpriteTest());
+        }
+        //Thread.sleep(200);
+       */
     }
     
 }

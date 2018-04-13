@@ -10,6 +10,7 @@ import model.entities.EntityStatus;
 import model.entities.FloorTile;
 import model.entities.Mario;
 import model.entities.Princess;
+import model.entities.Stair;
 import model.levels.BasicLevel;
 import model.levels.Level1st;
 
@@ -46,6 +47,24 @@ public class BasicModel extends ModelImpl{
     public Princess getPrincess() {
         return this.getCurrentLevel().getPrincess();
     }
+    
+    /**
+     * Getter for the floor.
+     * 
+     * @return the list containing all the floor tiles.
+     */
+    public List<? extends FloorTile> getFloor() {
+        return this.getCurrentLevel().getFloor();
+    }
+    
+    /**
+     * Getter for the stairs.
+     * 
+     * @return the list containing all the stairs.
+     */
+    public List<? extends Stair> getStairs() {
+        return this.getCurrentLevel().getStairs();
+    }
 
     /**
      * Getter for the Barrels.
@@ -58,24 +77,6 @@ public class BasicModel extends ModelImpl{
 
     public BasicLevel getCurrentLevel() {
         return (BasicLevel) super.getCurrentLevel();
-    }
-
-    //TODO could be removed
-    /**
-     * Remover for the dead barrels.
-     * 
-     * @param barrel
-     *          the barrel to remove.
-     */
-    public void removeBarrel(final Barrel barrel) {
-        this.getDonkeyKong().getBarrelsList().remove(barrel);
-    }
-
-    public void checkCollisions() {
-        this.isOnTheFloor(this.getMario());
-        this.isMarioAlive(this.getMario());
-        this.processBarrels(getBarrels());
-        this.checkVictory(this.getMario());
     }
 
     public void updateGame() {
@@ -92,6 +93,7 @@ public class BasicModel extends ModelImpl{
                 getMario().setX(this.getCurrentLevel().getMarioSpawn().getX());
                 getMario().setY(this.getCurrentLevel().getMarioSpawn().getX());
                 getMario().setStatus(EntityStatus.OnTheFloor);
+                getDonkeyKong().getBarrelsList().clear();
                 start();
             }
             else {
@@ -101,17 +103,42 @@ public class BasicModel extends ModelImpl{
 
         //TODO to complete
         if(this.getGameStatus().equals(GameStatus.Won)) {
-            
         }
     } 
-
-    private void isOnTheFloor(final DynamicEntity entity) {
+    
+    public void checkCollisions() {
+        this.checkStatus(this.getMario());
+        this.isMarioAlive(this.getMario());
+        this.processBarrels(getBarrels());
+        this.checkVictory(this.getMario());
+    }
+    
+    //check if it is on the floor and eventually continue with the stairs
+    private void checkStatus(final DynamicEntity entity) {
         Optional<? extends FloorTile> floorTile = Optional.empty();
-        floorTile = this.getCurrentLevel().getFloor().stream().filter(X -> entity.isColliding(X) == true).findFirst();
+        floorTile = this.getFloor().stream().filter(T -> entity.isColliding(T) == true).findFirst();
         if(floorTile.isPresent()) {
             entity.setStatus(EntityStatus.OnTheFloor);
             fixHeight(entity, floorTile.get());
         }
+        checkStairs(entity);
+    }
+    
+    private void checkStairs(final DynamicEntity entity) {
+        this.getStairs().stream().forEach(S -> {
+            if(entity.isColliding(S.getTrigger()) && entity.getY()+entity.getHitbox().getHeight() == S.getTrigger().getY()+S.getTrigger().getHitbox().getHeight()) {
+                entity.setStatus(EntityStatus.CanClimbDown);
+                return;
+            }
+            else if (entity.isColliding(S) && entity.getY()+entity.getHitbox().getHeight() == S.getY()+S.getHitbox().getHeight()) {
+                entity.setStatus(EntityStatus.CanClimbUp);
+                return;
+            }
+            else if (entity.isColliding(S)) {
+                entity.setStatus(EntityStatus.Climbing);
+                return;
+            }
+        });
     }
 
     private void isMarioAlive(final Mario mario) {
@@ -121,7 +148,9 @@ public class BasicModel extends ModelImpl{
     }
 
     private void processBarrels(final List<Barrel> barrels) {
-        barrels.stream().forEach(X -> this.isOnTheFloor(X));
+        if(!barrels.isEmpty()) {
+        barrels.stream().forEach(X -> this.checkStatus(X));
+        }
     }
 
     private void checkVictory(final Mario mario) {
@@ -131,8 +160,8 @@ public class BasicModel extends ModelImpl{
     }
 
     private void fixHeight(final DynamicEntity entity, final FloorTile floorTile) {
-        if(entity.getY() < floorTile.getHitbox().getHeight()+floorTile.getY()) {
-            entity.setY(floorTile.getHitbox().getHeight()+floorTile.getY());
+        if(entity.getY()+entity.getHitbox().getHeight() > floorTile.getY()) {
+            entity.setY(floorTile.getY()-entity.getHitbox().getHeight());
         }
     }
 }

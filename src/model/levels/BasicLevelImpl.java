@@ -9,8 +9,6 @@ import model.entities.Princess;
 import model.entities.StairImpl;
 import utilities.Pair;
 
-
-
 /**
  * Implementation of a basic level
  */

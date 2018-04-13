@@ -119,8 +119,4 @@ public class MainMenu extends JFrame {
         frame.setVisible(true);
     }
 
-<<<<<<< HEAD
-
 }
-=======
->>>>>>> 2a62384518ec8e599e0ad4c83939f21a97464dac

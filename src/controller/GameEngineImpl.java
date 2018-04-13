@@ -23,6 +23,7 @@ public class GameEngineImpl implements GameEngine {
     private final DonkeyKong dk;
     
     private final GameLoop gameLoop;
+    private boolean gameRunning;
     private InputTranslator translator;
     private InputHandler handler;
     private DrawableCanvas drawer;
@@ -43,7 +44,10 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public void startGame() {
-        this.gameLoop.start();      
+        if(!this.gameRunning) {
+            this.gameLoop.start();  
+            this.gameRunning = true;
+        }  
     }
     
     @Override

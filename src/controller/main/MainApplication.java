@@ -1,6 +1,10 @@
 package controller.main;
 
 import controller.GameEngineImpl;
+
+
+import java.awt.EventQueue;
+
 import controller.GameEngine;
 import view.DrawableCanvas;
 import view.DrawableCanvasImpl;
@@ -11,9 +15,11 @@ import view.ViewInterface;
 public class MainApplication {
     public static void main(final String[] args) {
       
-        final ViewInterface v = new ViewImpl();
-        //final MenuController c = new MenuController();
-        //c.setView(v);
-        v.startView();
-    }
+ 
+       
+                
+                final ViewInterface v = new ViewImpl();
+                v.startView();
+
+}
 }

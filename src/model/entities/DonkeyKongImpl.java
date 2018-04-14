@@ -30,7 +30,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
 
     @Override
     public List<Barrel> getBarrelsList(){
-        return Collections.unmodifiableList(this.barrelsList);
+        return  new ArrayList<>(this.barrelsList);
     }
     
     @Override
@@ -56,12 +56,19 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
         public void run() { 
 
             while(creatingBarrels) {
-                this.barrel = DonkeyKongImpl.this.bf.createSimpleBarrel(10.0, 10.0, new Dimension(10,10));
+                DonkeyKongImpl.this.launchingBarrel = true;
+                this.barrel = DonkeyKongImpl.this.bf.createSimpleBarrel(45.0, 60.0, new Dimension(10,10));
                 barrelsList.add(this.barrel);
+                try {
+                    Thread.sleep(400); //sleep to change Sprites of Dk launching barrels
+                } catch (Exception ex) {
+                }
+                DonkeyKongImpl.this.launchingBarrel = false;
                 try {
                     Thread.sleep(1000);
                 } catch (Exception ex) {
                 }
+                DonkeyKongImpl.this.launchingBarrel = false;
                 this.checkBarrels();
             }
         }

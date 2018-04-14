@@ -23,7 +23,6 @@ public class GameEngineImpl implements GameEngine {
     private final static long PERIOD = 20;
     
     private final Mario mario;
-    private final List<Barrel> barrels;
     private final DonkeyKong dk;
     
     private final GameLoop gameLoop;
@@ -39,12 +38,10 @@ public class GameEngineImpl implements GameEngine {
     public GameEngineImpl(final GameScreenPanel gameScreen) {
         super();
         this.mario = this.model.getMario();
-        this.barrels = this.model.getBarrels();
         this.dk = this.model.getDonkeyKong();
         this.gameLoop = new GameLoop();
-        this.translateInputs();
-        this.gameScreen = gameScreen;
-        /* ***in the view addKeyListener(handler); */     
+        this.gameScreen = gameScreen;   
+        this.translateInputs(); 
     }
 
     @Override
@@ -117,26 +114,21 @@ public class GameEngineImpl implements GameEngine {
             this.drawer.drawEntity(Sprites.GORILLA_FACING_RIGHT, this.dk.getX().intValue(), this.dk.getY().intValue());
             this.donkeySprite = Sprites.GORILLA_FACING_RIGHT;
         } else {
-            //TODO change with Sprites.GORILLA_LAUNCHING
             this.drawer.drawEntity(Sprites.GORILLA_IDLE, this.dk.getX().intValue(), this.dk.getY().intValue());
             this.donkeySprite = Sprites.GORILLA_IDLE;
         }
         
         if(!this.model.getBarrels().isEmpty()) {
-            this.dk.getBarrelsList().forEach(br -> drawer.drawEntity
-                    (Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue()));
-            //Barrels
-            /*this.barrels.stream().forEach(br -> {
+            this.dk.getBarrelsList().forEach(br -> {
                 if(br.getCurrentDirection().equals(Movement.RIGHT)) {
                     this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
                 } else {
                     this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
                 }
-            });*/
+            });
+        }
             SwingUtilities.invokeLater(() -> gameScreen.updateScreen() );
             
-        }
-
     }
 
     private void updateGame(long elapsedTime) {
@@ -148,7 +140,7 @@ public class GameEngineImpl implements GameEngine {
      * of functional interface {@link InputTranslator}
      */
     private void processInput() {
-       Set<Movement> parsedMovements = translator.inputParser(handler.parser(false));
+      /* Set<Movement> parsedMovements = translator.inputParser(handler.parser(false));
         
         for (final Movement dir : parsedMovements) {
             mario.stopMoving(dir);
@@ -159,8 +151,7 @@ public class GameEngineImpl implements GameEngine {
         for (final Movement dir : parsedMovements) {
             mario.move(Optional.of(dir));
         }
-        mario.update(); 
-        
+        mario.update(); */       
     }
     
     private class GameLoop extends Thread {

@@ -140,7 +140,7 @@ public class GameEngineImpl implements GameEngine {
      * of functional interface {@link InputTranslator}
      */
     private void processInput() {
-      /* Set<Movement> parsedMovements = translator.inputParser(handler.parser(false));
+       Set<Movement> parsedMovements = translator.inputParser(handler.parser(false));
         
         for (final Movement dir : parsedMovements) {
             mario.stopMoving(dir);
@@ -151,7 +151,7 @@ public class GameEngineImpl implements GameEngine {
         for (final Movement dir : parsedMovements) {
             mario.move(Optional.of(dir));
         }
-        mario.update(); */       
+        mario.update();       
     }
     
     private class GameLoop extends Thread {

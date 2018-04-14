@@ -18,6 +18,7 @@ import model.entities.Mario;
 import model.entities.Movement;
 import view.DrawableCanvasImpl;
 import view.GameScreenPanel;
+import view.InputHandler;
 import view.Sprites;
 
 public class GameLoopTest {
@@ -32,6 +33,7 @@ public class GameLoopTest {
         simpleBarrels.add(bf.createSimpleBarrel(10.0, 20.0, new Dimension(100,100)));
         final GameEngineImpl ge = new GameEngineImpl(new GameScreenPanel(new DrawableCanvasImpl(200, 200, "")));
         mario.move(Optional.of(Movement.RIGHT));
+        ge.setHandler(new InputHandler());
         ge.startGame();
         Thread.sleep(200);
         assertEquals("Mario was supposed to face right", Sprites.MARIO_WALKING_RIGHT, ge.getMarioSpriteTest());

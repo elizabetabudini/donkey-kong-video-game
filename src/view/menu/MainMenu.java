@@ -45,6 +45,7 @@ public class MainMenu extends JFrame {
             gameEngine.startGame();
             this.gameFrame = new GameFrame(gameScreen);
 
+
         });
         highscores = new JButton("High Scores");
         info = new JButton("Info");

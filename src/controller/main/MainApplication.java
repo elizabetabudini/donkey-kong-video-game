@@ -2,7 +2,6 @@ package controller.main;
 
 import controller.GameEngineImpl;
 
-
 import java.awt.EventQueue;
 
 import controller.GameEngine;
@@ -14,12 +13,9 @@ import view.ViewInterface;
 
 public class MainApplication {
     public static void main(final String[] args) {
-      
- 
-       
-                
-                final ViewInterface v = new ViewImpl();
-                v.startView();
 
-}
+        final ViewInterface v = new ViewImpl();
+        v.startView();
+
+    }
 }

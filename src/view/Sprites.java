@@ -23,7 +23,7 @@ public enum Sprites {
     /**
      * The princess sprite.
      */
-    PRINCESS("princess.png", new Dimension(2, 2)),
+    PRINCESS("princess.png", new Dimension(25, 25)),
     /**
      * The main character sprite, facing right..
      */
@@ -35,11 +35,11 @@ public enum Sprites {
     /**
      * The main character sprite, jumping right.
      */
-    MARIO_JUMPING_RIGHT("mario_jr.png", new Dimension(2, 2)),
+    MARIO_JUMPING_RIGHT("mario_jr.png", new Dimension(20, 25)),
     /**
      * The main character sprite, jumping left.
      */
-    MARIO_JUMPING_LEFT("mario_jl.png", new Dimension(2, 2)),
+    MARIO_JUMPING_LEFT("mario_jl.png", new Dimension(20, 25)),
     /**
      * The main character sprite, walking right.
      */

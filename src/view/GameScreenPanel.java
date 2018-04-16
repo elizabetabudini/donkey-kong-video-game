@@ -26,9 +26,11 @@ public class GameScreenPanel extends JPanel {
     public GameScreenPanel(DrawableCanvas canvas) {
         super();
         this.setFocusable(true);
-        this.gameDimension = new Dimension(500, 600);
-        this.setSize((int)(screenRes.getWidth()*WIDTH), (int)(screenRes.getHeight()*HEIGHT));
-        this.canvas = canvas;
+        this.gameDimension = new Dimension((int)(screenRes.getWidth()*WIDHT_SCALE), (int)(screenRes.getHeight()*HEIGHT_SCALE));
+        this.setSize((int)(gameDimension.getWidth()), (int)(gameDimension.getHeight()));
+        this.canvas = canvas;   
+        System.out.println(screenRes.getHeight());
+        System.out.println(gameDimension.getWidth());
         this.setBackground(Color.BLACK);
         this.addKeyListener(handler);
         this.setVisible(true);
@@ -51,8 +53,8 @@ public class GameScreenPanel extends JPanel {
 
     private void doDrawing(final Graphics g) {
         final Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(canvas.getBackGround(), 0, 0, gameDimension.width, gameDimension.height - 100, null);
-        g2d.drawImage(canvas.getforeGround(), 0, 0, gameDimension.width, gameDimension.height - 100, null);
+        g2d.drawImage(canvas.getBackGround(), 0, 0, gameDimension.width , gameDimension.height-50 , null);
+        g2d.drawImage(canvas.getforeGround(), 0, 0, gameDimension.width , gameDimension.height-50 , null);
     }
 
     public DrawableCanvas getCanvas() {

@@ -93,18 +93,18 @@ public class GameEngineImpl implements GameEngine {
     private void render() {
         
         if(this.mario.getCurrentDirection().equals(Movement.RIGHT)) {
-            this.marioSprite = Sprites.MARIO_WALKING_RIGHT;
+            this.marioSprite = Sprites.MARIO_FACING_RIGHT;
             if(this.mario.isJumping()) {
                 this.marioSprite = Sprites.MARIO_JUMPING_RIGHT;
             } else if(this.mario.isMoving()){
-                this.marioSprite = Sprites.MARIO_FACING_RIGHT;
+                this.marioSprite = Sprites.MARIO_WALKING_RIGHT;
             }
         } else {
-            this.marioSprite = Sprites.MARIO_WALKING_LEFT;
+            this.marioSprite = Sprites.MARIO_FACING_LEFT;
             if(this.mario.isJumping()) {
                 this.marioSprite = Sprites.MARIO_JUMPING_LEFT;
             } else {
-                this.marioSprite = Sprites.MARIO_FACING_LEFT;
+                this.marioSprite = Sprites.MARIO_WALKING_LEFT;
             }
         }
         this.drawer.drawEntity(this.marioSprite, this.mario.getX().intValue(), this.mario.getY().intValue());

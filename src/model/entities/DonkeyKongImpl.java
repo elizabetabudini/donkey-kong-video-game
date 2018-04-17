@@ -62,11 +62,13 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
                 try {
                     Thread.sleep(400); //sleep to change Sprites of Dk launching barrels
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
                 DonkeyKongImpl.this.launchingBarrel = false;
                 try {
                     Thread.sleep(1000);
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
                 DonkeyKongImpl.this.launchingBarrel = false;
                 this.checkBarrels();
@@ -92,10 +94,15 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
 
         public void run() {    
             while(true) {
-                        DonkeyKongImpl.this.getBarrelsList().stream().forEach(br -> br.move(Optional.of(Movement.RIGHT)));
+                        DonkeyKongImpl.this.getBarrelsList().stream().forEach(br -> {
+                            if(!br.getStatus().equals(EntityStatus.Falling)) {
+                                br.move(Optional.of(Movement.RIGHT));
+                            }
+                        });
                 try {
                     Thread.sleep(20);
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
         }

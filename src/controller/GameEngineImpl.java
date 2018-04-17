@@ -29,7 +29,7 @@ public class GameEngineImpl implements GameEngine {
     private DonkeyKong dk;
     private Princess princess;
     
-    private final GameLoop gameLoop;
+    private GameLoop gameLoop;
     private final GameScreenPanel gameScreen;
     private boolean gameRunning;
     private InputTranslator translator;
@@ -41,7 +41,6 @@ public class GameEngineImpl implements GameEngine {
  
     public GameEngineImpl(final GameScreenPanel gameScreen) {
         super(); 
-        this.gameLoop = new GameLoop();
         this.gameScreen = gameScreen;   
         this.translateInputs(); 
     }
@@ -49,6 +48,7 @@ public class GameEngineImpl implements GameEngine {
     @Override
     public void startGame() {
         if(!this.gameRunning) {
+            this.gameLoop = new GameLoop();
             this.initModel();
             this.gameLoop.start();  
             this.gameRunning = true;
@@ -96,7 +96,9 @@ public class GameEngineImpl implements GameEngine {
        if (delta < PERIOD) {
            try {
                Thread.sleep(PERIOD - delta);
-           } catch (Exception ex){}
+           } catch (Exception ex){
+               ex.printStackTrace();
+           }
        }
     }
 
@@ -165,8 +167,7 @@ public class GameEngineImpl implements GameEngine {
 
         for (final Movement dir : parsedMovements) {
             mario.move(Optional.of(dir));
-        }
-        mario.update();       
+        }      
     }
     
     private class GameLoop extends Thread {

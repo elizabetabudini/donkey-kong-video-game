@@ -23,7 +23,7 @@ public class ScoreTimePanel extends JPanel{
        
 
         private static final int PANEL_HEIGHT = 20;
-        private static final String VALUE_SEPARATOR = " ";
+        private static final Font font= new Font("Courier New", Font.BOLD, 12);
 
         //private final GameEngine controller;
 
@@ -40,12 +40,10 @@ public class ScoreTimePanel extends JPanel{
             //this.controller = Objects.requireNonNull(controller);
             this.setLayout(new GridLayout(0, 2));
             this.time=new JLabel();
-            this.time.setFont(new Font("Courier New", Font.BOLD, 12));
+            this.time.setFont(this.font);
             this.score= new JLabel();
-            this.score.setFont(new Font("Courier New", Font.BOLD, 12));
-            
-            // Sets the panel containing the time and the score
-            final JPanel infoPanel = new JPanel();
+            this.score.setFont(this.font);
+           
             this.setLayout(new GridLayout(0, 2));
             this.setBackground(Color.RED);
             //infoPanel.setOpaque(false);
@@ -64,7 +62,7 @@ public class ScoreTimePanel extends JPanel{
          */
         public final void updateScore(final long score) {
             SwingUtilities.invokeLater(() -> {
-                ScoreTimePanel.this.score.setText("Score" + VALUE_SEPARATOR + score);
+                ScoreTimePanel.this.score.setText("Score "+ score);
             });
         }
 
@@ -75,13 +73,11 @@ public class ScoreTimePanel extends JPanel{
          *          the number of seconds elapsed from the game's start
          */
         public final void updateTime(final long seconds) {
-            SwingUtilities.invokeLater(() -> {
-                ScoreTimePanel.this.time.setText("Time" + VALUE_SEPARATOR
-                        + String.format("%02d:%02d",
-                                TimeUnit.SECONDS.toMinutes(seconds),
-                                TimeUnit.SECONDS.toSeconds(seconds) % TimeUnit.MINUTES.toSeconds(1L)));
-            });
-        }
+        SwingUtilities.invokeLater(() -> {
+            ScoreTimePanel.this.time.setText("Time " + String.format("%02d:%02d", TimeUnit.SECONDS.toMinutes(seconds),
+                    TimeUnit.SECONDS.toSeconds(seconds) % TimeUnit.MINUTES.toSeconds(1L)));
+        });
+    }
 
         @Override
         public final Dimension getPreferredSize() {

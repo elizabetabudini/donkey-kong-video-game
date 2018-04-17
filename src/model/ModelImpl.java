@@ -23,6 +23,7 @@ public abstract class ModelImpl implements ModelInterface{
     public ModelImpl() {
         this.score = 0;
         this.currentLives = PLAYER_LIFE;
+        this.start();
         //TODO just for test, to edit
     }
     

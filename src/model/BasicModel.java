@@ -81,7 +81,7 @@ public class BasicModel extends ModelImpl{
 
     public void updateGame() {
         
-        /*if(this.getGameStatus().equals(GameStatus.Running)) {
+        if(this.getGameStatus().equals(GameStatus.Running)) {
             checkCollisions();
             getMario().update();
             if(!getBarrels().isEmpty())
@@ -104,13 +104,10 @@ public class BasicModel extends ModelImpl{
 
         //TODO to complete
         if(this.getGameStatus().equals(GameStatus.Won)) {
-<<<<<<< HEAD
         }
-=======
+
             
-        }*/
->>>>>>> d9be526c46b6b94aefe8565cd0de6bceac36bf52
-    } 
+    }
     
     public void checkCollisions() {
         this.checkStatus(this.getMario());

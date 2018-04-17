@@ -37,9 +37,10 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
     // da aggiungere climbing status e metodo istouchingground()
     @Override
     protected void tryToMove(final Optional<Movement> dir) {
-        if (!dir.isPresent()) {
+        if (!dir.isPresent() || dir.get() == Movement.JUMP) {
             return;
         }
+        System.out.println(dir.get());
         this.setDirection(dir.get());
         if (dir.get() == Movement.LEFT) {
             this.setDeltaX(-STEP);
@@ -54,14 +55,16 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
          *  this.jump();
             }
          */
+        System.out.println("DEBUG: La coordinata X di mario è "+this.getX());
+        System.out.println("DEBUG: La coordinata Y di mario è "+this.getY());
     }
 
-    private void jump() {
+  /*  private void jump() {
         jumping = true;
         this.setDeltaY(JUMP_DISTANCE);
         this.setDeltaX(this.getDeltaX() * 1.5);
     }
-
+    */
     /**
      * Checks whether or not Mario is trying to move outside game's borders.
      * 
@@ -90,6 +93,11 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
     @Override
     public boolean isJumping() {
         return jumping;
+    }
+
+    @Override
+    public boolean isMoving() {
+        return this.getDeltaX() != 0;
     }
 
 }

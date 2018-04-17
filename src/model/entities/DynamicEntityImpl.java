@@ -33,6 +33,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     @Override
     public final void move(final Optional<Movement> dir) {
         tryToMove(dir);
+        if(dir.get()!=Movement.JUMP)
         this.setX(this.getX() + deltaX);
         this.setY(this.getY() + deltaY);
     }

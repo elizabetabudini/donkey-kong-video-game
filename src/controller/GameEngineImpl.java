@@ -1,8 +1,11 @@
 package controller;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+
+import javax.swing.SwingUtilities;
 
 import model.BasicModel;
 import model.entities.Barrel;
@@ -10,7 +13,8 @@ import model.entities.DonkeyKong;
 import model.entities.Mario;
 import model.entities.Movement;
 import view.DrawableCanvas;
-import view.GameScreen;
+import view.GameScreenPanel;
+//import view.GameScreenPanel;
 import view.InputHandler;
 import view.Sprites;
 
@@ -19,36 +23,43 @@ public class GameEngineImpl implements GameEngine {
     private final static long PERIOD = 20;
     
     private final Mario mario;
-    private final List<Barrel> barrels;
     private final DonkeyKong dk;
     
     private final GameLoop gameLoop;
+    private boolean gameRunning;
     private InputTranslator translator;
-    private final InputHandler handler  = new InputHandler();
+    private InputHandler handler;
     private DrawableCanvas drawer;
     private Sprites marioSprite;
-    private GameScreen gameScreen;
+    private Sprites donkeySprite;
+    private GameScreenPanel gameScreen;
     private final BasicModel model = new BasicModel();
  
-    public GameEngineImpl(final GameScreen gameScreen) {
+    public GameEngineImpl(final GameScreenPanel gameScreen) {
         super();
         this.mario = this.model.getMario();
-        this.barrels = this.model.getBarrels();
         this.dk = this.model.getDonkeyKong();
         this.gameLoop = new GameLoop();
-        this.translateInputs();
-        this.gameScreen = gameScreen;
-        /* ***in the view addKeyListener(handler); */     
+        this.gameScreen = gameScreen;   
+        this.translateInputs(); 
     }
 
     @Override
     public void startGame() {
-        this.gameLoop.start();      
+        if(!this.gameRunning) {
+            this.gameLoop.start();  
+            this.gameRunning = true;
+        }  
     }
     
     @Override
     public void setCanvas(final DrawableCanvas drawer) {
         this.drawer = drawer;
+    }
+    
+    @Override
+    public void setHandler(final InputHandler handler) {
+        this.handler = handler;     
     }
     
     private void translateInputs() {
@@ -80,42 +91,44 @@ public class GameEngineImpl implements GameEngine {
     }
 
     private void render() {
-        //intValue or cast
+        
         if(this.mario.getCurrentDirection().equals(Movement.RIGHT)) {
-            this.marioSprite = Sprites.MARIO_WALKING_RIGHT;
+            this.marioSprite = Sprites.MARIO_FACING_RIGHT;
             if(this.mario.isJumping()) {
                 this.marioSprite = Sprites.MARIO_JUMPING_RIGHT;
             } else if(this.mario.isMoving()){
-                this.marioSprite = Sprites.MARIO_FACING_RIGHT;
+                this.marioSprite = Sprites.MARIO_WALKING_RIGHT;
             }
         } else {
-            this.marioSprite = Sprites.MARIO_WALKING_LEFT;
+            this.marioSprite = Sprites.MARIO_FACING_LEFT;
             if(this.mario.isJumping()) {
                 this.marioSprite = Sprites.MARIO_JUMPING_LEFT;
             } else {
-                this.marioSprite = Sprites.MARIO_FACING_LEFT;
+                this.marioSprite = Sprites.MARIO_WALKING_LEFT;
             }
         }
         this.drawer.drawEntity(this.marioSprite, this.mario.getX().intValue(), this.mario.getY().intValue());
-        
+ 
         //DonkeyKong
         if(this.dk.isLaunchingBarrel()) {
             this.drawer.drawEntity(Sprites.GORILLA_FACING_RIGHT, this.dk.getX().intValue(), this.dk.getY().intValue());
+            this.donkeySprite = Sprites.GORILLA_FACING_RIGHT;
         } else {
-            //TODO change with Sprites.GORILLA_LAUNCHING
             this.drawer.drawEntity(Sprites.GORILLA_IDLE, this.dk.getX().intValue(), this.dk.getY().intValue());
+            this.donkeySprite = Sprites.GORILLA_IDLE;
         }
         
-        this.dk.getBarrelsList().forEach(br -> drawer.drawEntity
-                (Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue()));
-        //Barrels
-        this.barrels.stream().forEach(br -> {
-            if(br.getCurrentDirection().equals(Movement.RIGHT)) {
-                this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
-            } else {
-                this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
-            }
-        });
+        if(!this.model.getBarrels().isEmpty()) {
+            this.dk.getBarrelsList().forEach(br -> {
+                if(br.getCurrentDirection().equals(Movement.RIGHT)) {
+                    this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
+                } else {
+                    this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
+                }
+            });
+        }
+            SwingUtilities.invokeLater(() -> gameScreen.updateScreen() );
+            
     }
 
     private void updateGame(long elapsedTime) {
@@ -127,7 +140,7 @@ public class GameEngineImpl implements GameEngine {
      * of functional interface {@link InputTranslator}
      */
     private void processInput() {
-        Set<Movement> parsedMovements = translator.inputParser(handler.parser(false));
+       Set<Movement> parsedMovements = translator.inputParser(handler.parser(false));
         
         for (final Movement dir : parsedMovements) {
             mario.stopMoving(dir);
@@ -138,8 +151,7 @@ public class GameEngineImpl implements GameEngine {
         for (final Movement dir : parsedMovements) {
             mario.move(Optional.of(dir));
         }
-       // mario.update(); /* ?*/
-        
+        mario.update();       
     }
     
     private class GameLoop extends Thread {
@@ -166,4 +178,10 @@ public class GameEngineImpl implements GameEngine {
     public Sprites getMarioSpriteTest() {
         return this.marioSprite;
     }
+    
+    public Sprites getDonkeySpriteTest() {
+        return this.donkeySprite;
+    }
+    
+
 }

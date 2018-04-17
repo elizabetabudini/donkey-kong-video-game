@@ -16,18 +16,25 @@ public interface Mario extends DynamicEntity {
     boolean isClimbing();
 
     /**
-     * Returns whether or not Mario is jumping.
+     * Returns whether or not Mario is currently jumping.
      * 
      * @return true if Mario is jumping, false otherwise.
      */
     boolean isJumping();
 
     /**
+     * Returns whether or not Mario is currently moving.
+     * 
+     * @return true if Mario is moving, false otherwise.
+     */
+    boolean isMoving();
+
+    /**
      * Tells Mario to stop moving in the dir direction. If Mario is currently not
      * moving, the method does nothing.
      * 
-     * @param dir The dir representing the movement that should be stopped.
+     * @param dir
+     *            The dir representing the movement that should be stopped.
      */
     void stopMoving(Movement dir);
-
 }

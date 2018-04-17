@@ -1,6 +1,7 @@
 package controller;
 
 import view.DrawableCanvas;
+import view.InputHandler;
 
 /**
  * 
@@ -21,5 +22,13 @@ public interface GameEngine {
      * @param drawer A new {@link DrawableCanvas}
      */
     void setCanvas(final DrawableCanvas drawer);
+    
+    /**
+     * 
+     * A method to set the InputHandler
+     * 
+     * @param handler The {@link InputHandler}
+     */
+    void setHandler(final InputHandler handler);
 
 }

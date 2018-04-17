@@ -3,6 +3,8 @@ package model.entities;
 import java.awt.Dimension;
 import java.util.Optional;
 
+import model.ModelImpl;
+
 /**
  * An implementation of a DynamicEntity, this class extends a basic entity and
  * adds methods to manage movements.
@@ -49,9 +51,9 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
 
     @Override
     public void update() {
-        /*if (!isTouchingGround()) {
+        if (getStatus() == EntityStatus.Falling) {
             this.setDeltaY(this.getDeltaY() - ModelImpl.GRAVITY);
-        }*/
+        }
     }
 
 

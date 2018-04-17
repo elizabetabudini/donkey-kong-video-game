@@ -121,7 +121,6 @@ public class BasicModel extends ModelImpl{
         Optional<? extends FloorTile> floorTile = Optional.empty();
         floorTile = this.getFloor().stream().filter(T -> entity.isColliding(T) == true).findFirst();
         if(floorTile.isPresent()) {
-            entity.setStatus(EntityStatus.OnTheFloor);
             fixHeight(entity, floorTile.get());
         }
         checkStairs(entity);
@@ -145,7 +144,7 @@ public class BasicModel extends ModelImpl{
     }
 
     private void isMarioAlive(final Mario mario) {
-        if(this.getBarrels().stream().map(X -> mario.isColliding(X)).findFirst().isPresent()) {
+        if(this.getBarrels().stream().filter(X -> mario.isColliding(X)).findFirst().isPresent()) {
             mario.setStatus(EntityStatus.Dead);
         }
     }
@@ -163,8 +162,20 @@ public class BasicModel extends ModelImpl{
     }
 
     private void fixHeight(final DynamicEntity entity, final FloorTile floorTile) {
-        if(entity.getY()+entity.getHitbox().getHeight() > floorTile.getY()) {
-            entity.setY(floorTile.getY()-entity.getHitbox().getHeight());
+        //touching the floor from the bottom
+        if(floorTile.getHitbox().getCenterY() <= entity.getY()){
+            entity.setY(floorTile.getY()+floorTile.getHitbox().getHeight());
         }
+        
+        //touching the floor from above
+        else if(floorTile.getHitbox().getCenterY() < entity.getY()+entity.getHitbox().getHeight()) {
+            entity.setY(entity.getY() - (entity.getY()+entity.getHitbox().getHeight() - floorTile.getY()));
+            entity.setStatus(EntityStatus.OnTheFloor);
+        }
+        
+        if(floorTile.getHitbox().getCenterY() == entity.getY()+entity.getHitbox().getHeight()) {
+            entity.setStatus(EntityStatus.OnTheFloor);
+        }
+        
     }
 }

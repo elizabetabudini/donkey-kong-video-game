@@ -23,15 +23,15 @@ public final class Level1st extends BasicLevelImpl{
     private static final String IMAGE_DIRECTORY = new String("imageDirectory/imageName.ext");
    
     //entities
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> MARIO = new Pair<>(new Pair<>(90.0,56.0), new Pair<>(0,0));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> MARIO = new Pair<>(new Pair<>(30.0,505.0), new Pair<>(25,25));
     private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> DONKEYKONG = new Pair<>(new Pair<>(15.0,21.0), new Pair<>(0,0));
     private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> PRINCESS = new Pair<>(new Pair<>(0.0,0.0), new Pair<>(0,0));
     
     //all the floor tiles
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_1 = new Pair<>(new Pair<>(0.0,0.0), new Pair<>(0,0));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_2 = new Pair<>(new Pair<>(0.0,0.0), new Pair<>(0,0));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_3 = new Pair<>(new Pair<>(0.0,0.0), new Pair<>(0,0));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_4 = new Pair<>(new Pair<>(0.0,0.0), new Pair<>(0,0));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_1 = new Pair<>(new Pair<>(0.0,513.0), new Pair<>(500,25));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_2 = new Pair<>(new Pair<>(15.0,369.0), new Pair<>(428,25));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_3 = new Pair<>(new Pair<>(0.0,225.0), new Pair<>(428,25));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_4 = new Pair<>(new Pair<>(15.0,81.0), new Pair<>(428,25));
     
     private static final List<Pair<Pair<Double,Double>, Pair<Integer,Integer>>> FLOOR = Collections.unmodifiableList(new ArrayList<>(Arrays.asList(FLOOR_TILE_1,FLOOR_TILE_2,FLOOR_TILE_3,FLOOR_TILE_4)));
     

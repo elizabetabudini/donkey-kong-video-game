@@ -10,7 +10,7 @@ public abstract class ModelImpl implements ModelInterface{
     
     private final static int PLAYER_LIFE = 3;
     
-    public final static Double GRAVITY = 0.030;
+    public final static Double GRAVITY = 0.39;
     
     //game info
     private GameStatus gameStatus;

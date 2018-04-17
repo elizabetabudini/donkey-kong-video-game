@@ -82,10 +82,10 @@ public class BasicModel extends ModelImpl{
     public void updateGame() {
         
         if(this.getGameStatus().equals(GameStatus.Running)) {
-            checkCollisions();
             getMario().update();
             if(!getBarrels().isEmpty())
             getBarrels().forEach(X -> X.update());
+            checkCollisions();
         }
 
         if(this.getMario().getStatus().equals(EntityStatus.Dead)) {
@@ -119,11 +119,15 @@ public class BasicModel extends ModelImpl{
     //check if it is on the floor and eventually continue with the stairs
     private void checkStatus(final DynamicEntity entity) {
         Optional<? extends FloorTile> floorTile = Optional.empty();
-        floorTile = this.getFloor().stream().filter(T -> entity.isColliding(T) == true).findFirst();
+        floorTile = this.getFloor().stream().filter(T -> entity.isColliding(T)).findFirst();
         if(floorTile.isPresent()) {
             fixHeight(entity, floorTile.get());
         }
+        else {
+            entity.setStatus(EntityStatus.Falling);
+        }
         checkStairs(entity);
+        
     }
     
     private void checkStairs(final DynamicEntity entity) {
@@ -156,9 +160,9 @@ public class BasicModel extends ModelImpl{
     }
 
     private void checkVictory(final Mario mario) {
-        if(mario.isColliding(getPrincess())) {
-            this.victory();
-        }
+        //if(mario.isColliding(getPrincess())) {
+      //      this.victory();
+      //  }
     }
 
     private void fixHeight(final DynamicEntity entity, final FloorTile floorTile) {
@@ -166,9 +170,8 @@ public class BasicModel extends ModelImpl{
         if(floorTile.getHitbox().getCenterY() <= entity.getY()){
             entity.setY(floorTile.getY()+floorTile.getHitbox().getHeight());
         }
-        
         //touching the floor from above
-        else if(floorTile.getHitbox().getCenterY() < entity.getY()+entity.getHitbox().getHeight()) {
+        else if(floorTile.getY() < entity.getY()+entity.getHitbox().getHeight()) {
             entity.setY(entity.getY() - (entity.getY()+entity.getHitbox().getHeight() - floorTile.getY()));
             entity.setStatus(EntityStatus.OnTheFloor);
         }

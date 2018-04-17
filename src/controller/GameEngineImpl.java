@@ -23,7 +23,7 @@ import view.Sprites;
 
 public class GameEngineImpl implements GameEngine {
     
-    private final static long PERIOD = 20;
+    private final static long PERIOD = 18;
     
     private Mario mario;
     private DonkeyKong dk;

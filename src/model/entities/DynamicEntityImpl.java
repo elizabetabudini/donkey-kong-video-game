@@ -34,11 +34,15 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     // template method to compute moving and update the entity.
     @Override
     public final void move(final Optional<Movement> dir) {
-        if(dir.isPresent()) {
-        tryToMove(dir);
+        if (dir.isPresent()) {
+            tryToMove(dir);
+            if (dir.get() == Movement.RIGHT || dir.get() == Movement.LEFT) {
+                this.setX(this.getX() + deltaX);
+                return;
+            }
         }
-        this.setX(this.getX() + deltaX);
         this.setY(this.getY() + deltaY);
+
     }
 
     /**

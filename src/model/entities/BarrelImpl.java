@@ -23,12 +23,6 @@ public class BarrelImpl extends DynamicEntityImpl implements Barrel, DynamicEnti
     }
 
     @Override
-    public void update() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
     protected void tryToMove(final Optional<Movement> dir) {
         /*Factorize this part with MarioImpl*/
         if(!dir.isPresent()) {

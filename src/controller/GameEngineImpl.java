@@ -10,6 +10,8 @@ import javax.swing.SwingUtilities;
 import model.BasicModel;
 import model.entities.Barrel;
 import model.entities.DonkeyKong;
+import model.entities.Entity;
+import model.entities.EntityStatus;
 import model.entities.Mario;
 import model.entities.Movement;
 import model.entities.Princess;
@@ -106,14 +108,14 @@ public class GameEngineImpl implements GameEngine {
         //draw mario
         if(this.mario.getCurrentDirection().equals(Movement.RIGHT)) {
             this.marioSprite = Sprites.MARIO_FACING_RIGHT;
-            if(this.mario.isJumping()) {
+            if(this.mario.getStatus().equals(EntityStatus.Jumping)) {
                 this.marioSprite = Sprites.MARIO_JUMPING_RIGHT;
             } else if(this.mario.isMoving()){
                 this.marioSprite = Sprites.MARIO_WALKING_RIGHT;
             }
         } else {
             this.marioSprite = Sprites.MARIO_FACING_LEFT;
-            if(this.mario.isJumping()) {
+            if(this.mario.getStatus().equals(EntityStatus.Jumping)) {
                 this.marioSprite = Sprites.MARIO_JUMPING_LEFT;
             } else if(this.mario.isMoving()) {
                 this.marioSprite = Sprites.MARIO_WALKING_LEFT;
@@ -140,7 +142,7 @@ public class GameEngineImpl implements GameEngine {
                 }
             });
         }
-            SwingUtilities.invokeLater(() -> gameScreen.updateScreen() );
+        SwingUtilities.invokeLater(() -> gameScreen.updateScreen() );
             
     }
 

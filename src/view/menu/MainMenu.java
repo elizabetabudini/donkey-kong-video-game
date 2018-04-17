@@ -1,10 +1,16 @@
 package view.menu;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import controller.GameEngine;
 import controller.GameEngineImpl;
+import utilities.ImageLoader;
 import view.DrawableCanvas;
 import view.DrawableCanvasImpl;
 import view.GameFrame;
@@ -19,8 +25,8 @@ public class MainMenu extends JFrame {
     private static final Insets TITLE_INSETS = new Insets(20, 0, 20, 0);
     private static final Insets BUTTONS_INSETS = new Insets(10, 20, 20, 20);
     private static final Insets IMAGES_INSETS = new Insets(20, 20, 20, 30);
-    private static final Double HEIGHT = 0.6;
-    private static final Double WIDHT = 0.5;
+    private static final Double HEIGHT = 0.7;
+    private static final Double WIDHT = 0.4;
     private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
     private final GameScreenPanel gameScreen;
     private final GameEngine gameEngine;
@@ -41,10 +47,9 @@ public class MainMenu extends JFrame {
         gameEngine.setHandler(gameScreen.getHandler());
         newGame.setIcon(new ImageIcon("res/icons/jump_right.png"));
         newGame.addActionListener(e -> {
-
+            
             gameEngine.startGame();
             this.gameFrame = new GameFrame(gameScreen);
-
 
         });
         highscores = new JButton("High Scores");
@@ -58,9 +63,15 @@ public class MainMenu extends JFrame {
         // set frame
         JFrame frame = new JFrame();
         frame.setTitle("Main Menu - DonkeyKong");
-        // frame.setLocationRelativeTo(null);
         frame.setResizable(false);
-        // frame.setIconImage(new Image("res/icons/donkeyIcon.png"));
+        
+        //set the background image
+        ImageIcon background = ImageLoader.getInstance().getImage("images/background.jpg");
+        //frame.setContentPane(new JLabel(new ImageIcon(background.getImage())));
+        //set the icon image
+        ImageIcon icon = ImageLoader.getInstance().getImage("images/donkeyIcon.png");
+        frame.setIconImage(icon.getImage());
+        
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setSize((int) (screenRes.getWidth() * WIDHT), (int) (screenRes.getHeight() * HEIGHT));
 
@@ -115,7 +126,7 @@ public class MainMenu extends JFrame {
         gbc.gridx = 1;
         gbc.gridy = 1;
         panel.add(lblImage, gbc);
-
+        
         frame.add(panel);
         frame.setVisible(true);
     }

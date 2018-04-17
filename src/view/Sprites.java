@@ -27,11 +27,11 @@ public enum Sprites {
     /**
      * The main character sprite, facing right..
      */
-    MARIO_FACING_RIGHT("mario_fr.png", new Dimension(20, 25)),
+    MARIO_FACING_RIGHT("mario_facing_right.png", new Dimension(30, 25)),
     /**
      * The main character sprite, facing left.
      */
-    MARIO_FACING_LEFT("mario_fl.png", new Dimension(20, 25)),
+    MARIO_FACING_LEFT("mario_facing_left.png", new Dimension(30, 25)),
     /**
      * The main character sprite, jumping right.
      */
@@ -43,15 +43,15 @@ public enum Sprites {
     /**
      * The main character sprite, walking right.
      */
-    MARIO_WALKING_RIGHT("mario_r.png", new Dimension(20, 25)),
+    MARIO_WALKING_RIGHT("mario_walking_right.gif", new Dimension(30, 25)),
     /**
      * The main character sprite, walking left.
      */
-    MARIO_WALKING_LEFT("mario_l.png", new Dimension(20, 25)),
+    MARIO_WALKING_LEFT("mario_walking_left.gif", new Dimension(30, 25)),
     /**
      * The barrel sprite, rotating right.
      */
-    BARREL_RIGHT("barrel_b1.png", new Dimension(20, 20)),
+    BARREL_RIGHT("barrelroll.gif", new Dimension(20, 20)),
     /**
      * The barrel sprite, rotating left.
      */

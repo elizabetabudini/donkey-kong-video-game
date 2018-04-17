@@ -12,6 +12,7 @@ import model.entities.Barrel;
 import model.entities.DonkeyKong;
 import model.entities.Mario;
 import model.entities.Movement;
+import model.entities.Princess;
 import view.DrawableCanvas;
 import view.GameScreenPanel;
 //import view.GameScreenPanel;
@@ -22,23 +23,22 @@ public class GameEngineImpl implements GameEngine {
     
     private final static long PERIOD = 20;
     
-    private final Mario mario;
-    private final DonkeyKong dk;
+    private Mario mario;
+    private DonkeyKong dk;
+    private Princess princess;
     
     private final GameLoop gameLoop;
+    private final GameScreenPanel gameScreen;
     private boolean gameRunning;
     private InputTranslator translator;
     private InputHandler handler;
     private DrawableCanvas drawer;
     private Sprites marioSprite;
     private Sprites donkeySprite;
-    private GameScreenPanel gameScreen;
-    private final BasicModel model = new BasicModel();
+    private BasicModel model;
  
     public GameEngineImpl(final GameScreenPanel gameScreen) {
-        super();
-        this.mario = this.model.getMario();
-        this.dk = this.model.getDonkeyKong();
+        super(); 
         this.gameLoop = new GameLoop();
         this.gameScreen = gameScreen;   
         this.translateInputs(); 
@@ -47,9 +47,17 @@ public class GameEngineImpl implements GameEngine {
     @Override
     public void startGame() {
         if(!this.gameRunning) {
+            this.initModel();
             this.gameLoop.start();  
             this.gameRunning = true;
         }  
+    }
+    
+    private void initModel(){
+        this.model = new BasicModel();
+        this.mario = this.model.getMario();
+        this.dk = this.model.getDonkeyKong();
+        this.princess = this.model.getPrincess();
     }
     
     @Override
@@ -92,6 +100,10 @@ public class GameEngineImpl implements GameEngine {
 
     private void render() {
         
+        //draw princess
+        this.drawer.drawEntity(Sprites.PRINCESS, this.princess.getX().intValue(), this.princess.getY().intValue());
+        
+        //draw mario
         if(this.mario.getCurrentDirection().equals(Movement.RIGHT)) {
             this.marioSprite = Sprites.MARIO_FACING_RIGHT;
             if(this.mario.isJumping()) {
@@ -103,13 +115,13 @@ public class GameEngineImpl implements GameEngine {
             this.marioSprite = Sprites.MARIO_FACING_LEFT;
             if(this.mario.isJumping()) {
                 this.marioSprite = Sprites.MARIO_JUMPING_LEFT;
-            } else {
+            } else if(this.mario.isMoving()) {
                 this.marioSprite = Sprites.MARIO_WALKING_LEFT;
             }
         }
         this.drawer.drawEntity(this.marioSprite, this.mario.getX().intValue(), this.mario.getY().intValue());
  
-        //DonkeyKong
+        //Draw DonkeyKong
         if(this.dk.isLaunchingBarrel()) {
             this.drawer.drawEntity(Sprites.GORILLA_FACING_RIGHT, this.dk.getX().intValue(), this.dk.getY().intValue());
             this.donkeySprite = Sprites.GORILLA_FACING_RIGHT;
@@ -118,6 +130,7 @@ public class GameEngineImpl implements GameEngine {
             this.donkeySprite = Sprites.GORILLA_IDLE;
         }
         
+        //draw barrels
         if(!this.model.getBarrels().isEmpty()) {
             this.dk.getBarrelsList().forEach(br -> {
                 if(br.getCurrentDirection().equals(Movement.RIGHT)) {

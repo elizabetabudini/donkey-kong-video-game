@@ -23,11 +23,8 @@ public final class Level1st extends BasicLevelImpl{
     private static final String IMAGE_DIRECTORY = new String("imageDirectory/imageName.ext");
    
     //entities
-<<<<<<< HEAD
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> MARIO = new Pair<>(new Pair<>(276.0, 88.0), new Pair<>(25,25));
-=======
+
     private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> MARIO = new Pair<>(new Pair<>(0.0,512.0), new Pair<>(30,25));
->>>>>>> f0ae2b77a99bd456fe06e355db2d29e5117d68aa
     private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> DONKEYKONG = new Pair<>(new Pair<>(15.0,53.0), new Pair<>(60,60));
     private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> PRINCESS = new Pair<>(new Pair<>(142.5,24.0), new Pair<>(0,0));
     

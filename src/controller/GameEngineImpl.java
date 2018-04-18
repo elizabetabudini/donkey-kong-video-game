@@ -16,7 +16,7 @@ import view.Sprites;
 
 public class GameEngineImpl implements GameEngine {
     
-    private final static long PERIOD = 18;
+    public final static long PERIOD = 18;
     
     private Mario mario;
     private DonkeyKong dk;
@@ -142,7 +142,7 @@ public class GameEngineImpl implements GameEngine {
             
     }
 
-    private void updateGame(long elapsedTime) {
+    private void updateGame() {
       this.model.updateGame();
     }
 
@@ -177,7 +177,7 @@ public class GameEngineImpl implements GameEngine {
                     final long currentTime = System.currentTimeMillis();
                     final long elapsedTime = currentTime - lastLoopTime;
                     processInput();
-                    updateGame(elapsedTime);
+                    updateGame();
                     render();
                     waitNextFrame(currentTime);
                 }
@@ -191,6 +191,10 @@ public class GameEngineImpl implements GameEngine {
     
     public Sprites getDonkeySpriteTest() {
         return this.donkeySprite;
+    }
+    
+    public Mario getMario() {
+        return this.mario;
     }
     
 

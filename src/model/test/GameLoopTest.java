@@ -25,16 +25,15 @@ public class GameLoopTest {
 
     @Test
     public void testLoop() throws InterruptedException {
-        final BasicModel model = new BasicModel();
-        final Mario mario = model.getMario();
+        //final BasicModel model = new BasicModel();
         final BarrelFactory bf = new BarrelFactoryImpl();
         final List<Barrel> simpleBarrels = new ArrayList<>();
-        final DonkeyKong dk = model.getDonkeyKong();
         simpleBarrels.add(bf.createSimpleBarrel(10.0, 20.0, new Dimension(100,100)));
         final GameEngineImpl ge = new GameEngineImpl(new GameScreenPanel(new DrawableCanvasImpl(200, 200, "")));
+        ge.startGame();
+        final Mario mario = ge.getMario();
         mario.move(Optional.of(Movement.RIGHT));
         ge.setHandler(new InputHandler());
-        ge.startGame();
         Thread.sleep(200);
         assertEquals("Mario was supposed to face right", Sprites.MARIO_WALKING_RIGHT, ge.getMarioSpriteTest());
         

@@ -14,6 +14,6 @@ public interface Barrel extends DynamicEntity {
      * it changes his direction when needed
      * 
      */
-    void moveBarrels();
+    void manageBarrelMovement();
 
 }

@@ -37,7 +37,7 @@ public class BarrelImpl extends DynamicEntityImpl implements Barrel, DynamicEnti
     }
     
     @Override
-    public void moveBarrels() {
+    public void manageBarrelMovement() {
         if(this.getStatus().equals(EntityStatus.OnTheFloor)) {
             if( this.getCurrentDirection().equals(Movement.RIGHT)) {
                     this.move(Optional.of(Movement.RIGHT));
@@ -46,16 +46,19 @@ public class BarrelImpl extends DynamicEntityImpl implements Barrel, DynamicEnti
              }
              this.directionChanged = false;
         } else { //the barrel is falling down
-            //when a barrel reaches a floor it changes its direction 
-            if( !directionChanged) {
-                this.directionChanged = true;
-                if(this.getCurrentDirection().equals(Movement.RIGHT)) {
-                    this.setDirection(Movement.LEFT);
-                } else {
-                    this.setDirection(Movement.RIGHT);
-                } 
-           }
+            this.changeDirection();
         }  
+    }
+
+    private void changeDirection() { //when a barrel reaches a floor it changes its direction 
+        if( !directionChanged) {
+            this.directionChanged = true;
+            if(this.getCurrentDirection().equals(Movement.RIGHT)) {
+                this.setDirection(Movement.LEFT);
+            } else {
+                this.setDirection(Movement.RIGHT);
+            } 
+       }  
     }
     
 }

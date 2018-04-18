@@ -6,25 +6,26 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import controller.GameEngineImpl;
+
 /**
  *
  * An implementation of {@link DonkeyKong}
  */
 public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKong {
     
-    private final BarrelFactory bf ;
     private final AgentBarrelsCreator barrels;
+    private final BarrelFactory bf ;
     private volatile List<Barrel> barrelsList;
-    private final MovingBarrels barrelsMovement;
     private boolean launchingBarrel;
 
     public DonkeyKongImpl(final Double x, final Double y,final Dimension dim) {
         super(x, y, dim);
+        final MovingBarrels barrelsMovement = new MovingBarrels();
         this.bf = new BarrelFactoryImpl();
         this.barrels = new AgentBarrelsCreator();
         this.barrelsList = new ArrayList<>();
         this.barrels.start();
-        this.barrelsMovement = new MovingBarrels();
         barrelsMovement.start();
     }
 
@@ -97,12 +98,12 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
         public void run() {    
             while(true) {
                 DonkeyKongImpl.this.getBarrelsList().stream()
-                                   .forEach(br -> br.moveBarrels());
+                                   .forEach(br -> br.manageBarrelMovement());
                 try {
-                    Thread.sleep(18);
+                        Thread.sleep(GameEngineImpl.PERIOD);
                     } catch (Exception ex) {
                         ex.printStackTrace();
-                        }
+                    }
             }
         }
   

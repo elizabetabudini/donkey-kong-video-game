@@ -80,11 +80,11 @@ public class BasicModel extends ModelImpl{
     }
 
     public void updateGame() {
-        
         if(this.getGameStatus().equals(GameStatus.Running)) {
             getMario().update();
-            if(!getBarrels().isEmpty())
-            getBarrels().forEach(X -> X.update());
+            if(!getBarrels().isEmpty()) {
+                getBarrels().forEach(X -> X.update());
+            }
             checkCollisions();
         }
 
@@ -92,7 +92,7 @@ public class BasicModel extends ModelImpl{
             if(!this.isOver()) {
                 currentLives--;
                 getMario().setX(this.getCurrentLevel().getMarioSpawn().getX());
-                getMario().setY(this.getCurrentLevel().getMarioSpawn().getX());
+                getMario().setY(this.getCurrentLevel().getMarioSpawn().getY());
                 getMario().setStatus(EntityStatus.OnTheFloor);
                 getDonkeyKong().getBarrelsList().clear();
                 start();
@@ -105,15 +105,13 @@ public class BasicModel extends ModelImpl{
         //TODO to complete
         if(this.getGameStatus().equals(GameStatus.Won)) {
         }
-
-            
     }
     
     public void checkCollisions() {
         this.checkStatus(this.getMario());
-        this.isMarioAlive(this.getMario());
+        //this.isMarioAlive(this.getMario());
         this.processBarrels(getBarrels());
-        this.checkVictory(this.getMario());
+        //this.checkVictory(this.getMario());
     }
     
     //check if it is on the floor and eventually continue with the stairs
@@ -123,10 +121,10 @@ public class BasicModel extends ModelImpl{
         if(floorTile.isPresent()) {
             fixHeight(entity, floorTile.get());
         }
-        else {
+        else{
             entity.setStatus(EntityStatus.Falling);
         }
-        checkStairs(entity);
+       //checkStairs(entity);
         
     }
     
@@ -171,8 +169,8 @@ public class BasicModel extends ModelImpl{
             entity.setY(floorTile.getY()+floorTile.getHitbox().getHeight());
         }
         //touching the floor from above
-        else if(floorTile.getY() < entity.getY()+entity.getHitbox().getHeight()) {
-            entity.setY(entity.getY() - (entity.getY()+entity.getHitbox().getHeight() - floorTile.getY()));
+        else if(floorTile.getY() < entity.getY()+entity.getHitbox().getHeight() && entity.getStatus() != EntityStatus.Climbing) {
+            entity.setY(entity.getY().floatValue() - (entity.getY().floatValue() + entity.getHitbox().getHeight() - floorTile.getY().floatValue()-1));
             entity.setStatus(EntityStatus.OnTheFloor);
         }
         

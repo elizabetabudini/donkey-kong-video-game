@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JLabel;
@@ -12,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import controller.GameEngine;
+//import controller.GameEngine;
 
 public class ScoreTimePanel extends JPanel{
 
@@ -22,8 +21,8 @@ public class ScoreTimePanel extends JPanel{
     private static final long serialVersionUID = 1L;
        
 
-        private static final int PANEL_HEIGHT = 20;
-        private static final Font font= new Font("Courier New", Font.BOLD, 12);
+        private static final int PANEL_HEIGHT = 15;
+        private final Font font= new Font("Courier New", Font.BOLD, 12);
 
         //private final GameEngine controller;
 

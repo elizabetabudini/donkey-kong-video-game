@@ -53,11 +53,13 @@ public interface Entity {
      * @return A point containing both the X and Y coordinate of the entity.
      */
     Point2D getPosition();
-    
+
     /**
-     * A method to determine if an {@link Entity} is colliding with another Entity
-     * @param entity The Entity is thought to collide with 
-     * @return True if a collision happens, false otherwise
+     * A method to determine if an {@link Entity} is colliding with another Entity.
+     * 
+     * @param entity
+     *            The Entity with whom to check collision.
+     * @return True if there is a collision, false otherwise.
      */
     boolean isColliding(Entity entity);
 

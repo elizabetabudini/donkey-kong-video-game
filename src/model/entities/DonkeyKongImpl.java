@@ -2,10 +2,7 @@ package model.entities;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import controller.GameEngineImpl;
@@ -34,7 +31,9 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
 
     @Override
     public List<Barrel> getBarrelsList(){
-        return  new ArrayList<>(this.barrelsList);
+        return new ArrayList<>(this.barrelsList);
+        //TODO change with unmodifiableList
+        //return  Collections.unmodifiableList(this.barrelsList);
     }
     
     @Override

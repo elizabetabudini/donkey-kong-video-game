@@ -1,8 +1,8 @@
 package model.entities;
 
 import java.awt.Dimension;
-import java.util.Optional;
 
+import model.BasicModel;
 import model.ModelImpl;
 
 /**
@@ -41,18 +41,18 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
             this.setDeltaX(-STEP);
         } else if (dir == Movement.RIGHT) {
             this.setDeltaX(STEP);
-        } else if (dir == Movement.UP) {
+        } else if (dir == Movement.UP && BasicModel.canClimbUp(this)) {
             this.setDeltaY(-STEP);
-        } else if (dir == Movement.DOWN) {
+        } else if (dir == Movement.DOWN && BasicModel.canClimbDown(this)) {
             this.setDeltaY(STEP);
         }
-        System.out.println(getStatus().toString());
-        if (dir == Movement.JUMP && getStatus() == EntityStatus.OnTheFloor) {
+        if (dir == Movement.JUMP && this.getStatus() == EntityStatus.OnTheFloor) {
             this.jump();
         }
-
-        System.out.println("DEBUG: La coordinata X di mario è " + this.getX());
-        System.out.println("DEBUG: La coordinata Y di mario è " + this.getY());
+        if (!isWithinBorder()) {
+            stopMoving(dir);
+        }
+        System.out.println(toString());
     }
 
     private void jump() {
@@ -69,7 +69,15 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
      */
     private boolean isWithinBorder() {
         final double newCoord = this.getX() + this.getDeltaX();
-        return newCoord > 0 && newCoord <= ModelImpl.WIDTH;
+        return newCoord >= 0 && newCoord <= ModelImpl.WIDTH;
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        if (this.getStatus() == EntityStatus.OnTheFloor) {
+            this.jumping = false;
+        }
     }
 
     @Override
@@ -95,6 +103,12 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
     @Override
     public boolean isMoving() {
         return this.getDeltaX() != 0;
+    }
+
+    @Override
+    public String toString() {
+        return "DEBUG INFORMATION: Current Mario Coordinates: [" + this.getX() + "," + this.getY() + "]" + "Status is:"
+                + this.getStatus();
     }
 
 }

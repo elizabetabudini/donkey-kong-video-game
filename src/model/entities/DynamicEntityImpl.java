@@ -31,7 +31,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
         super(x, y, dim);
     }
 
-    // template method to compute moving and update the entity.
+
     @Override
     public final void move(final Optional<Movement> dir) {
         if (dir.isPresent()) {
@@ -54,6 +54,10 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      */
     protected abstract void tryToMove(Movement dir);
 
+
+    /**
+     * Update method is designed for extension in special cases.
+     */
     @Override
     public void update() {
         if (getStatus() == EntityStatus.Falling) {

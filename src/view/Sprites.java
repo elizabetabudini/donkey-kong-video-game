@@ -55,7 +55,7 @@ public enum Sprites {
     /**
      * The barrel sprite, rotating left.
      */
-    BARREL_LEFT("barrel_b2.png", new Dimension(20, 20));
+    BARREL_LEFT("barrelroll.gif", new Dimension(20, 20));
 
     private static final String SPRITES_FOLDER = "sprites/";
     private final String imagePath;

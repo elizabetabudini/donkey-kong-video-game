@@ -1,11 +1,9 @@
 package model.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.*;
 
 import java.awt.Dimension;
-import java.util.List;
 import org.junit.Test;
-import model.entities.Barrel;
 import model.entities.DonkeyKongImpl;
 
 public class DonkeyKongTest {
@@ -13,8 +11,7 @@ public class DonkeyKongTest {
     @Test
     public void testBarrelsCreation() throws InterruptedException {
         final DonkeyKongImpl dk = new DonkeyKongImpl(9.0, 9.0, new Dimension(20, 20));
-        final List<Barrel> l = dk.getBarrelsList();
-        Thread.sleep(200);
-        assertEquals(1, dk.getBarrelsList().size(), "One barrel was supposed to be created");
+        Thread.sleep(1400);
+        assertEquals("One barrel was supposed to be created", 1, dk.getBarrelsList().size());
     }
 }

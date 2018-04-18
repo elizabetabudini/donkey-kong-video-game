@@ -1,29 +1,22 @@
 package controller;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
 import javax.swing.SwingUtilities;
-
 import model.BasicModel;
-import model.entities.Barrel;
 import model.entities.DonkeyKong;
-import model.entities.Entity;
 import model.entities.EntityStatus;
 import model.entities.Mario;
 import model.entities.Movement;
 import model.entities.Princess;
 import view.DrawableCanvas;
 import view.GameScreenPanel;
-//import view.GameScreenPanel;
 import view.InputHandler;
 import view.Sprites;
 
 public class GameEngineImpl implements GameEngine {
     
-    private final static long PERIOD = 18;
+    public final static long PERIOD = 18;
     
     private Mario mario;
     private DonkeyKong dk;
@@ -45,6 +38,7 @@ public class GameEngineImpl implements GameEngine {
         this.translateInputs(); 
     }
 
+    //TODO endgame to change flag and stop all threads -> to call in MainMenu
     @Override
     public void startGame() {
         if(!this.gameRunning) {
@@ -148,7 +142,7 @@ public class GameEngineImpl implements GameEngine {
             
     }
 
-    private void updateGame(long elapsedTime) {
+    private void updateGame() {
       this.model.updateGame();
     }
 
@@ -183,7 +177,7 @@ public class GameEngineImpl implements GameEngine {
                     final long currentTime = System.currentTimeMillis();
                     final long elapsedTime = currentTime - lastLoopTime;
                     processInput();
-                    updateGame(elapsedTime);
+                    updateGame();
                     render();
                     waitNextFrame(currentTime);
                 }
@@ -197,6 +191,10 @@ public class GameEngineImpl implements GameEngine {
     
     public Sprites getDonkeySpriteTest() {
         return this.donkeySprite;
+    }
+    
+    public Mario getMario() {
+        return this.mario;
     }
     
 

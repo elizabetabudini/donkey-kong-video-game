@@ -35,7 +35,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     @Override
     public final void move(final Optional<Movement> dir) {
         if (dir.isPresent()) {
-            tryToMove(dir);
+            tryToMove(dir.get());
             if (dir.get() == Movement.RIGHT || dir.get() == Movement.LEFT) {
                 this.setX(this.getX() + deltaX);
                 return;
@@ -52,7 +52,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      * @param dir
      *            The direction in which the entity wants to move.
      */
-    protected abstract void tryToMove(Optional<Movement> dir);
+    protected abstract void tryToMove(Movement dir);
 
     @Override
     public void update() {

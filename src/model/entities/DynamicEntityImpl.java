@@ -31,7 +31,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
         super(x, y, dim);
     }
 
-    // template method to compute moving and update the entity.
+
     @Override
     public final void move(final Optional<Movement> dir) {
         if (dir.isPresent()) {

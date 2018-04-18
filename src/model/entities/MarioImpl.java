@@ -41,9 +41,11 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
             this.setDeltaX(-STEP);
         } else if (dir == Movement.RIGHT) {
             this.setDeltaX(STEP);
-        } else if (dir == Movement.UP && BasicModel.canClimbUp(this)) {
+        } else if (dir == Movement.UP && BasicModel.canClimbUp(this) || this.getStatus() == EntityStatus.Climbing) {
+            this.setStatus(EntityStatus.Climbing);
             this.setDeltaY(-STEP);
-        } else if (dir == Movement.DOWN && BasicModel.canClimbDown(this)) {
+        } else if (dir == Movement.DOWN && BasicModel.canClimbDown(this) || this.getStatus() == EntityStatus.Climbing) {
+            this.setStatus(EntityStatus.Climbing);
             this.setDeltaY(STEP);
         }
         if (dir == Movement.JUMP && this.getStatus() == EntityStatus.OnTheFloor) {

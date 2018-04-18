@@ -41,6 +41,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
                 return;
             }
         }
+
         this.setY(this.getY() + deltaY);
 
     }

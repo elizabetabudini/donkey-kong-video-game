@@ -83,5 +83,4 @@ public abstract class ModelImpl implements ModelInterface{
     public Boolean isOver() {
         return this.getLife() <= 0;
     }
-    
 }

@@ -10,6 +10,8 @@ import javax.swing.SwingUtilities;
 import model.BasicModel;
 import model.entities.Barrel;
 import model.entities.DonkeyKong;
+import model.entities.Entity;
+import model.entities.EntityStatus;
 import model.entities.Mario;
 import model.entities.Movement;
 import model.entities.Princess;
@@ -21,13 +23,13 @@ import view.Sprites;
 
 public class GameEngineImpl implements GameEngine {
     
-    private final static long PERIOD = 20;
+    private final static long PERIOD = 18;
     
     private Mario mario;
     private DonkeyKong dk;
     private Princess princess;
     
-    private final GameLoop gameLoop;
+    private GameLoop gameLoop;
     private final GameScreenPanel gameScreen;
     private boolean gameRunning;
     private InputTranslator translator;
@@ -39,7 +41,6 @@ public class GameEngineImpl implements GameEngine {
  
     public GameEngineImpl(final GameScreenPanel gameScreen) {
         super(); 
-        this.gameLoop = new GameLoop();
         this.gameScreen = gameScreen;   
         this.translateInputs(); 
     }
@@ -47,6 +48,7 @@ public class GameEngineImpl implements GameEngine {
     @Override
     public void startGame() {
         if(!this.gameRunning) {
+            this.gameLoop = new GameLoop();
             this.initModel();
             this.gameLoop.start();  
             this.gameRunning = true;
@@ -94,7 +96,9 @@ public class GameEngineImpl implements GameEngine {
        if (delta < PERIOD) {
            try {
                Thread.sleep(PERIOD - delta);
-           } catch (Exception ex){}
+           } catch (Exception ex){
+               ex.printStackTrace();
+           }
        }
     }
 
@@ -106,14 +110,14 @@ public class GameEngineImpl implements GameEngine {
         //draw mario
         if(this.mario.getCurrentDirection().equals(Movement.RIGHT)) {
             this.marioSprite = Sprites.MARIO_FACING_RIGHT;
-            if(this.mario.isJumping()) {
+            if(this.mario.getStatus().equals(EntityStatus.Jumping)) {
                 this.marioSprite = Sprites.MARIO_JUMPING_RIGHT;
             } else if(this.mario.isMoving()){
                 this.marioSprite = Sprites.MARIO_WALKING_RIGHT;
             }
         } else {
             this.marioSprite = Sprites.MARIO_FACING_LEFT;
-            if(this.mario.isJumping()) {
+            if(this.mario.getStatus().equals(EntityStatus.Jumping)) {
                 this.marioSprite = Sprites.MARIO_JUMPING_LEFT;
             } else if(this.mario.isMoving()) {
                 this.marioSprite = Sprites.MARIO_WALKING_LEFT;
@@ -140,7 +144,7 @@ public class GameEngineImpl implements GameEngine {
                 }
             });
         }
-            SwingUtilities.invokeLater(() -> gameScreen.updateScreen() );
+        SwingUtilities.invokeLater(() -> gameScreen.updateScreen() );
             
     }
 
@@ -163,8 +167,7 @@ public class GameEngineImpl implements GameEngine {
 
         for (final Movement dir : parsedMovements) {
             mario.move(Optional.of(dir));
-        }
-        mario.update();       
+        }      
     }
     
     private class GameLoop extends Thread {

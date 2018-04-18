@@ -1,13 +1,5 @@
 package controller.main;
 
-import controller.GameEngineImpl;
-
-import java.awt.EventQueue;
-
-import controller.GameEngine;
-import view.DrawableCanvas;
-import view.DrawableCanvasImpl;
-import view.GameScreenPanel;
 import view.ViewImpl;
 import view.ViewInterface;
 

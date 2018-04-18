@@ -26,11 +26,10 @@ public class GameScreenPanel extends JPanel {
     public GameScreenPanel(DrawableCanvas canvas) {
         super();
         this.setFocusable(true);
-        this.gameDimension = new Dimension((int)(screenRes.getWidth()*WIDHT_SCALE), (int)(screenRes.getHeight()*HEIGHT_SCALE));
-        this.setSize((int)(gameDimension.getWidth()), (int)(gameDimension.getHeight()));
-        this.canvas = canvas;   
-        System.out.println(screenRes.getHeight());
-        System.out.println(gameDimension.getWidth());
+        this.gameDimension = new Dimension((int) (screenRes.getWidth() * WIDHT_SCALE),
+                (int) (screenRes.getHeight() * HEIGHT_SCALE));
+        this.setSize((int) (gameDimension.getWidth()), (int) (gameDimension.getHeight()));
+        this.canvas = canvas;
         this.setBackground(Color.BLACK);
         this.addKeyListener(handler);
         this.setVisible(true);

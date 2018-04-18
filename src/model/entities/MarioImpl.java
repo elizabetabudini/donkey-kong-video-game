@@ -2,6 +2,7 @@ package model.entities;
 
 import java.awt.Dimension;
 
+import model.BasicModel;
 import model.ModelImpl;
 
 /**
@@ -40,9 +41,9 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
             this.setDeltaX(-STEP);
         } else if (dir == Movement.RIGHT) {
             this.setDeltaX(STEP);
-        } else if (dir == Movement.UP) {
+        } else if (dir == Movement.UP && BasicModel.canClimbUp(this)) {
             this.setDeltaY(-STEP);
-        } else if (dir == Movement.DOWN) {
+        } else if (dir == Movement.DOWN && BasicModel.canClimbDown(this)) {
             this.setDeltaY(STEP);
         }
         if (dir == Movement.JUMP && this.getStatus() == EntityStatus.OnTheFloor) {

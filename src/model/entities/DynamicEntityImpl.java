@@ -54,6 +54,10 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      */
     protected abstract void tryToMove(Movement dir);
 
+
+    /**
+     * Update method is designed for extension in special cases.
+     */
     @Override
     public void update() {
         if (getStatus() == EntityStatus.Falling) {

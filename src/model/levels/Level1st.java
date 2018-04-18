@@ -23,7 +23,7 @@ public final class Level1st extends BasicLevelImpl{
     private static final String IMAGE_DIRECTORY = new String("imageDirectory/imageName.ext");
    
     //entities
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> MARIO = new Pair<>(new Pair<>(200.0,12.0), new Pair<>(30,25));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> MARIO = new Pair<>(new Pair<>(276.0, 88.0), new Pair<>(25,25));
     private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> DONKEYKONG = new Pair<>(new Pair<>(15.0,53.0), new Pair<>(60,60));
     private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> PRINCESS = new Pair<>(new Pair<>(142.5,24.0), new Pair<>(0,0));
     
@@ -38,13 +38,13 @@ public final class Level1st extends BasicLevelImpl{
     
     
     //all the stairs
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> STAIR_1 = new Pair<>(new Pair<>(334.0,379.0), new Pair<>(134,12));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> STAIR_2 = new Pair<>(new Pair<>(188.0,246.0), new Pair<>(133,12));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> STAIR_3 = new Pair<>(new Pair<>(93.0,246.0), new Pair<>(133,12));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> STAIR_4 = new Pair<>(new Pair<>(337.0,113.0), new Pair<>(133,12));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> STAIR_5 = new Pair<>(new Pair<>(228.0,113.0), new Pair<>(133,12));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> STAIR_6 = new Pair<>(new Pair<>(185.0,0.0), new Pair<>(113,12));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> STAIR_7 = new Pair<>(new Pair<>(106.0,0.0), new Pair<>(113,12));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> STAIR_1 = new Pair<>(new Pair<>(334.0,379.0), new Pair<>(12,134));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> STAIR_2 = new Pair<>(new Pair<>(188.0,246.0), new Pair<>(12,133));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> STAIR_3 = new Pair<>(new Pair<>(93.0,246.0), new Pair<>(12,133));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> STAIR_4 = new Pair<>(new Pair<>(337.0,113.0), new Pair<>(12,133));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> STAIR_5 = new Pair<>(new Pair<>(228.0,113.0), new Pair<>(12,133));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> STAIR_6 = new Pair<>(new Pair<>(185.0,0.0), new Pair<>(12,113));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> STAIR_7 = new Pair<>(new Pair<>(106.0,0.0), new Pair<>(12,113));
     
     private static final List<Pair<Pair<Double,Double>, Pair<Integer,Integer>>> STAIRS = Collections.unmodifiableList(new ArrayList<>(Arrays.asList(STAIR_1,STAIR_2,STAIR_3,STAIR_4,STAIR_5,STAIR_6,STAIR_7)));
  

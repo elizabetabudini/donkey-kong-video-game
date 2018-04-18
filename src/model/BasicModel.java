@@ -6,6 +6,7 @@ import java.util.Optional;
 import model.entities.Barrel;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
+import model.entities.Entity;
 import model.entities.EntityStatus;
 import model.entities.FloorTile;
 import model.entities.Mario;
@@ -15,10 +16,13 @@ import model.levels.BasicLevel;
 import model.levels.Level1st;
 
 public class BasicModel extends ModelImpl{
+    
+    private static List<? extends Stair> stairs;
 
     public BasicModel() {
         super();
-       setCurrentLevel(new Level1st());
+        setCurrentLevel(new Level1st());
+        stairs = getStairs();
     }
 
     /**
@@ -178,5 +182,27 @@ public class BasicModel extends ModelImpl{
             entity.setStatus(EntityStatus.OnTheFloor);
         }
         
+    }
+    
+    public static boolean canClimbDown(final DynamicEntity entity) {
+        return stairs.stream()
+                .filter(S -> 
+                    entity.isColliding(S.getTrigger()) 
+                    && entity.getY()+entity.getHitbox().getHeight() 
+                    == S.getTrigger().getY()+S.getTrigger().getHitbox().getHeight())
+                .findFirst()
+                .isPresent()
+                ? true : false;
+    }
+    
+    public static boolean canClimbUp(final DynamicEntity entity) {
+        return stairs.stream()
+                .filter(S -> 
+                    entity.isColliding(S)
+                    && entity.getY()+entity.getHitbox().getHeight()
+                    == S.getY()+S.getHitbox().getHeight())
+                .findFirst()
+                .isPresent()
+                ? true : false;
     }
 }

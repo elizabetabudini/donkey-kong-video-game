@@ -30,7 +30,7 @@ public enum EntityStatus {
      * The entity is falling.
      */
     Falling,
-    
+
     /**
      * The entity is jumping.
      */

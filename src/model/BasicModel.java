@@ -122,14 +122,15 @@ public class BasicModel extends ModelImpl{
     private void checkStatus(final DynamicEntity entity) {
         Optional<? extends FloorTile> floorTile = Optional.empty();
         floorTile = this.getFloor().stream().filter(T -> entity.isColliding(T)).findFirst();
-        if(floorTile.isPresent()) {
+        if(floorTile.isPresent() && entity.getStatus() != EntityStatus.Climbing) {
             fixHeight(entity, floorTile.get());
+        }
+        else if( this.getStairs().stream().filter(S -> entity.isColliding(S)).findFirst().isPresent()) {
+            entity.setStatus(EntityStatus.Climbing);
         }
         else{
             entity.setStatus(EntityStatus.Falling);
-        }
-       //checkStairs(entity);
-        
+        }   
     }
     
     private void checkStairs(final DynamicEntity entity) {
@@ -142,7 +143,7 @@ public class BasicModel extends ModelImpl{
                 entity.setStatus(EntityStatus.CanClimbUp);
                 return;
             }
-            else if (entity.isColliding(S)) {
+            if (entity.isColliding(S)) {
                 entity.setStatus(EntityStatus.Climbing);
                 return;
             }
@@ -192,7 +193,7 @@ public class BasicModel extends ModelImpl{
                     == S.getTrigger().getY()+S.getTrigger().getHitbox().getHeight())
                 .findFirst()
                 .isPresent()
-                ? true : false;
+                    ? true : false;
     }
     
     public static boolean canClimbUp(final DynamicEntity entity) {
@@ -203,6 +204,6 @@ public class BasicModel extends ModelImpl{
                     == S.getY()+S.getHitbox().getHeight())
                 .findFirst()
                 .isPresent()
-                ? true : false;
+                    ? true : false;
     }
 }

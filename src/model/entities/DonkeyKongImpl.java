@@ -57,7 +57,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
 
             while(creatingBarrels) {
                 DonkeyKongImpl.this.launchingBarrel = true;
-                this.barrel = DonkeyKongImpl.this.bf.createSimpleBarrel(45.0, 60.0, new Dimension(10,10));
+                this.barrel = DonkeyKongImpl.this.bf.createSimpleBarrel(75.0, 120.0, new Dimension(20,20));
                 barrelsList.add(this.barrel);
                 //TODO remove
                 System.out.println(barrelsList.size());
@@ -96,38 +96,16 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
 
         public void run() {    
             while(true) {
-                        DonkeyKongImpl.this.getBarrelsList().stream()
-                                                            .forEach(br -> this.moveBarrels(br));
-                        try {
-                            Thread.sleep(20);
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
+                DonkeyKongImpl.this.getBarrelsList().stream()
+                                   .forEach(br -> br.moveBarrels());
+                try {
+                    Thread.sleep(18);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                         }
             }
         }
-        
-        private void moveBarrels(final Barrel br) {
-            System.out.println(br.getStatus());
-            if(!(br.getStatus().equals(EntityStatus.Falling))) {
-                if(br.getCurrentDirection().equals(Movement.RIGHT)) {
-                    br.move(Optional.of(Movement.RIGHT));
-                } else {
-                    br.move(Optional.of(Movement.LEFT));
-                }
-            } else { //the barrel is falling down
-                
-               // br.move(Optional.of(Movement.DOWN));
-                
-                //when a barrel reaches a floor it changes its direction
-                if(br.getStatus().equals(EntityStatus.OnTheFloor)) {
-                    if(br.getCurrentDirection().equals(Movement.RIGHT)) { 
-                        br.setDirection(Movement.LEFT);
-                    } else {
-                        br.setDirection(Movement.RIGHT);
-                    }
-                }
-            }
-        }  
+  
     }
     
 }

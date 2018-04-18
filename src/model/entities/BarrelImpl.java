@@ -11,6 +11,7 @@ import java.util.Optional;
 public class BarrelImpl extends DynamicEntityImpl implements Barrel, DynamicEntity {
 
     private final static double STEP = 1;
+    private boolean directionChanged;
     
     /**
      * A constructor for a Barrel
@@ -29,11 +30,32 @@ public class BarrelImpl extends DynamicEntityImpl implements Barrel, DynamicEnti
         }
         this.setDirection(dir.get());
         if (dir.get() == Movement.LEFT) {
-            this.setDeltaY(-STEP);
+            this.setDeltaX(-STEP);
         } else if (dir.get() == Movement.RIGHT) {
             this.setDeltaX(STEP);
         }
     }
-
-
+    
+    @Override
+    public void moveBarrels() {
+        if(this.getStatus().equals(EntityStatus.OnTheFloor)) {
+            if( this.getCurrentDirection().equals(Movement.RIGHT)) {
+                    this.move(Optional.of(Movement.RIGHT));
+             } else {
+                    this.move(Optional.of(Movement.LEFT));
+             }
+             this.directionChanged = false;
+        } else { //the barrel is falling down
+            //when a barrel reaches a floor it changes its direction 
+            if( !directionChanged) {
+                this.directionChanged = true;
+                if(this.getCurrentDirection().equals(Movement.RIGHT)) {
+                    this.setDirection(Movement.LEFT);
+                } else {
+                    this.setDirection(Movement.RIGHT);
+                } 
+           }
+        }  
+    }
+    
 }

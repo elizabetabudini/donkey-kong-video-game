@@ -8,4 +8,12 @@ package model.entities;
  */
 public interface Barrel extends DynamicEntity {
 
+    /**
+     * 
+     * A method to move a barrel and make 
+     * it changes his direction when needed
+     * 
+     */
+    void moveBarrels();
+
 }

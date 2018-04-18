@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import controller.GameEngineImpl;
 
@@ -14,6 +16,7 @@ import controller.GameEngineImpl;
  */
 public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKong {
     
+    private final static double ZERO = 0.0;
     private final AgentBarrelsCreator barrels;
     private final BarrelFactory bf ;
     private volatile List<Barrel> barrelsList;
@@ -69,7 +72,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
                 }
                 DonkeyKongImpl.this.launchingBarrel = false;
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(2000);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -80,6 +83,9 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
 
         /*check if a barrel needs to be removed from the list*/
         private void checkBarrels() {
+           barrelsList = barrelsList.stream()
+                       .filter(br -> br.getX() > ZERO)
+                       .collect(Collectors.toList());
         }
     }
     

@@ -34,29 +34,25 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
         }
     }
 
-    // da aggiungere climbing status e metodo istouchingground()
     @Override
-    protected void tryToMove(final Optional<Movement> dir) {
-        if (!dir.isPresent()) {
-            return;
-        }
-        System.out.println(dir.get());
-        this.setDirection(dir.get());
-        if (dir.get() == Movement.LEFT) {
+    protected void tryToMove(final Movement dir) {
+        this.setDirection(dir);
+        if (dir == Movement.LEFT) {
             this.setDeltaX(-STEP);
-        } else if (dir.get() == Movement.RIGHT) {
+        } else if (dir == Movement.RIGHT) {
             this.setDeltaX(STEP);
+        } else if (dir == Movement.UP) {
+            this.setDeltaY(-STEP);
+        } else if (dir == Movement.DOWN) {
+            this.setDeltaY(STEP);
         }
-        if (!isWithinBorder()) { ;
-        }
-        
         System.out.println(getStatus().toString());
-             if (dir.get() == Movement.JUMP && getStatus() == EntityStatus.OnTheFloor) {
-                 this.jump();
-            }
-         
-        System.out.println("DEBUG: La coordinata X di mario è "+this.getX());
-        System.out.println("DEBUG: La coordinata Y di mario è "+this.getY());
+        if (dir == Movement.JUMP && getStatus() == EntityStatus.OnTheFloor) {
+            this.jump();
+        }
+
+        System.out.println("DEBUG: La coordinata X di mario è " + this.getX());
+        System.out.println("DEBUG: La coordinata Y di mario è " + this.getY());
     }
 
     private void jump() {

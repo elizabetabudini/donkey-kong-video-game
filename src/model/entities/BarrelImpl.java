@@ -24,18 +24,15 @@ public class BarrelImpl extends DynamicEntityImpl implements Barrel, DynamicEnti
     }
 
     @Override
-    protected void tryToMove(final Optional<Movement> dir) {
-        if(!dir.isPresent()) {
-            return;
-        }
-        this.setDirection(dir.get());
-        if (dir.get() == Movement.LEFT) {
+    protected void tryToMove(final Movement dir) {
+        this.setDirection(dir);
+        if (dir == Movement.LEFT) {
             this.setDeltaX(-STEP);
-        } else if (dir.get() == Movement.RIGHT) {
+        } else if (dir == Movement.RIGHT) {
             this.setDeltaX(STEP);
         }
     }
-    
+
     @Override
     public void manageBarrelMovement() {
         if(this.getStatus().equals(EntityStatus.OnTheFloor)) {

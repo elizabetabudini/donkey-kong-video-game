@@ -14,7 +14,8 @@ public class DonkeyKongTest {
     public void testBarrelsCreation() throws InterruptedException {
         final DonkeyKongImpl dk = new DonkeyKongImpl(9.0, 9.0, new Dimension(20, 20));
         final List<Barrel> l = dk.getBarrelsList();
-        Thread.sleep(200);
+        Thread.sleep(1400);
         assertEquals(1, dk.getBarrelsList().size(), "One barrel was supposed to be created");
+        
     }
 }

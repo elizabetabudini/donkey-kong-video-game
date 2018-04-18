@@ -38,6 +38,7 @@ public class GameLoopTest {
         Thread.sleep(200);
         assertEquals("Mario was supposed to face right", Sprites.MARIO_WALKING_RIGHT, ge.getMarioSpriteTest());
         
+        
         /*
         mario.move(Optional.of(Movement.LEFT));
         Thread.sleep(500);

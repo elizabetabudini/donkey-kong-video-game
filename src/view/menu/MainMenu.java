@@ -52,13 +52,13 @@ public class MainMenu extends JFrame {
         this.gameScreen = gameScreen;
         this.gameEngine = new GameEngineImpl(gameScreen);
       //set the background image
-        ImageIcon background = ImageLoader.getInstance().getImage("images/background.jpg");
+        ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
         //frame.setContentPane(new JLabel(new ImageIcon(background.getImage())));
         //set the icon image
         ImageIcon icon = ImageLoader.getInstance().getImage("images/donkeyIcon.png");
         frame.setIconImage(icon.getImage());
         
-        BackgroundPanel bgPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.ACTUAL, 0.0f, 0.0f);
+        BackgroundPanel backgroundPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.TILED, 0.0f, 0.0f);
         
         // inizializza bottoni
         newGame = new JButton("New Game");
@@ -85,7 +85,7 @@ public class MainMenu extends JFrame {
         final GridBagLayout gbLayout = new GridBagLayout();
         gbLayout.columnWeights = new double[] { 2.0, 1.0 };
         gbLayout.rowWeights = new double[] { 2.0, 1.0 };
-        bgPanel.setLayout(gbLayout);
+        backgroundPanel.setLayout(gbLayout);
 
         // sets constraints
         final GridBagConstraints gbc = new GridBagConstraints();
@@ -99,22 +99,22 @@ public class MainMenu extends JFrame {
         lblTitle.setIcon(new ImageIcon("res/images/logo.png"));
         gbc.gridwidth = 2;
         gbc.insets = TITLE_INSETS;
-        bgPanel.add(lblTitle, gbc);
+        backgroundPanel.add(lblTitle, gbc);
         gbc.gridy++;
 
         // Sets buttons
         gbc.gridwidth = 1;
         gbc.insets = BUTTONS_INSETS;
 
-        bgPanel.add(newGame, gbc);
+        backgroundPanel.add(newGame, gbc);
         gbc.gridy++;
-        bgPanel.add(highscores, gbc);
+        backgroundPanel.add(highscores, gbc);
         gbc.gridy++;
-        bgPanel.add(info, gbc);
+        backgroundPanel.add(info, gbc);
         gbc.gridy++;
-        bgPanel.add(settings, gbc);
+        backgroundPanel.add(settings, gbc);
         gbc.gridy++;
-        bgPanel.add(exit, gbc);
+        backgroundPanel.add(exit, gbc);
         
 
         // Sets image
@@ -124,9 +124,9 @@ public class MainMenu extends JFrame {
         gbc.insets = IMAGES_INSETS;
         gbc.gridx = 1;
         gbc.gridy = 1;
-        bgPanel.add(lblImage, gbc);
+        backgroundPanel.add(lblImage, gbc);
         
-        frame.add(bgPanel);
+        frame.add(backgroundPanel);
         frame.setVisible(true);
     }
 

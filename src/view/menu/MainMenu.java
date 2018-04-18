@@ -11,6 +11,7 @@ import javax.swing.*;
 import controller.GameEngine;
 import controller.GameEngineImpl;
 import utilities.ImageLoader;
+import view.BackgroundPanel;
 import view.DrawableCanvas;
 import view.DrawableCanvasImpl;
 import view.GameFrame;
@@ -36,11 +37,29 @@ public class MainMenu extends JFrame {
     private final JButton highscores;
     private final JButton info;
     private final JButton exit;
-    private static final int NUM_BUTTONS = 4;
+    private final JButton settings;
+    private static final int NUM_BUTTONS = 5;
 
     public MainMenu(GameScreenPanel gameScreen) {
+     // set frame
+        JFrame frame = new JFrame();
+        frame.setTitle("Main Menu - DonkeyKong");
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.setSize((int) (screenRes.getWidth() * WIDHT), (int) (screenRes.getHeight() * HEIGHT));
+
+        
         this.gameScreen = gameScreen;
         this.gameEngine = new GameEngineImpl(gameScreen);
+      //set the background image
+        ImageIcon background = ImageLoader.getInstance().getImage("images/background.jpg");
+        //frame.setContentPane(new JLabel(new ImageIcon(background.getImage())));
+        //set the icon image
+        ImageIcon icon = ImageLoader.getInstance().getImage("images/donkeyIcon.png");
+        frame.setIconImage(icon.getImage());
+        
+        BackgroundPanel bgPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.ACTUAL, 0.0f, 0.0f);
+        
         // inizializza bottoni
         newGame = new JButton("New Game");
         gameEngine.setCanvas(gameScreen.getCanvas());
@@ -54,33 +73,19 @@ public class MainMenu extends JFrame {
         });
         highscores = new JButton("High Scores");
         info = new JButton("Info");
+        settings = new JButton("Settings");
 
         exit = new JButton("Exit");
         exit.addActionListener(e -> {
             System.exit(0);
         });
 
-        // set frame
-        JFrame frame = new JFrame();
-        frame.setTitle("Main Menu - DonkeyKong");
-        frame.setResizable(false);
-        
-        //set the background image
-        ImageIcon background = ImageLoader.getInstance().getImage("images/background.jpg");
-        //frame.setContentPane(new JLabel(new ImageIcon(background.getImage())));
-        //set the icon image
-        ImageIcon icon = ImageLoader.getInstance().getImage("images/donkeyIcon.png");
-        frame.setIconImage(icon.getImage());
-        
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.setSize((int) (screenRes.getWidth() * WIDHT), (int) (screenRes.getHeight() * HEIGHT));
-
+     
         // sets gridbag layout
-        final JPanel panel = new JPanel();
         final GridBagLayout gbLayout = new GridBagLayout();
         gbLayout.columnWeights = new double[] { 2.0, 1.0 };
         gbLayout.rowWeights = new double[] { 2.0, 1.0 };
-        panel.setLayout(gbLayout);
+        bgPanel.setLayout(gbLayout);
 
         // sets constraints
         final GridBagConstraints gbc = new GridBagConstraints();
@@ -88,35 +93,29 @@ public class MainMenu extends JFrame {
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.BOTH;
 
-        // background
-        // JLabel background= new JLabel();
-        // background.setIcon(new ImageIcon("res/images/background.jpg"));
-        // gbc.gridy=0;
-        // gbc.gridy=0;
-        // panel.add(background);
-        // gbc.gridheight = 3;
-        // panel.setComponentZOrder(background, 0);
-
         // Sets title menu
         final JLabel lblTitle = new JLabel();
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         lblTitle.setIcon(new ImageIcon("res/images/logo.png"));
         gbc.gridwidth = 2;
         gbc.insets = TITLE_INSETS;
-        panel.add(lblTitle, gbc);
+        bgPanel.add(lblTitle, gbc);
         gbc.gridy++;
 
         // Sets buttons
         gbc.gridwidth = 1;
         gbc.insets = BUTTONS_INSETS;
 
-        panel.add(newGame, gbc);
+        bgPanel.add(newGame, gbc);
         gbc.gridy++;
-        panel.add(highscores, gbc);
+        bgPanel.add(highscores, gbc);
         gbc.gridy++;
-        panel.add(info, gbc);
+        bgPanel.add(info, gbc);
         gbc.gridy++;
-        panel.add(exit, gbc);
+        bgPanel.add(settings, gbc);
+        gbc.gridy++;
+        bgPanel.add(exit, gbc);
+        
 
         // Sets image
         final JLabel lblImage = new JLabel();
@@ -125,9 +124,9 @@ public class MainMenu extends JFrame {
         gbc.insets = IMAGES_INSETS;
         gbc.gridx = 1;
         gbc.gridy = 1;
-        panel.add(lblImage, gbc);
+        bgPanel.add(lblImage, gbc);
         
-        frame.add(panel);
+        frame.add(bgPanel);
         frame.setVisible(true);
     }
 

@@ -1,5 +1,4 @@
 package controller.main;
-
 import view.ViewImpl;
 import view.ViewInterface;
 

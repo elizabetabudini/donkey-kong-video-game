@@ -1,12 +1,9 @@
-package view.menu;
+package view.menu.menuPanels;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Toolkit;
-import java.util.stream.IntStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,8 +13,8 @@ import javax.swing.SwingConstants;
 
 import utilities.ImageLoader;
 import view.BackgroundPanel;
-import view.GameFrame;
-import view.menu.scenes.MenuScene.MenuObserver;
+import view.menu.Strategy;
+import view.menu.StrategyImpl;
 
 
 public class HomePanel extends JPanel{
@@ -26,11 +23,11 @@ public class HomePanel extends JPanel{
     private static final Insets BUTTONS_INSETS = new Insets(10, 20, 20, 20);
     private static final Insets IMAGES_INSETS = new Insets(20, 20, 20, 30);
 
-    private final JButton newGame;
-    private final JButton highscores;
-    private final JButton info;
-    private final JButton exit;
-    private final JButton settings;
+    private JButton newGame;
+    private JButton highscores;
+    private JButton info;
+    private JButton settings;
+    private JButton exit;
     private static final int NUM_BUTTONS = 5;
     
     private MenuObserver observer;
@@ -41,7 +38,7 @@ public class HomePanel extends JPanel{
     
     private void initialize() {
         
-        final MenuStrategy strategy = new MenuStrategyImpl();
+        final Strategy strategy = new StrategyImpl();
 
         ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
         BackgroundPanel backgroundPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.TILED, 0.0f, 0.0f);
@@ -111,41 +108,21 @@ public class HomePanel extends JPanel{
         this.add(backgroundPanel);
 
     }
-    /**
-     * Set the observer of the HomePanel.
-     * 
-     * @param observer
-     *          the observer to use
-     */
+
     public void setObserver(final MenuObserver observer) {
         this.observer = observer;
     }
 
-    /**
-     * This interface indicates the operations that an observer
-     * of the HomePanel can do.
-     *
-     */
+
     public interface MenuObserver {
 
-        /**
-         * Starts the game.
-         */
-        void play();
+        void newGame();
+ 
+        void settings();
         
-        /**
-         * Show the scores of the player.
-         */
         void scores();
 
-        /**
-         * Show settings menu.
-         */
-        void settings();
-
-        /**
-         * Show some information about the game.
-         */
         void info();
+        
     }
 }

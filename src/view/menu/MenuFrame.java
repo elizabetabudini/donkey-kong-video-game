@@ -3,17 +3,17 @@ package view.menu;
 import javax.swing.JPanel;
 
 
-import view.menu.InfoPanel;
-import view.menu.HomePanel;
-import view.menu.HighScoresPanel;
-import view.menu.SettingsPanel;
+import view.menu.menuPanels.InfoPanel;
+import view.menu.menuPanels.HighScoresPanel;
+import view.menu.menuPanels.HomePanel;
+//import view.menu.menuPanels.SettingsPanel;
 
 public interface MenuFrame {
     
     enum MenuPanel {
         HOME(new HomePanel()),
         SCORES(new HighScoresPanel()),
-        SETTINGS(new SettingsPanel()),
+        //SETTINGS(new SettingsPanel()),
         INFO(new InfoPanel());
 
         private final JPanel panel;

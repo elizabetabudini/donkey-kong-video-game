@@ -2,7 +2,7 @@ package view.menu;
 
 import view.menu.MenuScene.MenuObserver;
 
-public class MenuStrategy {
+public class StrategyImpl implements Strategy {
     public void newGame() {
         public void clickEvent(final MenuObserver observer) {
             observer.play();

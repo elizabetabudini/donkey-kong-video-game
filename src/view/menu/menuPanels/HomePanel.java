@@ -13,8 +13,7 @@ import javax.swing.SwingConstants;
 
 import utilities.ImageLoader;
 import view.BackgroundPanel;
-import view.menu.Strategy;
-import view.menu.StrategyImpl;
+import view.menu.MainMenu;
 
 
 public class HomePanel extends JPanel{
@@ -28,17 +27,17 @@ public class HomePanel extends JPanel{
     private JButton info;
     private JButton settings;
     private JButton exit;
+    private InfoPanel infoPanel;
+    private SettingsPanel settingsPanel;
+    private HighScoresPanel hscorePanel;
     private static final int NUM_BUTTONS = 5;
     
-    private MenuObserver observer;
+    private static MainMenu mainMenu;
     
     public HomePanel() {
-        initialize();
-    }
-    
-    private void initialize() {
-        
-        final Strategy strategy = new StrategyImpl();
+        infoPanel= new InfoPanel();
+        settingsPanel= new SettingsPanel();
+        hscorePanel= new HighScoresPanel();
 
         ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
         BackgroundPanel backgroundPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.TILED, 0.0f, 0.0f);
@@ -47,11 +46,19 @@ public class HomePanel extends JPanel{
         newGame = new JButton("New Game");
         newGame.setIcon(new ImageIcon("res/icons/jump_right.png"));
         newGame.addActionListener(e -> {
-            
         });
         highscores = new JButton("High Scores");
+        highscores.addActionListener(e -> {
+            mainMenu.switchPanel(this.hscorePanel);
+        });
         info = new JButton("Info");
+        info.addActionListener(e -> {
+            mainMenu.switchPanel(this.infoPanel);
+        });
         settings = new JButton("Settings");
+        settings.addActionListener(e -> {
+            mainMenu.switchPanel(this.settingsPanel);
+        });
 
         exit = new JButton("Exit");
         exit.addActionListener(e -> {
@@ -106,23 +113,8 @@ public class HomePanel extends JPanel{
         
         this.setLayout(new BorderLayout());
         this.add(backgroundPanel);
-
     }
-
-    public void setObserver(final MenuObserver observer) {
-        this.observer = observer;
-    }
+    
 
 
-    public interface MenuObserver {
-
-        void newGame();
- 
-        void settings();
-        
-        void scores();
-
-        void info();
-        
-    }
 }

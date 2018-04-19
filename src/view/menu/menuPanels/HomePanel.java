@@ -49,15 +49,13 @@ public class HomePanel extends JPanel{
         });
         highscores = new JButton("High Scores");
         highscores.addActionListener(e -> {
-            mainMenu.switchPanel(this.hscorePanel);
         });
         info = new JButton("Info");
         info.addActionListener(e -> {
-            mainMenu.switchPanel(this.infoPanel);
         });
         settings = new JButton("Settings");
         settings.addActionListener(e -> {
-            mainMenu.switchPanel(this.settingsPanel);
+            System.out.println("settings panel");
         });
 
         exit = new JButton("Exit");

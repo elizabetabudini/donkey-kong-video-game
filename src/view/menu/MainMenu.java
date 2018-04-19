@@ -8,6 +8,7 @@ import javax.swing.*;
 import view.GameScreenPanel;
 import view.ScoreTimePanel;
 import view.menu.menuPanels.HomePanel;
+import view.menu.menuPanels.SettingsPanel;
 
 public class MainMenu extends JFrame {
 
@@ -22,10 +23,10 @@ public class MainMenu extends JFrame {
    
     private HomePanel homePanel;
 
-    public MainMenu(JPanel panel) {
+    public MainMenu() {
        
         final JPanel mainPanel = new JPanel(new BorderLayout());
-        this.homePanel=(HomePanel)panel;
+        this.homePanel=new HomePanel();
         mainPanel.add(this.homePanel, BorderLayout.CENTER);
         this.setTitle("Main Menu - DonkeyKong");
         this.setResizable(false);
@@ -35,11 +36,6 @@ public class MainMenu extends JFrame {
         this.add(mainPanel);
         this.setVisible(true);
     }
-    
-    public void switchPanel(JPanel panel) {
-        this.getContentPane().removeAll();
-        this.getContentPane().add(panel);
-        this.repaint();
-    }
+
 
 }

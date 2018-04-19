@@ -24,16 +24,16 @@ public final class Level1st extends BasicLevelImpl{
    
     //entities
 
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> MARIO = new Pair<>(new Pair<>(276.0, 88.0), new Pair<>(25,25));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> MARIO = new Pair<>(new Pair<>(50.0,512.0), new Pair<>(25,25));
     private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> DONKEYKONG = new Pair<>(new Pair<>(15.0,53.0), new Pair<>(60,60));
     private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> PRINCESS = new Pair<>(new Pair<>(142.5,24.0), new Pair<>(0,0));
     
     //all the floor tiles
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_1 = new Pair<>(new Pair<>(0.0,512.0), new Pair<>(460,25));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_2 = new Pair<>(new Pair<>(0.0,378.0), new Pair<>(404,25));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_3 = new Pair<>(new Pair<>(64.0,245.0), new Pair<>(404,25));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_4 = new Pair<>(new Pair<>(0.0,112.0), new Pair<>(404,25));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_5 = new Pair<>(new Pair<>(100.0,48.0), new Pair<>(109,25));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_1 = new Pair<>(new Pair<>(0.0,512.0), new Pair<>(460,22));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_2 = new Pair<>(new Pair<>(0.0,378.0), new Pair<>(404,22));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_3 = new Pair<>(new Pair<>(55.0,245.0), new Pair<>(404,22));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_4 = new Pair<>(new Pair<>(0.0,112.0), new Pair<>(404,22));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_5 = new Pair<>(new Pair<>(100.0,48.0), new Pair<>(109,22));
     
     private static final List<Pair<Pair<Double,Double>, Pair<Integer,Integer>>> FLOOR = Collections.unmodifiableList(new ArrayList<>(Arrays.asList(FLOOR_TILE_1,FLOOR_TILE_2,FLOOR_TILE_3,FLOOR_TILE_4,FLOOR_TILE_5)));
     
@@ -62,5 +62,6 @@ public final class Level1st extends BasicLevelImpl{
         
         super.setFloor(FLOOR.stream().map(T -> new FloorTileImpl(T.getX().getX(), T.getX().getY(), new Dimension(T.getY().getX(), T.getY().getY()))).collect(Collectors.toList()));
         super.setStairs(STAIRS.stream().map(S -> new StairImpl(S.getX().getX(), S.getX().getY(), new Dimension(S.getY().getX(), S.getY().getY()))).collect(Collectors.toList()));
+
     }
 }

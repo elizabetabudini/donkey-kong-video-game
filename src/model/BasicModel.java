@@ -10,6 +10,7 @@ import model.entities.Entity;
 import model.entities.EntityStatus;
 import model.entities.FloorTile;
 import model.entities.Mario;
+import model.entities.MarioImpl;
 import model.entities.Princess;
 import model.entities.Stair;
 import model.levels.BasicLevel;
@@ -113,7 +114,7 @@ public class BasicModel extends ModelImpl{
     
     public void checkCollisions() {
         this.checkStatus(this.getMario());
-        //this.isMarioAlive(this.getMario());
+        this.isMarioAlive(this.getMario());
         this.processBarrels(getBarrels());
         //this.checkVictory(this.getMario());
     }

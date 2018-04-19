@@ -53,8 +53,7 @@ public class MainMenu extends JFrame {
         this.gameEngine = new GameEngineImpl(gameScreen);
       //set the background image
         ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
-        //frame.setContentPane(new JLabel(new ImageIcon(background.getImage())));
-        //set the icon image
+        
         ImageIcon icon = ImageLoader.getInstance().getImage("images/donkeyIcon.png");
         frame.setIconImage(icon.getImage());
         

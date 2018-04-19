@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import controller.GameEngine;
 import view.GameScreenPanel;
@@ -17,8 +18,6 @@ public class GameFrame extends JFrame {
     private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
     private GameScreenPanel gsPanel;
     private ScoreTimePanel scorePanel;
-    private DrawableCanvas canvas;
-    private GameEngine gameEngine;
  
     
     public GameFrame(GameScreenPanel gamescreen) {
@@ -39,7 +38,6 @@ public class GameFrame extends JFrame {
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-   
-    
+
 
 }

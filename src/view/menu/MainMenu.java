@@ -26,8 +26,8 @@ public class MainMenu extends JFrame {
     private static final Insets TITLE_INSETS = new Insets(20, 0, 20, 0);
     private static final Insets BUTTONS_INSETS = new Insets(10, 20, 20, 20);
     private static final Insets IMAGES_INSETS = new Insets(20, 20, 20, 30);
-    private static final Double HEIGHT = 0.7;
-    private static final Double WIDHT = 0.4;
+    private static final Double HEIGHT = 0.8;
+    private static final Double WIDHT = 0.45;
     private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
     private final GameScreenPanel gameScreen;
     private final GameEngine gameEngine;
@@ -97,7 +97,7 @@ public class MainMenu extends JFrame {
         final JLabel lblTitle = new JLabel();
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         lblTitle.setIcon(new ImageIcon("res/images/logo.png"));
-        gbc.gridwidth = 2;
+        gbc.gridwidth =2;
         gbc.insets = TITLE_INSETS;
         backgroundPanel.add(lblTitle, gbc);
         gbc.gridy++;
@@ -119,7 +119,7 @@ public class MainMenu extends JFrame {
 
         // Sets image
         final JLabel lblImage = new JLabel();
-        lblImage.setIcon(new ImageIcon("res/icons/donkey-kong.gif"));
+        lblImage.setIcon(new ImageIcon("res/icons/donkey-kong2.gif"));
         gbc.gridheight = NUM_BUTTONS;
         gbc.insets = IMAGES_INSETS;
         gbc.gridx = 1;

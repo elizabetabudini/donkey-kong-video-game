@@ -1,6 +1,7 @@
 package view.menuPanels;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -47,6 +48,7 @@ public class HomePanel extends JPanel{
         newGame.addActionListener(e -> {
             gameEngine.startGame();
             this.gameFrame = new GameFrame(gameScreen);
+
         });
         
         exit = new JButton("Exit");

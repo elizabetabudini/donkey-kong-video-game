@@ -196,6 +196,15 @@ public class GameEngineImpl implements GameEngine {
     public Mario getMario() {
         return this.mario;
     }
+
+    @Override
+    public void abortGameLoop() {
+        GameLoop.currentThread().interrupt();
+        
+    }
+    public Boolean isGameRunning() {
+        return this.gameRunning;
+    }
     
 
 }

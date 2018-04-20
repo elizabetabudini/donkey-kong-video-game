@@ -31,4 +31,8 @@ public interface GameEngine {
      */
     void setHandler(final InputHandler handler);
 
+    void abortGameLoop();
+    
+    public Boolean isGameRunning();
+
 }

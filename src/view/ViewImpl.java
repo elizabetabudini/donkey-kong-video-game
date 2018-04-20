@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import controller.GameEngine;
+import controller.GameEngineImpl;
 import view.GameScreenPanel;
 
 public class ViewImpl implements ViewInterface {
@@ -37,6 +38,9 @@ public class ViewImpl implements ViewInterface {
 
     public void startView() {
         new CardMenu(this.gameScreen);
+    }
+    static GameEngine getController() {
+        return ViewImpl.gameEngine;
     }
 
     public GameScreenPanel getGameScreen() {

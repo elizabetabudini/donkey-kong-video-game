@@ -4,11 +4,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
-import controller.GameEngine;
-import view.GameScreenPanel;
 
 public class GameFrame extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -18,26 +15,41 @@ public class GameFrame extends JFrame {
     private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
     private GameScreenPanel gsPanel;
     private ScoreTimePanel scorePanel;
- 
+    private final JFrame frame;
     
     public GameFrame(GameScreenPanel gamescreen) {
+        frame= new JFrame();
         final JPanel mainPanel = new JPanel(new BorderLayout());
         //creating new score panel
         this.scorePanel= new ScoreTimePanel();
         mainPanel.add(this.scorePanel, BorderLayout.NORTH);
         
-        this.setSize((int)(screenRes.getWidth()*WIDTH), (int)(screenRes.getHeight()*HEIGHT));//prova
-        this.setTitle("Game Donkey Kong");
+        frame.setSize((int)(screenRes.getWidth()*WIDTH), (int)(screenRes.getHeight()*HEIGHT));//prova
+        frame.setTitle("Game Donkey Kong");
         
         //creating new gamescreen panel
         this.gsPanel= gamescreen;
         mainPanel.add(this.gsPanel, BorderLayout.CENTER);
-        this.add(mainPanel);
-        this.setVisible(true);
-        this.setFocusable(true);
-        this.setResizable(false);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.add(mainPanel);
+        frame.setVisible(true);
+        frame.setFocusable(true);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (JOptionPane.showConfirmDialog(frame, 
+                    "Vuoi uscire dal gioco?", "Exit Game?", 
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                    
+                    System.exit(0);
+                        
+                }
+            }
+        });
+
+
     }
-
-
 }

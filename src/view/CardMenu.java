@@ -63,34 +63,45 @@ public class CardMenu {
         }
         ControlActionListenter cal = new ControlActionListenter();
  
-        JButton btn1 = new JButton("Home");
-        btn1.setActionCommand(HOME);
-        btn1.addActionListener(cal);
+        JButton btnHome = new JButton("Home");
+        btnHome.setActionCommand(HOME);
+        btnHome.addActionListener(cal);
  
-        JButton btn2 = new JButton("Settings");
-        btn2.setActionCommand(SETTINGS);
-        btn2.addActionListener(cal);
+        JButton btnSett = new JButton("Settings");
+        btnSett.setActionCommand(SETTINGS);
+        btnSett.addActionListener(cal);
  
-        JButton btn3 = new JButton("Info");
-        btn3.setActionCommand(INFO);
-        btn3.addActionListener(cal);
+        JButton btnInfo = new JButton("Info");
+        btnInfo.setActionCommand(INFO);
+        btnInfo.addActionListener(cal);
         
-        JButton btn4 = new JButton("High Scores");
-        btn4.setActionCommand(SCORES);
-        btn4.addActionListener(cal);
+        JButton btnHigh = new JButton("High Scores");
+        btnHigh.setActionCommand(SCORES);
+        btnHigh.addActionListener(cal);
  
-        JPanel controlButtons = new JPanel();
-        controlButtons.add(btn1);
-        controlButtons.add(btn2);
-        controlButtons.add(btn3);
-        controlButtons.add(btn4);
-        controlButtons.setOpaque(false);
+        JPanel menuButtons = new JPanel();
+        menuButtons.add(btnHome);
+        menuButtons.add(btnSett);
+        menuButtons.add(btnInfo);
+        menuButtons.add(btnHigh);
+        menuButtons.setOpaque(false);
  
         Container pane = frame.getContentPane();
         pane.add(cards, BorderLayout.CENTER);
-        pane.add(controlButtons, BorderLayout.SOUTH);
+        pane.add(menuButtons, BorderLayout.SOUTH);
  
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (JOptionPane.showConfirmDialog(frame, 
+                    "Vuoi chiudere l'applicazione?", "Exit Game?", 
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                    System.exit(0);      
+                }
+            }
+        });
         frame.setSize((int) (screenRes.getWidth() * WIDHT), (int) (screenRes.getHeight() * HEIGHT));
         frame.setVisible(true);
     }

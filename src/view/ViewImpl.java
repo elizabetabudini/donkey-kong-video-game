@@ -6,7 +6,14 @@ import java.awt.Toolkit;
 import controller.GameEngine;
 import controller.GameEngineImpl;
 import view.GameScreenPanel;
-
+/**
+ * The View of the MVC pattern, this class is responsible
+ * for everything shown on the screen.
+ * It implements the method of the View
+ * 
+ * @author elizabeta
+ *
+ */
 public class ViewImpl implements ViewInterface {
 
     // private final InputHandler inputHandler;

@@ -10,7 +10,9 @@ import javax.swing.JTextArea;
 
 import utilities.ImageLoader;
 import view.BackgroundPanel;
-
+/**
+ * This is the Info Panel which displays the application informations ant authors
+ */
 public class InfoPanel extends JPanel {
     /**
      * 

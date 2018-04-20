@@ -4,7 +4,10 @@ import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
+/**
+ * This is the Settings Panel which allows the 
+ * user to chose the difficulty of the game
+ */
 public class SettingsPanel extends JPanel{
 
 

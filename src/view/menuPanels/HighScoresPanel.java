@@ -8,7 +8,11 @@ import javax.swing.JPanel;
 
 import utilities.ImageLoader;
 import view.BackgroundPanel;
-
+/**
+ * This is the High Scores Panel which allows the 
+ * user to check out the last scores in the previews games
+ * If the application is run for the first time no scores are displayed in this panel
+ */
 public class HighScoresPanel extends JPanel{
     private static final long serialVersionUID = 1L;
     private JButton highScores;

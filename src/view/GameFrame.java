@@ -8,6 +8,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class GameFrame extends JFrame {
+    /**
+     * This class is the main frame for a new game
+     * It displays the gameScreen panel and the score panel in the game frame
+     */
     private static final long serialVersionUID = 1L;
     
     private static final Double HEIGHT = 0.5;

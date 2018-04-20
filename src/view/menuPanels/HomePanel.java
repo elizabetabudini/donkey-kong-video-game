@@ -21,10 +21,14 @@ import view.GameFrame;
 import view.GameScreenPanel;
 
 public class HomePanel extends JPanel{
+    /**
+     * This is the Home Menu Panel which allows the 
+     * user to start a new Game and to exit the application
+     */
     private static final long serialVersionUID = 1L;
-    private static final Insets TITLE_INSETS = new Insets(20, 0, 20, 0);
-    private static final Insets BUTTONS_INSETS = new Insets(10, 20, 20, 20);
-    private static final Insets IMAGES_INSETS = new Insets(20, 20, 20, 30);
+//    private static final Insets TITLE_INSETS = new Insets(20, 0, 20, 0);
+//    private static final Insets BUTTONS_INSETS = new Insets(10, 20, 20, 20);
+//    private static final Insets IMAGES_INSETS = new Insets(20, 20, 20, 30);
     private final GameScreenPanel gameScreen;
     private GameEngine gameEngine;
     private GameFrame gameFrame;
@@ -37,7 +41,7 @@ public class HomePanel extends JPanel{
         this.gameEngine = new GameEngineImpl(gameScreen);
 
         ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
-        BackgroundPanel backgroundPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.TILED, 0.0f, 0.0f);
+        BackgroundPanel backgroundPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.ACTUAL, 0.0f, 0.0f);
         
         // inizializza bottoni
         newGame = new JButton();

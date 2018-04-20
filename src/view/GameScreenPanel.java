@@ -44,7 +44,10 @@ public class GameScreenPanel extends JPanel {
         this.repaint();
     }
 
-    @Override
+    /**
+     * Method to paint a component
+     * @param g the component to draw
+     */
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
         doDrawing(g);
@@ -55,11 +58,17 @@ public class GameScreenPanel extends JPanel {
         g2d.drawImage(canvas.getBackGround(), 0, 0, gameDimension.width , gameDimension.height-50 , null);
         g2d.drawImage(canvas.getforeGround(), 0, 0, gameDimension.width , gameDimension.height-50 , null);
     }
-
+    /**
+     * Getter for the drawable canvas
+     * @return the canvas on which to draw
+     */
     public DrawableCanvas getCanvas() {
         return this.canvas;
     }
-
+    /**
+     * Getter for the Handler
+     * @return handler of the game
+     */
     public InputHandler getHandler() {
         return this.handler;
     }

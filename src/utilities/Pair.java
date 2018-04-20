@@ -21,4 +21,8 @@ public class Pair<X, Y> {
     public final Y getY() {
         return this.y;
     }
+    @Override
+    public String toString() {
+            return "<" + this.x + "," + this.y + ">";
+    }
 }

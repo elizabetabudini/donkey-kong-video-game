@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import java.awt.color.*;
 import utilities.ImageLoader;
 import view.menuPanels.HighScoresPanel;
 import view.menuPanels.HomePanel;
@@ -12,7 +11,11 @@ import view.menuPanels.InfoPanel;
 import view.menuPanels.SettingsPanel;
  
 public class CardMenu {
-    
+    /**
+     * This class is responsible for displaying the MenuPanels (HomePanel,Settings, Info, HighScores)
+     * It's the main frame of the menu
+     */
+     
     final GameScreenPanel gameScreen;
 
     public CardMenu(GameScreenPanel gameScreen2) {
@@ -35,6 +38,12 @@ public class CardMenu {
         final String SCORES= "SCORES";
  
         JFrame frame = new JFrame("Donkey Kong Menu");
+        ImageIcon icon = ImageLoader.getInstance().getImage("icons/donkey.png");
+        frame.setIconImage(icon.getImage());
+//        ImageIcon iconHome = ImageLoader.getInstance().getImage("icons/donkey.png");
+        ImageIcon iconSett = ImageLoader.getInstance().getImage("images/settings.png");
+        ImageIcon iconInfo = ImageLoader.getInstance().getImage("images/info.png");
+        ImageIcon iconHigh = ImageLoader.getInstance().getImage("images/high_scores.png");
  
         //Create the "cards".
         JPanel homeCard = new HomePanel(this.gameScreen);
@@ -72,7 +81,7 @@ public class CardMenu {
         btnHome.addActionListener(cal);
  
         JButton btnSett = new JButton();
-        btnSett.setIcon(new ImageIcon("res/images/settings.png"));
+        btnSett.setIcon(iconSett);
         btnSett.setOpaque(false);
         btnSett.setContentAreaFilled(false);
         btnSett.setBorderPainted(false);
@@ -80,7 +89,7 @@ public class CardMenu {
         btnSett.addActionListener(cal);
  
         JButton btnInfo = new JButton();
-        btnInfo.setIcon(new ImageIcon("res/images/info.png"));
+        btnInfo.setIcon(iconInfo);
         btnInfo.setOpaque(false);
         btnInfo.setContentAreaFilled(false);
         btnInfo.setBorderPainted(false);
@@ -88,7 +97,7 @@ public class CardMenu {
         btnInfo.addActionListener(cal);
         
         JButton btnHigh = new JButton();
-        btnHigh.setIcon(new ImageIcon("res/images/high_scores.png"));
+        btnHigh.setIcon(iconHigh);
         btnHigh.setOpaque(false);
         btnHigh.setContentAreaFilled(false);
         btnHigh.setBorderPainted(false);

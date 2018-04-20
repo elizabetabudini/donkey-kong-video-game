@@ -12,13 +12,15 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 //import controller.GameEngine;
-
+/**
+ * Panel on which display the time elapsed and the score
+ * during the game
+ * it will be shown on the GameFrame beside the GameScreenPanel
+ */
 public class ScoreTimePanel extends JPanel{
+   
 
-     /**
-     * auto-generated ID
-     */
-    private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
        
 
         private static final int PANEL_HEIGHT = 15;

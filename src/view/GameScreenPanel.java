@@ -64,12 +64,4 @@ public class GameScreenPanel extends JPanel {
         return this.handler;
     }
 
-    // private final DrawEntities drawEntities = new DrawEntities(GameWidth,
-    // GameHeight);
-
-    // fare metodo per la vittoria
-    // fare metodo che richiama drawentities
-    // fare metodo per tornare al menu iniziale
-    // fare metodo per input
-
 }

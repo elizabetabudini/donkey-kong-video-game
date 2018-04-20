@@ -49,6 +49,10 @@ public enum Sprites {
      */
     MARIO_WALKING_LEFT("mario_walking_left.gif", new Dimension(30, 25)),
     /**
+     * The main character sprite, walking left.
+     */
+    MARIO_CLIMBING_STAIRS("mario_climbing.gif", new Dimension(30, 25)),
+    /**
      * The barrel sprite, rotating right.
      */
     BARREL_RIGHT("barrel_rolling_right.gif", new Dimension(20, 20)),

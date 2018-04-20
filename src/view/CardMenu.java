@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import java.awt.color.*;
+import utilities.ImageLoader;
 import view.menuPanels.HighScoresPanel;
 import view.menuPanels.HomePanel;
 import view.menuPanels.InfoPanel;
@@ -25,6 +27,7 @@ public class CardMenu {
         final String highScoresText= "High Scores";
         final JPanel cards; //a panel that uses CardLayout
         
+        
         // button commands
         final String HOME = "HOME";
         final String SETTINGS = "SETTINGS";
@@ -41,6 +44,7 @@ public class CardMenu {
  
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
+       
         cards.add(homeCard, homeText);
         cards.add(settingsCard, settingsText);
         cards.add(infoCard, infoText);
@@ -67,18 +71,30 @@ public class CardMenu {
         btnHome.setActionCommand(HOME);
         btnHome.addActionListener(cal);
  
-        JButton btnSett = new JButton("Settings");
+        JButton btnSett = new JButton();
+        btnSett.setIcon(new ImageIcon("res/images/settings.png"));
+        btnSett.setOpaque(false);
+        btnSett.setContentAreaFilled(false);
+        btnSett.setBorderPainted(false);
         btnSett.setActionCommand(SETTINGS);
         btnSett.addActionListener(cal);
  
-        JButton btnInfo = new JButton("Info");
+        JButton btnInfo = new JButton();
+        btnInfo.setIcon(new ImageIcon("res/images/info.png"));
+        btnInfo.setOpaque(false);
+        btnInfo.setContentAreaFilled(false);
+        btnInfo.setBorderPainted(false);
         btnInfo.setActionCommand(INFO);
         btnInfo.addActionListener(cal);
         
-        JButton btnHigh = new JButton("High Scores");
+        JButton btnHigh = new JButton();
+        btnHigh.setIcon(new ImageIcon("res/images/high_scores.png"));
+        btnHigh.setOpaque(false);
+        btnHigh.setContentAreaFilled(false);
+        btnHigh.setBorderPainted(false);
         btnHigh.setActionCommand(SCORES);
         btnHigh.addActionListener(cal);
- 
+        
         JPanel menuButtons = new JPanel();
         menuButtons.add(btnHome);
         menuButtons.add(btnSett);

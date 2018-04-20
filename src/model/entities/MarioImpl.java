@@ -41,12 +41,13 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
             this.setDeltaX(-STEP);
         } else if (dir == Movement.RIGHT) {
             this.setDeltaX(STEP);
-        } else if (dir == Movement.UP && BasicModel.canClimbUp(this) || this.getStatus() == EntityStatus.Climbing) {
-            this.setStatus(EntityStatus.Climbing);
+            
+        } else if ((dir == Movement.UP && BasicModel.canClimbUp(this)) || (dir == Movement.UP && this.getStatus() == EntityStatus.Climbing)) {
             this.setDeltaY(-STEP);
-        } else if (dir == Movement.DOWN && BasicModel.canClimbDown(this) || this.getStatus() == EntityStatus.Climbing) {
             this.setStatus(EntityStatus.Climbing);
+        } else if ((dir == Movement.DOWN && BasicModel.canClimbDown(this)) || (dir == Movement.DOWN && this.getStatus() == EntityStatus.Climbing)) {
             this.setDeltaY(STEP);
+            this.setStatus(EntityStatus.Climbing);
         }
         if (dir == Movement.JUMP && this.getStatus() == EntityStatus.OnTheFloor) {
             this.jump();
@@ -87,7 +88,7 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
         if (dir == Movement.LEFT || dir == Movement.RIGHT) {
             this.setDeltaX(0);
         }
-        if ((dir == Movement.UP || dir == Movement.DOWN) && !jumping) {
+        if ((dir == Movement.UP || dir == Movement.DOWN) && this.getStatus() != EntityStatus.Falling) {
             this.setDeltaY(0);
         }
     }
@@ -109,8 +110,8 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
 
     @Override
     public String toString() {
-        return "DEBUG INFORMATION: Current Mario Coordinates: [" + this.getX() + "," + this.getY() + "]" + "Status is:"
-                + this.getStatus();
+        return "DEBUG INFORMATION MARIO: Coordinates: [" + this.getX() + "," + this.getY() + "] - " + "Status : ["
+                + this.getStatus() + "] - Dy : [" + this.getDeltaY() + "]";
     }
 
 }

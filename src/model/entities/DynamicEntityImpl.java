@@ -13,7 +13,7 @@ import model.ModelImpl;
 public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEntity {
 
     private double deltaX;
-    private double deltaY;
+    public double deltaY;
     private Movement lastDirection = Movement.RIGHT;
     private EntityStatus currentStatus = EntityStatus.OnTheFloor;
 
@@ -34,7 +34,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
 
     @Override
     public final void move(final Optional<Movement> dir) {
-        if (dir.isPresent()) {
+        if (dir.isPresent() && this.getStatus() != EntityStatus.Dead) {
             tryToMove(dir.get());
             if (dir.get() == Movement.RIGHT || dir.get() == Movement.LEFT) {
                 this.setX(this.getX() + deltaX);
@@ -43,7 +43,6 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
         }
 
         this.setY(this.getY() + deltaY);
-
     }
 
     /**
@@ -63,6 +62,9 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     public void update() {
         if (getStatus() == EntityStatus.Falling) {
             this.setDeltaY(this.getDeltaY() + ModelImpl.GRAVITY);
+        }
+        else if(getStatus() == EntityStatus.Climbing) {
+            this.setDeltaY(0);
         }
         this.move(Optional.empty());
     }

@@ -36,16 +36,19 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
 
     @Override
     protected void tryToMove(final Movement dir) {
-        this.setDirection(dir);
         if (dir == Movement.LEFT) {
+            this.setDirection(dir);
             this.setDeltaX(-STEP);
         } else if (dir == Movement.RIGHT) {
+            this.setDirection(dir);
             this.setDeltaX(STEP);
-            
-        } else if ((dir == Movement.UP && BasicModel.canClimbUp(this)) || (dir == Movement.UP && this.getStatus() == EntityStatus.Climbing)) {
+
+        } else if ((dir == Movement.UP && BasicModel.canClimbUp(this))
+                || (dir == Movement.UP && this.getStatus() == EntityStatus.Climbing)) {
             this.setDeltaY(-STEP);
             this.setStatus(EntityStatus.Climbing);
-        } else if ((dir == Movement.DOWN && BasicModel.canClimbDown(this)) || (dir == Movement.DOWN && this.getStatus() == EntityStatus.Climbing)) {
+        } else if ((dir == Movement.DOWN && BasicModel.canClimbDown(this))
+                || (dir == Movement.DOWN && this.getStatus() == EntityStatus.Climbing)) {
             this.setDeltaY(STEP);
             this.setStatus(EntityStatus.Climbing);
         }

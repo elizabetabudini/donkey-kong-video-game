@@ -37,5 +37,4 @@ public interface Mario extends DynamicEntity {
      *            The dir representing the movement that should be stopped.
      */
     void stopMoving(Movement dir);
-    
 }

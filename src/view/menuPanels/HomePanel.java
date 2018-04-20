@@ -1,4 +1,4 @@
-package view.menu.menuPanels;
+package view.menuPanels;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -11,33 +11,28 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import controller.GameEngine;
+import controller.GameEngineImpl;
 import utilities.ImageLoader;
 import view.BackgroundPanel;
-import view.menu.MainMenu;
-
+import view.GameFrame;
+import view.GameScreenPanel;
 
 public class HomePanel extends JPanel{
     private static final long serialVersionUID = 1L;
     private static final Insets TITLE_INSETS = new Insets(20, 0, 20, 0);
     private static final Insets BUTTONS_INSETS = new Insets(10, 20, 20, 20);
     private static final Insets IMAGES_INSETS = new Insets(20, 20, 20, 30);
-
+    private final GameScreenPanel gameScreen;
+    private GameEngine gameEngine;
+    private GameFrame gameFrame;
     private JButton newGame;
-    private JButton highscores;
-    private JButton info;
-    private JButton settings;
     private JButton exit;
-    private InfoPanel infoPanel;
-    private SettingsPanel settingsPanel;
-    private HighScoresPanel hscorePanel;
     private static final int NUM_BUTTONS = 5;
     
-    private static MainMenu mainMenu;
-    
-    public HomePanel() {
-        infoPanel= new InfoPanel();
-        settingsPanel= new SettingsPanel();
-        hscorePanel= new HighScoresPanel();
+    public HomePanel(GameScreenPanel gameScreen) {
+        this.gameScreen = gameScreen;
+        this.gameEngine = new GameEngineImpl(gameScreen);
 
         ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
         BackgroundPanel backgroundPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.TILED, 0.0f, 0.0f);
@@ -45,19 +40,15 @@ public class HomePanel extends JPanel{
         // inizializza bottoni
         newGame = new JButton("New Game");
         newGame.setIcon(new ImageIcon("res/icons/jump_right.png"));
+        
+        gameEngine.setCanvas(gameScreen.getCanvas());
+        gameEngine.setHandler(gameScreen.getHandler());
+        
         newGame.addActionListener(e -> {
+            gameEngine.startGame();
+            this.gameFrame = new GameFrame(gameScreen);
         });
-        highscores = new JButton("High Scores");
-        highscores.addActionListener(e -> {
-        });
-        info = new JButton("Info");
-        info.addActionListener(e -> {
-        });
-        settings = new JButton("Settings");
-        settings.addActionListener(e -> {
-            System.out.println("settings panel");
-        });
-
+        
         exit = new JButton("Exit");
         exit.addActionListener(e -> {
             System.exit(0);
@@ -91,14 +82,7 @@ public class HomePanel extends JPanel{
 
         backgroundPanel.add(newGame, gbc);
         gbc.gridy++;
-        backgroundPanel.add(highscores, gbc);
-        gbc.gridy++;
-        backgroundPanel.add(info, gbc);
-        gbc.gridy++;
-        backgroundPanel.add(settings, gbc);
-        gbc.gridy++;
-        backgroundPanel.add(exit, gbc);
-        
+        backgroundPanel.add(exit, gbc);  
 
         // Sets image
         final JLabel lblImage = new JLabel();

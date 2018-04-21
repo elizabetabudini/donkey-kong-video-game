@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.swing.SwingUtilities;
 import model.BasicModel;
 import model.entities.DonkeyKong;
+import model.entities.DynamicEntity;
 import model.entities.EntityStatus;
 import model.entities.Mario;
 import model.entities.Movement;
@@ -105,22 +106,27 @@ public class GameEngineImpl implements GameEngine {
 
     private void render() {
 
-        // TODO draw princess (keep this draw here only if we want to change its Sprite)
+        /* TODO draw princess (keep this draw here only if we want to change its Sprite) 
+         consider using == instead of .equals with enum*/
         this.drawer.drawEntity(Sprites.PRINCESS, this.princess.getX().intValue(), this.princess.getY().intValue());
 
         // draw mario
-        if (this.mario.getStatus().equals(EntityStatus.Climbing)) {
-            this.marioSprite = Sprites.MARIO_CLIMBING_STAIRS;
-        } else if (this.mario.getCurrentDirection().equals(Movement.RIGHT)) {
+        if (this.mario.isClimbing()) {
+            if (this.isMarioMovingOnTheStair()) {
+                this.marioSprite = Sprites.MARIO_CLIMBING_STAIRS;
+            } else {
+                this.marioSprite = Sprites.MARIO_ON_STAIR;
+            }
+        } else if (this.isMovingRight(this.mario)) {
             this.marioSprite = Sprites.MARIO_FACING_RIGHT;
-            if (this.mario.getStatus().equals(EntityStatus.Jumping)) {
+            if (this.mario.isJumping()) {
                 this.marioSprite = Sprites.MARIO_JUMPING_RIGHT;
             } else if (this.mario.isMoving()) {
                 this.marioSprite = Sprites.MARIO_WALKING_RIGHT;
             }
-        } else if (this.mario.getCurrentDirection().equals(Movement.LEFT)) {
+        } else if (!this.isMovingRight(this.mario)) {
             this.marioSprite = Sprites.MARIO_FACING_LEFT;
-            if (this.mario.getStatus().equals(EntityStatus.Jumping)) {
+            if (this.mario.isJumping()) {
                 this.marioSprite = Sprites.MARIO_JUMPING_LEFT;
             } else if (this.mario.isMoving()) {
                 this.marioSprite = Sprites.MARIO_WALKING_LEFT;
@@ -141,7 +147,7 @@ public class GameEngineImpl implements GameEngine {
         // draw barrels
         if (!this.model.getBarrels().isEmpty()) {
             this.dk.getBarrelsList().forEach(br -> {
-                if (br.getCurrentDirection().equals(Movement.RIGHT)) {
+                if (this.isMovingRight(br)) {
                     this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
                 } else {
                     this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
@@ -151,7 +157,16 @@ public class GameEngineImpl implements GameEngine {
         SwingUtilities.invokeLater(() -> gameScreen.updateScreen());
 
     }
-
+    
+    private boolean isMarioMovingOnTheStair() {
+        return (this.mario.getCurrentDirection().equals(Movement.UP) 
+                || this.mario.getCurrentDirection().equals(Movement.DOWN));
+    }
+    
+    private boolean isMovingRight(final DynamicEntity entity) {
+        return entity.getCurrentDirection().equals(Movement.RIGHT);
+    }
+    
     private void updateGame() {
         this.model.updateGame();
     }

@@ -49,7 +49,11 @@ public enum Sprites {
      */
     MARIO_WALKING_LEFT("mario_walking_left.gif", new Dimension(30, 25)),
     /**
-     * The main character sprite, walking left.
+     * The main character sprite, stationary on a stair.
+     */
+    MARIO_ON_STAIR("mario_on_stair.png", new Dimension(30, 25)),
+    /**
+     * The main character sprite, climbing the stairs.
      */
     MARIO_CLIMBING_STAIRS("mario_climbing.gif", new Dimension(30, 25)),
     /**

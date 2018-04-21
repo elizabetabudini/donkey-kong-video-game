@@ -57,7 +57,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
 
 
     /**
-     * Update method is designed for extension in special cases.
+     * Update method is designed for extension in special cases, eventual extension should start with super() call.
      */
     @Override
     public void update() {

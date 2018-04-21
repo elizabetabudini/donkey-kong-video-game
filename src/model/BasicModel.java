@@ -122,12 +122,21 @@ public class BasicModel extends ModelImpl{
     //check if it is on the floor and eventually continue with the stairs
     private void checkStatus(final DynamicEntity entity) {
         Optional<? extends FloorTile> floorTile = Optional.empty();
+        Optional<? extends Stair> stair = Optional.empty();
+        
         floorTile = this.getFloor().stream().filter(T -> entity.isColliding(T)).findFirst();
+        stair = this.getStairs().stream().filter(S -> entity.isColliding(S)).findFirst();
+        
+        
         if(floorTile.isPresent() && entity.getStatus() != EntityStatus.Climbing) {
             fixHeight(entity, floorTile.get());
         }
-        else if( this.getStairs().stream().filter(S -> entity.isColliding(S)).findFirst().isPresent()) {
+        else if( stair.isPresent() && !entity.getStatus().equals(EntityStatus.Falling)) {
             entity.setStatus(EntityStatus.Climbing);
+            if(entity.getHitbox().getCenterY() > stair.get().getHitbox().getCenterY() && floorTile.isPresent()) {
+                System.out.println("FIXING");
+                fixHeight(entity, floorTile.get());
+            }
         }
         else{
             entity.setStatus(EntityStatus.Falling);
@@ -175,7 +184,7 @@ public class BasicModel extends ModelImpl{
             entity.setY(floorTile.getY()+floorTile.getHitbox().getHeight());
         }
         //touching the floor from above
-        else if(floorTile.getY() < entity.getY()+entity.getHitbox().getHeight() && entity.getStatus() != EntityStatus.Climbing) {
+        else if(floorTile.getY() < entity.getY()+entity.getHitbox().getHeight()) {
             entity.setY(entity.getY().floatValue() - (entity.getY().floatValue() + entity.getHitbox().getHeight() - floorTile.getY().floatValue()-1));
             entity.setStatus(EntityStatus.OnTheFloor);
         }

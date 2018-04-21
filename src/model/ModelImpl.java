@@ -1,5 +1,6 @@
 package model;
 
+import model.entities.DynamicEntity;
 import model.levels.GameLevel;
 
 public abstract class ModelImpl implements ModelInterface{
@@ -55,6 +56,19 @@ public abstract class ModelImpl implements ModelInterface{
      * 
      */
     protected abstract void checkCollisions();
+    
+    /**
+     * The function that checks if the given entity is within the game borders.
+     * 
+     */
+    public static Boolean isWithinBorders(final DynamicEntity entity) {
+        if (entity.getX() + entity.getHitbox().getWidth() < WIDTH && entity.getY() + entity.getHitbox().getHeight() < HEIGHT) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     
     public GameStatus getGameStatus() {
         return this.gameStatus;

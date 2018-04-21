@@ -98,25 +98,28 @@ public class GameEngineImpl implements GameEngine {
 
     private void render() {
         
-        //draw princess
+        //TODO draw princess (keep this draw here only if we want to change its Sprite)
         this.drawer.drawEntity(Sprites.PRINCESS, this.princess.getX().intValue(), this.princess.getY().intValue());
         
         //draw mario
-        if(this.mario.getCurrentDirection().equals(Movement.RIGHT)) {
+        if(this.mario.getStatus().equals(EntityStatus.Climbing)) {
+            this.marioSprite = Sprites.MARIO_CLIMBING_STAIRS;
+        } else if(this.mario.getCurrentDirection().equals(Movement.RIGHT)) {
             this.marioSprite = Sprites.MARIO_FACING_RIGHT;
             if(this.mario.getStatus().equals(EntityStatus.Jumping)) {
                 this.marioSprite = Sprites.MARIO_JUMPING_RIGHT;
             } else if(this.mario.isMoving()){
                 this.marioSprite = Sprites.MARIO_WALKING_RIGHT;
             }
-        } else {
-            this.marioSprite = Sprites.MARIO_FACING_LEFT;
-            if(this.mario.getStatus().equals(EntityStatus.Jumping)) {
-                this.marioSprite = Sprites.MARIO_JUMPING_LEFT;
-            } else if(this.mario.isMoving()) {
-                this.marioSprite = Sprites.MARIO_WALKING_LEFT;
-            }
+        } else if(this.mario.getCurrentDirection().equals(Movement.LEFT)) {
+                this.marioSprite = Sprites.MARIO_FACING_LEFT;
+                if(this.mario.getStatus().equals(EntityStatus.Jumping)) {
+                    this.marioSprite = Sprites.MARIO_JUMPING_LEFT;
+                } else if(this.mario.isMoving()) {
+                    this.marioSprite = Sprites.MARIO_WALKING_LEFT;
+                }
         }
+        
         this.drawer.drawEntity(this.marioSprite, this.mario.getX().intValue(), this.mario.getY().intValue());
  
         //Draw DonkeyKong

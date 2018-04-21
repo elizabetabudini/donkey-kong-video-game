@@ -32,12 +32,12 @@ public class HighScoresPanel extends JPanel{
     private List<Pair<String, Integer>> scores;
   
     public HighScoresPanel(){
-        this.manager= new HighScoreManagerImpl(FILENAME, NSCORES);
+        //this.manager= new HighScoreManagerImpl(FILENAME, NSCORES);
         
         ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
         BackgroundPanel backgroundPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.SCALED, 0.0f, 0.0f);
         backgroundPanel.setLayout(new BorderLayout());
-        scores=manager.getScores();
+       /* scores=manager.getScores();
         if(!scores.isEmpty()) {
             for (Pair<String, Integer> pair : scores) {
                 JTextArea text =new JTextArea();
@@ -53,7 +53,7 @@ public class HighScoresPanel extends JPanel{
             text.setText("No score to display");
             backgroundPanel.add(text, BorderLayout.NORTH);
             
-        }
+        }*/
   
         this.add(backgroundPanel);
     }

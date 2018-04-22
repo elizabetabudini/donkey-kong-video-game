@@ -11,12 +11,27 @@ import java.awt.Dimension;
 public interface BarrelFactory {
 
     /**
-     * A method to create a simple {@link Barrel} with the default speed
+     * A method to create a simple {@link AbstractBarrel} with the default speed
      * @param x The starting x Coordinate.
      * @param y The starting y Coordinate.
      * @param dim The dimension of a barrel's hitbox
-     * @return A {@link Barrel}
+     * @return A {@link AbstractBarrel}
      */
-    Barrel createSimpleBarrel(final Double x, final Double y, final Dimension dim);
+    AbstractBarrel createSimpleBarrel(final Double x, final Double y, final Dimension dim);
     //Other kind of barrels
+    /**
+     * A method to create an {@link AbstractBarrel} with the default speed
+     * that moves down each stair that it encounters
+     * 
+     * @param x 
+     *          The starting x Coordinate.
+     * @param y 
+     *          The starting y Coordinate.
+     * @param dim 
+     *          The dimension of a barrel's hitbox
+     * @return A {@link AbstractBarrel}
+     */
+    AbstractBarrel createBarrelMovingDownStairs(final Double x, final Double y, final Dimension dim);
+    
+    
 }

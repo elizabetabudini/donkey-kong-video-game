@@ -16,7 +16,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
     private final static double ZERO = 0.0;
     private final AgentBarrelsCreator barrels;
     private final BarrelFactory bf ;
-    private volatile List<Barrel> barrelsList;
+    private volatile List<AbstractBarrel> barrelsList;
     private boolean launchingBarrel;
 
     public DonkeyKongImpl(final Double x, final Double y,final Dimension dim) {
@@ -30,7 +30,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
     }
 
     @Override
-    public List<Barrel> getBarrelsList(){
+    public List<AbstractBarrel> getBarrelsList(){
         return new ArrayList<>(this.barrelsList);
         //TODO change with unmodifiableList
         //return  Collections.unmodifiableList(this.barrelsList);
@@ -50,7 +50,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
     private class AgentBarrelsCreator extends Thread {
 
         private volatile boolean creatingBarrels = true;
-        private Barrel barrel;
+        private AbstractBarrel barrel;
 
         protected AgentBarrelsCreator() {
             super();
@@ -59,11 +59,9 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
         public void run() { 
 
             while(creatingBarrels) {
-                DonkeyKongImpl.this.launchingBarrel = true;
+                /*DonkeyKongImpl.this.launchingBarrel = true;
                 this.barrel = DonkeyKongImpl.this.bf.createSimpleBarrel(75.0, 120.0, new Dimension(20,20));
                 barrelsList.add(this.barrel);
-                //TODO remove
-                System.out.println(barrelsList.size());
                 try {
                     Thread.sleep(400); //sleep to change Sprites of Dk launching barrels
                 } catch (Exception ex) {
@@ -74,8 +72,24 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
                     Thread.sleep(2000);
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                }*/
+                //TODO just for check
+                DonkeyKongImpl.this.launchingBarrel = true;
+                this.barrel = DonkeyKongImpl.this.bf.createBarrelMovingDownStairs(75.0, 120.0, new Dimension(20,20));
+                barrelsList.add(this.barrel);
+                try {
+                    Thread.sleep(400); //sleep to change Sprites of Dk launching barrels
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
                 DonkeyKongImpl.this.launchingBarrel = false;
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                //TODO remove
+                System.out.println(barrelsList.size());
                 this.checkBarrels();
             }
         }

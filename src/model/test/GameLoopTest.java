@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import controller.GameEngineImpl;
 import model.BasicModel;
-import model.entities.Barrel;
+import model.entities.AbstractBarrel;
 import model.entities.BarrelFactory;
 import model.entities.BarrelFactoryImpl;
 import model.entities.DonkeyKong;
@@ -27,7 +27,7 @@ public class GameLoopTest {
     public void testLoop() throws InterruptedException {
         //final BasicModel model = new BasicModel();
         final BarrelFactory bf = new BarrelFactoryImpl();
-        final List<Barrel> simpleBarrels = new ArrayList<>();
+        final List<AbstractBarrel> simpleBarrels = new ArrayList<>();
         simpleBarrels.add(bf.createSimpleBarrel(10.0, 20.0, new Dimension(100,100)));
         final GameEngineImpl ge = new GameEngineImpl(new GameScreenPanel(new DrawableCanvasImpl(200, 200, "")));
         ge.startGame();

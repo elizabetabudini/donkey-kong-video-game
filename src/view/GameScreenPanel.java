@@ -55,8 +55,8 @@ public class GameScreenPanel extends JPanel {
 
     private void doDrawing(final Graphics g) {
         final Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(canvas.getBackGround(), 0, 0, gameDimension.width , gameDimension.height-50 , null);
-        g2d.drawImage(canvas.getforeGround(), 0, 0, gameDimension.width , gameDimension.height-50 , null);
+        g2d.drawImage(canvas.getBackGround(), 0, 0, gameDimension.width, gameDimension.height - 50, null);
+        g2d.drawImage(canvas.getforeGround(), 0, 0, gameDimension.width, gameDimension.height - 50, null);
     }
     /**
      * Getter for the drawable canvas

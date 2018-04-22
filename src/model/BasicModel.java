@@ -6,24 +6,23 @@ import java.util.Optional;
 import model.entities.Barrel;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
-import model.entities.Entity;
 import model.entities.EntityStatus;
 import model.entities.FloorTile;
 import model.entities.Mario;
-import model.entities.MarioImpl;
 import model.entities.Princess;
 import model.entities.Stair;
 import model.levels.BasicLevel;
 import model.levels.Level1st;
 
 public class BasicModel extends ModelImpl{
-    
-    private static List<? extends Stair> stairs;
 
     public BasicModel() {
         super();
         setCurrentLevel(new Level1st());
-        stairs = getStairs();
+        stairs = this.getCurrentLevel().getStairs();
+        floor = this.getCurrentLevel().getFloor();
+        System.out.println("MARIO_1 : " + (this.getMario().getX()+this.getMario().getHitbox().width));
+        System.out.println("MARIO_1 : " + this.getMario().getX());
     }
 
     /**
@@ -119,7 +118,7 @@ public class BasicModel extends ModelImpl{
         //this.checkVictory(this.getMario());
     }
     
-    //check if it is on the floor and eventually continue with the stairs
+    
     private void checkStatus(final DynamicEntity entity) {
         Optional<? extends FloorTile> floorTile = Optional.empty();
         Optional<? extends Stair> stair = Optional.empty();
@@ -143,6 +142,7 @@ public class BasicModel extends ModelImpl{
         }   
     }
     
+    //TODO to delete
     private void checkStairs(final DynamicEntity entity) {
         this.getStairs().stream().forEach(S -> {
             if(entity.isColliding(S.getTrigger()) && entity.getY()+entity.getHitbox().getHeight() == S.getTrigger().getY()+S.getTrigger().getHitbox().getHeight()) {
@@ -179,41 +179,21 @@ public class BasicModel extends ModelImpl{
     }
 
     private void fixHeight(final DynamicEntity entity, final FloorTile floorTile) {
+        
         //touching the floor from the bottom
         if(floorTile.getHitbox().getCenterY() <= entity.getY()){
-            entity.setY(floorTile.getY()+floorTile.getHitbox().getHeight());
+            entity.setY(floorTile.getHitbox().getMaxY());
         }
+        
         //touching the floor from above
-        else if(floorTile.getY() < entity.getY()+entity.getHitbox().getHeight()) {
-            entity.setY(entity.getY().floatValue() - (entity.getY().floatValue() + entity.getHitbox().getHeight() - floorTile.getY().floatValue()-1));
+        else if(floorTile.getY() < entity.getHitbox().getMaxY()) {
+            entity.setY(entity.getY() - (entity.getHitbox().getMaxY() - floorTile.getY()-1));
             entity.setStatus(EntityStatus.OnTheFloor);
         }
         
-        if(floorTile.getHitbox().getCenterY() == entity.getY()+entity.getHitbox().getHeight()) {
+        if(floorTile.getHitbox().getCenterY() == entity.getHitbox().getMaxY()) {
             entity.setStatus(EntityStatus.OnTheFloor);
         }
         
-    }
-    
-    public static boolean canClimbDown(final DynamicEntity entity) {
-        return stairs.stream()
-                .filter(S -> 
-                    entity.isColliding(S.getTrigger()) 
-                    && entity.getY()+entity.getHitbox().getHeight() 
-                    == S.getTrigger().getY()+S.getTrigger().getHitbox().getHeight())
-                .findFirst()
-                .isPresent()
-                    ? true : false;
-    }
-    
-    public static boolean canClimbUp(final DynamicEntity entity) {
-        return stairs.stream()
-                .filter(S -> 
-                    entity.isColliding(S)
-                    && entity.getY()+entity.getHitbox().getHeight()
-                    == S.getY()+S.getHitbox().getHeight())
-                .findFirst()
-                .isPresent()
-                    ? true : false;
     }
 }

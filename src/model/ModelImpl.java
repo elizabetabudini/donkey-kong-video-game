@@ -1,6 +1,10 @@
 package model;
 
+import java.util.List;
+
 import model.entities.DynamicEntity;
+import model.entities.FloorTile;
+import model.entities.Stair;
 import model.levels.GameLevel;
 
 public abstract class ModelImpl implements ModelInterface{
@@ -20,6 +24,10 @@ public abstract class ModelImpl implements ModelInterface{
     //player info
     private final int score;
     protected int currentLives;
+    
+    //level
+    protected static List<? extends Stair> stairs;
+    protected static List<? extends FloorTile> floor;
     
     public ModelImpl() {
         this.score = 0;
@@ -96,5 +104,43 @@ public abstract class ModelImpl implements ModelInterface{
     
     public Boolean isOver() {
         return this.getLife() <= 0;
+    }
+    
+    /**
+     * The function that check if the given entity can climb down the stairs.
+     * 
+     * @param entity
+     *          the DynamicEntity that is making the request.
+     *          
+     * @return a boolean, true if can, false otherwise
+     */
+    public static boolean canClimbDown(final DynamicEntity entity) {
+        return stairs.stream()
+                .filter(S -> 
+                    entity.isColliding(S.getTrigger()) 
+                    && entity.getHitbox().getMaxY()
+                    == S.getTrigger().getHitbox().getMaxY())
+                .findFirst()
+                .isPresent()
+                    ? true : false;
+    }
+    
+    /**
+     * The function that check if the given entity can climb up the stairs.
+     * 
+     * @param entity
+     *          the DynamicEntity that is making the request.
+     *          
+     * @return a boolean, true if can, false otherwise
+     */
+    public static boolean canClimbUp(final DynamicEntity entity) {
+        return stairs.stream()
+                .filter(S -> 
+                    entity.isColliding(S)
+                    && entity.getHitbox().getMaxY()
+                    == S.getHitbox().getMaxY())
+                .findFirst()
+                .isPresent()
+                    ? true : false;
     }
 }

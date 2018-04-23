@@ -10,8 +10,6 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import utilities.ImageLoader;
@@ -55,8 +53,8 @@ public class HighScoresPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.add(backgroundPanel);
         
-        ViewImpl.getHighScoreManager().addScore(new Pair<>("giorgia", 10));
-//        ViewImpl.getHighScoreManager().addScore(new Pair<>("LORENZO", 20));
+        ViewImpl.getHighScoreManager().addScore(new Pair<>("GIORGIA", 10));
+        ViewImpl.getHighScoreManager().addScore(new Pair<>("LORENZO", 20));
         updateScores();
 
         this.add(backgroundPanel);

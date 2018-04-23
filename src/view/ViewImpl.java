@@ -29,7 +29,6 @@ public class ViewImpl implements ViewInterface {
     }
 
     public void startView() {
-        MenuFrame.getMenuFrame().initialize();
         MenuFrame.getMenuFrame().showMenu();
     }
 

@@ -55,9 +55,9 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
                 //this.climbingDone = true;
                 //this.barrelOnStair=true;
             } 
-            if(this.getStatus().equals(EntityStatus.OnTheFloor)) {
+          /*  if(this.getStatus().equals(EntityStatus.OnTheFloor)) {
                 this.changeDirection();
-            }
+            }*/
             
         } else if (this.getStatus().equals(EntityStatus.OnTheFloor)) {
             if (this.getCurrentDirection().equals(Movement.RIGHT)) {
@@ -65,10 +65,10 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
             } else {
                 this.move(Optional.of(Movement.LEFT));
             }
+            this.directionChanged = false;
         } else { // the barrel is falling down
             this.changeDirection();
         }
-        this.directionChanged = false;
     }
     
     protected abstract void setBarrelType();
@@ -82,8 +82,6 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
                 this.setDirection(Movement.RIGHT);
             } 
        }  
-        //this.barrelOnStair = false;
-        this.setStatus(EntityStatus.OnTheFloor);
     }
     
     private boolean isBarrelOnStair() {

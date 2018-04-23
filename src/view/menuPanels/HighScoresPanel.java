@@ -1,10 +1,14 @@
 package view.menuPanels;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -26,15 +30,33 @@ public class HighScoresPanel extends JPanel {
      */
     private static final long serialVersionUID = -1660139571372451321L;
     private List<Pair<String, Integer>> scores;
-    private BackgroundPanel backgroundPanel;
+    private JPanel panelName;
 
     public HighScoresPanel() {
-        ViewImpl.getHighScoreManager().addScore(new Pair<>("FRANCESCA", 10));
-        ViewImpl.getHighScoreManager().addScore(new Pair<>("LORENZO", 20));
-
         ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
-        backgroundPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.SCALED, 0.0f, 0.0f);
+        ImageIcon highsc = ImageLoader.getInstance().getImage("images/high_scores_text.png");
+        
+        JLabel labelhigh = new JLabel();
+        labelhigh.setIcon(highsc);
+        labelhigh.setHorizontalAlignment(SwingConstants.CENTER);
+
+
+        panelName = new JPanel();
+        panelName.setLayout(new BoxLayout(panelName, BoxLayout.Y_AXIS));
+
+        BackgroundPanel backgroundPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.SCALED, 0.0f,
+                0.0f);
+
         backgroundPanel.setLayout(new BorderLayout());
+
+        backgroundPanel.add(panelName, BorderLayout.CENTER);
+        backgroundPanel.add(labelhigh, BorderLayout.NORTH);
+
+        this.setLayout(new BorderLayout());
+        this.add(backgroundPanel);
+        
+        ViewImpl.getHighScoreManager().addScore(new Pair<>("giorgia", 10));
+//        ViewImpl.getHighScoreManager().addScore(new Pair<>("LORENZO", 20));
         updateScores();
 
         this.add(backgroundPanel);
@@ -44,18 +66,24 @@ public class HighScoresPanel extends JPanel {
         scores = ViewImpl.getHighScoreManager().getScores();
         if (!scores.isEmpty()) {
             for (Pair<String, Integer> pair : scores) {
-                JTextArea text = new JTextArea();
+                JLabel text = new JLabel();
                 text.setText("nome: " + pair.getX() + " score: " + pair.getY());
-                backgroundPanel.add(text);
+                panelName.add(text);
+                text.setOpaque(true);
+                text.setBackground(Color.GREEN.darker());
+                text.setFont(new Font("Arial", Font.BOLD, 20));
+                text.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             }
         } else {
-            JTextField text = new JTextField();
+            JLabel text = new JLabel();
             text.setHorizontalAlignment(SwingConstants.CENTER);
-            text.setFont(new Font("Courier New", Font.ITALIC, 30));
+            text.setFont(new Font("Courier New", Font.ITALIC, 20));
             text.setOpaque(true);
+            text.setBackground(Color.ORANGE.darker());
             text.setText("No score to display");
-            backgroundPanel.add(text, BorderLayout.NORTH);
+            panelName.add(text, BorderLayout.NORTH);
+            text.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         }
     }

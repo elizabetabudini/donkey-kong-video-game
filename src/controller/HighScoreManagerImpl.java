@@ -52,13 +52,16 @@ public class HighScoreManagerImpl implements HighScoreManager {
         if (!this.list.isPresent()) {
             this.readScores();
         }
-        final List<Pair<String, Integer>> list = this.list.get();
-        list.add(score);
-        this.sortScores(list);
-        this.cutScores(list);
-        this.list = Optional.of(list);
+        if(this.list.isPresent() && !this.list.get().contains(score)) {
+            final List<Pair<String, Integer>> list = this.list.get();
+            list.add(score);
+            this.sortScores(list);
+            this.cutScores(list);
+            this.list = Optional.of(list);
 
-        this.toSave = true;
+            this.toSave = true;
+        }
+       
     }
 
     /**

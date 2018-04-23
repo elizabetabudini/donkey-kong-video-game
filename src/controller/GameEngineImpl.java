@@ -11,7 +11,7 @@ import model.entities.Mario;
 import model.entities.Movement;
 import model.entities.Princess;
 import view.DrawableCanvas;
-import view.GameScreenPanel;
+import view.GameScreenImpl;
 import view.InputHandler;
 import view.Sprites;
 
@@ -24,7 +24,7 @@ public class GameEngineImpl implements GameEngine {
     private Princess princess;
 
     private GameLoop gameLoop;
-    private final GameScreenPanel gameScreen;
+    private final GameScreenImpl gameScreen;
     private boolean gameRunning;
     private InputTranslator translator;
     private InputHandler handler;
@@ -33,7 +33,7 @@ public class GameEngineImpl implements GameEngine {
     private Sprites donkeySprite;
     private BasicModel model;
 
-    public GameEngineImpl(final GameScreenPanel gameScreen) {
+    public GameEngineImpl(final GameScreenImpl gameScreen) {
         super();
         this.gameScreen = gameScreen;
         this.translateInputs();

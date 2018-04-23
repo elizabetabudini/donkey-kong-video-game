@@ -7,28 +7,44 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class GameFrame extends JFrame {
+import controller.GameEngine;
+import controller.GameEngineImpl;
+
+public class GameFrame {
     /**
      * This class is the main frame for a new game
      * It displays the gameScreen panel and the score panel in the game frame
      */
-    private static final long serialVersionUID = 1L;
     
-    private static final Double HEIGHT = 0.5;
-    private static final Double WIDTH = 0.25;
-    private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
-    private GameScreenPanel gsPanel;
+    private GameScreenImpl gsPanel;
     private ScoreTimePanel scorePanel;
     private final JFrame frame;
+    private final GameScreenImpl gamescreen;
+    private  DrawableCanvas canvas;
+    private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
+    private static final Double HEIGHT = 0.5;
+    private static final Double WIDHT = 0.25;
+    public final static int WORLD_HEIGHT = 540;
+    public final static int WORLD_WIDTH = 460;
+    private GameEngine gameEngine;
     
-    public GameFrame(GameScreenPanel gamescreen) {
+    public GameFrame() {
+        
+        this.canvas = new DrawableCanvasImpl(WORLD_WIDTH, WORLD_HEIGHT, "game_bg.png");
+        this.gamescreen = new GameScreenImpl(canvas);
+        this.gameEngine = new GameEngineImpl(gamescreen);
+        gameEngine.setCanvas(gamescreen.getCanvas());
+        gameEngine.setHandler(gamescreen.getHandler());
+        gameEngine.startGame();
+        
         frame= new JFrame();
+        
         final JPanel mainPanel = new JPanel(new BorderLayout());
         //creating new score panel
         this.scorePanel= new ScoreTimePanel();
         mainPanel.add(this.scorePanel, BorderLayout.NORTH);
         
-        frame.setSize((int)(screenRes.getWidth()*WIDTH), (int)(screenRes.getHeight()*HEIGHT));//prova
+        frame.setSize((int)(screenRes.getWidth()*WIDHT), (int)(screenRes.getHeight()*HEIGHT));//prova
         frame.setTitle("Game Donkey Kong");
         
         //creating new gamescreen panel
@@ -38,7 +54,7 @@ public class GameFrame extends JFrame {
         frame.setVisible(true);
         frame.setFocusable(true);
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -47,8 +63,9 @@ public class GameFrame extends JFrame {
                     "Vuoi uscire dal gioco?", "Exit Game?", 
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                    frame.dispose();
                     
-                    System.exit(0);
+                    MenuFrame.getMenuFrame().showMenu();
                         
                 }
             }

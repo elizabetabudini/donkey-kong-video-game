@@ -2,6 +2,9 @@ package view;
  
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
 
 import utilities.ImageLoader;
@@ -10,43 +13,62 @@ import view.menuPanels.HomePanel;
 import view.menuPanels.InfoPanel;
 import view.menuPanels.SettingsPanel;
  
-public class CardMenu {
+public class MenuFrame implements MenuFrameInterface{
     /**
      * This class is responsible for displaying the MenuPanels (HomePanel,Settings, Info, HighScores)
      * It's the main frame of the menu
      */
      
-    final GameScreenPanel gameScreen;
+    private GameScreenImpl gameScreen;
+    final static Double HEIGHT = 0.8;
+    final static Double WIDHT = 0.5;
+    final static Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
+    private final JFrame frame;
+    private static volatile MenuFrame menuFrame;
+    
+    private MenuFrame() {
+       
+        this.frame = new JFrame("Donkey Kong Menu");
+        initialize();
+    }
+    public void showMenu() {
 
-    public CardMenu(GameScreenPanel gameScreen2) {
-        this.gameScreen=gameScreen2;
-        final Double HEIGHT = 0.8;
-        final Double WIDHT = 0.45;
-        final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
- 
+        this.frame.setVisible(true);
+    }
+    
+    public static MenuFrame getMenuFrame() {
+        if (menuFrame == null) {
+            synchronized (MenuFrame.class) {
+                if (menuFrame == null) {
+                    menuFrame = new MenuFrame();
+                }
+            }
+        }
+        return menuFrame;
+    }
+    
+    public void initialize() {
         final String homeText = "Home";
         final String settingsText = "Settings";
         final String infoText = "Info";
         final String highScoresText= "High Scores";
         final JPanel cards; //a panel that uses CardLayout
         
-        
         // button commands
         final String HOME = "HOME";
         final String SETTINGS = "SETTINGS";
         final String INFO = "INFO";
         final String SCORES= "SCORES";
- 
-        JFrame frame = new JFrame("Donkey Kong Menu");
+        frame.setResizable(false);
         ImageIcon icon = ImageLoader.getInstance().getImage("icons/donkey.png");
         frame.setIconImage(icon.getImage());
-//        ImageIcon iconHome = ImageLoader.getInstance().getImage("icons/donkey.png");
+        ImageIcon iconHome = ImageLoader.getInstance().getImage("images/home.png");
         ImageIcon iconSett = ImageLoader.getInstance().getImage("images/settings.png");
         ImageIcon iconInfo = ImageLoader.getInstance().getImage("images/info.png");
         ImageIcon iconHigh = ImageLoader.getInstance().getImage("images/high_scores.png");
  
         //Create the "cards".
-        JPanel homeCard = new HomePanel(this.gameScreen);
+        JPanel homeCard = new HomePanel();
         JPanel settingsCard = new SettingsPanel();
         JPanel infoCard = new InfoPanel();
         JPanel highScoreCard = new HighScoresPanel();
@@ -75,40 +97,37 @@ public class CardMenu {
             }
         }
         ControlActionListenter cal = new ControlActionListenter();
- 
-        JButton btnHome = new JButton("Home");
-        btnHome.setActionCommand(HOME);
-        btnHome.addActionListener(cal);
- 
-        JButton btnSett = new JButton();
-        btnSett.setIcon(iconSett);
-        btnSett.setOpaque(false);
-        btnSett.setContentAreaFilled(false);
-        btnSett.setBorderPainted(false);
-        btnSett.setActionCommand(SETTINGS);
-        btnSett.addActionListener(cal);
- 
-        JButton btnInfo = new JButton();
-        btnInfo.setIcon(iconInfo);
-        btnInfo.setOpaque(false);
-        btnInfo.setContentAreaFilled(false);
-        btnInfo.setBorderPainted(false);
-        btnInfo.setActionCommand(INFO);
-        btnInfo.addActionListener(cal);
-        
-        JButton btnHigh = new JButton();
-        btnHigh.setIcon(iconHigh);
-        btnHigh.setOpaque(false);
-        btnHigh.setContentAreaFilled(false);
-        btnHigh.setBorderPainted(false);
-        btnHigh.setActionCommand(SCORES);
-        btnHigh.addActionListener(cal);
-        
+        final List<JButton> buttons = new ArrayList<>();
         JPanel menuButtons = new JPanel();
-        menuButtons.add(btnHome);
-        menuButtons.add(btnSett);
-        menuButtons.add(btnInfo);
-        menuButtons.add(btnHigh);
+        JButton btnHome=new JButton();
+        JButton btnSett=new JButton(); 
+        JButton btnInfo=new JButton(); 
+        JButton btnHigh=new JButton();
+        buttons.add(btnHome);
+        buttons.add(btnSett);
+        buttons.add(btnInfo);
+        buttons.add(btnHigh);
+        
+        for (JButton b : buttons) {
+            b.addActionListener(cal);
+            b.setOpaque(false);
+            b.setContentAreaFilled(false);
+            b.setBorderPainted(false);
+            menuButtons.add(b);
+        }
+        
+        btnHome.setActionCommand(HOME);
+        btnHome.setIcon(iconHome);
+       
+        btnSett.setIcon(iconSett);
+        btnSett.setActionCommand(SETTINGS);
+        
+        btnInfo.setIcon(iconInfo);
+        btnInfo.setActionCommand(INFO);
+        
+        btnHigh.setIcon(iconHigh);
+        btnHigh.setActionCommand(SCORES);
+     
         menuButtons.setOpaque(false);
  
         Container pane = frame.getContentPane();
@@ -128,6 +147,9 @@ public class CardMenu {
             }
         });
         frame.setSize((int) (screenRes.getWidth() * WIDHT), (int) (screenRes.getHeight() * HEIGHT));
-        frame.setVisible(true);
+        
+    }
+    public void dispose() {
+        frame.dispose();
     }
 }

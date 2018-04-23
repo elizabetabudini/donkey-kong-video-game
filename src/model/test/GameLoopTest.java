@@ -17,7 +17,7 @@ import model.entities.DonkeyKong;
 import model.entities.Mario;
 import model.entities.Movement;
 import view.DrawableCanvasImpl;
-import view.GameScreenPanel;
+import view.GameScreenImpl;
 import view.InputHandler;
 import view.Sprites;
 
@@ -29,7 +29,7 @@ public class GameLoopTest {
         final BarrelFactory bf = new BarrelFactoryImpl();
         final List<AbstractBarrel> simpleBarrels = new ArrayList<>();
         simpleBarrels.add(bf.createSimpleBarrel(10.0, 20.0, new Dimension(100,100)));
-        final GameEngineImpl ge = new GameEngineImpl(new GameScreenPanel(new DrawableCanvasImpl(200, 200, "")));
+        final GameEngineImpl ge = new GameEngineImpl(new GameScreenImpl(new DrawableCanvasImpl(200, 200, "")));
         ge.startGame();
         final Mario mario = ge.getMario();
         mario.move(Optional.of(Movement.RIGHT));

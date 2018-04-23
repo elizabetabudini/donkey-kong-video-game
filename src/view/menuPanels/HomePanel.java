@@ -2,23 +2,16 @@ package view.menuPanels;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-import controller.GameEngine;
-import controller.GameEngineImpl;
 import utilities.ImageLoader;
 import view.BackgroundPanel;
 import view.GameFrame;
-import view.GameScreenPanel;
+import view.MenuFrame;
 
 public class HomePanel extends JPanel{
     /**
@@ -26,41 +19,41 @@ public class HomePanel extends JPanel{
      * user to start a new Game and to exit the application
      */
     private static final long serialVersionUID = 1L;
-//    private static final Insets TITLE_INSETS = new Insets(20, 0, 20, 0);
-//    private static final Insets BUTTONS_INSETS = new Insets(10, 20, 20, 20);
-//    private static final Insets IMAGES_INSETS = new Insets(20, 20, 20, 30);
-    private final GameScreenPanel gameScreen;
-    private GameEngine gameEngine;
+//    private GameEngine gameEngine;
     private GameFrame gameFrame;
     private JButton newGame;
     private JButton exit;
-    private static final int NUM_BUTTONS = 5;
     
-    public HomePanel(GameScreenPanel gameScreen) {
-        this.gameScreen = gameScreen;
-        this.gameEngine = new GameEngineImpl(gameScreen);
+    public HomePanel() {
+//        this.gameScreen = gameScreen;
+//        this.gameEngine = new GameEngineImpl(gameScreen);
 
         ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
-        BackgroundPanel backgroundPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.ACTUAL, 0.0f, 0.0f);
+        ImageIcon iconNewGame = ImageLoader.getInstance().getImage("images/new_game.png");
+        ImageIcon image = ImageLoader.getInstance().getImage("icons/donkey-kong2.gif");
+        ImageIcon title = ImageLoader.getInstance().getImage("images/logo3.png");
+        ImageIcon iconExit = ImageLoader.getInstance().getImage("images/exit.png");
+        BackgroundPanel backgroundPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.SCALED, 0.0f, 0.0f);
         
         // inizializza bottoni
         newGame = new JButton();
-        newGame.setIcon(new ImageIcon("res/images/new_game.png"));
+        newGame.setIcon(iconNewGame);
         newGame.setOpaque(false);
         newGame.setContentAreaFilled(false);
         newGame.setBorderPainted(false);
         
-        gameEngine.setCanvas(gameScreen.getCanvas());
-        gameEngine.setHandler(gameScreen.getHandler());
+//        gameEngine.setCanvas(gameScreen.getCanvas());
+//        gameEngine.setHandler(gameScreen.getHandler());
         
         newGame.addActionListener(e -> {
-            gameEngine.startGame();
-            this.gameFrame = new GameFrame(gameScreen);
+//            gameEngine.startGame();
+            this.gameFrame = new GameFrame();
+            MenuFrame.getMenuFrame().dispose();
 
         });
         
         exit = new JButton();
-        exit.setIcon(new ImageIcon("res/images/exit.png"));
+        exit.setIcon(iconExit);
         exit.setOpaque(false);
         exit.setContentAreaFilled(false);
         exit.setBorderPainted(false);
@@ -74,56 +67,14 @@ public class HomePanel extends JPanel{
         buttonsPanel.add(exit);
         final JLabel lblTitle = new JLabel();
         final JLabel lblImage = new JLabel();
-        lblImage.setIcon(new ImageIcon("res/icons/donkey-kong2.gif"));
-        lblTitle.setIcon(new ImageIcon("res/images/logo3.png"));
+        lblImage.setIcon(image);
+        lblTitle.setIcon(title);
         
         lblImage.setHorizontalAlignment(SwingConstants.CENTER);
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         backgroundPanel.add(lblTitle, BorderLayout.NORTH);
         backgroundPanel.add(buttonsPanel, BorderLayout.SOUTH);
         backgroundPanel.add(lblImage, BorderLayout.CENTER);
-        
-
-     
-//        // sets gridbag layout
-//        final GridBagLayout gbLayout = new GridBagLayout();
-//        gbLayout.columnWeights = new double[] { 2.0, 1.0 };
-//        gbLayout.rowWeights = new double[] { 2.0, 1.0 };
-//        backgroundPanel.setLayout(gbLayout);
-//
-//        // sets constraints
-//        final GridBagConstraints gbc = new GridBagConstraints();
-//        gbc.gridx = 0;
-//        gbc.gridy = 0;
-//        gbc.fill = GridBagConstraints.BOTH;
-//
-//        // Sets title menu
-//        final JLabel lblTitle = new JLabel();
-//        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-//        lblTitle.setIcon(new ImageIcon("res/images/logo.png"));
-//        gbc.gridwidth =2;
-//        gbc.insets = TITLE_INSETS;
-//        backgroundPanel.add(lblTitle, gbc);
-//        gbc.gridy++;
-//
-//        // Sets buttons
-//        gbc.gridwidth = 1;
-//        gbc.insets = BUTTONS_INSETS;
-//
-//        backgroundPanel.add(newGame, gbc);
-//        gbc.gridy++;
-//        gbc.gridy++;
-//        gbc.gridy++;
-//        backgroundPanel.add(exit, gbc);  
-//
-//        // Sets image
-//        final JLabel lblImage = new JLabel();
-//        lblImage.setIcon(new ImageIcon("res/icons/donkey-kong2.gif"));
-//        gbc.gridheight = NUM_BUTTONS;
-//        gbc.insets = IMAGES_INSETS;
-//        gbc.gridx = 1;
-//        gbc.gridy = 1;
-//        backgroundPanel.add(lblImage, gbc);
         
         this.setLayout(new BorderLayout());
         this.add(backgroundPanel);

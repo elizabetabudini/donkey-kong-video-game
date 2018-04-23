@@ -22,12 +22,12 @@ public class InfoPanel extends JPanel {
 
     public InfoPanel() {
         ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
-        BackgroundPanel backgroundPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.ACTUAL, 0.0f, 0.0f);
+        BackgroundPanel backgroundPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.SCALED, 0.0f, 0.0f);
         backgroundPanel.setLayout(new BorderLayout());
         JButton info= new JButton();
         info.setText("Credits: Luca Rispoli, Samuele Gregori, Marco Creta, Elizabeta Budini");
         
-        backgroundPanel.add(info, BorderLayout.NORTH);
+        //backgroundPanel.add(info, BorderLayout.NORTH);
         this.add(backgroundPanel);
 
     }

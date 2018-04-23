@@ -6,7 +6,7 @@ public interface ViewInterface {
      */
     void startView();
     
-    GameScreenPanel getGameScreen();
+    GameScreenImpl getGameScreen();
  
 
 }

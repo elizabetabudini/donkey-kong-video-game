@@ -7,7 +7,7 @@ import controller.HighScoreManager;
 import utilities.Pair;
 import view.DrawableCanvas;
 import view.DrawableCanvasImpl;
-import view.GameScreenPanel;
+import view.GameScreenImpl;
 import view.ViewInterface;
 
 public class ControllerImpl implements Controller {
@@ -35,7 +35,7 @@ public class ControllerImpl implements Controller {
     @Override
     public void startGameEngine() {
         final DrawableCanvas canvas = new DrawableCanvasImpl(score, score, null);
-        final GameScreenPanel gamescreen= new GameScreenPanel(canvas);
+        final GameScreenImpl gamescreen= new GameScreenImpl(canvas);
         final GameEngine gameEng= new GameEngineImpl(gamescreen);
         gameEng.startGame();
 

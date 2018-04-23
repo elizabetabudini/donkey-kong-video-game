@@ -195,6 +195,5 @@ public class BasicModel extends ModelImpl{
         if(floorTile.getHitbox().getCenterY() == entity.getHitbox().getMaxY()) {
             entity.setStatus(EntityStatus.OnTheFloor);
         }
-        
     }
 }

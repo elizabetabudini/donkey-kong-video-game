@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.swing.*;
 
+import controller.HighScoreManager;
+import controller.HighScoreManagerImpl;
 import utilities.ImageLoader;
 import view.menuPanels.HighScoresPanel;
 import view.menuPanels.HomePanel;
@@ -25,9 +27,9 @@ public class MenuFrame implements MenuFrameInterface{
     final static Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
     private final JFrame frame;
     private static volatile MenuFrame menuFrame;
+    private static HighScoreManager highscores= new HighScoreManagerImpl("GIULIA", 10);
     
     private MenuFrame() {
-       
         this.frame = new JFrame("Donkey Kong Menu");
         initialize();
     }
@@ -152,4 +154,8 @@ public class MenuFrame implements MenuFrameInterface{
     public void dispose() {
         frame.dispose();
     }
+    public static HighScoreManager getHighManager() {
+        return MenuFrame.highscores;
+    }
+    
 }

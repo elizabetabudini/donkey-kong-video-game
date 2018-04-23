@@ -9,6 +9,10 @@ import javax.swing.JPanel;
 
 import controller.GameEngine;
 import controller.GameEngineImpl;
+import controller.HighScoreManager;
+import controller.HighScoreManagerImpl;
+import utilities.Pair;
+import view.ViewImpl;
 
 public class GameFrame {
     /**
@@ -27,6 +31,7 @@ public class GameFrame {
     public final static int WORLD_HEIGHT = 540;
     public final static int WORLD_WIDTH = 460;
     private GameEngine gameEngine;
+   
     
     public GameFrame() {
         
@@ -70,7 +75,6 @@ public class GameFrame {
                 }
             }
         });
-
 
     }
 }

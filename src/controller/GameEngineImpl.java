@@ -231,5 +231,8 @@ public class GameEngineImpl implements GameEngine {
     public Boolean isGameRunning() {
         return this.gameRunning;
     }
+    public Integer getScore() {
+        return this.model.getScore();
+    }
 
 }

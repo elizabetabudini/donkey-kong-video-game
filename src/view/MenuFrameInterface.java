@@ -1,5 +1,7 @@
 package view;
 
+import controller.HighScoreManager;
+
 public interface MenuFrameInterface {
     /**
      * disposes the menu frame when a new game is starting

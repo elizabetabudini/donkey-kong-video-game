@@ -1,6 +1,8 @@
 package model.entities;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import model.ModelImpl;
@@ -16,6 +18,8 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     private double deltaY;
     private Movement lastDirection = Movement.RIGHT;
     private EntityStatus currentStatus = EntityStatus.OnTheFloor;
+    private List<Movement> movements;
+    private List<Movement> ingoredMovements;
 
     /**
      * A constructor for a dynamic entity.
@@ -29,19 +33,23 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      */
     public DynamicEntityImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
+        this.movements = new ArrayList<>();
+        this.ingoredMovements = new ArrayList<>();
     }
+    
 
 
     @Override
     public final void move(final Optional<Movement> dir) {
+        
         if (dir.isPresent() && this.getStatus() != EntityStatus.Dead) {
             tryToMove(dir.get());
             if (dir.get() == Movement.RIGHT || dir.get() == Movement.LEFT) {
                 this.setX(this.getX() + deltaX);
-                return;
             }
         }
-        if (this.getStatus() == EntityStatus.Climbing || !dir.isPresent()) {
+        
+        if (!dir.isPresent() || this.getStatus() == EntityStatus.Climbing || this.getStatus() == EntityStatus.Falling) {
             this.setY(this.getY() + deltaY);
         }
     }
@@ -61,12 +69,20 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      */
     @Override
     public void update() {
+        
+        if(movements.isEmpty()) {
+            this.move(Optional.empty());
+        }
+        else {
+            movements.forEach(X->this.move(Optional.of(X)));
+        }
+        movements.clear();
+        
         if (getStatus() == EntityStatus.Falling) {
             this.setDeltaY(this.getDeltaY() + ModelImpl.GRAVITY);
         } else if (getStatus() == EntityStatus.Climbing) {
             this.setDeltaY(0);
         }
-        this.move(Optional.empty());
     }
 
 
@@ -104,7 +120,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      * 
      * @return A double representing the Y increment.
      */
-    protected double getDeltaY() {
+    public double getDeltaY() {
         return this.deltaY;
     }
 
@@ -127,4 +143,13 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     protected void setDeltaY(final double dY) {
         this.deltaY = dY;
     }
+    
+    public void addMovement(Movement dir) {
+        this.movements.add(dir);
+    }
+    
+    public void addIngoredMovement(final Movement dir) {
+        this.ingoredMovements.add(dir);
+    }
+    
 }

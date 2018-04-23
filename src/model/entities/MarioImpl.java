@@ -11,7 +11,7 @@ import model.ModelImpl;
 public final class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity {
 
     private boolean jumping;
-    private static final double JUMP_DISTANCE = -1.9;
+    private static final double JUMP_DISTANCE = -2.5;
     private static final double STEP = 1;
 
     /**

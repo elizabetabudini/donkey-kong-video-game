@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
 /**
  * 
  * This class models a listener for keyboard inputs.
@@ -20,14 +19,14 @@ public final class InputHandler extends KeyAdapter {
     private final Map<Integer, ViewInputs> registeredKeys = new HashMap<>();
 
     /**
-     * A constructor for the Inputhandler, it initializes all inputs to false and builds the register of all recognized keys.
+     * A constructor for the Inputhandler, it initializes all inputs to false and
+     * builds the register of all recognized keys.
      */
     public InputHandler() {
         super();
         activeInputs = EnumSet.allOf(ViewInputs.class).stream().collect(Collectors.toMap(e -> e, e -> false));
         buildRegisteredInputs();
     }
-
 
     private void buildRegisteredInputs() {
         registeredKeys.put(KeyEvent.VK_DOWN, ViewInputs.ARROW_DOWN); // Move Down

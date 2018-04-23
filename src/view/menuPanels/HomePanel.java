@@ -19,14 +19,11 @@ public class HomePanel extends JPanel{
      * user to start a new Game and to exit the application
      */
     private static final long serialVersionUID = 1L;
-//    private GameEngine gameEngine;
     private GameFrame gameFrame;
     private JButton newGame;
     private JButton exit;
     
     public HomePanel() {
-//        this.gameScreen = gameScreen;
-//        this.gameEngine = new GameEngineImpl(gameScreen);
 
         ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
         ImageIcon iconNewGame = ImageLoader.getInstance().getImage("images/new_game.png");
@@ -46,7 +43,6 @@ public class HomePanel extends JPanel{
 //        gameEngine.setHandler(gameScreen.getHandler());
         
         newGame.addActionListener(e -> {
-//            gameEngine.startGame();
             this.gameFrame = new GameFrame();
             MenuFrame.getMenuFrame().dispose();
 

@@ -13,7 +13,6 @@ import utilities.ImageLoader;
 import view.menuPanels.HighScoresPanel;
 import view.menuPanels.HomePanel;
 import view.menuPanels.InfoPanel;
-import view.menuPanels.SettingsPanel;
  
 public class MenuFrame implements MenuFrameInterface{
     /**
@@ -51,27 +50,23 @@ public class MenuFrame implements MenuFrameInterface{
     
     public void initialize() {
         final String homeText = "Home";
-        final String settingsText = "Settings";
         final String infoText = "Info";
         final String highScoresText= "High Scores";
         final JPanel cards; //a panel that uses CardLayout
         
         // button commands
         final String HOME = "HOME";
-        final String SETTINGS = "SETTINGS";
         final String INFO = "INFO";
         final String SCORES= "SCORES";
         frame.setResizable(false);
         ImageIcon icon = ImageLoader.getInstance().getImage("icons/donkey.png");
         frame.setIconImage(icon.getImage());
         ImageIcon iconHome = ImageLoader.getInstance().getImage("images/home.png");
-        ImageIcon iconSett = ImageLoader.getInstance().getImage("images/settings.png");
         ImageIcon iconInfo = ImageLoader.getInstance().getImage("images/info.png");
         ImageIcon iconHigh = ImageLoader.getInstance().getImage("images/high_scores.png");
  
         //Create the "cards".
         JPanel homeCard = new HomePanel();
-        JPanel settingsCard = new SettingsPanel();
         JPanel infoCard = new InfoPanel();
         JPanel highScoreCard = new HighScoresPanel();
  
@@ -79,7 +74,6 @@ public class MenuFrame implements MenuFrameInterface{
         cards = new JPanel(new CardLayout());
        
         cards.add(homeCard, homeText);
-        cards.add(settingsCard, settingsText);
         cards.add(infoCard, infoText);
         cards.add(highScoreCard, highScoresText);
  
@@ -89,8 +83,6 @@ public class MenuFrame implements MenuFrameInterface{
                 String cmd = e.getActionCommand();
                 if (cmd.equals(HOME)) {
                     cl.show(cards, homeText);
-                } else if (cmd.equals(SETTINGS)) {
-                    cl.show(cards, settingsText);
                 } else if (cmd.equals(INFO)) {
                     cl.show(cards, infoText);
                 } else if(cmd.equals(SCORES)) {
@@ -102,11 +94,9 @@ public class MenuFrame implements MenuFrameInterface{
         final List<JButton> buttons = new ArrayList<>();
         JPanel menuButtons = new JPanel();
         JButton btnHome=new JButton();
-        JButton btnSett=new JButton(); 
         JButton btnInfo=new JButton(); 
         JButton btnHigh=new JButton();
         buttons.add(btnHome);
-        buttons.add(btnSett);
         buttons.add(btnInfo);
         buttons.add(btnHigh);
         
@@ -120,9 +110,6 @@ public class MenuFrame implements MenuFrameInterface{
         
         btnHome.setActionCommand(HOME);
         btnHome.setIcon(iconHome);
-       
-        btnSett.setIcon(iconSett);
-        btnSett.setActionCommand(SETTINGS);
         
         btnInfo.setIcon(iconInfo);
         btnInfo.setActionCommand(INFO);

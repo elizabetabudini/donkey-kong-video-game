@@ -90,6 +90,7 @@ public class BasicModel extends ModelImpl{
             }
             checkCollisions();
         }
+        
 
         if(this.getMario().getStatus().equals(EntityStatus.Dead)) {
             if(!this.isOver()) {

@@ -1,12 +1,8 @@
 package model.levels;
 
-import java.util.List;
-
 import model.entities.DonkeyKong;
-import model.entities.FloorTileImpl;
 import model.entities.Mario;
 import model.entities.Princess;
-import model.entities.StairImpl;
 import utilities.Pair;
 
 /**
@@ -14,12 +10,6 @@ import utilities.Pair;
  */
 
 public interface BasicLevel extends GameLevel{
-    
-    /**
-     * 
-     * @return the list containing all components of the floor
-     */
-    List<FloorTileImpl> getFloor();
     
     /**
      * 
@@ -38,12 +28,6 @@ public interface BasicLevel extends GameLevel{
      * @return the entity of the princess
      */
     Princess getPrincess();
-    
-    /**
-     * 
-     * @return the list containing all the stairs
-     */
-    List<StairImpl> getStairs();
     
     /**
      * 

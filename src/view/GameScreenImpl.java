@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  *
  */
 
-public class GameScreenPanel extends JPanel {
+public class GameScreenImpl extends JPanel implements GameScreen{
 
     private static final long serialVersionUID = -6769386766627070108L;
     private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
@@ -23,7 +23,7 @@ public class GameScreenPanel extends JPanel {
     private final DrawableCanvas canvas;
     InputHandler handler = new InputHandler();
 
-    public GameScreenPanel(DrawableCanvas canvas) {
+    public GameScreenImpl(DrawableCanvas canvas) {
         super();
         this.setFocusable(true);
         this.gameDimension = new Dimension((int) (screenRes.getWidth() * WIDHT_SCALE),

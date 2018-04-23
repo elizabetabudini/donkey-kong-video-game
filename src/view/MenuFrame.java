@@ -19,7 +19,7 @@ public class MenuFrame implements MenuFrameInterface{
      * It's the main frame of the menu
      */
      
-    private GameScreenPanel gameScreen;
+    private GameScreenImpl gameScreen;
     final static Double HEIGHT = 0.8;
     final static Double WIDHT = 0.5;
     final static Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
@@ -147,6 +147,7 @@ public class MenuFrame implements MenuFrameInterface{
             }
         });
         frame.setSize((int) (screenRes.getWidth() * WIDHT), (int) (screenRes.getHeight() * HEIGHT));
+        
     }
     public void dispose() {
         frame.dispose();

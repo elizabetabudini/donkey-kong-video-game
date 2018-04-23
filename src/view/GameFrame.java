@@ -16,10 +16,10 @@ public class GameFrame {
      * It displays the gameScreen panel and the score panel in the game frame
      */
     
-    private GameScreenPanel gsPanel;
+    private GameScreenImpl gsPanel;
     private ScoreTimePanel scorePanel;
     private final JFrame frame;
-    private final GameScreenPanel gamescreen;
+    private final GameScreenImpl gamescreen;
     private  DrawableCanvas canvas;
     private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
     private static final Double HEIGHT = 0.5;
@@ -31,7 +31,7 @@ public class GameFrame {
     public GameFrame() {
         
         this.canvas = new DrawableCanvasImpl(WORLD_WIDTH, WORLD_HEIGHT, "game_bg.png");
-        this.gamescreen = new GameScreenPanel(canvas);
+        this.gamescreen = new GameScreenImpl(canvas);
         this.gameEngine = new GameEngineImpl(gamescreen);
         gameEngine.setCanvas(gamescreen.getCanvas());
         gameEngine.setHandler(gamescreen.getHandler());

@@ -1,7 +1,7 @@
 package view;
 
 import controller.GameEngine;
-import view.GameScreenPanel;
+import view.GameScreenImpl;
 /**
  * The View of the MVC pattern, this class is responsible
  * for everything shown on the screen.
@@ -12,13 +12,13 @@ import view.GameScreenPanel;
 public class ViewImpl implements ViewInterface {
 
     // private final InputHandler inputHandler;
-    private static GameScreenPanel gameScreen;
+    private static GameScreenImpl gameScreen;
     private static GameEngine gameEngine;
 
     public ViewImpl() {        
     }
 
-    static void setView(final GameScreenPanel gamescreen) {
+    static void setView(final GameScreenImpl gamescreen) {
         ViewImpl.gameScreen = gamescreen;
     }
 
@@ -34,7 +34,7 @@ public class ViewImpl implements ViewInterface {
         return ViewImpl.gameEngine;
     }
 
-    public GameScreenPanel getGameScreen() {
+    public GameScreenImpl getGameScreen() {
         return gameScreen;
     }
 

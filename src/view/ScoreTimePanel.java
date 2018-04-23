@@ -41,7 +41,7 @@ public class ScoreTimePanel extends JPanel{
          */
         public ScoreTimePanel(/*final GameEngine controller*/) {
             //this.controller = Objects.requireNonNull(controller);
-            ViewImpl.getController().getScore();
+//            ViewImpl.getController().getScore();
             this.setLayout(new GridLayout(0, 2));
             this.time=new JLabel();
             this.time.setFont(this.font);

@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import controller.GameEngineImpl;
+
 //import controller.GameEngine;
 /**
  * Panel on which display the time elapsed and the score
@@ -39,6 +41,7 @@ public class ScoreTimePanel extends JPanel{
          */
         public ScoreTimePanel(/*final GameEngine controller*/) {
             //this.controller = Objects.requireNonNull(controller);
+            ViewImpl.getController().getScore();
             this.setLayout(new GridLayout(0, 2));
             this.time=new JLabel();
             this.time.setFont(this.font);

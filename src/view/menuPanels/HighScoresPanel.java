@@ -23,7 +23,6 @@ import view.MenuFrame;
  * If the application is run for the first time no scores are displayed in this panel
  */
 public class HighScoresPanel extends JPanel{
-    private JButton highScores;
     private HighScoreManager manager;
     private List<Pair<String, Integer>> scores;
   

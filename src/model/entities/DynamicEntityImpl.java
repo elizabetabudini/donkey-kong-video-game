@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.swing.JSpinner.DateEditor;
+
 import model.ModelImpl;
 
 /**
@@ -41,17 +43,24 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
 
     @Override
     public final void move(final Optional<Movement> dir) {
-        
+
         if (dir.isPresent() && this.getStatus() != EntityStatus.Dead) {
             tryToMove(dir.get());
             if (dir.get() == Movement.RIGHT || dir.get() == Movement.LEFT) {
                 this.setX(this.getX() + deltaX);
+                return;
             }
+            if ((this.getStatus()!=EntityStatus.Climbing)) {
+                if (dir.get() == Movement.UP || dir.get() == Movement.DOWN) {
+                    return;
+                }
+                
+        }else if(dir.get()==Movement.JUMP) {
+            return;
         }
-        
-        if (!dir.isPresent() || this.getStatus() == EntityStatus.Climbing || this.getStatus() == EntityStatus.Falling) {
-            this.setY(this.getY() + deltaY);
         }
+        this.setY(this.getY() + deltaY);
+
     }
 
     /**
@@ -70,13 +79,10 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     @Override
     public void update() {
         
-        if(movements.isEmpty()) {
-            this.move(Optional.empty());
-        }
-        else {
-            movements.forEach(X->this.move(Optional.of(X)));
-        }
-        movements.clear();
+      while(!movements.isEmpty()) {
+          this.move(Optional.of(movements.remove(0)));
+      }
+      this.move(Optional.empty());
         
         if (getStatus() == EntityStatus.Falling) {
             this.setDeltaY(this.getDeltaY() + ModelImpl.GRAVITY);

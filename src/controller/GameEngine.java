@@ -33,6 +33,14 @@ public interface GameEngine {
 
     void abortGameLoop();
     
-    public Boolean isGameRunning();
+    Boolean isGameRunning();
+
+    /**
+     * A method to get the score of the game
+     * Whenever {@link Mario} jump and avoid a {@link Barrel} it gets points
+     * @return 
+     *          The current score 
+     */
+    Integer getScore();
 
 }

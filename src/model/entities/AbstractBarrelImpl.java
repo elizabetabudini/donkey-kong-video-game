@@ -36,14 +36,6 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
             this.setDeltaX(STEP);
         }
     }
-    
-    @Override
-    public void update(){
-        if (getStatus() == EntityStatus.Climbing) {
-            this.setDeltaY(this.getDeltaY() + ModelImpl.GRAVITY);
-        }
-        this.move(Optional.empty());
-    }
 
     @Override
     public void manageBarrelMovement() {
@@ -54,36 +46,26 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
                 this.setStatus(EntityStatus.Climbing);
                 //this.climbingDone = true;
                 //this.barrelOnStair=true;
-            } 
-            if(this.getStatus().equals(EntityStatus.OnTheFloor)) {
-                this.changeDirection();
-            }
-            
-        } else if (this.getStatus().equals(EntityStatus.OnTheFloor)) {
-            if (this.getCurrentDirection().equals(Movement.RIGHT)) {
-                this.move(Optional.of(Movement.RIGHT));
             } else {
-                this.move(Optional.of(Movement.LEFT));
+                this.checkDirectionChange();
             }
-        } else { // the barrel is falling down
-            this.changeDirection();
+          /*  if(this.getStatus().equals(EntityStatus.OnTheFloor)) {
+                this.changeDirection();
+            }*/   
+        } else {
+            this.checkDirectionChange();
         }
-        this.directionChanged = false;
     }
     
     protected abstract void setBarrelType();
 
     private void changeDirection() { //when a barrel reaches a floor it changes its direction 
-        if( !directionChanged) {
             this.directionChanged = true;
             if(this.getCurrentDirection().equals(Movement.RIGHT)) {
                 this.setDirection(Movement.LEFT);
             } else {
                 this.setDirection(Movement.RIGHT);
             } 
-       }  
-        //this.barrelOnStair = false;
-        this.setStatus(EntityStatus.OnTheFloor);
     }
     
     private boolean isBarrelOnStair() {
@@ -93,6 +75,24 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     protected void setBarrelOnStair(final boolean barrelOnStair) {
         this.barrelOnStair = barrelOnStair;
     }
+    
+    private void checkDirectionChange() {
+       if (this.getStatus().equals(EntityStatus.OnTheFloor)) {
+            if (this.getCurrentDirection().equals(Movement.RIGHT)) {
+                this.move(Optional.of(Movement.RIGHT));
+            } else {
+                this.move(Optional.of(Movement.LEFT));
+            }
+            this.directionChanged = false;
+        } else { // the barrel is falling down
+            if( !directionChanged) {
+                this.changeDirection();
+                System.out.println(this.getStatus());
+                System.out.println(this.getCurrentDirection());
+            }
+        }
+    }
+    
     
     @Override
     public String toString() {

@@ -1,9 +1,9 @@
 package model.entities;
 
 import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.geom.Point2D;
 import java.util.Optional;
+
+import model.ModelImpl;
 
 public class BarrelGoingDownTheStairs extends AbstractBarrelImpl implements AbstractBarrel {
 
@@ -14,6 +14,14 @@ public class BarrelGoingDownTheStairs extends AbstractBarrelImpl implements Abst
     @Override
     protected void setBarrelType() {
         this.setBarrelOnStair(true);     
+    }
+    
+    @Override
+    public void update(){
+        if (this.getStatus() == EntityStatus.Climbing || this.getStatus() == EntityStatus.Falling) {
+            this.setDeltaY(this.getDeltaY() + 0.02);
+        }
+        this.move(Optional.empty());
     }
 
   

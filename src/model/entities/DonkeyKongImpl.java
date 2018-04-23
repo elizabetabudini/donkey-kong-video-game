@@ -3,6 +3,7 @@ package model.entities;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import controller.GameEngineImpl;
@@ -18,7 +19,8 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
     private final BarrelFactory bf ;
     private volatile List<AbstractBarrel> barrelsList;
     private boolean launchingBarrel;
-
+    private final static int MAX_TIME = 2500;
+    private final static int STARTING_TIME = 500;
     public DonkeyKongImpl(final Double x, final Double y,final Dimension dim) {
         super(x, y, dim);
         final MovingBarrels barrelsMovement = new MovingBarrels();
@@ -51,7 +53,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
 
         private volatile boolean creatingBarrels = true;
         private AbstractBarrel barrel;
-        private boolean created;
+        final Random randomCreationTime = new Random();
 
         protected AgentBarrelsCreator() {
             super();
@@ -60,7 +62,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
         public void run() { 
 
             while(creatingBarrels) {
-                /*DonkeyKongImpl.this.launchingBarrel = true;
+                DonkeyKongImpl.this.launchingBarrel = true;
                 this.barrel = DonkeyKongImpl.this.bf.createSimpleBarrel(75.0, 120.0, new Dimension(20,20));
                 barrelsList.add(this.barrel);
                 try {
@@ -70,18 +72,14 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
                 }
                 DonkeyKongImpl.this.launchingBarrel = false;
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(this.randomCreationTime.nextInt(MAX_TIME) + STARTING_TIME);
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                }*/
+                }
                 //TODO just for check
                 DonkeyKongImpl.this.launchingBarrel = true;
-                if(!created) {
-                    this.barrel = DonkeyKongImpl.this.bf.createBarrelMovingDownStairs(75.0, 120.0, new Dimension(20,20));
-                    barrelsList.add(this.barrel);
-                    created = true;
-                }
-                
+                this.barrel = DonkeyKongImpl.this.bf.createBarrelMovingDownStairs(75.0, 120.0, new Dimension(20,20));
+                barrelsList.add(this.barrel);    
                 try {
                     Thread.sleep(400); //sleep to change Sprites of Dk launching barrels
                 } catch (Exception ex) {
@@ -89,7 +87,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
                 }
                 DonkeyKongImpl.this.launchingBarrel = false;
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(this.randomCreationTime.nextInt(MAX_TIME) + STARTING_TIME);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

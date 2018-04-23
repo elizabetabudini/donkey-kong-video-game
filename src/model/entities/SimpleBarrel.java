@@ -4,7 +4,7 @@ import java.awt.Dimension;
 
 public class SimpleBarrel extends AbstractBarrelImpl implements AbstractBarrel {
 
-    public SimpleBarrel(Double x, Double y, Dimension dim) {
+    public SimpleBarrel(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
     }
 

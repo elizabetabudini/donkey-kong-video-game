@@ -2,8 +2,6 @@ package model.entities;
 
 import java.awt.Dimension;
 import java.util.Optional;
-
-import model.BasicModel;
 import model.ModelImpl;
 
 /**
@@ -16,7 +14,6 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     private final static double STEP = 1;
     private boolean directionChanged;
     private boolean barrelOnStair;
-    private boolean climbingDone = false;
     /**
      * A constructor for a Barrel
      * @param x The starting x Coordinate.
@@ -42,16 +39,10 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
         this.setBarrelType();
         if (ModelImpl.canClimbDown(this)) {
             if (this.isBarrelOnStair()) {
-                //this.move(Optional.of(Movement.DOWN));
                 this.setStatus(EntityStatus.Climbing);
-                //this.climbingDone = true;
-                //this.barrelOnStair=true;
             } else {
                 this.checkDirectionChange();
-            }
-          /*  if(this.getStatus().equals(EntityStatus.OnTheFloor)) {
-                this.changeDirection();
-            }*/   
+            }  
         } else {
             this.checkDirectionChange();
         }
@@ -92,12 +83,10 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
             }
         }
     }
-    
-    
+       
     @Override
     public String toString() {
-        return "DEBUG INFORMATION BARREL: Status : ["
-                + this.getStatus() + "]";
+        return "DEBUG INFORMATION BARREL: Status : [" + this.getStatus() + "]";
     }
     
 }

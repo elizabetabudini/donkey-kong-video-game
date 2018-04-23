@@ -59,7 +59,9 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
     }
 
     private void jump() {
+        System.out.println("jumping");
         jumping = true;
+        this.setStatus(EntityStatus.Falling);
         this.setDeltaY(JUMP_DISTANCE);
     }
 

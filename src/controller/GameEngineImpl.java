@@ -179,13 +179,13 @@ public class GameEngineImpl implements GameEngine {
         Set<Movement> parsedMovements = translator.inputParser(handler.parser(false));
 
         for (final Movement dir : parsedMovements) {
-            mario.stopMoving(dir);
+            mario.stopMoving(dir);;
         }
 
         parsedMovements = translator.inputParser(handler.parser(true));
 
         for (final Movement dir : parsedMovements) {
-            mario.move(Optional.of(dir));
+            mario.addMovement(dir);
         }
     }
 

@@ -1,19 +1,10 @@
 package model;
 
-import java.util.logging.Level;
-
 /**
  * The interface that defines the main methods to build the game.
  */
 
 public interface ModelInterface {
-    
-    /**
-     * Getter for the current Level in game.
-     * 
-     * @return the current level.
-     */
-    Level getCurrentLevel();
 
     /**
      * Getter for the Score.

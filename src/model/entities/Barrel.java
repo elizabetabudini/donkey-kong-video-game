@@ -9,11 +9,20 @@ package model.entities;
 public interface Barrel extends DynamicEntity {
 
     /**
-     * A method to determine if an {@link Entity} is colliding with a {@link Barrel}
-     * @param entity The Entity is thought to collide with a Barrel
-     * @return True if a collision happens, false otherwise
+     * 
+     * A method to move a barrel and make 
+     * it changes his direction when needed
+     * 
      */
-    boolean isColliding(Entity entity);
+    void manageBarrelMovement();
     
-    //public void update(long time);
+    /**
+     * Getter for the trigger that allows to detect 
+     * if {@link Mario} is colliding with it
+     * 
+     * @return 
+     *          an {@link Entity} holding the trigger
+     */
+    public Entity getTrigger();
+
 }

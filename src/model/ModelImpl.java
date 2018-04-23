@@ -1,27 +1,38 @@
 package model;
 
-import java.util.logging.Level;
+import java.util.List;
+
+import model.entities.DynamicEntity;
+import model.entities.FloorTile;
+import model.entities.Stair;
+import model.levels.GameLevel;
 
 public abstract class ModelImpl implements ModelInterface{
     
 
     public final static int HEIGHT = 540;
     public final static int WIDTH = 460;
-
+    
     private final static int PLAYER_LIFE = 3;
+    
+    public final static Double GRAVITY = 0.09;
     
     //game info
     private GameStatus gameStatus;
-    private Level currentLevel;
+    private GameLevel currentLevel ;
    
     //player info
     private final int score;
     protected int currentLives;
     
+    //level
+    protected static List<? extends Stair> stairs;
+    protected static List<? extends FloorTile> floor;
     
     public ModelImpl() {
         this.score = 0;
         this.currentLives = PLAYER_LIFE;
+        this.start();
         //TODO just for test, to edit
     }
     
@@ -30,13 +41,22 @@ public abstract class ModelImpl implements ModelInterface{
         return this.score;
     }
     
+    //TODO to complete
+    public void setScore() {
+        
+    }
+    
     @Override
     public int getLife() {
         return this.currentLives;
     }
     
-    public Level getCurrentLevel() {
+    protected GameLevel getCurrentLevel() {
         return currentLevel;
+    }
+    
+    public void setCurrentLevel(GameLevel currentLevel) {
+        this.currentLevel = currentLevel;
     }
     
     /**
@@ -44,6 +64,19 @@ public abstract class ModelImpl implements ModelInterface{
      * 
      */
     protected abstract void checkCollisions();
+    
+    /**
+     * The function that checks if the given entity is within the game borders.
+     * 
+     */
+    public static Boolean isWithinBorders(final DynamicEntity entity) {
+        if (entity.getX() + entity.getHitbox().getWidth() < WIDTH && entity.getY() + entity.getHitbox().getHeight() < HEIGHT) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     
     public GameStatus getGameStatus() {
         return this.gameStatus;
@@ -73,4 +106,41 @@ public abstract class ModelImpl implements ModelInterface{
         return this.getLife() <= 0;
     }
     
+    /**
+     * The function that check if the given entity can climb down the stairs.
+     * 
+     * @param entity
+     *          the DynamicEntity that is making the request.
+     *          
+     * @return a boolean, true if can, false otherwise
+     */
+    public static boolean canClimbDown(final DynamicEntity entity) {
+        return stairs.stream()
+                .filter(S -> 
+                    entity.isColliding(S.getTrigger()) 
+                    && entity.getHitbox().getMaxY()
+                    == S.getTrigger().getHitbox().getMaxY())
+                .findFirst()
+                .isPresent()
+                    ? true : false;
+    }
+    
+    /**
+     * The function that check if the given entity can climb up the stairs.
+     * 
+     * @param entity
+     *          the DynamicEntity that is making the request.
+     *          
+     * @return a boolean, true if can, false otherwise
+     */
+    public static boolean canClimbUp(final DynamicEntity entity) {
+        return stairs.stream()
+                .filter(S -> 
+                    entity.isColliding(S)
+                    && entity.getHitbox().getMaxY()
+                    == S.getHitbox().getMaxY())
+                .findFirst()
+                .isPresent()
+                    ? true : false;
+    }
 }

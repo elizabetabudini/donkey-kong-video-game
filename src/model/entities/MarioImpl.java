@@ -1,7 +1,6 @@
 package model.entities;
 
 import java.awt.Dimension;
-import java.util.Optional;
 
 import model.ModelImpl;
 
@@ -11,16 +10,20 @@ import model.ModelImpl;
  */
 public final class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity {
 
-    private boolean climbing;
     private boolean jumping;
-    private static final double JUMP_DISTANCE = -2;
+    private static final double JUMP_DISTANCE = -2.3;
     private static final double STEP = 1;
 
     /**
-     * A constructor for the main character of the game, the character cannot be spawned outside the game bounds.
-     * @param x The starting x Coordinate.
-     * @param y The starting Y Coordinate.
-     * @param dim Dimension of Mario's hitbox
+     * A constructor for the main character of the game, the character cannot be
+     * spawned outside the game bounds.
+     * 
+     * @param x
+     *            The starting x Coordinate.
+     * @param y
+     *            The starting Y Coordinate.
+     * @param dim
+     *            Dimension of Mario's hitbox
      */
     public MarioImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
@@ -29,37 +32,35 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
         }
     }
 
-    // da aggiungere climbing status e metodo istouchingground()
     @Override
-    protected void tryToMove(final Optional<Movement> dir) {
-        if (!dir.isPresent()) {
-            return;
-        }
-        this.setDirection(dir.get());
-        if (dir.get() == Movement.LEFT) {
+    protected void tryToMove(final Movement dir) {
+        if (dir == Movement.LEFT) {
+            this.setDirection(dir);
             this.setDeltaX(-STEP);
-        } else if (dir.get() == Movement.RIGHT) {
+        } else if (dir == Movement.RIGHT) {
+            this.setDirection(dir);
             this.setDeltaX(STEP);
+        } else if ((dir == Movement.UP && (ModelImpl.canClimbUp(this) || this.getStatus() == EntityStatus.Climbing))) {
+            this.setDirection(dir);
+            this.setDeltaY(-STEP);
+            this.setStatus(EntityStatus.Climbing);
+        } else if ((dir == Movement.DOWN && (ModelImpl.canClimbDown(this) || this.getStatus() == EntityStatus.Climbing))) {
+            this.setDirection(dir);
+            this.setDeltaY(STEP);
+            this.setStatus(EntityStatus.Climbing);
+        }
+        if (dir == Movement.JUMP && this.getStatus() == EntityStatus.OnTheFloor) {
+            this.jump();
         }
         if (!isWithinBorder()) {
-            stopMoving(dir.get());
+            stopMoving(dir);
         }
-      /*  if (dir.get() == Movement.JUMP && isTouchingGround()) {
-            this.jump();
-        }*/
+        System.out.println(toString());
     }
 
     private void jump() {
         jumping = true;
         this.setDeltaY(JUMP_DISTANCE);
-        this.setDeltaX(this.getDeltaX() * 1.5);
-    }
-
-    @Override
-    public void update() {
-        /*if (!isTouchingGround()) {
-            this.setDeltaY(this.getDeltaY() - ModelImpl.GRAVITY);
-        }*/
     }
 
     /**
@@ -69,7 +70,15 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
      */
     private boolean isWithinBorder() {
         final double newCoord = this.getX() + this.getDeltaX();
-        return newCoord > 0 && newCoord <= ModelImpl.WIDTH;
+        return newCoord >= 0 && newCoord <= ModelImpl.WIDTH;
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        if (this.getStatus() == EntityStatus.OnTheFloor) {
+            this.jumping = false;
+        }
     }
 
     @Override
@@ -77,19 +86,30 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
         if (dir == Movement.LEFT || dir == Movement.RIGHT) {
             this.setDeltaX(0);
         }
-        if ((dir == Movement.UP || dir == Movement.DOWN) && !jumping) {
+        if ((dir == Movement.UP || dir == Movement.DOWN) && this.getStatus() != EntityStatus.Falling) {
             this.setDeltaY(0);
         }
     }
 
     @Override
     public boolean isClimbing() {
-        return climbing;
+        return this.getStatus().equals(EntityStatus.Climbing);
     }
 
     @Override
     public boolean isJumping() {
-        return jumping;
+        return this.jumping;
+    }
+
+    @Override
+    public boolean isMoving() {
+        return this.getDeltaX() != 0;
+    }
+
+    @Override
+    public String toString() {
+        return "DEBUG INFORMATION MARIO: Coordinates: [" + this.getX() + "," + this.getY() + "] - " + "Status : ["
+                + this.getStatus() + "] - Dy : [" + this.getDeltaY() + "]";
     }
 
 }

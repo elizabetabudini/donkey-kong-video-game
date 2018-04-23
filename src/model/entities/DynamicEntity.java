@@ -34,20 +34,20 @@ public interface DynamicEntity extends Entity {
     void setDirection(Movement dir);
 
     /**
-     * Sets the current state of the entity.
+     * Sets the current status of the entity.
      * 
-     * @param alive
-     *            True if it's alive, false otherwise.
+     * @param status
+     *            An Enum describing the entity's current status.
      */
-    void setState(boolean alive);
+    void setStatus(EntityStatus status);
 
     /**
-     * Returns whether or not the character is still alive.
+     * Returns the current Entity status.
      * 
-     * @return True if the character is alive, false otherwise.
+     * @return An Enum entry describing the entity status.
      */
-    boolean isAlive();
-    
+    EntityStatus getStatus();
+
     /**
      * Method to update the entity : e.g: apply gravity.
      */

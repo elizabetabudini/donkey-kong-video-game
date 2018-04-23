@@ -5,7 +5,8 @@ import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 
 /**
- * An implementation of a basic Entity of the game, contains all the methods shared by all the game's entities.
+ * An implementation of a basic Entity of the game, contains all the methods
+ * shared by all the game's entities.
  *
  */
 public class EntityImpl implements Entity {
@@ -60,6 +61,11 @@ public class EntityImpl implements Entity {
     @Override
     public final Point2D getPosition() {
         return position;
+    }
+
+    @Override
+    public final boolean isColliding(final Entity entity) {
+        return this.getHitbox().intersects(entity.getHitbox());
     }
 
 }

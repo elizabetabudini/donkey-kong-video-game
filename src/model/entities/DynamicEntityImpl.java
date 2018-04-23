@@ -3,6 +3,8 @@ package model.entities;
 import java.awt.Dimension;
 import java.util.Optional;
 
+import model.ModelImpl;
+
 /**
  * An implementation of a DynamicEntity, this class extends a basic entity and
  * adds methods to manage movements.
@@ -13,8 +15,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     private double deltaX;
     private double deltaY;
     private Movement lastDirection = Movement.RIGHT;
-    private boolean alive = true;
-    
+    private EntityStatus currentStatus = EntityStatus.OnTheFloor;
 
     /**
      * A constructor for a dynamic entity.
@@ -30,12 +31,19 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
         super(x, y, dim);
     }
 
-    // template method to compute moving and update the entity.
+
     @Override
     public final void move(final Optional<Movement> dir) {
-        tryToMove(dir);
-        this.setX(this.getX() + deltaX);
-        this.setY(this.getY() + deltaY);
+        if (dir.isPresent() && this.getStatus() != EntityStatus.Dead) {
+            tryToMove(dir.get());
+            if (dir.get() == Movement.RIGHT || dir.get() == Movement.LEFT) {
+                this.setX(this.getX() + deltaX);
+                return;
+            }
+        }
+        if (this.getStatus() == EntityStatus.Climbing || !dir.isPresent()) {
+            this.setY(this.getY() + deltaY);
+        }
     }
 
     /**
@@ -45,10 +53,22 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      * @param dir
      *            The direction in which the entity wants to move.
      */
-    protected abstract void tryToMove(Optional<Movement> dir);
+    protected abstract void tryToMove(Movement dir);
 
+
+    /**
+     * Update method is designed for extension in special cases, eventual extension should start with super() call.
+     */
     @Override
-    public abstract void update();
+    public void update() {
+        if (getStatus() == EntityStatus.Falling) {
+            this.setDeltaY(this.getDeltaY() + ModelImpl.GRAVITY);
+        } else if (getStatus() == EntityStatus.Climbing) {
+            this.setDeltaY(0);
+        }
+        this.move(Optional.empty());
+    }
+
 
     @Override
     public final Movement getCurrentDirection() {
@@ -61,13 +81,13 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     }
 
     @Override
-    public final void setState(final boolean alive) {
-        this.alive = alive;
+    public final EntityStatus getStatus() {
+        return currentStatus;
     }
 
     @Override
-    public final boolean isAlive() {
-        return alive;
+    public final void setStatus(final EntityStatus status) {
+        this.currentStatus = status;
     }
 
     /**

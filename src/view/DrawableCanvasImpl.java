@@ -8,6 +8,9 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
+
+
+
 import utilities.ImageLoader;
 
 /**
@@ -16,7 +19,8 @@ import utilities.ImageLoader;
  * reason.
  * 
  */
-public final class DrawableCanvasImpl implements DrawableCanvas {
+public final class DrawableCanvasImpl  implements DrawableCanvas  {
+
 
     private BufferedImage foreGround;
     private BufferedImage backGround;
@@ -36,6 +40,7 @@ public final class DrawableCanvasImpl implements DrawableCanvas {
      *            The path of the current background image.
      */
     public DrawableCanvasImpl(final int width, final int height, final String backGroundPath) {
+        super();
         this.height = height;
         this.width = width;
         foreGround = getEmptyLayer();
@@ -63,13 +68,13 @@ public final class DrawableCanvasImpl implements DrawableCanvas {
     @Override
     public void drawEntity(final Sprites toDraw, final int x, final int y) {
         final Graphics2D g = foreGround.createGraphics();
-        drawOnLayer(g, toDraw.getIcon().getImage(), new Point(x, y), new Dimension(20, 20));
+        drawOnLayer(g, toDraw.getIcon().getImage(), new Point(x, y), toDraw.getDimension());
     }
 
     @Override
     public void drawOnBackground(final Sprites toDraw, final int x, final int y) {
         final Graphics2D g = backGround.createGraphics();
-        drawOnLayer(g, toDraw.getIcon().getImage(), new Point(x, y), new Dimension(20, 20));
+        drawOnLayer(g, toDraw.getIcon().getImage(), new Point(x, y), toDraw.getDimension());
 
     }
 
@@ -91,5 +96,4 @@ public final class DrawableCanvasImpl implements DrawableCanvas {
         initBackGround();
     }
 
- 
 }

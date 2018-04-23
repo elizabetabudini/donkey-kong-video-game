@@ -9,8 +9,6 @@ import model.entities.Princess;
 import model.entities.StairImpl;
 import utilities.Pair;
 
-
-
 /**
  * Implementation of a basic level
  */
@@ -19,8 +17,6 @@ public abstract class BasicLevelImpl implements BasicLevel{
     
     private String name;
     private String imageDirectory;
-    
-    private Double gravity;
     
     private Mario mario;
     private DonkeyKong donkeyKong;
@@ -50,14 +46,6 @@ public abstract class BasicLevelImpl implements BasicLevel{
     
     public String getImageDirectory() {
         return this.imageDirectory;
-    }
-    
-    protected void setGravity(final Double gravity) {
-        this.gravity = gravity;
-    }
-    
-    public Double getGravity() {
-        return this.gravity;
     }
     
     //mario

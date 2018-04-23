@@ -1,82 +1,27 @@
 package model.entities;
 
-import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
-public class DonkeyKong extends EntityImpl implements StaticEntity {
+/**
+ * 
+ * An interface modeling Donkey Kong, the main Enemy of the game. 
+ * It has a method to get the current barrels list
+ *
+ */
+public interface DonkeyKong extends Entity {
     
-    private final BarrelFactory bf ;
-    private final AgentBarrelsCreator barrels;
-    private final List<Barrel> barrelsList;
-    private final MovingBarrels barrelsMovement;
-    //TODO interface!
-
-    public DonkeyKong(final Double x, final Double y,final Dimension dim) {
-        super(x, y, dim);
-        this.bf = new BarrelFactoryImpl();
-        this.barrels = new AgentBarrelsCreator();
-        this.barrelsList = new ArrayList<>();
-        this.barrels.start();
-        this.barrelsMovement = new MovingBarrels();
-        barrelsMovement.start();
-    }
-
-    public List<Barrel> getBarrelsList(){
-        return Collections.unmodifiableList(this.barrelsList);
-    }
-
-    private class AgentBarrelsCreator extends Thread {
-
-        private volatile boolean creatingBarrels = true;
-        private Barrel barrel;
-
-        protected AgentBarrelsCreator() {
-            super();
-        }
-
-        public void run() { 
-
-            while(creatingBarrels) {
-                this.barrel = DonkeyKong.this.bf.createSimpleBarrel(10.0, 10.0, new Dimension(10,10));
-                barrelsList.add(this.barrel);
-                try {
-                    Thread.sleep(1000);
-                } catch (Exception ex) {
-                }
-                this.checkBarrels();
-            }
-        }
-
-        /*check if a barrel needs to be removed from the list*/
-        private void checkBarrels() {
-        }
-    }
     /**
+     * A method to get all the barrels created by Donkey Kong 
+     * in a specific moment of the game
      * 
-     * An inner class responsible of moving each barrels actually created 
-     * with a dedicated independent Thread
-     *
+     * @return the list of barrels
      */
-    private class MovingBarrels extends Thread {
-
-        protected MovingBarrels() {
-            super();
-        }
-
-        public void run() {    
-            while(true) {
-                        DonkeyKong.this.getBarrelsList().forEach(br -> br.move(Optional.of(Movement.RIGHT)));
-                try {
-                    Thread.sleep(10);
-                } catch (Exception ex) {
-                }
-            }
-        }
-        }
+    List<Barrel> getBarrelsList();
+    
+    /**
+     * A method to know if {@link DonkeyKong} is actually launching a new {@link Barrel}
+     * @return True if a barrel is now being launched
+     */
+    boolean isLaunchingBarrel();
 
 }
-
-

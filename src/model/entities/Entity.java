@@ -54,4 +54,13 @@ public interface Entity {
      */
     Point2D getPosition();
 
+    /**
+     * A method to determine if an {@link Entity} is colliding with another Entity.
+     * 
+     * @param entity
+     *            The Entity with whom to check collision.
+     * @return True if there is a collision, false otherwise.
+     */
+    boolean isColliding(Entity entity);
+
 }

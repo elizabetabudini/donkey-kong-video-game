@@ -9,6 +9,7 @@ import model.entities.DynamicEntity;
 import model.entities.EntityStatus;
 import model.entities.FloorTile;
 import model.entities.Mario;
+import model.entities.Movement;
 import model.entities.Princess;
 import model.entities.Stair;
 import model.levels.BasicLevel;
@@ -21,8 +22,6 @@ public class BasicModel extends ModelImpl{
         setCurrentLevel(new Level1st());
         stairs = this.getCurrentLevel().getStairs();
         floor = this.getCurrentLevel().getFloor();
-        System.out.println("MARIO_1 : " + (this.getMario().getX()+this.getMario().getHitbox().width));
-        System.out.println("MARIO_1 : " + this.getMario().getX());
     }
 
     /**
@@ -113,7 +112,7 @@ public class BasicModel extends ModelImpl{
     
     public void checkCollisions() {
         this.checkStatus(this.getMario());
-        this.isMarioAlive(this.getMario());
+        //this.isMarioAlive(this.getMario());
         this.processBarrels(getBarrels());
         //this.checkVictory(this.getMario());
     }
@@ -132,7 +131,7 @@ public class BasicModel extends ModelImpl{
         }
         else if( stair.isPresent() && !entity.getStatus().equals(EntityStatus.Falling)) {
             entity.setStatus(EntityStatus.Climbing);
-            if(entity.getHitbox().getCenterY() > stair.get().getHitbox().getCenterY() && floorTile.isPresent()) {
+            if(entity.getHitbox().getCenterY() > stair.get().getHitbox().getCenterY() && floorTile.isPresent() && entity.getCurrentDirection().equals(Movement.DOWN)) {
                 System.out.println("FIXING");
                 fixHeight(entity, floorTile.get());
             }
@@ -173,9 +172,11 @@ public class BasicModel extends ModelImpl{
     }
 
     private void checkVictory(final Mario mario) {
-        //if(mario.isColliding(getPrincess())) {
-      //      this.victory();
-      //  }
+        if(mario.isColliding(getPrincess())) {
+            //this.victory();
+            System.out.println("victory");
+            this.pause();
+        }
     }
 
     private void fixHeight(final DynamicEntity entity, final FloorTile floorTile) {

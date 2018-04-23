@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.util.Optional;
 
 import model.BasicModel;
+import model.ModelImpl;
 
 /**
  * 
@@ -35,17 +36,29 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
             this.setDeltaX(STEP);
         }
     }
+    
+    @Override
+    public void update(){
+        if (getStatus() == EntityStatus.Climbing) {
+            this.setDeltaY(this.getDeltaY() + ModelImpl.GRAVITY);
+        }
+        this.move(Optional.empty());
+    }
 
     @Override
     public void manageBarrelMovement() {
         this.setBarrelType();
-        if (BasicModel.canClimbDown(this) /*&& !climbingDone*/) {
+        if (ModelImpl.canClimbDown(this)) {
             if (this.isBarrelOnStair()) {
                 //this.move(Optional.of(Movement.DOWN));
-                this.setStatus(EntityStatus.Falling);
+                this.setStatus(EntityStatus.Climbing);
                 //this.climbingDone = true;
                 //this.barrelOnStair=true;
             } 
+            if(this.getStatus().equals(EntityStatus.OnTheFloor)) {
+                this.changeDirection();
+            }
+            
         } else if (this.getStatus().equals(EntityStatus.OnTheFloor)) {
             if (this.getCurrentDirection().equals(Movement.RIGHT)) {
                 this.move(Optional.of(Movement.RIGHT));
@@ -79,6 +92,12 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     
     protected void setBarrelOnStair(final boolean barrelOnStair) {
         this.barrelOnStair = barrelOnStair;
+    }
+    
+    @Override
+    public String toString() {
+        return "DEBUG INFORMATION BARREL: Status : ["
+                + this.getStatus() + "]";
     }
     
 }

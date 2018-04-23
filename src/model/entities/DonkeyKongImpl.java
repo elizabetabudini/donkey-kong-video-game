@@ -51,6 +51,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
 
         private volatile boolean creatingBarrels = true;
         private AbstractBarrel barrel;
+        private boolean created;
 
         protected AgentBarrelsCreator() {
             super();
@@ -75,8 +76,12 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
                 }*/
                 //TODO just for check
                 DonkeyKongImpl.this.launchingBarrel = true;
-                this.barrel = DonkeyKongImpl.this.bf.createBarrelMovingDownStairs(75.0, 120.0, new Dimension(20,20));
-                barrelsList.add(this.barrel);
+                if(!created) {
+                    this.barrel = DonkeyKongImpl.this.bf.createBarrelMovingDownStairs(75.0, 120.0, new Dimension(20,20));
+                    barrelsList.add(this.barrel);
+                    created = true;
+                }
+                
                 try {
                     Thread.sleep(400); //sleep to change Sprites of Dk launching barrels
                 } catch (Exception ex) {
@@ -118,6 +123,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
             while(true) {
                 DonkeyKongImpl.this.getBarrelsList().stream()
                                    .forEach(br -> br.manageBarrelMovement());
+                System.out.println(getBarrelsList().toString());
                 try {
                         Thread.sleep(GameEngineImpl.PERIOD);
                     } catch (Exception ex) {

@@ -1,5 +1,6 @@
 package utilities;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,7 +51,8 @@ public final class ImageLoader {
      */
     public ImageIcon getImage(final String path) {
         if (!this.loadedImages.containsKey(path)) {
-            this.loadedImages.put(path, new ImageIcon("res/" + path));
+            final URL imgURL = ImageLoader.class.getResource("/" + path);
+            this.loadedImages.put(path, new ImageIcon(imgURL));
         }
         return this.loadedImages.get(path);
     }

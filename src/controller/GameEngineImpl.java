@@ -225,12 +225,12 @@ public class GameEngineImpl implements GameEngine {
     @Override
     public void abortGameLoop() {
         GameLoop.currentThread().interrupt();
-
     }
 
     public Boolean isGameRunning() {
         return this.gameRunning;
     }
+
     public Integer getScore() {
         return this.model.getScore();
     }

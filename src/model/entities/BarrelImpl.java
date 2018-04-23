@@ -12,6 +12,7 @@ public class BarrelImpl extends DynamicEntityImpl implements Barrel, DynamicEnti
 
     private final static double STEP = 1;
     private boolean directionChanged;
+    private final Entity trigger;
     
     /**
      * A constructor for a Barrel
@@ -21,6 +22,7 @@ public class BarrelImpl extends DynamicEntityImpl implements Barrel, DynamicEnti
      */
     public BarrelImpl(final Double x, final Double y, final Dimension dim) {
         super(x,y,dim);
+        this.trigger = new EntityImpl(this.getHitbox().getCenterX()-0.5, y-StairImpl.TRIGGER_HEIGHT, new Dimension(1, StairImpl.TRIGGER_HEIGHT));
     }
 
     @Override
@@ -57,5 +59,10 @@ public class BarrelImpl extends DynamicEntityImpl implements Barrel, DynamicEnti
             } 
        }  
     }
+    
+    public Entity getTrigger() {
+        return this.trigger;
+    }
+
     
 }

@@ -15,5 +15,14 @@ public interface Barrel extends DynamicEntity {
      * 
      */
     void manageBarrelMovement();
+    
+    /**
+     * Getter for the trigger that allows to detect 
+     * if {@link Mario} is colliding with it
+     * 
+     * @return 
+     *          an {@link Entity} holding the trigger
+     */
+    public Entity getTrigger();
 
 }

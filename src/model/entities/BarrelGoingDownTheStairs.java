@@ -21,7 +21,7 @@ public class BarrelGoingDownTheStairs extends AbstractBarrelImpl implements Abst
 
        this.manageMovements();
  
-        if (this.getStatus() == EntityStatus.Climbing || this.getStatus() == EntityStatus.Falling) {
+        if (this.getStatus() == EntityStatus.Climbing) {
             this.setDeltaY(this.getDeltaY() + GRAVITY);
         }
         this.move(Optional.empty());

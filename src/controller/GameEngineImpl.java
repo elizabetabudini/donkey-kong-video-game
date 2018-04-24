@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.Set;
 import javax.swing.SwingUtilities;
 import model.BasicModel;
+import model.entities.BarrelGoingDownTheStairs;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
 import model.entities.EntityStatus;
@@ -147,7 +148,7 @@ public class GameEngineImpl implements GameEngine {
         // draw barrels
         if (!this.model.getBarrels().isEmpty()) {
             this.dk.getBarrelsList().forEach(br -> {
-                if (br.isBarrelOnStair()) {
+                if (br instanceof BarrelGoingDownTheStairs) {
                     if (br.getStatus() == EntityStatus.Climbing) {
                        this.drawer.drawEntity(Sprites.BARREL_FALLING_ON_STAIRS, br.getX().intValue(), br.getY().intValue());
                     } else {

@@ -17,17 +17,17 @@ public class GameFrame {
      * and the score panel in the game frame
      */
 
-    private GameScreenImpl gsPanel;
-    private ScoreTimePanel scorePanel;
+    private final GameScreenImpl gsPanel;
+    private final ScoreTimePanel scorePanel;
     private final JFrame frame;
     private final GameScreenImpl gamescreen;
-    private DrawableCanvas canvas;
+    private final DrawableCanvas canvas;
     private final Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
     private static final Double HEIGHT = 0.5;
     private static final Double WIDHT = 0.25;
     public final static int WORLD_HEIGHT = 540;
     public final static int WORLD_WIDTH = 460;
-    private GameEngine gameEngine;
+    private final GameEngine gameEngine;
 
     public GameFrame() {
 

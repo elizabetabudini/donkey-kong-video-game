@@ -28,13 +28,13 @@ public class HighScoresPanel extends JPanel {
      */
     private static final long serialVersionUID = -1660139571372451321L;
     private List<Pair<String, Integer>> scores;
-    private JPanel panelName;
+    private final JPanel panelName;
 
     public HighScoresPanel() {
-        ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
-        ImageIcon highsc = ImageLoader.getInstance().getImage("images/high_scores_text.png");
+        final ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
+        final ImageIcon highsc = ImageLoader.getInstance().getImage("images/high_scores_text.png");
         
-        JLabel labelhigh = new JLabel();
+        final JLabel labelhigh = new JLabel();
         labelhigh.setIcon(highsc);
         labelhigh.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -64,7 +64,7 @@ public class HighScoresPanel extends JPanel {
         scores = ViewImpl.getHighScoreManager().getScores();
         if (!scores.isEmpty()) {
             for (Pair<String, Integer> pair : scores) {
-                JLabel text = new JLabel();
+                final JLabel text = new JLabel();
                 text.setText("nome: " + pair.getX() + " score: " + pair.getY());
                 panelName.add(text);
                 text.setOpaque(true);
@@ -74,7 +74,7 @@ public class HighScoresPanel extends JPanel {
 
             }
         } else {
-            JLabel text = new JLabel();
+            final JLabel text = new JLabel();
             text.setHorizontalAlignment(SwingConstants.CENTER);
             text.setFont(new Font("Courier New", Font.ITALIC, 20));
             text.setOpaque(true);

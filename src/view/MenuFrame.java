@@ -20,9 +20,9 @@ public class MenuFrame implements MenuFrameInterface {
      * Info, HighScores) It's the main frame of the menu
      */
 
-    final static Double HEIGHT = 0.8;
-    final static Double WIDHT = 0.5;
-    final static Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
+    private final static Double HEIGHT = 0.8;
+    private final static Double WIDHT = 0.5;
+    private final static Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
     private final JFrame frame;
     private static volatile MenuFrame menuFrame;
 

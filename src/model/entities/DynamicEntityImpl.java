@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.swing.JSpinner.DateEditor;
+
 import model.ModelImpl;
 
 /**
@@ -18,7 +20,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     private double deltaY;
     private Movement lastDirection = Movement.RIGHT;
     private EntityStatus currentStatus = EntityStatus.OnTheFloor;
-    private List<Movement> movements;
+    protected  List<Movement> movements;
     private List<Movement> ingoredMovements;
 
     /**
@@ -36,22 +38,19 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
         this.movements = new ArrayList<>();
         this.ingoredMovements = new ArrayList<>();
     }
-    
-
 
     @Override
     public final void move(final Optional<Movement> dir) {
-        
+
         if (dir.isPresent() && this.getStatus() != EntityStatus.Dead) {
             tryToMove(dir.get());
             if (dir.get() == Movement.RIGHT || dir.get() == Movement.LEFT) {
                 this.setX(this.getX() + deltaX);
             }
+            return;
         }
-        
-        if (!dir.isPresent() || this.getStatus() == EntityStatus.Climbing || this.getStatus() == EntityStatus.Falling) {
-            this.setY(this.getY() + deltaY);
-        }
+
+        this.setY(this.getY() + deltaY);
     }
 
     /**
@@ -69,15 +68,14 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      */
     @Override
     public void update() {
-        
-        if(movements.isEmpty()) {
-            this.move(Optional.empty());
+     
+
+        while (!movements.isEmpty()) {
+            this.move(Optional.ofNullable(movements.remove(0)));
         }
-        else {
-            movements.forEach(X->this.move(Optional.of(X)));
-        }
-        movements.clear();
-        
+       
+        this.move(Optional.empty());
+
         if (getStatus() == EntityStatus.Falling) {
             this.setDeltaY(this.getDeltaY() + ModelImpl.GRAVITY);
         } else if (getStatus() == EntityStatus.Climbing) {
@@ -120,7 +118,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      * 
      * @return A double representing the Y increment.
      */
-    public double getDeltaY() {
+    protected double getDeltaY() {
         return this.deltaY;
     }
 
@@ -143,13 +141,9 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     protected void setDeltaY(final double dY) {
         this.deltaY = dY;
     }
-    
-    public void addMovement(Movement dir) {
+
+    public void addMovement(final Movement dir) {
         this.movements.add(dir);
     }
-    
-    public void addIngoredMovement(final Movement dir) {
-        this.ingoredMovements.add(dir);
-    }
-    
+
 }

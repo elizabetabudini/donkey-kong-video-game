@@ -23,34 +23,34 @@ public class InfoPanel extends JPanel {
 
     public InfoPanel() {
 
-        ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
-        ImageIcon credits = ImageLoader.getInstance().getImage("images/credits.png");
-        ImageIcon elizabeta = ImageLoader.getInstance().getImage("images/elizabeta_budini.png");
-        ImageIcon luca = ImageLoader.getInstance().getImage("images/luca_rispoli.png");
-        ImageIcon marco = ImageLoader.getInstance().getImage("images/marco_creta.png");
-        ImageIcon samuele = ImageLoader.getInstance().getImage("images/samuele_gregori.png");
-        ImageIcon image = ImageLoader.getInstance().getImage("icons/donkey2.png");
+        final ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
+        final ImageIcon credits = ImageLoader.getInstance().getImage("images/credits.png");
+        final ImageIcon elizabeta = ImageLoader.getInstance().getImage("images/elizabeta_budini.png");
+        final ImageIcon luca = ImageLoader.getInstance().getImage("images/luca_rispoli.png");
+        final ImageIcon marco = ImageLoader.getInstance().getImage("images/marco_creta.png");
+        final ImageIcon samuele = ImageLoader.getInstance().getImage("images/samuele_gregori.png");
+        final ImageIcon image = ImageLoader.getInstance().getImage("icons/donkey2.png");
 
-        JLabel labelcred = new JLabel();
-        JLabel imagelab = new JLabel();
+        final JLabel labelcred = new JLabel();
+        final JLabel imagelab = new JLabel();
         imagelab.setIcon(image);
         imagelab.setAlignmentX(Component.CENTER_ALIGNMENT);
         labelcred.setIcon(credits);
         labelcred.setHorizontalAlignment(SwingConstants.CENTER);
-        JLabel lab1 = new JLabel();
+        final JLabel lab1 = new JLabel();
         lab1.setIcon(luca);
         lab1.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JLabel lab2 = new JLabel();
+        final JLabel lab2 = new JLabel();
         lab2.setIcon(samuele);
         lab2.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JLabel lab3 = new JLabel();
+        final JLabel lab3 = new JLabel();
         lab3.setIcon(marco);
         lab3.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JLabel lab4 = new JLabel();
+        final JLabel lab4 = new JLabel();
         lab4.setIcon(elizabeta);
         lab4.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JPanel panelName = new JPanel();
+        final JPanel panelName = new JPanel();
         panelName.setLayout(new BoxLayout(panelName, BoxLayout.Y_AXIS));
         panelName.add(imagelab);
         panelName.add(lab1);

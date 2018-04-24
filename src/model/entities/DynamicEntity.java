@@ -54,10 +54,6 @@ public interface DynamicEntity extends Entity {
     void update();
     
     void addMovement(Movement dir);
-    
-    void addIngoredMovement(Movement dir);
-    
-    //TODO to delete
-    public double getDeltaY();
+
 
 }

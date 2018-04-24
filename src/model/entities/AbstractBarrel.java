@@ -6,11 +6,11 @@ package model.entities;
  * with a method to determine if a collision is happening 
  *
  */
-public interface Barrel extends DynamicEntity {
+public interface AbstractBarrel extends DynamicEntity {
 
     /**
      * 
-     * A method to move a barrel and make 
+     * A template method to move a barrel and make 
      * it changes his direction when needed
      * 
      */
@@ -23,6 +23,8 @@ public interface Barrel extends DynamicEntity {
      * @return 
      *          an {@link Entity} holding the trigger
      */
-    public Entity getTrigger();
+     public Entity getTrigger();
+     
+     public boolean isBarrelOnStair();
 
 }

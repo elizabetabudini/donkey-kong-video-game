@@ -36,7 +36,7 @@ public class ViewImpl implements ViewInterface {
         return ViewImpl.gameEngine;
     }
 
-    static void setHighScoreManager(HighScoreManager hs) {
+    static void setHighScoreManager(final HighScoreManager hs) {
         ViewImpl.highscoreManager = hs;
     }
 

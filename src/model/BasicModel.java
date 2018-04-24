@@ -3,7 +3,7 @@ package model;
 import java.util.List;
 import java.util.Optional;
 
-import model.entities.Barrel;
+import model.entities.AbstractBarrel;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
 import model.entities.EntityStatus;
@@ -74,7 +74,7 @@ public class BasicModel extends ModelImpl{
      * 
      * @return the list of all the active barrels.
      */
-    public List<Barrel> getBarrels() {
+    public List<AbstractBarrel> getBarrels() {
         return this.getDonkeyKong().getBarrelsList();
     }
 
@@ -166,7 +166,7 @@ public class BasicModel extends ModelImpl{
         }
     }
 
-    private void processBarrels(final List<Barrel> barrels) {
+    private void processBarrels(final List<AbstractBarrel> barrels) {
         if(!barrels.isEmpty()) {
         barrels.stream().forEach(X -> this.checkStatus(X));
         }

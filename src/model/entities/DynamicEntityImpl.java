@@ -20,7 +20,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     private double deltaY;
     private Movement lastDirection = Movement.RIGHT;
     private EntityStatus currentStatus = EntityStatus.OnTheFloor;
-    private List<Movement> movements;
+    protected List<Movement> movements;
     private List<Movement> ingoredMovements;
 
     /**
@@ -72,6 +72,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
         while (!movements.isEmpty()) {
             this.move(Optional.of(movements.remove(0)));
         }
+        
         this.move(Optional.empty());
 
         if (getStatus() == EntityStatus.Falling) {

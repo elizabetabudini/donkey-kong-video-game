@@ -14,6 +14,7 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     private final static double STEP = 1;
     private boolean directionChanged;
     private boolean barrelOnStair;
+    private final Entity trigger;
     /**
      * A constructor for a Barrel
      * @param x The starting x Coordinate.
@@ -21,7 +22,9 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
      * @param dim Dimension of a barrel's hitbox
      */
     public AbstractBarrelImpl(final Double x, final Double y, final Dimension dim) {
-        super(x,y,dim);
+        super(x, y, dim);
+        this.trigger = new EntityImpl(this.getHitbox().getCenterX() - 0.5, y - StairImpl.TRIGGER_HEIGHT,
+                new Dimension(1, StairImpl.TRIGGER_HEIGHT));
     }
 
     @Override
@@ -41,10 +44,10 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
             if (this.isBarrelOnStair()) {
                 this.setStatus(EntityStatus.Climbing);
             } else {
-                this.checkDirectionChange();
+                this.checkDirection();
             }  
         } else {
-            this.checkDirectionChange();
+            this.checkDirection();
         }
     }
     
@@ -67,7 +70,7 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
         this.barrelOnStair = barrelOnStair;
     }
     
-    private void checkDirectionChange() {
+    private void checkDirection() {
        if (this.getStatus().equals(EntityStatus.OnTheFloor)) {
             if (this.getCurrentDirection().equals(Movement.RIGHT)) {
                 this.move(Optional.of(Movement.RIGHT));
@@ -78,10 +81,13 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
         } else { // the barrel is falling down
             if( !directionChanged) {
                 this.changeDirection();
-                System.out.println(this.getStatus());
-                System.out.println(this.getCurrentDirection());
             }
         }
+    }
+    
+    @Override
+    public Entity getTrigger() {
+        return this.trigger;
     }
        
     @Override

@@ -3,8 +3,6 @@ package model.entities;
 import java.awt.Dimension;
 import java.util.Optional;
 
-import model.ModelImpl;
-
 public class BarrelGoingDownTheStairs extends AbstractBarrelImpl implements AbstractBarrel {
     
     private final static double GRAVITY = 0.02;

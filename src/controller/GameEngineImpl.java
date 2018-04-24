@@ -6,7 +6,6 @@ import javax.swing.SwingUtilities;
 import model.BasicModel;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
-import model.entities.EntityStatus;
 import model.entities.Mario;
 import model.entities.Movement;
 import model.entities.Princess;

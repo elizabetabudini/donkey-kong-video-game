@@ -15,19 +15,19 @@ import controller.GameEngineImpl;
 public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKong {
     
     private final static double ZERO = 0.0;
-    private final AgentBarrelsCreator barrels;
     private final BarrelFactory bf ;
     private volatile List<AbstractBarrel> barrelsList;
     private boolean launchingBarrel;
     private final static int MAX_TIME = 2500;
     private final static int STARTING_TIME = 500;
+    
     public DonkeyKongImpl(final Double x, final Double y,final Dimension dim) {
         super(x, y, dim);
+        final AgentBarrelsCreator barrels = new AgentBarrelsCreator();
         final MovingBarrels barrelsMovement = new MovingBarrels();
         this.bf = new BarrelFactoryImpl();
-        this.barrels = new AgentBarrelsCreator();
         this.barrelsList = new ArrayList<>();
-        this.barrels.start();
+        barrels.start();
         barrelsMovement.start();
     }
 
@@ -53,7 +53,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
 
         private volatile boolean creatingBarrels = true;
         private AbstractBarrel barrel;
-        final Random randomCreationTime = new Random();
+        private final Random randomCreationTime = new Random();
 
         protected AgentBarrelsCreator() {
             super();

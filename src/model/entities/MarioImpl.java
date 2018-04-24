@@ -1,6 +1,10 @@
 package model.entities;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import model.ModelImpl;
 
@@ -13,6 +17,8 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
     private boolean jumping;
     private static final double JUMP_DISTANCE = -2.5;
     private static final double STEP = 1;
+    private boolean moving = false;
+    private List<Movement> ignoredMovements = new ArrayList<Movement>();
 
     /**
      * A constructor for the main character of the game, the character cannot be
@@ -81,6 +87,13 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
         if (this.getStatus() == EntityStatus.OnTheFloor) {
             this.jumping = false;
         }
+        if(this.getDeltaX()!=0) {
+            moving = true;
+        }else {
+            moving = false;
+        }
+        this.stopMoving(this.getCurrentDirection());
+        System.out.println(this.getDeltaX());
     }
 
     @Override
@@ -105,7 +118,7 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
 
     @Override
     public boolean isMoving() {
-        return this.getDeltaX() != 0;
+        return this.moving;
     }
 
     @Override

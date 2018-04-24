@@ -52,8 +52,14 @@ public interface DynamicEntity extends Entity {
      * Method to update the entity : e.g: apply gravity.
      */
     void update();
-    
-    void addMovement(Movement dir);
 
+    /**
+     * Adds a new movement to be processed by the entity, if it is not currently
+     * possible, the thread is temporarily blocked.
+     *
+     * @param dir
+     *            The new movement to process.
+     */
+    void addMovement(Movement dir);
 
 }

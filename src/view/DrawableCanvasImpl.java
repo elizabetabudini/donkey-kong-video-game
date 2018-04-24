@@ -44,16 +44,6 @@ public final class DrawableCanvasImpl implements DrawableCanvas {
         initBackGround();
     }
 
-    private BufferedImage getEmptyLayer() {
-        return new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-    }
-
-    private void initBackGround() {
-        backGround = getEmptyLayer();
-        final Graphics2D g = backGround.createGraphics();
-        drawOnLayer(g, loader.getImage(backGroundPath).getImage(), new Point(0, 0), new Dimension(width, height));
-    }
-
     private void drawOnLayer(final Graphics2D g, final Image toDraw, final Point position, final Dimension dimension) {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC));
@@ -90,6 +80,16 @@ public final class DrawableCanvasImpl implements DrawableCanvas {
     public void setbackGround(final String backGroundPath) {
         this.backGroundPath = backGroundPath;
         initBackGround();
+    }
+
+    private BufferedImage getEmptyLayer() {
+        return new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+    }
+
+    private void initBackGround() {
+        backGround = getEmptyLayer();
+        final Graphics2D g = backGround.createGraphics();
+        drawOnLayer(g, loader.getImage(backGroundPath).getImage(), new Point(0, 0), new Dimension(width, height));
     }
 
 }

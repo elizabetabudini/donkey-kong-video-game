@@ -54,8 +54,9 @@ public interface DynamicEntity extends Entity {
     void update();
 
     /**
-     * Adds a new movement to be processed by the entity.
-     * 
+     * Adds a new movement to be processed by the entity, if it is not currently
+     * possible, the thread is temporarily blocked.
+     *
      * @param dir
      *            The new movement to process.
      */

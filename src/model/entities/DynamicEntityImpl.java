@@ -1,10 +1,9 @@
 package model.entities;
 
 import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import model.ModelImpl;
 
@@ -19,7 +18,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     private double deltaY;
     private Movement lastDirection = Movement.RIGHT;
     private EntityStatus currentStatus = EntityStatus.OnTheFloor;
-    private final List<Movement> movements;
+    private final BlockingQueue<Movement> movements;
 
     /**
      * A constructor for a dynamic entity.
@@ -33,7 +32,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      */
     public DynamicEntityImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
-        this.movements = new ArrayList<>();
+        this.movements = new LinkedBlockingQueue<Movement>();
     }
 
     @Override
@@ -51,15 +50,6 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     }
 
     /**
-     * Tries to move in the dir Movement, if the movement is not possible, this
-     * method does nothing.
-     * 
-     * @param dir
-     *            The direction in which the entity wants to move.
-     */
-    protected abstract void tryToMove(Movement dir);
-
-    /**
      * Update method is designed for extension in special cases, eventual extension
      * should start with super() call.
      */
@@ -71,12 +61,6 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
             this.setDeltaY(this.getDeltaY() + ModelImpl.GRAVITY);
         } else if (getStatus() == EntityStatus.Climbing) {
             this.setDeltaY(0);
-        }
-    }
-
-    protected void manageMovements() {
-        while (!movements.isEmpty()) {
-            this.move(Optional.ofNullable(movements.remove(0)));
         }
     }
 
@@ -98,6 +82,36 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     @Override
     public final void setStatus(final EntityStatus status) {
         this.currentStatus = status;
+    }
+
+    @Override
+    public final void addMovement(final Movement dir) {
+        try {
+            this.movements.put(dir);
+        } catch (InterruptedException e) {
+            System.err.println("The thread was interrupted while adding a new Movement.");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Tries to move in the dir Movement, if the movement is not possible, this
+     * method does nothing.
+     * 
+     * @param dir
+     *            The direction in which the entity wants to move.
+     */
+    protected abstract void tryToMove(Movement dir);
+
+    /**
+     * Method to process available Movements.
+     * 
+     */
+    protected final void manageMovements() {
+        while (!this.movements.isEmpty()) {
+            this.move(Optional.ofNullable(movements.poll()));
+        }
+
     }
 
     /**
@@ -136,11 +150,6 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      */
     protected void setDeltaY(final double dY) {
         this.deltaY = dY;
-    }
-
-    @Override
-    public final void addMovement(final Movement dir) {
-        this.movements.add(dir);
     }
 
 }

@@ -18,9 +18,12 @@ public class BarrelGoingDownTheStairs extends AbstractBarrelImpl implements Abst
     
     @Override
     public void update(){        
+
         while (!movements.isEmpty()) {
-            this.move(Optional.of(movements.remove(0)));
+            this.move(Optional.ofNullable(movements.remove(0)));
         }
+       
+
         
         if (this.getStatus() == EntityStatus.Climbing || this.getStatus() == EntityStatus.Falling) {
             this.setDeltaY(this.getDeltaY() + GRAVITY);

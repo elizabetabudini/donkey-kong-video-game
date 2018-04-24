@@ -121,7 +121,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
             while(true) {
                 DonkeyKongImpl.this.getBarrelsList().stream()
                                    .forEach(br -> br.manageBarrelMovement());
-                System.out.println(getBarrelsList().toString());
+              //  System.out.println(getBarrelsList().toString());
                 try {
                         Thread.sleep(GameEngineImpl.PERIOD);
                     } catch (Exception ex) {

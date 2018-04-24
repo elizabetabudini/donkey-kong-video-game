@@ -7,13 +7,15 @@ import java.awt.Dimension;
  *
  */
 public class BarrelFactoryImpl implements BarrelFactory {
-
-    /**
-     * {@inheritDoc}
-     */
+    
     @Override
-    public Barrel createSimpleBarrel(final Double x, final Double y, final Dimension dim) {
-        return new BarrelImpl(x,y,dim);
+    public AbstractBarrel createSimpleBarrel(final Double x, final Double y, final Dimension dim) {
+        return new SimpleBarrel(x, y, dim);
+    }
+    
+    @Override
+    public BarrelGoingDownTheStairs createBarrelMovingDownStairs(Double x, Double y, Dimension dim) {
+        return new BarrelGoingDownTheStairs(x, y, dim);
     }
 
 

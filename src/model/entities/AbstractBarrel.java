@@ -24,5 +24,7 @@ public interface AbstractBarrel extends DynamicEntity {
      *          an {@link Entity} holding the trigger
      */
      public Entity getTrigger();
+     
+     public boolean isBarrelOnStair();
 
 }

@@ -6,6 +6,7 @@ import javax.swing.SwingUtilities;
 import model.BasicModel;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
+import model.entities.EntityStatus;
 import model.entities.Mario;
 import model.entities.Movement;
 import model.entities.Princess;
@@ -148,9 +149,11 @@ public class GameEngineImpl implements GameEngine {
             this.dk.getBarrelsList().forEach(br -> {
                 if (this.isMovingRight(br)) {
                     this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
-                } else {
-                    this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
-                }
+                } else if(br.isBarrelOnStair() && br.getStatus() == EntityStatus.Climbing){
+                            this.drawer.drawEntity(Sprites.BARREL_FALLING_ON_STAIRS, br.getX().intValue(), br.getY().intValue());
+                        } else {
+                            this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
+                        }
             });
         }
         SwingUtilities.invokeLater(() -> gameScreen.updateScreen());

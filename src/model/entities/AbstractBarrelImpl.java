@@ -62,7 +62,7 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
             } 
     }
     
-    private boolean isBarrelOnStair() {
+    public boolean isBarrelOnStair() {
         return this.barrelOnStair;
     }
     

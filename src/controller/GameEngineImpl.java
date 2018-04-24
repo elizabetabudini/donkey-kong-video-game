@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.Optional;
 import java.util.Set;
 import javax.swing.SwingUtilities;
 import model.BasicModel;
@@ -200,11 +199,9 @@ public class GameEngineImpl implements GameEngine {
         }
 
         public void run() {
-            final long lastLoopTime = System.currentTimeMillis();
             /* TODO modify with a gameover condition */
             while (true) {
                 final long currentTime = System.currentTimeMillis();
-                final long elapsedTime = currentTime - lastLoopTime;
                 processInput();
                 updateGame();
                 render();

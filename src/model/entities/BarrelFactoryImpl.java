@@ -14,7 +14,7 @@ public class BarrelFactoryImpl implements BarrelFactory {
     }
     
     @Override
-    public BarrelGoingDownTheStairs createBarrelMovingDownStairs(Double x, Double y, Dimension dim) {
+    public BarrelGoingDownTheStairs createBarrelMovingDownStairs(final Double x, final Double y, final Dimension dim) {
         return new BarrelGoingDownTheStairs(x, y, dim);
     }
 

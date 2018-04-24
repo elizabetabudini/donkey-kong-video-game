@@ -53,7 +53,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
 
         private volatile boolean creatingBarrels = true;
         private AbstractBarrel barrel;
-        final Random randomCreationTime = new Random();
+        private final Random randomCreationTime = new Random();
 
         protected AgentBarrelsCreator() {
             super();

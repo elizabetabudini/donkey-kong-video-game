@@ -8,9 +8,6 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
-
-
-
 import utilities.ImageLoader;
 
 /**
@@ -19,8 +16,7 @@ import utilities.ImageLoader;
  * reason.
  * 
  */
-public final class DrawableCanvasImpl  implements DrawableCanvas  {
-
+public final class DrawableCanvasImpl implements DrawableCanvas {
 
     private BufferedImage foreGround;
     private BufferedImage backGround;

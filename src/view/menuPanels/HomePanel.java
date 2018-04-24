@@ -13,45 +13,39 @@ import view.BackgroundPanel;
 import view.GameFrame;
 import view.MenuFrame;
 
-public class HomePanel extends JPanel{
+public class HomePanel extends JPanel {
     /**
-     * This is the Home Menu Panel which allows the 
-     * user to start a new Game and to exit the application
+     * This is the Home Menu Panel which allows the user to start a new Game and to
+     * exit the application
      */
     private static final long serialVersionUID = 1L;
-//    private GameEngine gameEngine;
     private GameFrame gameFrame;
-    private JButton newGame;
-    private JButton exit;
-    
+    private final JButton newGame;
+    private final JButton exit;
+
     public HomePanel() {
-//        this.gameScreen = gameScreen;
-//        this.gameEngine = new GameEngineImpl(gameScreen);
 
         ImageIcon background = ImageLoader.getInstance().getImage("images/background2.jpg");
         ImageIcon iconNewGame = ImageLoader.getInstance().getImage("images/new_game.png");
         ImageIcon image = ImageLoader.getInstance().getImage("icons/donkey-kong2.gif");
         ImageIcon title = ImageLoader.getInstance().getImage("images/logo3.png");
         ImageIcon iconExit = ImageLoader.getInstance().getImage("images/exit.png");
-        BackgroundPanel backgroundPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.SCALED, 0.0f, 0.0f);
-        
+        BackgroundPanel backgroundPanel = new BackgroundPanel(background.getImage(), BackgroundPanel.SCALED, 0.0f,
+                0.0f);
+
         // inizializza bottoni
         newGame = new JButton();
         newGame.setIcon(iconNewGame);
         newGame.setOpaque(false);
         newGame.setContentAreaFilled(false);
         newGame.setBorderPainted(false);
-        
-//        gameEngine.setCanvas(gameScreen.getCanvas());
-//        gameEngine.setHandler(gameScreen.getHandler());
-        
+
         newGame.addActionListener(e -> {
-//            gameEngine.startGame();
             this.gameFrame = new GameFrame();
             MenuFrame.getMenuFrame().dispose();
 
         });
-        
+
         exit = new JButton();
         exit.setIcon(iconExit);
         exit.setOpaque(false);
@@ -60,7 +54,7 @@ public class HomePanel extends JPanel{
         exit.addActionListener(e -> {
             System.exit(0);
         });
-        
+
         backgroundPanel.setLayout(new BorderLayout());
         JPanel buttonsPanel = new JPanel(new FlowLayout());
         buttonsPanel.add(newGame);
@@ -69,17 +63,15 @@ public class HomePanel extends JPanel{
         final JLabel lblImage = new JLabel();
         lblImage.setIcon(image);
         lblTitle.setIcon(title);
-        
+
         lblImage.setHorizontalAlignment(SwingConstants.CENTER);
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         backgroundPanel.add(lblTitle, BorderLayout.NORTH);
         backgroundPanel.add(buttonsPanel, BorderLayout.SOUTH);
         backgroundPanel.add(lblImage, BorderLayout.CENTER);
-        
+
         this.setLayout(new BorderLayout());
         this.add(backgroundPanel);
     }
-    
-
 
 }

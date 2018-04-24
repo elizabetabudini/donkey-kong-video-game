@@ -21,7 +21,7 @@ public class GameScreenImpl extends JPanel implements GameScreen{
     private static final Double WIDHT_SCALE = 0.25;
     private final Dimension gameDimension;
     private final DrawableCanvas canvas;
-    InputHandler handler = new InputHandler();
+    private final InputHandler handler = new InputHandler();
 
     public GameScreenImpl(DrawableCanvas canvas) {
         super();

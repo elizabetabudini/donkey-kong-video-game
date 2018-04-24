@@ -73,9 +73,11 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     private void checkDirection() {
        if (this.getStatus().equals(EntityStatus.OnTheFloor)) {
             if (this.getCurrentDirection().equals(Movement.RIGHT)) {
-                this.move(Optional.of(Movement.RIGHT));
+                this.addMovement(Movement.RIGHT);
+                //this.move(Optional.of(Movement.RIGHT));
             } else {
-                this.move(Optional.of(Movement.LEFT));
+                this.addMovement(Movement.LEFT);
+                //this.move(Optional.of(Movement.LEFT));
             }
             this.directionChanged = false;
         } else { // the barrel is falling down

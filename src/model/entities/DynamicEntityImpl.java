@@ -1,7 +1,11 @@
 package model.entities;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
+import javax.swing.JSpinner.DateEditor;
 
 import model.ModelImpl;
 
@@ -16,6 +20,8 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     private double deltaY;
     private Movement lastDirection = Movement.RIGHT;
     private EntityStatus currentStatus = EntityStatus.OnTheFloor;
+    protected List<Movement> movements;
+    private List<Movement> ingoredMovements;
 
     /**
      * A constructor for a dynamic entity.
@@ -29,21 +35,22 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      */
     public DynamicEntityImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
+        this.movements = new ArrayList<>();
+        this.ingoredMovements = new ArrayList<>();
     }
-
 
     @Override
     public final void move(final Optional<Movement> dir) {
+
         if (dir.isPresent() && this.getStatus() != EntityStatus.Dead) {
             tryToMove(dir.get());
             if (dir.get() == Movement.RIGHT || dir.get() == Movement.LEFT) {
                 this.setX(this.getX() + deltaX);
-                return;
             }
+            return;
         }
-        if (this.getStatus() == EntityStatus.Climbing || !dir.isPresent()) {
-            this.setY(this.getY() + deltaY);
-        }
+
+        this.setY(this.getY() + deltaY);
     }
 
     /**
@@ -61,12 +68,18 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      */
     @Override
     public void update() {
+
+        while (!movements.isEmpty()) {
+            this.move(Optional.of(movements.remove(0)));
+        }
+        
+        this.move(Optional.empty());
+
         if (getStatus() == EntityStatus.Falling) {
             this.setDeltaY(this.getDeltaY() + ModelImpl.GRAVITY);
         } else if (getStatus() == EntityStatus.Climbing) {
             this.setDeltaY(0);
         }
-        this.move(Optional.empty());
     }
 
 
@@ -127,4 +140,9 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     protected void setDeltaY(final double dY) {
         this.deltaY = dY;
     }
+
+    public void addMovement(final Movement dir) {
+        this.movements.add(dir);
+    }
+
 }

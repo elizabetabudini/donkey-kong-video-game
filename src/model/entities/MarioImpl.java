@@ -11,7 +11,7 @@ import model.ModelImpl;
 public final class MarioImpl extends DynamicEntityImpl implements Mario, DynamicEntity {
 
     private boolean jumping;
-    private static final double JUMP_DISTANCE = -2.3;
+    private static final double JUMP_DISTANCE = -2.5;
     private static final double STEP = 1;
 
     /**
@@ -59,7 +59,9 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
     }
 
     private void jump() {
+        System.out.println("jumping");
         jumping = true;
+        this.setStatus(EntityStatus.Falling);
         this.setDeltaY(JUMP_DISTANCE);
     }
 

@@ -184,7 +184,7 @@ public class GameEngineImpl implements GameEngine {
         parsedMovements = translator.inputParser(handler.parser(true));
 
         for (final Movement dir : parsedMovements) {
-            mario.move(Optional.of(dir));
+            mario.addMovement(dir);
         }
     }
 

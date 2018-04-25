@@ -232,6 +232,7 @@ public class GameEngineImpl implements GameEngine {
         return this.gameRunning;
     }
 
+    @Override
     public Integer getScore() {
         return this.model.getScore();
     }

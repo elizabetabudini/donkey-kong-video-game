@@ -63,7 +63,7 @@ public class GameFrame {
                 if (JOptionPane.showConfirmDialog(frame, "Vuoi uscire dal gioco?", "Exit Game?",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     frame.dispose();
-
+                    gameEngine.abortGameLoop();
                     MenuFrame.getMenuFrame().showMenu();
 
                 }

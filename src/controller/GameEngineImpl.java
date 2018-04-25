@@ -111,7 +111,7 @@ public class GameEngineImpl implements GameEngine {
         this.drawer.drawEntity(Sprites.PRINCESS, this.princess.getX().intValue(), this.princess.getY().intValue());
 
         // draw mario
-        if (this.mario.isClimbing()) {
+        if (this.mario.getStatus() == EntityStatus.Climbing) {
             if (this.isMarioMovingOnTheStair()) {
                 this.marioSprite = Sprites.MARIO_CLIMBING_STAIRS;
             } else {

@@ -6,6 +6,7 @@ import java.util.Optional;
 import model.entities.Barrel;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
+import model.entities.Entity;
 import model.entities.EntityStatus;
 import model.entities.FloorTile;
 import model.entities.Mario;
@@ -16,6 +17,8 @@ import model.levels.BasicLevel;
 import model.levels.Level1st;
 
 public class BasicModel extends ModelImpl{
+    
+    private final static int BARREL_SCORE = 100;
 
     public BasicModel() {
         super();
@@ -112,7 +115,7 @@ public class BasicModel extends ModelImpl{
     
     public void checkCollisions() {
         this.checkStatus(this.getMario());
-        //this.isMarioAlive(this.getMario());
+        this.isMarioAlive(this.getMario());
         this.processBarrels(getBarrels());
         //this.checkVictory(this.getMario());
     }
@@ -160,9 +163,17 @@ public class BasicModel extends ModelImpl{
     }
 
     private void isMarioAlive(final Mario mario) {
-        if(this.getBarrels().stream().filter(X -> mario.isColliding(X)).findFirst().isPresent()) {
-            mario.setStatus(EntityStatus.Dead);
-        }
+        this.getBarrels().stream().forEach(X -> {
+            if(mario.isColliding(X)) {
+                mario.setStatus(EntityStatus.Dead);
+                return;
+            }
+            else if(mario.isColliding(X.getTrigger())) {
+                setScore(getScore()+BARREL_SCORE);
+                System.out.println("SCORE!");
+                return;
+            }
+        });
     }
 
     private void processBarrels(final List<Barrel> barrels) {
@@ -180,9 +191,16 @@ public class BasicModel extends ModelImpl{
     }
 
     private void fixHeight(final DynamicEntity entity, final FloorTile floorTile) {
+        //touching the floor from the side
+        if(entity.getX()+3 > floorTile.getHitbox().getMaxX() && entity.getStatus().equals(EntityStatus.Falling)) {
+            entity.setX(floorTile.getHitbox().getMaxX()+1);
+        }
+        else if(entity.getHitbox().getMaxX()-3 < floorTile.getX() && entity.getStatus().equals(EntityStatus.Falling)) {
+            entity.setX(floorTile.getX()-(entity.getHitbox().getWidth()+1));
+        }
         
         //touching the floor from the bottom
-        if(floorTile.getHitbox().getCenterY() <= entity.getY()){
+        else if(floorTile.getHitbox().getCenterY() <= entity.getY()){
             entity.setY(floorTile.getHitbox().getMaxY());
         }
         

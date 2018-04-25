@@ -29,11 +29,11 @@ public final class Level1st extends BasicLevelImpl{
     private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> PRINCESS = new Pair<>(new Pair<>(142.5,24.0), new Pair<>(30,30));
     
     //all the floor tiles
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_1 = new Pair<>(new Pair<>(0.0,512.0), new Pair<>(460,22));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_2 = new Pair<>(new Pair<>(0.0,378.0), new Pair<>(404,22));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_3 = new Pair<>(new Pair<>(55.0,245.0), new Pair<>(404,22));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_4 = new Pair<>(new Pair<>(0.0,112.0), new Pair<>(404,22));
-    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_5 = new Pair<>(new Pair<>(100.0,48.0), new Pair<>(109,22));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_1 = new Pair<>(new Pair<>(0.0,512.0), new Pair<>(460,3));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_2 = new Pair<>(new Pair<>(0.0,378.0), new Pair<>(404,3));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_3 = new Pair<>(new Pair<>(55.0,245.0), new Pair<>(404,3));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_4 = new Pair<>(new Pair<>(0.0,112.0), new Pair<>(404,3));
+    private static final Pair<Pair<Double,Double>, Pair<Integer,Integer>> FLOOR_TILE_5 = new Pair<>(new Pair<>(100.0,48.0), new Pair<>(109,3));
     
     private static final List<Pair<Pair<Double,Double>, Pair<Integer,Integer>>> FLOOR = Collections.unmodifiableList(new ArrayList<>(Arrays.asList(FLOOR_TILE_1,FLOOR_TILE_2,FLOOR_TILE_3,FLOOR_TILE_4,FLOOR_TILE_5)));
     

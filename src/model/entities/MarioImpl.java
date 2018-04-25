@@ -55,7 +55,7 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
         if (!isWithinBorder()) {
             stopMoving(dir);
         }
-        System.out.println(toString());
+        //System.out.println(toString());
     }
 
     private void jump() {

@@ -22,7 +22,7 @@ public abstract class ModelImpl implements ModelInterface{
     private GameLevel currentLevel ;
    
     //player info
-    private final int score;
+    private int score;
     protected int currentLives;
     
     //level
@@ -42,8 +42,8 @@ public abstract class ModelImpl implements ModelInterface{
     }
     
     //TODO to complete
-    public void setScore() {
-        
+    public void setScore(int score) {
+        this.score = score;
     }
     
     @Override

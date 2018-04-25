@@ -23,6 +23,6 @@ public interface AbstractBarrel extends DynamicEntity {
      * @return 
      *          an {@link Entity} holding the trigger
      */
-     Entity getTrigger();
+    Entity getTrigger();
 
 }

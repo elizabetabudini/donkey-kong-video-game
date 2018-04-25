@@ -1,7 +1,6 @@
 package model.entities;
 
 import java.awt.Dimension;
-import java.util.Optional;
 import model.ModelImpl;
 
 /**
@@ -62,7 +61,7 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
             } 
     }
     
-    public boolean isBarrelOnStair() {
+    private boolean isBarrelOnStair() {
         return this.barrelOnStair;
     }
     

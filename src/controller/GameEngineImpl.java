@@ -1,9 +1,9 @@
 package controller;
 
-import java.util.Optional;
 import java.util.Set;
 import javax.swing.SwingUtilities;
 import model.BasicModel;
+import model.entities.BarrelGoingDownTheStairs;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
 import model.entities.EntityStatus;
@@ -147,13 +147,20 @@ public class GameEngineImpl implements GameEngine {
         // draw barrels
         if (!this.model.getBarrels().isEmpty()) {
             this.dk.getBarrelsList().forEach(br -> {
-                if (this.isMovingRight(br)) {
-                    this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
-                } else if(br.isBarrelOnStair() && br.getStatus() == EntityStatus.Climbing){
-                            this.drawer.drawEntity(Sprites.BARREL_FALLING_ON_STAIRS, br.getX().intValue(), br.getY().intValue());
-                        } else {
-                            this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
-                        }
+                if (br instanceof BarrelGoingDownTheStairs) {
+                    if (br.getStatus() == EntityStatus.Climbing) {
+                       this.drawer.drawEntity(Sprites.BARREL_FALLING_ON_STAIRS, br.getX().intValue(), br.getY().intValue());
+                    } else {
+                        this.drawer.drawEntity(Sprites.BARREL_ON_STAIR_ROLLING, br.getX().intValue(), br.getY().intValue());
+                    }
+                } else if (this.isMovingRight(br)) {
+                 /*   if (br.isBarrelOnStair()) {
+                        this.drawer.drawEntity(Sprites.BARREL_ON_STAIR_ROLLING, br.getX().intValue(), br.getY().intValue());
+                    }*/
+                         this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
+                  } else {
+                             this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
+                         }
             });
         }
         SwingUtilities.invokeLater(() -> gameScreen.updateScreen());
@@ -192,11 +199,9 @@ public class GameEngineImpl implements GameEngine {
         }
 
         public void run() {
-            final long lastLoopTime = System.currentTimeMillis();
             /* TODO modify with a gameover condition */
             while (true) {
                 final long currentTime = System.currentTimeMillis();
-                final long elapsedTime = currentTime - lastLoopTime;
                 processInput();
                 updateGame();
                 render();

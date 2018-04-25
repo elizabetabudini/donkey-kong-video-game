@@ -13,7 +13,4 @@ public class SimpleBarrel extends AbstractBarrelImpl implements AbstractBarrel {
         this.setBarrelOnStair(false);
     }
 
-
-
-
 }

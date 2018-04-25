@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
 /**
  * 
  * This class models a listener for keyboard inputs.
@@ -20,7 +19,8 @@ public final class InputHandler extends KeyAdapter {
     private final Map<Integer, ViewInputs> registeredKeys = new HashMap<>();
 
     /**
-     * A constructor for the Inputhandler, it initializes all inputs to false and builds the register of all recognized keys.
+     * A constructor for the Inputhandler, it initializes all inputs to false and
+     * builds the register of all recognized keys.
      */
     public InputHandler() {
         super();
@@ -28,17 +28,16 @@ public final class InputHandler extends KeyAdapter {
         buildRegisteredInputs();
     }
 
-
     private void buildRegisteredInputs() {
-        registeredKeys.put(KeyEvent.VK_DOWN, ViewInputs.ARROW_DOWN); // Move Down
+        registeredKeys.put(KeyEvent.VK_DOWN, ViewInputs.ARROW_DOWN); 
         registeredKeys.put(KeyEvent.VK_S, ViewInputs.ARROW_DOWN);
-        registeredKeys.put(KeyEvent.VK_RIGHT, ViewInputs.ARROW_RIGHT); // Move Right
+        registeredKeys.put(KeyEvent.VK_RIGHT, ViewInputs.ARROW_RIGHT); 
         registeredKeys.put(KeyEvent.VK_D, ViewInputs.ARROW_RIGHT);
-        registeredKeys.put(KeyEvent.VK_UP, ViewInputs.ARROW_UP); // Move Up
+        registeredKeys.put(KeyEvent.VK_UP, ViewInputs.ARROW_UP); 
         registeredKeys.put(KeyEvent.VK_W, ViewInputs.ARROW_UP);
-        registeredKeys.put(KeyEvent.VK_LEFT, ViewInputs.ARROW_LEFT); // Move Left
+        registeredKeys.put(KeyEvent.VK_LEFT, ViewInputs.ARROW_LEFT); 
         registeredKeys.put(KeyEvent.VK_A, ViewInputs.ARROW_LEFT);
-        registeredKeys.put(KeyEvent.VK_SPACE, ViewInputs.SPACE); // Jump
+        registeredKeys.put(KeyEvent.VK_SPACE, ViewInputs.SPACE); 
     }
 
     /**

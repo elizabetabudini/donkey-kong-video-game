@@ -1,9 +1,9 @@
 package controller;
 
-import java.util.Optional;
 import java.util.Set;
 import javax.swing.SwingUtilities;
 import model.BasicModel;
+import model.entities.BarrelGoingDownTheStairs;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
 import model.entities.EntityStatus;
@@ -111,7 +111,7 @@ public class GameEngineImpl implements GameEngine {
         this.drawer.drawEntity(Sprites.PRINCESS, this.princess.getX().intValue(), this.princess.getY().intValue());
 
         // draw mario
-        if (this.mario.isClimbing()) {
+        if (this.mario.getStatus() == EntityStatus.Climbing) {
             if (this.isMarioMovingOnTheStair()) {
                 this.marioSprite = Sprites.MARIO_CLIMBING_STAIRS;
             } else {
@@ -147,11 +147,20 @@ public class GameEngineImpl implements GameEngine {
         // draw barrels
         if (!this.model.getBarrels().isEmpty()) {
             this.dk.getBarrelsList().forEach(br -> {
-                if (this.isMovingRight(br)) {
-                    this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
-                } else {
-                    this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
-                }
+                if (br instanceof BarrelGoingDownTheStairs) {
+                    if (br.getStatus() == EntityStatus.Climbing) {
+                       this.drawer.drawEntity(Sprites.BARREL_FALLING_ON_STAIRS, br.getX().intValue(), br.getY().intValue());
+                    } else {
+                        this.drawer.drawEntity(Sprites.BARREL_ON_STAIR_ROLLING, br.getX().intValue(), br.getY().intValue());
+                    }
+                } else if (this.isMovingRight(br)) {
+                 /*   if (br.isBarrelOnStair()) {
+                        this.drawer.drawEntity(Sprites.BARREL_ON_STAIR_ROLLING, br.getX().intValue(), br.getY().intValue());
+                    }*/
+                         this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
+                  } else {
+                             this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
+                         }
             });
         }
         SwingUtilities.invokeLater(() -> gameScreen.updateScreen());
@@ -176,16 +185,10 @@ public class GameEngineImpl implements GameEngine {
      * {@link InputTranslator}
      */
     private void processInput() {
-        Set<Movement> parsedMovements = translator.inputParser(handler.parser(false));
+        final Set<Movement> parsedMovements = translator.inputParser(handler.parser(true));
 
         for (final Movement dir : parsedMovements) {
-            mario.stopMoving(dir);
-        }
-
-        parsedMovements = translator.inputParser(handler.parser(true));
-
-        for (final Movement dir : parsedMovements) {
-            mario.move(Optional.of(dir));
+            mario.addMovement(dir);
         }
     }
 
@@ -196,11 +199,9 @@ public class GameEngineImpl implements GameEngine {
         }
 
         public void run() {
-            final long lastLoopTime = System.currentTimeMillis();
             /* TODO modify with a gameover condition */
             while (true) {
                 final long currentTime = System.currentTimeMillis();
-                final long elapsedTime = currentTime - lastLoopTime;
                 processInput();
                 updateGame();
                 render();

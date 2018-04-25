@@ -3,6 +3,7 @@ package model.entities;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import controller.GameEngineImpl;
@@ -14,23 +15,24 @@ import controller.GameEngineImpl;
 public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKong {
     
     private final static double ZERO = 0.0;
-    private final AgentBarrelsCreator barrels;
     private final BarrelFactory bf ;
-    private volatile List<Barrel> barrelsList;
+    private volatile List<AbstractBarrel> barrelsList;
     private boolean launchingBarrel;
-
+    private final static int MAX_TIME = 2500;
+    private final static int STARTING_TIME = 500;
+    
     public DonkeyKongImpl(final Double x, final Double y,final Dimension dim) {
         super(x, y, dim);
+        final AgentBarrelsCreator barrels = new AgentBarrelsCreator();
         final MovingBarrels barrelsMovement = new MovingBarrels();
         this.bf = new BarrelFactoryImpl();
-        this.barrels = new AgentBarrelsCreator();
         this.barrelsList = new ArrayList<>();
-        this.barrels.start();
+        barrels.start();
         barrelsMovement.start();
     }
 
     @Override
-    public List<Barrel> getBarrelsList(){
+    public List<AbstractBarrel> getBarrelsList(){
         return new ArrayList<>(this.barrelsList);
         //TODO change with unmodifiableList
         //return  Collections.unmodifiableList(this.barrelsList);
@@ -50,7 +52,8 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
     private class AgentBarrelsCreator extends Thread {
 
         private volatile boolean creatingBarrels = true;
-        private Barrel barrel;
+        private AbstractBarrel barrel;
+        private final Random randomCreationTime = new Random();
 
         protected AgentBarrelsCreator() {
             super();
@@ -62,8 +65,6 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
                 DonkeyKongImpl.this.launchingBarrel = true;
                 this.barrel = DonkeyKongImpl.this.bf.createSimpleBarrel(75.0, 120.0, new Dimension(20,20));
                 barrelsList.add(this.barrel);
-                //TODO remove
-                System.out.println(barrelsList.size());
                 try {
                     Thread.sleep(400); //sleep to change Sprites of Dk launching barrels
                 } catch (Exception ex) {
@@ -71,11 +72,27 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
                 }
                 DonkeyKongImpl.this.launchingBarrel = false;
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(this.randomCreationTime.nextInt(MAX_TIME) + STARTING_TIME);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                //TODO just for check
+                DonkeyKongImpl.this.launchingBarrel = true;
+                this.barrel = DonkeyKongImpl.this.bf.createBarrelMovingDownStairs(75.0, 120.0, new Dimension(20,20));
+                barrelsList.add(this.barrel);    
+                try {
+                    Thread.sleep(400); //sleep to change Sprites of Dk launching barrels
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
                 DonkeyKongImpl.this.launchingBarrel = false;
+                try {
+                    Thread.sleep(this.randomCreationTime.nextInt(MAX_TIME) + STARTING_TIME);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                //TODO remove
+                System.out.println(barrelsList.size());
                 this.checkBarrels();
             }
         }
@@ -104,6 +121,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
             while(true) {
                 DonkeyKongImpl.this.getBarrelsList().stream()
                                    .forEach(br -> br.manageBarrelMovement());
+              //  System.out.println(getBarrelsList().toString());
                 try {
                         Thread.sleep(GameEngineImpl.PERIOD);
                     } catch (Exception ex) {

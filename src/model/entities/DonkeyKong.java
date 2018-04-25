@@ -16,10 +16,10 @@ public interface DonkeyKong extends Entity {
      * 
      * @return the list of barrels
      */
-    List<Barrel> getBarrelsList();
+    List<AbstractBarrel> getBarrelsList();
     
     /**
-     * A method to know if {@link DonkeyKong} is actually launching a new {@link Barrel}
+     * A method to know if {@link DonkeyKong} is actually launching a new {@link AbstractBarrel}
      * @return True if a barrel is now being launched
      */
     boolean isLaunchingBarrel();

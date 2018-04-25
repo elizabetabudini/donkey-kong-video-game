@@ -2,6 +2,8 @@ package model.entities;
 
 import java.awt.Dimension;
 import java.util.Optional;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import model.ModelImpl;
 
@@ -16,6 +18,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     private double deltaY;
     private Movement lastDirection = Movement.RIGHT;
     private EntityStatus currentStatus = EntityStatus.OnTheFloor;
+    private final BlockingQueue<Movement> movements;
 
     /**
      * A constructor for a dynamic entity.
@@ -29,46 +32,33 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
      */
     public DynamicEntityImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
+        this.movements = new LinkedBlockingQueue<Movement>();
     }
-
 
     @Override
     public final void move(final Optional<Movement> dir) {
-        if (dir.isPresent() && this.getStatus() != EntityStatus.Dead) {
+        if (dir.isPresent()) {
             tryToMove(dir.get());
             if (dir.get() == Movement.RIGHT || dir.get() == Movement.LEFT) {
                 this.setX(this.getX() + deltaX);
-                return;
             }
+            return;
         }
-        if (this.getStatus() == EntityStatus.Climbing || !dir.isPresent()) {
-            this.setY(this.getY() + deltaY);
-        }
+        this.setY(this.getY() + deltaY);
     }
 
     /**
-     * Tries to move in the dir Movement, if the movement is not possible, this
-     * method does nothing.
-     * 
-     * @param dir
-     *            The direction in which the entity wants to move.
-     */
-    protected abstract void tryToMove(Movement dir);
-
-
-    /**
-     * Update method is designed for extension in special cases, eventual extension should start with super() call.
+     * Update method is designed for extension in special cases, eventual extension
+     * should start with super() call.
      */
     @Override
     public void update() {
+        this.manageMovements();
+        this.move(Optional.empty());
         if (getStatus() == EntityStatus.Falling) {
             this.setDeltaY(this.getDeltaY() + ModelImpl.GRAVITY);
-        } else if (getStatus() == EntityStatus.Climbing) {
-            this.setDeltaY(0);
         }
-        this.move(Optional.empty());
     }
-
 
     @Override
     public final Movement getCurrentDirection() {
@@ -88,6 +78,36 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     @Override
     public final void setStatus(final EntityStatus status) {
         this.currentStatus = status;
+    }
+
+    @Override
+    public final void addMovement(final Movement dir) {
+        try {
+            this.movements.put(dir);
+        } catch (InterruptedException e) {
+            System.err.println("The thread was interrupted while adding a new Movement.");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Tries to move in the dir Movement, if the movement is not possible, this
+     * method does nothing.
+     * 
+     * @param dir
+     *            The direction in which the entity wants to move.
+     */
+    protected abstract void tryToMove(Movement dir);
+
+    /**
+     * Method to process available Movements.
+     * 
+     */
+    protected final void manageMovements() {
+        while (!this.movements.isEmpty()) {
+            this.move(Optional.ofNullable(movements.poll()));
+        }
+
     }
 
     /**
@@ -127,4 +147,5 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     protected void setDeltaY(final double dY) {
         this.deltaY = dY;
     }
+
 }

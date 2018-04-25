@@ -4,16 +4,8 @@ package model.entities;
  * An interface modeling Mario, the main character of the game, with methods to
  * check whether or not the character is doing certain actions.
  * 
- *
  */
 public interface Mario extends DynamicEntity {
-
-    /**
-     * Returns whether or not Mario is climbing.
-     * 
-     * @return true if Mario is climbing, false otherwise.
-     */
-    boolean isClimbing();
 
     /**
      * Returns whether or not Mario is currently jumping.

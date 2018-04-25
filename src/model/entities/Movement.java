@@ -7,12 +7,12 @@ package model.entities;
  */
 public enum Movement {
     /**
-     * The character tries to climb UP.
+     * The character tries to climb up.
      */
     UP,
 
     /**
-     * The character tries to climb DOWN.
+     * The character tries to climb down.
      */
     DOWN,
     /**

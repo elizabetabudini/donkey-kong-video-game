@@ -28,7 +28,7 @@ public class MarioTest {
         assertEquals("Testing base movement towards left", Double.valueOf(9.0), Double.valueOf(tester.getX()));
         tester.move(Optional.of(Movement.RIGHT));
         assertEquals("Testing base movement towards right", Double.valueOf(10.0), Double.valueOf(tester.getX()));
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < ModelImpl.WIDTH; i++) {
             tester.move(Optional.of(Movement.RIGHT));
         }
         assertEquals("Mario is not supposed to go over game borders", Double.valueOf(ModelImpl.WIDTH),

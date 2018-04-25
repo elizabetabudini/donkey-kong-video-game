@@ -29,15 +29,15 @@ public final class InputHandler extends KeyAdapter {
     }
 
     private void buildRegisteredInputs() {
-        registeredKeys.put(KeyEvent.VK_DOWN, ViewInputs.ARROW_DOWN); // Move Down
+        registeredKeys.put(KeyEvent.VK_DOWN, ViewInputs.ARROW_DOWN); 
         registeredKeys.put(KeyEvent.VK_S, ViewInputs.ARROW_DOWN);
-        registeredKeys.put(KeyEvent.VK_RIGHT, ViewInputs.ARROW_RIGHT); // Move Right
+        registeredKeys.put(KeyEvent.VK_RIGHT, ViewInputs.ARROW_RIGHT); 
         registeredKeys.put(KeyEvent.VK_D, ViewInputs.ARROW_RIGHT);
-        registeredKeys.put(KeyEvent.VK_UP, ViewInputs.ARROW_UP); // Move Up
+        registeredKeys.put(KeyEvent.VK_UP, ViewInputs.ARROW_UP); 
         registeredKeys.put(KeyEvent.VK_W, ViewInputs.ARROW_UP);
-        registeredKeys.put(KeyEvent.VK_LEFT, ViewInputs.ARROW_LEFT); // Move Left
+        registeredKeys.put(KeyEvent.VK_LEFT, ViewInputs.ARROW_LEFT); 
         registeredKeys.put(KeyEvent.VK_A, ViewInputs.ARROW_LEFT);
-        registeredKeys.put(KeyEvent.VK_SPACE, ViewInputs.SPACE); // Jump
+        registeredKeys.put(KeyEvent.VK_SPACE, ViewInputs.SPACE); 
     }
 
     /**

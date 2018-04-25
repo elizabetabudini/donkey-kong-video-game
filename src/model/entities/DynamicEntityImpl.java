@@ -37,15 +37,13 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
 
     @Override
     public final void move(final Optional<Movement> dir) {
-
-        if (dir.isPresent() && this.getStatus() != EntityStatus.Dead) {
+        if (dir.isPresent()) {
             tryToMove(dir.get());
             if (dir.get() == Movement.RIGHT || dir.get() == Movement.LEFT) {
                 this.setX(this.getX() + deltaX);
             }
             return;
         }
-
         this.setY(this.getY() + deltaY);
     }
 
@@ -59,8 +57,6 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
         this.move(Optional.empty());
         if (getStatus() == EntityStatus.Falling) {
             this.setDeltaY(this.getDeltaY() + ModelImpl.GRAVITY);
-        } else if (getStatus() == EntityStatus.Climbing) {
-            this.setDeltaY(0);
         }
     }
 

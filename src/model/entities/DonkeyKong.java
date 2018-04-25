@@ -20,8 +20,15 @@ public interface DonkeyKong extends Entity {
     
     /**
      * A method to know if {@link DonkeyKong} is actually launching a new {@link AbstractBarrel}
-     * @return True if a barrel is now being launched
+     * @return 
+     *          True if a barrel is now being launched
      */
     boolean isLaunchingBarrel();
+    
+    /**
+     * A method to stop all running threads.
+     * 
+     */
+    void stopThreads();
 
 }

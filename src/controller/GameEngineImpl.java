@@ -66,6 +66,34 @@ public class GameEngineImpl implements GameEngine {
     public void setHandler(final InputHandler handler) {
         this.handler = handler;
     }
+    
+    /* just for the GameLoopTest */
+    public Sprites getMarioSpriteTest() {
+        return this.marioSprite;
+    }
+
+    public Sprites getDonkeySpriteTest() {
+        return this.donkeySprite;
+    }
+
+    public Mario getMario() {
+        return this.mario;
+    }
+
+    @Override
+    public void abortGameLoop() {
+        this.gameLoop.stopThread();
+        this.model.getDonkeyKong().stopThreads();
+    }
+
+    public Boolean isGameRunning() {
+        return this.gameRunning;
+    }
+
+    @Override
+    public Integer getScore() {
+        return this.model.getScore();
+    }
 
     private void translateInputs() {
         this.translator = input -> {
@@ -99,7 +127,7 @@ public class GameEngineImpl implements GameEngine {
             try {
                 Thread.sleep(PERIOD - delta);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
     }
@@ -191,8 +219,11 @@ public class GameEngineImpl implements GameEngine {
             mario.addMovement(dir);
         }
     }
+    
 
     private class GameLoop extends Thread {
+        
+        private volatile boolean stopped;
 
         protected GameLoop() {
             super();
@@ -200,7 +231,7 @@ public class GameEngineImpl implements GameEngine {
 
         public void run() {
             /* TODO modify with a gameover condition */
-            while (true) {
+            while (!this.stopped) {
                 final long currentTime = System.currentTimeMillis();
                 processInput();
                 updateGame();
@@ -208,33 +239,11 @@ public class GameEngineImpl implements GameEngine {
                 waitNextFrame(currentTime);
             }
         }
-    }
-
-    /* just for the GameLoopTest */
-    public Sprites getMarioSpriteTest() {
-        return this.marioSprite;
-    }
-
-    public Sprites getDonkeySpriteTest() {
-        return this.donkeySprite;
-    }
-
-    public Mario getMario() {
-        return this.mario;
-    }
-
-    @Override
-    public void abortGameLoop() {
-        GameLoop.currentThread().interrupt();
-    }
-
-    public Boolean isGameRunning() {
-        return this.gameRunning;
-    }
-
-    @Override
-    public Integer getScore() {
-        return this.model.getScore();
+        
+        protected void stopThread(){
+            this.stopped = true;
+            this.interrupt();
+        }
     }
 
 }

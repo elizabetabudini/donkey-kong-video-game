@@ -40,7 +40,6 @@ public class GameEngineImpl implements GameEngine {
         this.translateInputs();
     }
 
-    // TODO endgame to change flag and stop all threads -> to call in MainMenu
     @Override
     public void startGame() {
         if (!this.gameRunning) {
@@ -55,7 +54,7 @@ public class GameEngineImpl implements GameEngine {
         this.model = new BasicModel();
         this.initCharacters();
     }
-    
+
     private void initCharacters() {
         this.mario = this.model.getMario();
         this.dk = this.model.getDonkeyKong();
@@ -71,7 +70,8 @@ public class GameEngineImpl implements GameEngine {
     public void setHandler(final InputHandler handler) {
         this.handler = handler;
     }
-    
+
+    // TODO remove test
     /* just for the GameLoopTest */
     public Sprites getMarioSpriteTest() {
         return this.marioSprite;
@@ -139,8 +139,6 @@ public class GameEngineImpl implements GameEngine {
 
     private void render() {
 
-        /* TODO draw princess (keep this draw here only if we want to change its Sprite) 
-         consider using == instead of .equals with enum*/
         this.drawer.drawEntity(Sprites.PRINCESS, this.princess.getX().intValue(), this.princess.getY().intValue());
 
         // draw mario
@@ -182,33 +180,30 @@ public class GameEngineImpl implements GameEngine {
             this.dk.getBarrelsList().forEach(br -> {
                 if (br instanceof BarrelGoingDownTheStairs) {
                     if (br.getStatus() == EntityStatus.Climbing) {
-                       this.drawer.drawEntity(Sprites.BARREL_FALLING_ON_STAIRS, br.getX().intValue(), br.getY().intValue());
+                        this.drawer.drawEntity(Sprites.BARREL_FALLING_ON_STAIRS, br.getX().intValue(),
+                                br.getY().intValue());
                     } else {
-                        this.drawer.drawEntity(Sprites.BARREL_ON_STAIR_ROLLING, br.getX().intValue(), br.getY().intValue());
+                        this.drawer.drawEntity(Sprites.BARREL_ON_STAIR_ROLLING, br.getX().intValue(),
+                                br.getY().intValue());
                     }
                 } else if (this.isMovingRight(br)) {
-                 /*   if (br.isBarrelOnStair()) {
-                        this.drawer.drawEntity(Sprites.BARREL_ON_STAIR_ROLLING, br.getX().intValue(), br.getY().intValue());
-                    }*/
-                         this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
-                  } else {
-                             this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
-                         }
+                    this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
+                } else {
+                    this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
+                }
             });
         }
         SwingUtilities.invokeLater(() -> gameScreen.updateScreen());
+    }
 
-    }
-    
     private boolean isMarioMovingOnTheStair() {
-        return (this.mario.getCurrentDirection().equals(Movement.UP) 
-                || this.mario.getCurrentDirection().equals(Movement.DOWN));
+        return (this.mario.getCurrentDirection() == Movement.UP) || (this.mario.getCurrentDirection() == Movement.DOWN);
     }
-    
+
     private boolean isMovingRight(final DynamicEntity entity) {
-        return entity.getCurrentDirection().equals(Movement.RIGHT);
+        return entity.getCurrentDirection() == Movement.RIGHT;
     }
-    
+
     private void updateGame() {
         this.model.updateGame();
     }
@@ -224,10 +219,9 @@ public class GameEngineImpl implements GameEngine {
             mario.addMovement(dir);
         }
     }
-    
 
     private class GameLoop extends Thread {
-        
+
         private volatile boolean stopped;
 
         protected GameLoop() {
@@ -235,7 +229,6 @@ public class GameEngineImpl implements GameEngine {
         }
 
         public void run() {
-            /* TODO modify with a gameover condition */
             while (!this.stopped || !this.isGameOver()) {
                 this.checkVictory();
                 final long currentTime = System.currentTimeMillis();
@@ -245,24 +238,24 @@ public class GameEngineImpl implements GameEngine {
                 waitNextFrame(currentTime);
             }
         }
-        
+
         private boolean isGameOver() {
             return model.getGameStatus() == GameStatus.Over ? true : false;
         }
 
-        protected void stopThread(){
+        protected void stopThread() {
             this.stopped = true;
             this.interrupt();
         }
-        
+
         private void checkVictory() {
-            if(model.getGameStatus() == GameStatus.Won) {
+            if (model.getGameStatus() == GameStatus.Won) {
                 dk.stopThreads();
                 initCharacters();
                 model.start();
             }
-        }   
-        
+        }
+
     }
 
 }

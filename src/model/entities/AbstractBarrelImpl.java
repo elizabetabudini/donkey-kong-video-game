@@ -16,6 +16,7 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     private final static double STEP = 1;
     private boolean directionChanged;
     private boolean barrelOnStair;
+    private final DynamicEntity trigger;
 
     /**
      * A constructor for a Barrel
@@ -25,6 +26,8 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
      */
     public AbstractBarrelImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
+        this.trigger = new BarrelTriggerImpl(this.getHitbox().getCenterX() - 0.5, y - StairImpl.TRIGGER_HEIGHT,
+                new Dimension(1, StairImpl.TRIGGER_HEIGHT));
     }
 
     @Override
@@ -87,7 +90,9 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     
     @Override
     public Entity getTrigger() {
+
         return new EntityImpl(this.getHitbox().getCenterX(), this.getY()-TRIGGER_HEIGHT, new Dimension(TRIGGER_WIDTH, TRIGGER_HEIGHT));
+
     }
 
     @Override

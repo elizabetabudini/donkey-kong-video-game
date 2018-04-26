@@ -104,7 +104,6 @@ public class BasicModel extends ModelImpl{
                 getMario().setX(this.getCurrentLevel().getMarioSpawn().getX());
                 getMario().setY(this.getCurrentLevel().getMarioSpawn().getY());
                 getMario().setStatus(EntityStatus.OnTheFloor);
-                getDonkeyKong().getBarrelsList().clear();
                 start();
             }
             else {
@@ -119,7 +118,7 @@ public class BasicModel extends ModelImpl{
     
     public void checkCollisions() {
         this.checkStatus(this.getMario());
-        this.isMarioAlive(this.getMario());
+        this.checkBarrels(this.getMario());
         this.processBarrels(getBarrels());
         this.checkVictory(this.getMario());
     }
@@ -139,7 +138,6 @@ public class BasicModel extends ModelImpl{
         else if( stair.isPresent() && !entity.getStatus().equals(EntityStatus.Falling)) {
             entity.setStatus(EntityStatus.Climbing);
             if(entity.getHitbox().getCenterY() > stair.get().getHitbox().getCenterY() && floorTile.isPresent() && entity.getCurrentDirection().equals(Movement.DOWN)) {
-                System.out.println("FIXING");
                 fixHeight(entity, floorTile.get());
             }
         }
@@ -166,18 +164,21 @@ public class BasicModel extends ModelImpl{
         });
     }
 
-    private void isMarioAlive(final Mario mario) {
-        Entity lastTrigger;
-        this.getBarrels().stream().forEach(X -> {
+    private void checkBarrels(final Mario mario) {
+        this.getBarrels().forEach(X -> {
             if(mario.isColliding(X)) {
                 mario.setStatus(EntityStatus.Dead);
                 return;
             }
-            else if(mario.isColliding(X.getTrigger()) && mario.getStatus().equals(EntityStatus.Falling)) {
-                updateScore(BARREL_SCORE);
-                System.out.println("SCORE!");
-                return;
+            else if(X.getTrigger().isPresent()) {
+                if(mario.isColliding(X.getTrigger().get()) && mario.getStatus().equals(EntityStatus.Falling)) {
+                    updateScore(BARREL_SCORE);
+                    System.out.println("SCORE!");
+                    X.removeTrigger();
+                    return;
+                }
             }
+
         });
     }
 

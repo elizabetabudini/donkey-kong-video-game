@@ -40,7 +40,6 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
         }
         this.moving = checkMovement();
         this.stopMoving(this.getCurrentDirection());
-        //ystem.out.println(this.getDeltaX());
     }
 
     @Override
@@ -66,7 +65,7 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
     @Override
     public String toString() {
         return "DEBUG INFORMATION MARIO: Coordinates: [" + this.getX() + "," + this.getY() + "] - " + "Status : ["
-                + this.getStatus() + "] - Dy : [" + this.getDeltaY() + "]";
+                + this.getStatus() + "] - Dy : [" + this.getDeltaY() + "]" +" - Dx : [" + this.getDeltaX() + "]";
     }
 
     @Override
@@ -89,14 +88,13 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
         if (dir == Movement.JUMP && this.getStatus() == EntityStatus.OnTheFloor) {
             this.jump();
         }
-        if (!isWithinBorder()) {
-            stopMoving(dir);
+        if(ModelImpl.borderCheck(this).isPresent()) {
+            stopMoving(ModelImpl.borderCheck(this).get());
         }
-        //System.out.println(toString());
+        //System.out.println(this.toString());
     }
 
     private void jump() {
-        System.out.println("jumping");
         jumping = true;
         this.setStatus(EntityStatus.Falling);
         this.setDeltaY(JUMP_DISTANCE);

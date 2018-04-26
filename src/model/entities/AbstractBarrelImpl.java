@@ -1,6 +1,7 @@
 package model.entities;
 
 import java.awt.Dimension;
+import java.util.Optional;
 
 import model.ModelImpl;
 
@@ -12,11 +13,11 @@ import model.ModelImpl;
 public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements AbstractBarrel, DynamicEntity {
 
     private final static int TRIGGER_HEIGHT = 20;
-    private final static int TRIGGER_WIDTH = 3;
+    private final static int TRIGGER_WIDTH = 5;
     private final static double STEP = 1;
     private boolean directionChanged;
     private boolean barrelOnStair;
-    private final DynamicEntity trigger;
+    private Optional<Entity> trigger;
 
     /**
      * A constructor for a Barrel
@@ -26,8 +27,8 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
      */
     public AbstractBarrelImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
-        this.trigger = new BarrelTriggerImpl(this.getHitbox().getCenterX() - 0.5, y - StairImpl.TRIGGER_HEIGHT,
-                new Dimension(1, StairImpl.TRIGGER_HEIGHT));
+        this.trigger = Optional.of(new BarrelTriggerImpl(this.getHitbox().getCenterX(), this.getY()-TRIGGER_HEIGHT,
+                new Dimension(TRIGGER_WIDTH, TRIGGER_HEIGHT)));
     }
 
     @Override
@@ -44,7 +45,7 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     public void manageBarrelMovement() {
         this.setBarrelType();
         if (ModelImpl.canClimbDown(this)) {
-            if (this.isBarrelOnStair()) {
+            if (this instanceof BarrelGoingDownTheStairs) {
                 this.setStatus(EntityStatus.Climbing);
             } else {
                 this.checkDirection();
@@ -89,10 +90,19 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     }
     
     @Override
-    public Entity getTrigger() {
-
-        return new EntityImpl(this.getHitbox().getCenterX(), this.getY()-TRIGGER_HEIGHT, new Dimension(TRIGGER_WIDTH, TRIGGER_HEIGHT));
-
+    public Optional<Entity> getTrigger() {
+        if(trigger.isPresent()) {
+            trigger.get().setX(this.getHitbox().getCenterX());
+            trigger.get().setY(this.getY()-TRIGGER_HEIGHT);
+            return trigger;
+        }
+        else {
+            return Optional.empty();
+        }
+    }
+    
+    public void removeTrigger() {
+        this.trigger = Optional.empty();
     }
 
     @Override

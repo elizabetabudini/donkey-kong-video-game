@@ -1,11 +1,13 @@
 package model;
 
 import java.util.List;
+import java.util.Optional;
 
 import controller.levels.levelManager;
 import model.entities.DynamicEntity;
 import model.entities.EntityStatus;
 import model.entities.FloorTile;
+import model.entities.Movement;
 import model.entities.Stair;
 import model.levels.GameLevel;
 
@@ -13,7 +15,7 @@ public abstract class ModelImpl implements ModelInterface{
     
 
     public final static int HEIGHT = 540;
-    public final static int WIDTH = 460;
+    public final static int WIDTH = 400;
     
     private final static double DIFFICULTY_OFFSET = 0.1;
     private final static int PLAYER_LIFE = 3;
@@ -71,16 +73,26 @@ public abstract class ModelImpl implements ModelInterface{
      */
     protected abstract void checkCollisions();
     
+    //TODO to watch later, could be deleted
     /**
      * The function that checks if the given entity is within the game borders.
      * 
      */
-    public static Boolean isWithinBorders(final DynamicEntity entity) {
-        if (entity.getX() + entity.getHitbox().getWidth() < WIDTH && entity.getY() + entity.getHitbox().getHeight() < HEIGHT) {
-            return true;
+    public static Optional<Movement> borderCheck(final DynamicEntity entity) {
+        if (entity.getHitbox().getMaxX() > WIDTH) {
+            return Optional.of(Movement.RIGHT);
+        }
+        else if(entity.getHitbox().getMaxY() > HEIGHT){
+            return Optional.of(Movement.DOWN);
+        }
+        else if(entity.getX() < 0 ){
+            return Optional.of(Movement.LEFT);
+        }
+        else if(entity.getY() < 0) {
+            return Optional.of(Movement.UP);
         }
         else {
-            return false;
+            return Optional.empty();
         }
     }
     

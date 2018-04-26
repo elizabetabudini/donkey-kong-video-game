@@ -1,5 +1,7 @@
 package model.entities;
 
+import java.util.Optional;
+
 /**
  * 
  * An interface modeling a Barrel, a {@link DynamicEntity} that {@link Mario} has to avoid,
@@ -23,6 +25,14 @@ public interface AbstractBarrel extends DynamicEntity {
      * @return 
      *          an {@link Entity} holding the trigger
      */
-    Entity getTrigger();
+    Optional<Entity> getTrigger();
+    
+    
+    /**
+     * Remover for the trigger that allows to detect 
+     * if {@link Mario} is colliding with it
+     * 
+     */
+    void removeTrigger();
 
 }

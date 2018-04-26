@@ -11,7 +11,8 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
 
     private boolean jumping;
     private static final double JUMP_DISTANCE = -2.5;
-    private static final double STEP = 1;
+    private static final double STEP = 1.4;
+    private static final double CLIMBING_STEP = 0.9;
     private boolean moving;
 
     /**
@@ -78,11 +79,11 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
             this.setDeltaX(STEP);
         } else if ((dir == Movement.UP && (ModelImpl.canClimbUp(this) || this.getStatus() == EntityStatus.Climbing))) {
             this.setDirection(dir);
-            this.setDeltaY(-STEP);
+            this.setDeltaY(-CLIMBING_STEP);
             this.setStatus(EntityStatus.Climbing);
         } else if ((dir == Movement.DOWN && (ModelImpl.canClimbDown(this) || this.getStatus() == EntityStatus.Climbing))) {
             this.setDirection(dir);
-            this.setDeltaY(STEP);
+            this.setDeltaY(CLIMBING_STEP);
             this.setStatus(EntityStatus.Climbing);
         }
         if (dir == Movement.JUMP && this.getStatus() == EntityStatus.OnTheFloor) {

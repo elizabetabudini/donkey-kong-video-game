@@ -85,7 +85,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
         try {
             this.movements.put(dir);
         } catch (InterruptedException e) {
-            System.err.println("The thread was interrupted while adding a new Movement.");
+            System.err.println("The thread  was interrupted while adding a new Movement to Mario.");
             e.printStackTrace();
         }
     }

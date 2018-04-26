@@ -11,7 +11,8 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
 
     private boolean jumping;
     private static final double JUMP_DISTANCE = -2.5;
-    private static final double STEP = 1;
+    private static final double STEP = 1.4;
+    private static final double CLIMBING_STEP = 0.9;
     private boolean moving;
 
     /**
@@ -65,33 +66,33 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
     @Override
     public String toString() {
         return "DEBUG INFORMATION MARIO: Coordinates: [" + this.getX() + "," + this.getY() + "] - " + "Status : ["
-                + this.getStatus() + "] - Dy : [" + this.getDeltaY() + "]" +" - Dx : [" + this.getDeltaX() + "]";
+                + this.getStatus() + "] - Dy : [" + this.getDeltaY() + "]" + " - Dx : [" + this.getDeltaX() + "]";
     }
 
     @Override
     protected void tryToMove(final Movement dir) {
-        if (dir == Movement.LEFT) {
+        if (dir == Movement.LEFT && this.getStatus() != EntityStatus.Climbing) {
             this.setDirection(dir);
             this.setDeltaX(-STEP);
-        } else if (dir == Movement.RIGHT) {
+        } else if (dir == Movement.RIGHT && this.getStatus() != EntityStatus.Climbing) {
             this.setDirection(dir);
             this.setDeltaX(STEP);
         } else if ((dir == Movement.UP && (ModelImpl.canClimbUp(this) || this.getStatus() == EntityStatus.Climbing))) {
             this.setDirection(dir);
-            this.setDeltaY(-STEP);
+            this.setDeltaY(-CLIMBING_STEP);
             this.setStatus(EntityStatus.Climbing);
         } else if ((dir == Movement.DOWN && (ModelImpl.canClimbDown(this) || this.getStatus() == EntityStatus.Climbing))) {
             this.setDirection(dir);
-            this.setDeltaY(STEP);
+            this.setDeltaY(CLIMBING_STEP);
             this.setStatus(EntityStatus.Climbing);
         }
         if (dir == Movement.JUMP && this.getStatus() == EntityStatus.OnTheFloor) {
             this.jump();
         }
-        if(ModelImpl.borderCheck(this).isPresent()) {
+        if (ModelImpl.borderCheck(this).isPresent()) {
             stopMoving(ModelImpl.borderCheck(this).get());
         }
-        //System.out.println(this.toString());
+        System.out.println(this.toString());
     }
 
     private void jump() {

@@ -14,13 +14,15 @@ public abstract class ModelImpl implements ModelInterface{
     public final static int HEIGHT = 540;
     public final static int WIDTH = 460;
     
+    private final static double DIFFICULTY_OFFSET = 0.1;
     private final static int PLAYER_LIFE = 3;
-    
     public final static Double GRAVITY = 0.09;
     
+    
     //game info
-    private GameStatus gameStatus;
+    private static GameStatus gameStatus;
     private GameLevel currentLevel ;
+    public static double gameDifficulty;
    
     //player info
     private int score;
@@ -35,9 +37,9 @@ public abstract class ModelImpl implements ModelInterface{
     public ModelImpl() {
         this.score = 0;
         this.currentLives = PLAYER_LIFE;
-        this.start();
+        gameDifficulty = 1;
         levelManager = new levelManager();
-        //TODO just for test, to edit
+        setCurrentLevel(levelManager.getNextLevel());
     }
     
     @Override
@@ -45,9 +47,8 @@ public abstract class ModelImpl implements ModelInterface{
         return this.score;
     }
     
-    //TODO to complete
-    public void setScore(int score) {
-        this.score = score;
+    public void updateScore(int score) {
+        this.score = this.getScore()+score;
     }
     
     @Override
@@ -83,31 +84,41 @@ public abstract class ModelImpl implements ModelInterface{
     }
     
     public GameStatus getGameStatus() {
-        return this.gameStatus;
+        return gameStatus;
     }
     
     public void start() {
-        this.gameStatus = GameStatus.Running;
+        gameStatus = GameStatus.Running;
+    }
+    public static GameStatus isRunning() {
+        return gameStatus;
     }
     
     public void pause() {
-        this.gameStatus = GameStatus.Pause;
+        gameStatus = GameStatus.Pause;
     }
     
     public void gameOver() {
-        this.gameStatus = GameStatus.Over ;
+        gameStatus = GameStatus.Over ;
     }
     
     public void victory() {
-        this.gameStatus = GameStatus.Won ;
+        if(levelManager.isLast()) {
+            updateGameDifficulty();
+        }
+        setCurrentLevel(levelManager.getNextLevel());
     }
     
     protected void setGameStatus(GameStatus currentStatus) {
-        this.gameStatus = currentStatus;
+        gameStatus = currentStatus;
     }
     
     public Boolean isOver() {
         return this.getLife() <= 0;
+    }
+    
+    private void updateGameDifficulty() {
+        gameDifficulty = gameDifficulty + DIFFICULTY_OFFSET;
     }
     
     /**
@@ -119,8 +130,7 @@ public abstract class ModelImpl implements ModelInterface{
      * @return a boolean, true if can, false otherwise
      */
     public static boolean canClimbDown(final DynamicEntity entity) {
-        if(stairs.isEmpty()) {
-            return false;
+        if(entity == null) {
         }
         return stairs.stream()
                 .filter(S -> 

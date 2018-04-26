@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.Dimension;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +7,6 @@ import model.entities.AbstractBarrel;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
 import model.entities.Entity;
-import model.entities.EntityImpl;
 import model.entities.EntityStatus;
 import model.entities.FloorTile;
 import model.entities.Mario;
@@ -23,9 +21,13 @@ public class BasicModel extends ModelImpl{
 
     public BasicModel() {
         super();
-        setCurrentLevel(levelManager.getNextLevel());
+        startLevel();
+    }
+    
+    private void startLevel() {
         stairs = this.getCurrentLevel().getStairs();
         floor = this.getCurrentLevel().getFloor();
+        this.start();
     }
 
     /**
@@ -117,9 +119,9 @@ public class BasicModel extends ModelImpl{
     
     public void checkCollisions() {
         this.checkStatus(this.getMario());
-        this.isMarioAlive(this.getMario());
+        //this.isMarioAlive(this.getMario());
         this.processBarrels(getBarrels());
-        //this.checkVictory(this.getMario());
+        this.checkVictory(this.getMario());
     }
     
     
@@ -172,7 +174,7 @@ public class BasicModel extends ModelImpl{
                 return;
             }
             else if(mario.isColliding(X.getTrigger()) && mario.getStatus().equals(EntityStatus.Falling)) {
-                setScore(getScore()+BARREL_SCORE);
+                updateScore(BARREL_SCORE);
                 System.out.println("SCORE!");
                 return;
             }
@@ -187,9 +189,8 @@ public class BasicModel extends ModelImpl{
 
     private void checkVictory(final Mario mario) {
         if(mario.isColliding(getPrincess())) {
-            this.victory();
+            victory();
             System.out.println("victory");
-            this.pause();
         }
     }
 

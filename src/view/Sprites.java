@@ -27,35 +27,35 @@ public enum Sprites {
     /**
      * The main character sprite, facing right..
      */
-    MARIO_FACING_RIGHT("mario_facing_right.png", new Dimension(30, 25)),
+    MARIO_FACING_RIGHT("mario_facing_right.png", new Dimension(25, 30)),
     /**
      * The main character sprite, facing left.
      */
-    MARIO_FACING_LEFT("mario_facing_left.png", new Dimension(30, 25)),
+    MARIO_FACING_LEFT("mario_facing_left.png", new Dimension(25, 30)),
     /**
      * The main character sprite, jumping right.
      */
-    MARIO_JUMPING_RIGHT("mario_jr.png", new Dimension(30, 25)),
+    MARIO_JUMPING_RIGHT("mario_jr.png", new Dimension(25, 30)),
     /**
      * The main character sprite, jumping left.
      */
-    MARIO_JUMPING_LEFT("mario_jl.png", new Dimension(30, 25)),
+    MARIO_JUMPING_LEFT("mario_jl.png", new Dimension(25, 30)),
     /**
      * The main character sprite, walking right.
      */
-    MARIO_WALKING_RIGHT("mario_walking_right.gif", new Dimension(30, 25)),
+    MARIO_WALKING_RIGHT("mario_walking_right.gif", new Dimension(25, 30)),
     /**
      * The main character sprite, walking left.
      */
-    MARIO_WALKING_LEFT("mario_walking_left.gif", new Dimension(30, 25)),
+    MARIO_WALKING_LEFT("mario_walking_left.gif", new Dimension(25, 30)),
     /**
      * The main character sprite, stationary on a stair.
      */
-    MARIO_ON_STAIR("mario_on_stair.png", new Dimension(30, 25)),
+    MARIO_ON_STAIR("mario_on_stair.png", new Dimension(25, 30)),
     /**
      * The main character sprite, climbing the stairs.
      */
-    MARIO_CLIMBING_STAIRS("mario_climbing.gif", new Dimension(30, 25)),
+    MARIO_CLIMBING_STAIRS("mario_climbing.gif", new Dimension(25, 30)),
     /**
      * The barrel sprite, rotating right.
      */

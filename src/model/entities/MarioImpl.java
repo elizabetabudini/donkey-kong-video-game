@@ -40,7 +40,7 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
         }
         this.moving = checkMovement();
         this.stopMoving(this.getCurrentDirection());
-        System.out.println(this.getDeltaX());
+        //ystem.out.println(this.getDeltaX());
     }
 
     @Override
@@ -115,5 +115,4 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
     private Boolean checkMovement() {
         return this.getDeltaX() != 0;
     }
-
 }

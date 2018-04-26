@@ -114,8 +114,8 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
 
         protected void stopThread() {
             this.creatingBarrels = false;
-            DonkeyKongImpl.this.barrelsList.clear();
             this.interrupt();
+            DonkeyKongImpl.this.barrelsList.clear();
         }
     }
     

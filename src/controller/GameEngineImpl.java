@@ -261,8 +261,7 @@ public class GameEngineImpl implements GameEngine {
                 initCharacters();
                 model.start();
             }
-        }
-        
+        }   
         
     }
 

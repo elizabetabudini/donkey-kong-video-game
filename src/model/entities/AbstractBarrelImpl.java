@@ -18,6 +18,7 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     private boolean directionChanged;
     private boolean barrelOnStair;
     private Optional<Entity> trigger;
+    protected Movement lastDirection = Movement.RIGHT;
 
     /**
      * A constructor for a Barrel
@@ -44,9 +45,14 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     @Override
     public void manageBarrelMovement() {
         this.setBarrelType();
+        if(!directionChanged) {
+            //TODO modify
+            this.lastDirection = this.getCurrentDirection();
+        }
         if (ModelImpl.canClimbDown(this)) {
             if (this instanceof BarrelGoingDownTheStairs) {
                 this.setStatus(EntityStatus.Climbing);
+                //this.setDirection(Movement.DOWN);
             } else {
                 this.checkDirection();
             }
@@ -59,7 +65,7 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
 
     private void changeDirection() { // when a barrel reaches a floor it changes its direction
         this.directionChanged = true;
-        if (this.getCurrentDirection().equals(Movement.RIGHT)) {
+        if (this.lastDirection == Movement.RIGHT) {
             this.setDirection(Movement.LEFT);
         } else {
             this.setDirection(Movement.RIGHT);

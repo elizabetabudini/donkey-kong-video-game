@@ -87,7 +87,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
                 barrelsList.add(this.barrel);
                 this.launchBarrelAndSleep();
 
-                System.out.println(barrelsList.size());
+                //System.out.println(barrelsList.size());
                 this.checkBarrels();
             }
         }

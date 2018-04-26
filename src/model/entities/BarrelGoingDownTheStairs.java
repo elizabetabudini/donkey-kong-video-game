@@ -6,6 +6,7 @@ import java.util.Optional;
 public class BarrelGoingDownTheStairs extends AbstractBarrelImpl implements AbstractBarrel {
     
     private final static double GRAVITY = 0.02;
+    private final static double ZERO = 0.0;
 
     public BarrelGoingDownTheStairs(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
@@ -23,6 +24,11 @@ public class BarrelGoingDownTheStairs extends AbstractBarrelImpl implements Abst
  
         if (this.getStatus() == EntityStatus.Climbing) {
             this.setDeltaY(this.getDeltaY() + GRAVITY);
+            //this.setDirection(Movement.DOWN);
+            //this.addMovement(Movement.DOWN);
+        } else {
+            this.setDeltaY(ZERO);
+           // this.setDirection(this.lastDirection);
         }
         this.move(Optional.empty());
     }

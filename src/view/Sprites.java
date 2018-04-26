@@ -23,7 +23,7 @@ public enum Sprites {
     /**
      * The princess sprite.
      */
-    PRINCESS("princess.png", new Dimension(25, 25)),
+    PRINCESS("princess.gif", new Dimension(50, 30)),
     /**
      * The main character sprite, facing right..
      */

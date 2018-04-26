@@ -28,6 +28,7 @@ public class BasicModel extends ModelImpl{
         stairs = this.getCurrentLevel().getStairs();
         floor = this.getCurrentLevel().getFloor();
         this.start();
+        this.getDonkeyKong().startDonkeyKongThreads();
     }
 
     /**

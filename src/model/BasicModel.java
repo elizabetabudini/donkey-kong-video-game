@@ -6,7 +6,6 @@ import java.util.Optional;
 import model.entities.AbstractBarrel;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
-import model.entities.Entity;
 import model.entities.EntityStatus;
 import model.entities.FloorTile;
 import model.entities.Mario;
@@ -14,7 +13,6 @@ import model.entities.Movement;
 import model.entities.Princess;
 import model.entities.Stair;
 import model.levels.BasicLevel;
-import model.levels.Level1st;
 
 public class BasicModel extends ModelImpl{
     
@@ -22,9 +20,14 @@ public class BasicModel extends ModelImpl{
 
     public BasicModel() {
         super();
-        setCurrentLevel(new Level1st());
+        setCurrentLevel(levelManager.getNextLevel());
         stairs = this.getCurrentLevel().getStairs();
         floor = this.getCurrentLevel().getFloor();
+        System.out.println("mario" + (getMario() instanceof Mario));
+        System.out.println("donkey" + (getDonkeyKong() instanceof DonkeyKong));
+        System.out.println("princess"+(getPrincess() instanceof Princess));
+        System.out.println("stairs"+getStairs().isEmpty());
+        System.out.println("floor"+getFloor().isEmpty());
     }
 
     /**

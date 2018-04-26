@@ -3,10 +3,10 @@ package model.levels;
 import java.util.List;
 
 import model.entities.DonkeyKong;
-import model.entities.FloorTileImpl;
+import model.entities.FloorTile;
 import model.entities.Mario;
 import model.entities.Princess;
-import model.entities.StairImpl;
+import model.entities.Stair;
 import utilities.Pair;
 
 /**
@@ -22,13 +22,12 @@ public abstract class BasicLevelImpl implements BasicLevel{
     private DonkeyKong donkeyKong;
     private Princess princess;
     
-    private  List<FloorTileImpl> floor;
-    private List<StairImpl> stairs;
+    private  List<FloorTile> floor;
+    private List<Stair> stairs;
     
     private Pair<Double,Double> marioSpawn;
     
-    public BasicLevelImpl(Pair<Double, Double> marioSpawn) {
-        this.marioSpawn = marioSpawn;
+    public BasicLevelImpl() {
     }
 
     //level
@@ -51,6 +50,7 @@ public abstract class BasicLevelImpl implements BasicLevel{
     //mario
     protected void setMario(final Mario mario) {
         this.mario = mario;
+        this.marioSpawn = new Pair<Double, Double>(mario.getX(),mario.getY());
     }
     
     public Mario getMario() {
@@ -80,20 +80,20 @@ public abstract class BasicLevelImpl implements BasicLevel{
     }
     
     //floor
-    protected void setFloor(final List<FloorTileImpl> floor) {
+    protected void setFloor(final List<FloorTile> floor) {
         this.floor = floor;
     }
     
-    public List<FloorTileImpl> getFloor(){
+    public List<FloorTile> getFloor(){
         return this.floor;
     }
     
     //stairs
-    protected void setStairs(final List<StairImpl> stairs) {
+    protected void setStairs(final List<Stair> stairs) {
         this.stairs = stairs;
     }
     
-    public List<StairImpl> getStairs(){
+    public List<Stair> getStairs(){
         return this.stairs;
     }
 

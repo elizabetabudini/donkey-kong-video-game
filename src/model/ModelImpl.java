@@ -2,6 +2,7 @@ package model;
 
 import java.util.List;
 
+import controller.levels.levelManager;
 import model.entities.DynamicEntity;
 import model.entities.FloorTile;
 import model.entities.Stair;
@@ -26,6 +27,8 @@ public abstract class ModelImpl implements ModelInterface{
     protected int currentLives;
     
     //level
+    protected levelManager levelManager;
+    
     protected static List<? extends Stair> stairs;
     protected static List<? extends FloorTile> floor;
     
@@ -33,6 +36,7 @@ public abstract class ModelImpl implements ModelInterface{
         this.score = 0;
         this.currentLives = PLAYER_LIFE;
         this.start();
+        levelManager = new levelManager();
         //TODO just for test, to edit
     }
     

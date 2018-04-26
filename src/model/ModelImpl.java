@@ -76,7 +76,8 @@ public abstract class ModelImpl implements ModelInterface{
      * 
      */
     public static Boolean isWithinBorders(final DynamicEntity entity) {
-        if (entity.getX() + entity.getHitbox().getWidth() < WIDTH && entity.getY() + entity.getHitbox().getHeight() < HEIGHT) {
+        if (entity.getHitbox().getWidth() < WIDTH && entity.getHitbox().getMinY() < HEIGHT
+                || entity.getX() > 0 || entity.getY() > 0) {
             return true;
         }
         else {

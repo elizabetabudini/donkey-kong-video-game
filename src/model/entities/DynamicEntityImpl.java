@@ -39,7 +39,7 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
     public final void move(final Optional<Movement> dir) {
         if (dir.isPresent()) {
             tryToMove(dir.get());
-            if (dir.get() == Movement.RIGHT || dir.get() == Movement.LEFT) {
+            if ((dir.get() == Movement.RIGHT || dir.get() == Movement.LEFT) && this.getStatus() != EntityStatus.Climbing) {
                 this.setX(this.getX() + deltaX);
             }
             return;

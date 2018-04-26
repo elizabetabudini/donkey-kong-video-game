@@ -1,11 +1,14 @@
 package model;
 
+import java.awt.Dimension;
 import java.util.List;
 import java.util.Optional;
 
 import model.entities.AbstractBarrel;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
+import model.entities.Entity;
+import model.entities.EntityImpl;
 import model.entities.EntityStatus;
 import model.entities.FloorTile;
 import model.entities.Mario;
@@ -23,11 +26,6 @@ public class BasicModel extends ModelImpl{
         setCurrentLevel(levelManager.getNextLevel());
         stairs = this.getCurrentLevel().getStairs();
         floor = this.getCurrentLevel().getFloor();
-        System.out.println("mario" + (getMario() instanceof Mario));
-        System.out.println("donkey" + (getDonkeyKong() instanceof DonkeyKong));
-        System.out.println("princess"+(getPrincess() instanceof Princess));
-        System.out.println("stairs"+getStairs().isEmpty());
-        System.out.println("floor"+getFloor().isEmpty());
     }
 
     /**
@@ -151,7 +149,7 @@ public class BasicModel extends ModelImpl{
     //TODO to delete
     private void checkStairs(final DynamicEntity entity) {
         this.getStairs().stream().forEach(S -> {
-            if(entity.isColliding(S.getTrigger()) && entity.getY()+entity.getHitbox().getHeight() == S.getTrigger().getY()+S.getTrigger().getHitbox().getHeight()) {
+            if(entity.isColliding(S.getUpperTriggerL()) && entity.getY()+entity.getHitbox().getHeight() == S.getUpperTriggerL().getY()+S.getUpperTriggerL().getHitbox().getHeight()) {
                 entity.setStatus(EntityStatus.CanClimbDown);
                 return;
             }
@@ -167,12 +165,13 @@ public class BasicModel extends ModelImpl{
     }
 
     private void isMarioAlive(final Mario mario) {
+        Entity lastTrigger;
         this.getBarrels().stream().forEach(X -> {
             if(mario.isColliding(X)) {
                 mario.setStatus(EntityStatus.Dead);
                 return;
             }
-            else if(mario.isColliding(X.getTrigger())) {
+            else if(mario.isColliding(X.getTrigger()) && mario.getStatus().equals(EntityStatus.Falling)) {
                 setScore(getScore()+BARREL_SCORE);
                 System.out.println("SCORE!");
                 return;
@@ -188,7 +187,7 @@ public class BasicModel extends ModelImpl{
 
     private void checkVictory(final Mario mario) {
         if(mario.isColliding(getPrincess())) {
-            //this.victory();
+            this.victory();
             System.out.println("victory");
             this.pause();
         }
@@ -218,4 +217,5 @@ public class BasicModel extends ModelImpl{
             entity.setStatus(EntityStatus.OnTheFloor);
         }
     }
+    
 }

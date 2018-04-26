@@ -119,11 +119,15 @@ public abstract class ModelImpl implements ModelInterface{
      * @return a boolean, true if can, false otherwise
      */
     public static boolean canClimbDown(final DynamicEntity entity) {
+        if(stairs.isEmpty()) {
+            return false;
+        }
         return stairs.stream()
                 .filter(S -> 
-                    entity.isColliding(S.getTrigger()) 
+                    (entity.isColliding(S.getUpperTriggerR()) 
+                            && entity.isColliding(S.getUpperTriggerL()))
                     && entity.getHitbox().getMaxY()
-                    == S.getTrigger().getHitbox().getMaxY())
+                    == S.getUpperTriggerL().getHitbox().getMaxY())
                 .findFirst()
                 .isPresent()
                     ? true : false;
@@ -140,7 +144,8 @@ public abstract class ModelImpl implements ModelInterface{
     public static boolean canClimbUp(final DynamicEntity entity) {
         return stairs.stream()
                 .filter(S -> 
-                    entity.isColliding(S)
+                    entity.isColliding(S.getTriggerL())
+                            && entity.isColliding(S.getTriggerR())
                     && entity.getHitbox().getMaxY()
                     == S.getHitbox().getMaxY())
                 .findFirst()

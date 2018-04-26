@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
 
-import org.omg.Messaging.SyncScopeHelper;
-
 import model.levels.BasicLevelBuilder;
 import model.levels.GameLevel;
 

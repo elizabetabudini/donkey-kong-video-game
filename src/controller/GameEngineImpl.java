@@ -3,6 +3,7 @@ package controller;
 import java.util.Set;
 import javax.swing.SwingUtilities;
 import model.BasicModel;
+import model.GameStatus;
 import model.entities.BarrelGoingDownTheStairs;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
@@ -52,6 +53,10 @@ public class GameEngineImpl implements GameEngine {
 
     private void initModel() {
         this.model = new BasicModel();
+        this.initCharacters();
+    }
+    
+    private void initCharacters() {
         this.mario = this.model.getMario();
         this.dk = this.model.getDonkeyKong();
         this.princess = this.model.getPrincess();
@@ -231,7 +236,8 @@ public class GameEngineImpl implements GameEngine {
 
         public void run() {
             /* TODO modify with a gameover condition */
-            while (!this.stopped) {
+            while (!this.stopped || !this.isGameOver()) {
+                this.checkVictory();
                 final long currentTime = System.currentTimeMillis();
                 processInput();
                 updateGame();
@@ -240,10 +246,24 @@ public class GameEngineImpl implements GameEngine {
             }
         }
         
+        private boolean isGameOver() {
+            return model.getGameStatus() == GameStatus.Over ? true : false;
+        }
+
         protected void stopThread(){
             this.stopped = true;
             this.interrupt();
         }
+        
+        private void checkVictory() {
+            if(model.getGameStatus() == GameStatus.Won) {
+                dk.stopThreads();
+                initCharacters();
+                model.start();
+            }
+        }
+        
+        
     }
 
 }

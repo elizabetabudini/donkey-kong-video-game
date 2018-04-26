@@ -17,12 +17,12 @@ public class levelManager {
     private static final File DIR = new File(LEVELS_DIR);
     
     private final List<File> availableLevels;
-    private final ListIterator<? extends GameLevel> levels;
+    private final ListIterator<File> levels;
     
     public levelManager(){
         availableLevels = new ArrayList<>(Arrays.asList(DIR.listFiles())).stream().filter(X -> X.toString().contains(".Blevel")).sorted().collect(Collectors.toList());
-        availableLevels.forEach(X-> System.out.println(X.toString()));
-        levels = availableLevels.stream().map(X -> buildBasicLevel(X)).collect(Collectors.toList()).listIterator();
+        //levels = availableLevels.stream().map(X -> buildBasicLevel(X)).collect(Collectors.toList()).listIterator();
+        levels = availableLevels.stream().collect(Collectors.toList()).listIterator();
     }
     
     private GameLevel buildBasicLevel(final File level) {
@@ -36,14 +36,18 @@ public class levelManager {
      */
     public GameLevel getNextLevel(){
         if(levels.hasNext()) {
-            return levels.next();
+            return buildBasicLevel(levels.next());
         }
         else {
             while(levels.previousIndex() > 0) {
                 levels.previous();
             }
-            return levels.previous();
+            return buildBasicLevel(levels.next());
         }
+    }
+    
+    public boolean isLast() {
+        return !levels.hasNext() ? false : true;
     }
     
 }

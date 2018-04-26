@@ -11,6 +11,8 @@ import model.ModelImpl;
  */
 public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements AbstractBarrel, DynamicEntity {
 
+    private final static int TRIGGER_HEIGHT = 20;
+    private final static int TRIGGER_WIDTH = 3;
     private final static double STEP = 1;
     private boolean directionChanged;
     private boolean barrelOnStair;
@@ -88,7 +90,9 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     
     @Override
     public Entity getTrigger() {
-        return this.trigger;
+
+        return new EntityImpl(this.getHitbox().getCenterX(), this.getY()-TRIGGER_HEIGHT, new Dimension(TRIGGER_WIDTH, TRIGGER_HEIGHT));
+
     }
 
     @Override

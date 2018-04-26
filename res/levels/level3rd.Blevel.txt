@@ -6,7 +6,7 @@ image_directory imagedirectory/imagename.png
 
 mario 50.0 512.0 25 25
 donkey_kong 15.0 53.0 60 60
-princess 142.5 24.0 0 0
+princess 142.5 24.0 30 30
 
 floor 0.0 512.0 460 3
 floor 0.0 378.0 404 3

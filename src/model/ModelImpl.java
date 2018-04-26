@@ -4,7 +4,6 @@ import java.util.List;
 
 import controller.levels.levelManager;
 import model.entities.DynamicEntity;
-import model.entities.EntityStatus;
 import model.entities.FloorTile;
 import model.entities.Stair;
 import model.levels.GameLevel;
@@ -15,13 +14,15 @@ public abstract class ModelImpl implements ModelInterface{
     public final static int HEIGHT = 540;
     public final static int WIDTH = 460;
     
+    private final static double DIFFICULTY_OFFSET = 0.1;
     private final static int PLAYER_LIFE = 3;
-    
     public final static Double GRAVITY = 0.09;
+    
     
     //game info
     private static GameStatus gameStatus;
     private GameLevel currentLevel ;
+    public static double gameDifficulty;
    
     //player info
     private int score;
@@ -36,9 +37,9 @@ public abstract class ModelImpl implements ModelInterface{
     public ModelImpl() {
         this.score = 0;
         this.currentLives = PLAYER_LIFE;
+        gameDifficulty = 1;
         levelManager = new levelManager();
-        this.start();
-        //TODO just for test, to edit
+        setCurrentLevel(levelManager.getNextLevel());
     }
     
     @Override
@@ -46,9 +47,8 @@ public abstract class ModelImpl implements ModelInterface{
         return this.score;
     }
     
-    //TODO to complete
-    public void setScore(int score) {
-        this.score = score;
+    public void updateScore(int score) {
+        this.score = this.getScore()+score;
     }
     
     @Override
@@ -84,7 +84,7 @@ public abstract class ModelImpl implements ModelInterface{
     }
     
     public GameStatus getGameStatus() {
-        return this.gameStatus;
+        return gameStatus;
     }
     
     public void start() {
@@ -103,7 +103,10 @@ public abstract class ModelImpl implements ModelInterface{
     }
     
     public void victory() {
-        gameStatus = GameStatus.Won ;
+        if(levelManager.isLast()) {
+            updateGameDifficulty();
+        }
+        setCurrentLevel(levelManager.getNextLevel());
     }
     
     protected void setGameStatus(GameStatus currentStatus) {
@@ -112,6 +115,10 @@ public abstract class ModelImpl implements ModelInterface{
     
     public Boolean isOver() {
         return this.getLife() <= 0;
+    }
+    
+    private void updateGameDifficulty() {
+        gameDifficulty = gameDifficulty + DIFFICULTY_OFFSET;
     }
     
     /**

@@ -33,8 +33,6 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
         this.barrelsMovement = new MovingBarrels();
         this.bf = new BarrelFactoryImpl();
         this.barrelsList = new ArrayList<>();
-        barrels.start();
-        barrelsMovement.start();
     }
 
     @Override
@@ -47,6 +45,12 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
     @Override
     public boolean isLaunchingBarrel() {
         return this.launchingBarrel;
+    }
+    
+    @Override
+    public void startDonkeyKongThreads() {
+        barrels.start();
+        barrelsMovement.start();
     }
     
     @Override

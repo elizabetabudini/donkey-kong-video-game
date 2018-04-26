@@ -26,6 +26,13 @@ public interface DonkeyKong extends Entity {
     boolean isLaunchingBarrel();
     
     /**
+     * This method allows to start the threads 
+     * used by Donkey Kong to create and move barrels
+     * 
+     */
+    void startDonkeyKongThreads();
+    
+    /**
      * A method to stop all running threads.
      * 
      */

@@ -4,6 +4,7 @@ import java.util.List;
 
 import controller.levels.levelManager;
 import model.entities.DynamicEntity;
+import model.entities.EntityStatus;
 import model.entities.FloorTile;
 import model.entities.Stair;
 import model.levels.GameLevel;
@@ -19,7 +20,7 @@ public abstract class ModelImpl implements ModelInterface{
     public final static Double GRAVITY = 0.09;
     
     //game info
-    private GameStatus gameStatus;
+    private static GameStatus gameStatus;
     private GameLevel currentLevel ;
    
     //player info
@@ -35,8 +36,8 @@ public abstract class ModelImpl implements ModelInterface{
     public ModelImpl() {
         this.score = 0;
         this.currentLives = PLAYER_LIFE;
-        this.start();
         levelManager = new levelManager();
+        this.start();
         //TODO just for test, to edit
     }
     
@@ -87,23 +88,26 @@ public abstract class ModelImpl implements ModelInterface{
     }
     
     public void start() {
-        this.gameStatus = GameStatus.Running;
+        gameStatus = GameStatus.Running;
+    }
+    public static GameStatus isRunning() {
+        return gameStatus;
     }
     
     public void pause() {
-        this.gameStatus = GameStatus.Pause;
+        gameStatus = GameStatus.Pause;
     }
     
     public void gameOver() {
-        this.gameStatus = GameStatus.Over ;
+        gameStatus = GameStatus.Over ;
     }
     
     public void victory() {
-        this.gameStatus = GameStatus.Won ;
+        gameStatus = GameStatus.Won ;
     }
     
     protected void setGameStatus(GameStatus currentStatus) {
-        this.gameStatus = currentStatus;
+        gameStatus = currentStatus;
     }
     
     public Boolean isOver() {
@@ -119,8 +123,7 @@ public abstract class ModelImpl implements ModelInterface{
      * @return a boolean, true if can, false otherwise
      */
     public static boolean canClimbDown(final DynamicEntity entity) {
-        if(stairs.isEmpty()) {
-            return false;
+        if(entity == null) {
         }
         return stairs.stream()
                 .filter(S -> 

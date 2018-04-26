@@ -119,7 +119,7 @@ public class BasicModel extends ModelImpl{
     
     public void checkCollisions() {
         this.checkStatus(this.getMario());
-        //this.isMarioAlive(this.getMario());
+        this.isMarioAlive(this.getMario());
         this.processBarrels(getBarrels());
         this.checkVictory(this.getMario());
     }

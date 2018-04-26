@@ -4,6 +4,7 @@ import java.util.List;
 
 import controller.levels.levelManager;
 import model.entities.DynamicEntity;
+import model.entities.EntityStatus;
 import model.entities.FloorTile;
 import model.entities.Stair;
 import model.levels.GameLevel;
@@ -107,6 +108,7 @@ public abstract class ModelImpl implements ModelInterface{
             updateGameDifficulty();
         }
         setCurrentLevel(levelManager.getNextLevel());
+        setGameStatus(GameStatus.Won);
     }
     
     protected void setGameStatus(GameStatus currentStatus) {

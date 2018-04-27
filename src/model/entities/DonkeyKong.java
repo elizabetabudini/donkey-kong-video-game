@@ -37,5 +37,12 @@ public interface DonkeyKong extends Entity {
      * 
      */
     void stopThreads();
+    
+    /**
+     *  This method allows to clear the barrels List
+     *  of all the {@link AbstractBarrel }created in the game.
+     *  
+     */
+    void clearBarrelsList();
 
 }

@@ -111,7 +111,6 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
         while (!this.movements.isEmpty()) {
             this.move(Optional.ofNullable(movements.poll()));
         }
-
     }
 
     /**

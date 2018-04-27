@@ -41,7 +41,7 @@ public interface Entity {
     void setY(Double y);
 
     /**
-     * This method returns the element's hitbox.
+     * This method returns the element's hitbox, which is placed in the current (X,Y) coordinates of the entity.
      * 
      * @return A geometric figure representing the element's hitbox.
      */

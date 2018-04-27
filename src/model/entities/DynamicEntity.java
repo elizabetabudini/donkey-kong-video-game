@@ -49,7 +49,7 @@ public interface DynamicEntity extends Entity {
     EntityStatus getStatus();
 
     /**
-     * Method to update the entity : e.g: apply gravity.
+     * Method to update the entity : e.g: apply gravity,manage movements.
      */
     void update();
 

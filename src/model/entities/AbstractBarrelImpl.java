@@ -52,7 +52,8 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
         if (ModelImpl.canClimbDown(this)) {
             if (this instanceof BarrelGoingDownTheStairs) {
                 this.setStatus(EntityStatus.Climbing);
-                //this.setDirection(Movement.DOWN);
+                this.setDirection(Movement.DOWN);
+                
             } else {
                 this.checkDirection();
             }

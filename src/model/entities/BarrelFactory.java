@@ -18,7 +18,7 @@ public interface BarrelFactory {
      * @return A {@link AbstractBarrel}
      */
     AbstractBarrel createStandardBarrel(final Double x, final Double y, final Dimension dim);
-    //Other kind of barrels
+    
     /**
      * A method to create an {@link AbstractBarrel} with the default speed
      * that moves down each stair that it encounters

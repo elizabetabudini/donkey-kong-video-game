@@ -23,69 +23,80 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
 
     /**
      * A constructor for a Barrel
-     * @param x The starting x Coordinate.
-     * @param y The starting Y Coordinate.
-     * @param dim Dimension of a barrel's hitbox
+     * 
+     * @param x
+     *            The starting x Coordinate.
+     * @param y
+     *            The starting Y Coordinate.
+     * @param dim
+     *            Dimension of a barrel's hitbox
      */
     public AbstractBarrelImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
-        setPrevStatus(getStatus());
-        this.trigger = Optional.of(new BarrelTriggerImpl(this.getHitbox().getCenterX(), this.getY()-TRIGGER_HEIGHT,
+        this.setPrevStatus(getStatus());
+        this.trigger = Optional.of(new BarrelTriggerImpl(this.getHitbox().getCenterX(), this.getY() - TRIGGER_HEIGHT,
                 new Dimension(TRIGGER_WIDTH, TRIGGER_HEIGHT)));
     }
 
     @Override
-    protected void tryToMove(Movement dir) {
-        if (dir == Movement.LEFT) {
+    protected void tryToMove(final Movement dir) {
+        switch(dir) {
+        case LEFT:
             this.setDeltaX(-STEP);
             this.setDeltaY(0);
-        } else if (dir == Movement.RIGHT) {
+            return;
+        case RIGHT:  
             this.setDeltaX(STEP);
             this.setDeltaY(0);
-        } else if(dir == Movement.DOWN) {
-            this.setDeltaY(getDeltaY()+ModelImpl.GRAVITY);
+            return;
+        case DOWN:     
+            this.setDeltaY(getDeltaY() + ModelImpl.GRAVITY);
             this.setDeltaX(0);
+            return;
+        default:
+            break;
         }
     }
 
     @Override
     public void update() {
-        checkDirection();
+        this.checkDirection();
         super.update();
     }
-    
-    abstract void changeDir();
-    
-    abstract void checkDirection();
-    
+
+    protected abstract void changeDirection();
+
+    protected abstract void checkDirection();
+
     @Override
     public Optional<Entity> getTrigger() {
-        if(trigger.isPresent()) {
+        if (trigger.isPresent()) {
             trigger.get().setX(this.getHitbox().getCenterX());
             trigger.get().setY(this.getY() - TRIGGER_HEIGHT);
             return trigger;
-        }
-        else {
+        } else {
             return Optional.empty();
         }
     }
-    
+
     public void removeTrigger() {
         this.trigger = Optional.empty();
     }
 
     @Override
     public String toString() {
-        return "BARREL | Coord[" + this.getX() + "," + this.getY() + "] - " + "Direction["
-                + this.getCurrentDirection() + "] - Dy[" + "Status["
-                + this.getStatus() + "] - Dy[" + this.getDeltaY() + "]" + " - Dx[" + this.getDeltaX() + "]";
+        return "BARREL | Coord[" + this.getX() + "," + this.getY() + "] - " + "Direction[" + this.getCurrentDirection()
+                + "] - Dy[" + "Status[" + this.getStatus() + "] - Dy[" + this.getDeltaY() + "]" + " - Dx["
+                + this.getDeltaX() + "]";
     }
 
+    @Override
     public EntityStatus getPrevStatus() {
-        return prevStatus;
+        return this.prevStatus;
     }
 
-    public void setPrevStatus(EntityStatus prevStatus) {
+    @Override
+    public void setPrevStatus(final EntityStatus prevStatus) {
         this.prevStatus = prevStatus;
     }
 }

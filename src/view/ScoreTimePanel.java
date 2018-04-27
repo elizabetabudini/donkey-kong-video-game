@@ -20,7 +20,7 @@ public class ScoreTimePanel extends JPanel {
 
     private final Font font = new Font("Courier New", Font.BOLD, 16);
 
-    private final JLabel score;
+    private static JLabel score;
 
     /**
      * Creates a new Panel.
@@ -28,16 +28,14 @@ public class ScoreTimePanel extends JPanel {
      */
     public ScoreTimePanel() {
 
-        this.score = new JLabel();
-        this.score.setFont(this.font);
+        score = new JLabel();
+        score.setFont(this.font);
 
-        this.setLayout(new GridLayout(0, 1));
-        this.setBackground(Color.RED);
-        this.score.setHorizontalAlignment(SwingConstants.CENTER);
-        // prova
-        updateScore(10);
-        // updateScore(ViewImpl.getController().getScore());
-        this.add(this.score);
+        setLayout(new GridLayout(0, 1));
+        setBackground(Color.RED);
+        score.setHorizontalAlignment(SwingConstants.CENTER);
+        this.add(score);
+        updateScore(0,0);
     }
 
     /**
@@ -46,9 +44,9 @@ public class ScoreTimePanel extends JPanel {
      * @param score
      *            the current score of the player
      */
-    public final void updateScore(final long score) {
+    public static void updateScore(final int lives, final int score) {
         SwingUtilities.invokeLater(() -> {
-            ScoreTimePanel.this.score.setText("Score: " + score);
+            ScoreTimePanel.score.setText("Lives: " + lives + " | Score: " + score);
         });
     }
 

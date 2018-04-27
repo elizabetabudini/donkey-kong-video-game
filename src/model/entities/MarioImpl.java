@@ -92,7 +92,7 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
         if (ModelImpl.borderCheck(this).isPresent()) {
             stopMoving(ModelImpl.borderCheck(this).get());
         }
-        System.out.println(this.toString());
+        //System.out.println(this.toString());
     }
 
     private void jump() {

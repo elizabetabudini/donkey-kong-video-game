@@ -23,7 +23,7 @@ public enum Sprites {
     /**
      * The princess sprite.
      */
-    PRINCESS("princess.gif", new Dimension(50, 30)),
+    PRINCESS("princess.gif", new Dimension(50, 43)),
     /**
      * The main character sprite, facing right..
      */
@@ -35,11 +35,11 @@ public enum Sprites {
     /**
      * The main character sprite, jumping right.
      */
-    MARIO_JUMPING_RIGHT("mario_jr.png", new Dimension(25, 30)),
+    MARIO_JUMPING_RIGHT("mario_jumping_right.png", new Dimension(25, 30)),
     /**
      * The main character sprite, jumping left.
      */
-    MARIO_JUMPING_LEFT("mario_jl.png", new Dimension(25, 30)),
+    MARIO_JUMPING_LEFT("mario_jumping_left.png", new Dimension(25, 30)),
     /**
      * The main character sprite, walking right.
      */
@@ -57,6 +57,10 @@ public enum Sprites {
      */
     MARIO_CLIMBING_STAIRS("mario_climbing.gif", new Dimension(25, 30)),
     /**
+     * The main character sprite, climbing the stairs.
+     */
+    MARIO_DEATH("mario_death.gif", new Dimension(30, 30)),
+    /**
      * The barrel sprite, rotating right.
      */
     BARREL_RIGHT("barrel_rolling_right.gif", new Dimension(20, 20)),
@@ -67,11 +71,15 @@ public enum Sprites {
     /**
      * The barrelOnStair sprite, rotating.
      */
-    BARREL_ON_STAIR_ROLLING("barrelRolling.gif", new Dimension(20, 20)),
+    BARREL_ON_STAIR_ROLLING("barrel_rolling_right.gif", new Dimension(20, 20)),
     /**
      * The barrel sprite, falling down the stairs.
      */
-    BARREL_FALLING_ON_STAIRS("barrelFallingOnStairs.gif", new Dimension(20, 20));
+    BARREL_FALLING_ON_STAIRS("barrel_falling_on_stair.gif", new Dimension(25, 20)),
+    
+    TEST_FLOOR("floor_tile_test.png", new Dimension(100, 22)),
+    TEST_STAIR("stair_test.png", new Dimension(12,50)),
+    TEST_STAIR_TRIGGER("stair_trigger_test.png", new Dimension(1,2));
 
     private static final String SPRITES_FOLDER = "sprites/";
     private final String imagePath;

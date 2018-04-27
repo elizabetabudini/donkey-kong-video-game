@@ -31,7 +31,7 @@ public class GameFrame {
 
     public GameFrame() {
 
-        this.canvas = new DrawableCanvasImpl(WORLD_WIDTH, WORLD_HEIGHT, "game_bg.png");
+        this.canvas = new DrawableCanvasImpl(WORLD_WIDTH, WORLD_HEIGHT, "level1st_backgroud.png");
         this.gamescreen = new GameScreenImpl(canvas);
         this.gameEngine = new GameEngineImpl(gamescreen);
         gameEngine.setCanvas(gamescreen.getCanvas());

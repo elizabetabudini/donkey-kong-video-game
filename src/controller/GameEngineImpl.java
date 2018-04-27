@@ -14,6 +14,7 @@ import model.entities.Princess;
 import view.DrawableCanvas;
 import view.GameScreenImpl;
 import view.InputHandler;
+import view.ScoreTimePanel;
 import view.Sprites;
 
 public class GameEngineImpl implements GameEngine {
@@ -138,7 +139,6 @@ public class GameEngineImpl implements GameEngine {
     }
 
     private void render() {
-
         this.drawer.drawEntity(Sprites.PRINCESS, this.princess.getX().intValue(), this.princess.getY().intValue());
 
         // draw mario
@@ -229,12 +229,13 @@ public class GameEngineImpl implements GameEngine {
         }
 
         public void run() {
-            while (!this.stopped || !this.isGameOver()) {
+            while (!this.stopped && !this.isGameOver()) {
                 this.checkVictory();
                 final long currentTime = System.currentTimeMillis();
                 processInput();
                 updateGame();
                 render();
+                ScoreTimePanel.updateScore(model.getLife(),model.getScore());
                 waitNextFrame(currentTime);
             }
         }
@@ -252,10 +253,9 @@ public class GameEngineImpl implements GameEngine {
             if (model.getGameStatus() == GameStatus.Won) {
                 dk.stopThreads();
                 initCharacters();
-                model.start();
+                model.startLevel();
             }
         }
 
     }
-
 }

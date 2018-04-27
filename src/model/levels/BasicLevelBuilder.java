@@ -49,7 +49,6 @@ public class BasicLevelBuilder extends BasicLevelImpl{
             super.setStairs(stairs);
             super.setFloor(floor);
             
-            System.out.println("level complete");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

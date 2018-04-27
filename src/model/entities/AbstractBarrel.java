@@ -10,13 +10,6 @@ import java.util.Optional;
  */
 public interface AbstractBarrel extends DynamicEntity {
 
-    /**
-     * 
-     * A template method to move a barrel and make 
-     * it changes his direction when needed
-     * 
-     */
-    void manageBarrelMovement();
     
     /**
      * Getter for the trigger that allows to detect 

@@ -95,7 +95,9 @@ public class BasicModel extends ModelImpl{
         if(this.getGameStatus().equals(GameStatus.Running)) {
             getMario().update();
             if(!getBarrels().isEmpty()) {
-                getBarrels().forEach(X -> X.update());
+                getBarrels().forEach(X -> {
+                    X.update();
+                });
             }
             checkCollisions();
         }
@@ -138,10 +140,14 @@ public class BasicModel extends ModelImpl{
         if(floorTile.isPresent() && entity.getStatus() != EntityStatus.Climbing) {
             fixHeight(entity, floorTile.get());
         }
-        else if( stair.isPresent() && !entity.getStatus().equals(EntityStatus.Falling)) {
-            entity.setStatus(EntityStatus.Climbing);
-            if(entity.getHitbox().getCenterY() > stair.get().getHitbox().getCenterY() && floorTile.isPresent() && entity.getCurrentDirection().equals(Movement.DOWN)) {
-                fixHeight(entity, floorTile.get());
+        else if((stair.isPresent() && !entity.getStatus().equals(EntityStatus.Falling)) || entity.getStatus() == EntityStatus.Climbing ) {
+            if(entity.getStatus() != EntityStatus.Climbing) {
+                entity.setStatus(EntityStatus.Climbing);
+            }
+            else if(entity.getCurrentDirection() == Movement.DOWN && stair.isPresent()) {
+                if(entity.getHitbox().getCenterY() > stair.get().getHitbox().getCenterY() && floorTile.isPresent() && entity.getCurrentDirection().equals(Movement.DOWN)) {
+                    fixHeight(entity, floorTile.get());
+                }
             }
         }
         else{

@@ -1,10 +1,7 @@
 package model.entities;
 
-import java.awt.Dimension;
-import java.util.Optional;
-
-public class BarrelGoingDownTheStairs extends AbstractBarrelImpl implements AbstractBarrel {
-    
+public class BarrelGoingDownTheStairs {
+    /*
     private final static double GRAVITY = 0.02;
     private final static double ZERO = 0.0;
 
@@ -33,5 +30,5 @@ public class BarrelGoingDownTheStairs extends AbstractBarrelImpl implements Abst
         this.move(Optional.empty());
     }
 
-  
+  */
 }

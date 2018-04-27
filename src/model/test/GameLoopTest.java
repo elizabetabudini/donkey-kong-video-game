@@ -28,7 +28,7 @@ public class GameLoopTest {
         //final BasicModel model = new BasicModel();
         final BarrelFactory bf = new BarrelFactoryImpl();
         final List<AbstractBarrel> simpleBarrels = new ArrayList<>();
-        simpleBarrels.add(bf.createSimpleBarrel(10.0, 20.0, new Dimension(100,100)));
+        simpleBarrels.add(bf.createStandardBarrel(10.0, 20.0, new Dimension(100,100)));
         final GameEngineImpl ge = new GameEngineImpl(new GameScreenImpl(new DrawableCanvasImpl(200, 200, "")));
         ge.startGame();
         final Mario mario = ge.getMario();

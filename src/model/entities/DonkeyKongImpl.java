@@ -78,16 +78,14 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
         public void run() {
 
             while (creatingBarrels) {
-                this.barrel = DonkeyKongImpl.this.bf.createSimpleBarrel(STARTING_X_BARREL_POSITION,
+                this.barrel = DonkeyKongImpl.this.bf.createStandardBarrel(STARTING_X_BARREL_POSITION,
                         STARTING_Y_BARREL_POSITION, new Dimension(BARREL_DIMENSION, BARREL_DIMENSION));
                 barrelsList.add(this.barrel);
                 this.launchBarrelAndSleep();
-                this.barrel = DonkeyKongImpl.this.bf.createBarrelMovingDownStairs(STARTING_X_BARREL_POSITION,
+                this.barrel = DonkeyKongImpl.this.bf.createClimbingBarrel(STARTING_X_BARREL_POSITION,
                         STARTING_Y_BARREL_POSITION, new Dimension(BARREL_DIMENSION, BARREL_DIMENSION));
                 barrelsList.add(this.barrel);
                 this.launchBarrelAndSleep();
-
-                //System.out.println(barrelsList.size());
                 this.checkBarrels();
             }
         }
@@ -136,7 +134,6 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
         public void run() {
             this.stopped = false;
             while (!stopped) {
-                DonkeyKongImpl.this.getBarrelsList().stream().forEach(br -> br.manageBarrelMovement());
                 // System.out.println(getBarrelsList().toString());
                 try {
                     Thread.sleep(GameEngineImpl.PERIOD);

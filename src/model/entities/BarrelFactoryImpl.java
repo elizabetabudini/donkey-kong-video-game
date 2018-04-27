@@ -9,13 +9,13 @@ import java.awt.Dimension;
 public class BarrelFactoryImpl implements BarrelFactory {
     
     @Override
-    public AbstractBarrel createSimpleBarrel(final Double x, final Double y, final Dimension dim) {
-        return new SimpleBarrel(x, y, dim);
+    public AbstractBarrel createStandardBarrel(final Double x, final Double y, final Dimension dim) {
+        return new StandardBarrel(x, y, dim);
     }
     
     @Override
-    public BarrelGoingDownTheStairs createBarrelMovingDownStairs(final Double x, final Double y, final Dimension dim) {
-        return new BarrelGoingDownTheStairs(x, y, dim);
+    public AbstractBarrel createClimbingBarrel(final Double x, final Double y, final Dimension dim) {
+        return new ClimbingBarrel(x, y, dim);
     }
 
 

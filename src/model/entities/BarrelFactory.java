@@ -17,7 +17,7 @@ public interface BarrelFactory {
      * @param dim The dimension of a barrel's hitbox
      * @return A {@link AbstractBarrel}
      */
-    AbstractBarrel createSimpleBarrel(final Double x, final Double y, final Dimension dim);
+    AbstractBarrel createStandardBarrel(final Double x, final Double y, final Dimension dim);
     //Other kind of barrels
     /**
      * A method to create an {@link AbstractBarrel} with the default speed
@@ -31,7 +31,7 @@ public interface BarrelFactory {
      *          The dimension of a barrel's hitbox
      * @return A {@link AbstractBarrel}
      */
-    AbstractBarrel createBarrelMovingDownStairs(final Double x, final Double y, final Dimension dim);
+    AbstractBarrel createClimbingBarrel(final Double x, final Double y, final Dimension dim);
     
     
 }

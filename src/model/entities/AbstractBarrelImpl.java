@@ -8,6 +8,8 @@ import model.ModelImpl;
 /**
  * 
  * An implementation of a {@link AbstractBarrel}
+ * 
+ * Those kind of barrels will flip their horizontal direction at every fall.
  *
  */
 public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements AbstractBarrel, DynamicEntity {
@@ -15,10 +17,9 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     private final static int TRIGGER_HEIGHT = 20;
     private final static int TRIGGER_WIDTH = 5;
     private final static double STEP = 1;
-    private boolean directionChanged;
-    private boolean barrelOnStair;
     private Optional<Entity> trigger;
     protected Movement lastDirection = Movement.RIGHT;
+    private EntityStatus prevStatus;
 
     /**
      * A constructor for a Barrel
@@ -28,68 +29,34 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
      */
     public AbstractBarrelImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
+        setPrevStatus(getStatus());
         this.trigger = Optional.of(new BarrelTriggerImpl(this.getHitbox().getCenterX(), this.getY()-TRIGGER_HEIGHT,
                 new Dimension(TRIGGER_WIDTH, TRIGGER_HEIGHT)));
     }
 
     @Override
-    protected void tryToMove(final Movement dir) {
-        this.setDirection(dir);
+    protected void tryToMove(Movement dir) {
         if (dir == Movement.LEFT) {
             this.setDeltaX(-STEP);
+            this.setDeltaY(0);
         } else if (dir == Movement.RIGHT) {
             this.setDeltaX(STEP);
+            this.setDeltaY(0);
+        } else if(dir == Movement.DOWN) {
+            this.setDeltaY(getDeltaY()+ModelImpl.GRAVITY);
+            this.setDeltaX(0);
         }
     }
 
     @Override
-    public void manageBarrelMovement() {
-        this.setBarrelType();
-        if(!directionChanged) {
-            //TODO modify
-            this.lastDirection = this.getCurrentDirection();
-        }
-        if (ModelImpl.canClimbDown(this)) {
-            if (this instanceof BarrelGoingDownTheStairs) {
-                this.setStatus(EntityStatus.Climbing);
-                //this.setDirection(Movement.DOWN);
-            } else {
-                this.checkDirection();
-            }
-        } else {
-            this.checkDirection();
-        }
+    public void update() {
+        checkDirection();
+        super.update();
     }
-
-    protected abstract void setBarrelType();
-
-    private void changeDirection() { // when a barrel reaches a floor it changes its direction
-        this.directionChanged = true;
-        if (this.lastDirection == Movement.RIGHT) {
-            this.setDirection(Movement.LEFT);
-        } else {
-            this.setDirection(Movement.RIGHT);
-        }
-    }
-
-    protected void setBarrelOnStair(final boolean barrelOnStair) {
-        this.barrelOnStair = barrelOnStair;
-    }
-
-    private void checkDirection() {
-        if (this.getStatus() == EntityStatus.OnTheFloor) {
-            if (this.getCurrentDirection() == Movement.RIGHT) {
-                this.addMovement(Movement.RIGHT);
-            } else {
-                this.addMovement(Movement.LEFT);
-            }
-            this.directionChanged = false;
-        } else { // the barrel is falling down
-            if (!directionChanged) {
-                this.changeDirection();
-            }
-        }
-    }
+    
+    abstract void changeDir();
+    
+    abstract void checkDirection();
     
     @Override
     public Optional<Entity> getTrigger() {
@@ -109,7 +76,16 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
 
     @Override
     public String toString() {
-        return "DEBUG INFORMATION BARREL: Status : [" + this.getStatus() + "]";
+        return "BARREL | Coord[" + this.getX() + "," + this.getY() + "] - " + "Direction["
+                + this.getCurrentDirection() + "] - Dy[" + "Status["
+                + this.getStatus() + "] - Dy[" + this.getDeltaY() + "]" + " - Dx[" + this.getDeltaX() + "]";
     }
 
+    public EntityStatus getPrevStatus() {
+        return prevStatus;
+    }
+
+    public void setPrevStatus(EntityStatus prevStatus) {
+        this.prevStatus = prevStatus;
+    }
 }

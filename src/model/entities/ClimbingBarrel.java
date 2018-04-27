@@ -10,41 +10,36 @@ import model.ModelImpl;
  *
  */
 
-public class ClimbingBarrel extends AbstractBarrelImpl{
-    
+public class ClimbingBarrel extends AbstractBarrelImpl {
+
     private Movement lastDirX;
 
-    public ClimbingBarrel(Double x, Double y, Dimension dim) {
+    public ClimbingBarrel(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
         lastDirX = getCurrentDirection();
     }
 
     @Override
     protected void checkDirection() {
-        if(ModelImpl.canClimbDown(this) && getStatus() != EntityStatus.Climbing) {
-            changeDir();
+        if (ModelImpl.canClimbDown(this) && getStatus() != EntityStatus.Climbing) {
+            this.changeDirection();
             this.setStatus(EntityStatus.Climbing);
+        } else if (getStatus() == EntityStatus.OnTheFloor) {
+            this.setDirection(lastDirX);
         }
-        else{
-            if(getStatus() == EntityStatus.OnTheFloor) {
-                this.setDirection(lastDirX);
-            }
-            this.addMovement(getCurrentDirection());
-        }
+        this.addMovement(getCurrentDirection());
     }
-    
-    
-    protected void changeDir() {
+
+    protected void changeDirection() {
         this.setDirection(Movement.DOWN);
         this.addMovement(Movement.DOWN);
-        
-        if(lastDirX == Movement.RIGHT) {
+
+        if (lastDirX == Movement.RIGHT) {
             this.addMovement(Movement.LEFT);
             lastDirX = Movement.LEFT;
-        }
-        else if(lastDirX == Movement.LEFT) {
+        } else if (lastDirX == Movement.LEFT) {
             this.addMovement(Movement.RIGHT);
             lastDirX = Movement.RIGHT;
-        } 
+        }
     }
 }

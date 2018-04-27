@@ -27,5 +27,19 @@ public interface AbstractBarrel extends DynamicEntity {
      * 
      */
     void removeTrigger();
+    
+    /**
+     * A method to get the previous status of the barrel.
+     * @return 
+     *          The {@link EntityStatus}
+     */
+    EntityStatus getPrevStatus();
+    
+    /**
+     * A method to set the previous status of the barrel
+     * @param prevStatus 
+     *          The previous {@link EntityStatus} of the barrel
+     */
+    void setPrevStatus(final EntityStatus prevStatus);
 
 }

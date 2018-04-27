@@ -1,13 +1,10 @@
 package model;
 
 import java.util.List;
-import java.util.Optional;
 
 import controller.levels.levelManager;
 import model.entities.DynamicEntity;
-import model.entities.EntityStatus;
 import model.entities.FloorTile;
-import model.entities.Movement;
 import model.entities.Stair;
 import model.levels.GameLevel;
 
@@ -28,8 +25,8 @@ public abstract class ModelImpl implements ModelInterface{
     public static double gameDifficulty;
    
     //player info
-    private int score;
-    protected int currentLives;
+    private static int score;
+    protected static int currentLives;
     
     //level
     protected levelManager levelManager;
@@ -38,25 +35,23 @@ public abstract class ModelImpl implements ModelInterface{
     protected static List<? extends FloorTile> floor;
     
     public ModelImpl() {
-        this.score = 0;
-        this.currentLives = PLAYER_LIFE;
+        ModelImpl.score = 0;
+        ModelImpl.currentLives = PLAYER_LIFE;
         gameDifficulty = 1;
         levelManager = new levelManager();
         setCurrentLevel(levelManager.getNextLevel());
     }
     
-    @Override
-    public int getScore() {
-        return this.score;
+    public static int getScore() {
+        return ModelImpl.score;
     }
     
     public void updateScore(int score) {
-        this.score = this.getScore()+score;
+        ModelImpl.score = ModelImpl.score+score;
     }
     
-    @Override
     public int getLife() {
-        return this.currentLives;
+        return ModelImpl.currentLives;
     }
     
     protected GameLevel getCurrentLevel() {
@@ -73,28 +68,7 @@ public abstract class ModelImpl implements ModelInterface{
      */
     protected abstract void checkCollisions();
     
-    //TODO to watch later, could be deleted
-    /**
-     * The function that checks if the given entity is within the game borders.
-     * 
-     */
-    public static Optional<Movement> borderCheck(final DynamicEntity entity) {
-        if (entity.getHitbox().getMaxX() > WIDTH) {
-            return Optional.of(Movement.RIGHT);
-        }
-        else if(entity.getHitbox().getMaxY() > HEIGHT){
-            return Optional.of(Movement.DOWN);
-        }
-        else if(entity.getX() < 0 ){
-            return Optional.of(Movement.LEFT);
-        }
-        else if(entity.getY() < 0) {
-            return Optional.of(Movement.UP);
-        }
-        else {
-            return Optional.empty();
-        }
-    }
+
     
     public GameStatus getGameStatus() {
         return gameStatus;
@@ -115,6 +89,14 @@ public abstract class ModelImpl implements ModelInterface{
         gameStatus = GameStatus.Over ;
     }
     
+    protected Boolean checkGameOver() {
+        return this.getLife() <= 0;
+    }
+    
+    public static Boolean isOver() {
+        return gameStatus == GameStatus.Over ? true : false;
+    }
+    
     public void victory() {
         if(levelManager.isLast()) {
             updateGameDifficulty();
@@ -125,10 +107,6 @@ public abstract class ModelImpl implements ModelInterface{
     
     protected void setGameStatus(GameStatus currentStatus) {
         gameStatus = currentStatus;
-    }
-    
-    public Boolean isOver() {
-        return this.getLife() <= 0;
     }
     
     private void updateGameDifficulty() {

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import controller.GameEngine;
 import controller.GameEngineImpl;
+import utilities.Pair;
 
 public class GameFrame {
     /**
@@ -30,7 +31,7 @@ public class GameFrame {
     private final GameEngine gameEngine;
 
     public GameFrame() {
-
+       
         this.canvas = new DrawableCanvasImpl(WORLD_WIDTH, WORLD_HEIGHT, "level1st_backgroud.png");
         this.gamescreen = new GameScreenImpl(canvas);
         this.gameEngine = new GameEngineImpl(gamescreen);
@@ -60,15 +61,20 @@ public class GameFrame {
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if (JOptionPane.showConfirmDialog(frame, "Vuoi uscire dal gioco?", "Exit Game?",
+                
+                if (GameEngineImpl.isGameOver()) {
+                    ViewImpl.getHighScoreManager().addScore(new Pair<>(JOptionPane.showInputDialog("inserire il nome"), GameEngineImpl.getScore()));
+                    frame.dispose();
+                    gameEngine.abortGameLoop();
+                    MenuFrame.getMenuFrame().showMenu();
+                }
+                else if (JOptionPane.showConfirmDialog(frame, "Vuoi uscire dal gioco?", "Exit Game?",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     frame.dispose();
                     gameEngine.abortGameLoop();
                     MenuFrame.getMenuFrame().showMenu();
-
                 }
             }
         });
-
     }
 }

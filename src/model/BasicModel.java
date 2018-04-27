@@ -65,7 +65,7 @@ public class BasicModel extends ModelImpl{
      * 
      * @return the list containing all the floor tiles.
      */
-    public List<? extends FloorTile> getFloor() {
+    private List<? extends FloorTile> getFloor() {
         return this.getCurrentLevel().getFloor();
     }
     
@@ -74,7 +74,7 @@ public class BasicModel extends ModelImpl{
      * 
      * @return the list containing all the stairs.
      */
-    public List<? extends Stair> getStairs() {
+    private List<? extends Stair> getStairs() {
         return this.getCurrentLevel().getStairs();
     }
 
@@ -104,7 +104,7 @@ public class BasicModel extends ModelImpl{
         
 
         if(this.getMario().getStatus().equals(EntityStatus.Dead)) {
-            if(!this.isOver()) {
+            if(!this.checkGameOver()) {
                 currentLives--;
                 getMario().setX(this.getCurrentLevel().getMarioSpawn().getX());
                 getMario().setY(this.getCurrentLevel().getMarioSpawn().getY());
@@ -114,10 +114,6 @@ public class BasicModel extends ModelImpl{
             else {
                 gameOver();
             }   
-        }
-
-        //TODO to complete
-        if(this.getGameStatus().equals(GameStatus.Won)) {
         }
     }
     
@@ -136,41 +132,26 @@ public class BasicModel extends ModelImpl{
         floorTile = this.getFloor().stream().filter(T -> entity.isColliding(T)).findFirst();
         stair = this.getStairs().stream().filter(S -> entity.isColliding(S)).findFirst();
         
-        
-        if(floorTile.isPresent() && entity.getStatus() != EntityStatus.Climbing) {
+        //upper stair end
+        if(!stair.isPresent() && entity.getStatus() == EntityStatus.Climbing && entity.getCurrentDirection().equals(Movement.UP)) {
+            entity.setStatus(EntityStatus.Falling);
+        }
+        //bottom stair end
+        else if(floorTile.isPresent() && entity.getStatus() != EntityStatus.Climbing) {
             fixHeight(entity, floorTile.get());
         }
+        //middle stair
         else if((stair.isPresent() && !entity.getStatus().equals(EntityStatus.Falling)) || entity.getStatus() == EntityStatus.Climbing ) {
-            if(entity.getStatus() != EntityStatus.Climbing) {
-                entity.setStatus(EntityStatus.Climbing);
-            }
-            else if(entity.getCurrentDirection() == Movement.DOWN && stair.isPresent()) {
+            if(entity.getCurrentDirection() == Movement.DOWN && stair.isPresent()) {
                 if(entity.getHitbox().getCenterY() > stair.get().getHitbox().getCenterY() && floorTile.isPresent() && entity.getCurrentDirection().equals(Movement.DOWN)) {
                     fixHeight(entity, floorTile.get());
                 }
             }
         }
+        //not interacting with a stair
         else{
             entity.setStatus(EntityStatus.Falling);
-        }   
-    }
-    
-    //TODO to delete
-    private void checkStairs(final DynamicEntity entity) {
-        this.getStairs().stream().forEach(S -> {
-            if(entity.isColliding(S.getUpperTriggerL()) && entity.getY()+entity.getHitbox().getHeight() == S.getUpperTriggerL().getY()+S.getUpperTriggerL().getHitbox().getHeight()) {
-                entity.setStatus(EntityStatus.CanClimbDown);
-                return;
-            }
-            else if (entity.isColliding(S) && entity.getY()+entity.getHitbox().getHeight() == S.getY()+S.getHitbox().getHeight()) {
-                entity.setStatus(EntityStatus.CanClimbUp);
-                return;
-            }
-            if (entity.isColliding(S)) {
-                entity.setStatus(EntityStatus.Climbing);
-                return;
-            }
-        });
+        }
     }
 
     private void checkBarrels(final Mario mario) {

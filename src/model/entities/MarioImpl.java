@@ -89,8 +89,8 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
         if (dir == Movement.JUMP && this.getStatus() == EntityStatus.OnTheFloor) {
             this.jump();
         }
-        if (ModelImpl.borderCheck(this).isPresent()) {
-            stopMoving(ModelImpl.borderCheck(this).get());
+        if (!isWithinBorder()) {
+            stopMoving(dir);
         }
         /**
          * Debug purpose:

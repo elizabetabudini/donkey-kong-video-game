@@ -4,6 +4,7 @@ import java.util.Set;
 import javax.swing.SwingUtilities;
 import model.BasicModel;
 import model.GameStatus;
+import model.ModelImpl;
 import model.entities.BarrelGoingDownTheStairs;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
@@ -96,9 +97,24 @@ public class GameEngineImpl implements GameEngine {
         return this.gameRunning;
     }
 
-    @Override
-    public Integer getScore() {
-        return this.model.getScore();
+    /**
+     * A method to know if the game is over
+     * Check if {@link ModelImpl} status is set on {@link GameStatus} OVER
+     * @return 
+     *          A boolean
+     */
+    public static Boolean isGameOver() {
+        return ModelImpl.isOver();
+    }
+    
+    /**
+     * A method to get the score of the game
+     * Whenever {@link Mario} jump and avoid a {@link Barrel} it gets points
+     * @return 
+     *          The current score 
+     */
+    public static Integer getScore() {
+        return ModelImpl.WIDTH;
     }
 
     private void translateInputs() {
@@ -229,19 +245,15 @@ public class GameEngineImpl implements GameEngine {
         }
 
         public void run() {
-            while (!this.stopped && !this.isGameOver()) {
+            while (!this.stopped && !ModelImpl.isOver()) {
                 this.checkVictory();
                 final long currentTime = System.currentTimeMillis();
                 processInput();
                 updateGame();
                 render();
-                ScoreLifePanel.updateScore(model.getLife(),model.getScore());
+                ScoreLifePanel.updateScore(model.getLife(),ModelImpl.getScore());
                 waitNextFrame(currentTime);
             }
-        }
-
-        private boolean isGameOver() {
-            return model.getGameStatus() == GameStatus.Over ? true : false;
         }
 
         protected void stopThread() {

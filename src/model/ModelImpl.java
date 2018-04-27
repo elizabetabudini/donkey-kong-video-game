@@ -164,8 +164,8 @@ public abstract class ModelImpl implements ModelInterface{
      *          
      * @return a boolean, true if is within borders, false otherwise
      */
-    public static boolean isWithinBorders(final DynamicEntity entity, final int x) {
-        if(entity.getHitbox().getWidth() + x > ModelImpl.WIDTH || x < 0) {
+    public static boolean isWithinBorders(final DynamicEntity entity, final double d) {
+        if(entity.getHitbox().getWidth() + d > ModelImpl.WIDTH || d < 0) {
             return false;
         }
         return true;

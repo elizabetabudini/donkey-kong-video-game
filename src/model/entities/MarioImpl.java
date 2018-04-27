@@ -89,29 +89,19 @@ public final class MarioImpl extends DynamicEntityImpl implements Mario, Dynamic
         if (dir == Movement.JUMP && this.getStatus() == EntityStatus.OnTheFloor) {
             this.jump();
         }
-        if (!isWithinBorder()) {
+        if (!ModelImpl.isWithinBorders(this, this.getX() + this.getDeltaX())) {
             stopMoving(dir);
         }
         /**
          * Debug purpose:
          */
-        //System.out.println(this.toString());
+        // System.out.println(this.toString());
     }
 
     private void jump() {
         jumping = true;
         this.setStatus(EntityStatus.Falling);
         this.setDeltaY(JUMP_DISTANCE);
-    }
-
-    /**
-     * Checks whether or not Mario is trying to move outside game's borders.
-     * 
-     * @return true if Mario is still within borders, false otherwise.
-     */
-    private boolean isWithinBorder() {
-        final double newCoord = this.getX() + this.getDeltaX();
-        return newCoord >= 0 && newCoord <= ModelImpl.WIDTH;
     }
 
     private Boolean checkMovement() {

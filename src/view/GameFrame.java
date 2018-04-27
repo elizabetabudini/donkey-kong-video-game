@@ -18,7 +18,7 @@ public class GameFrame {
      */
 
     private final GameScreenImpl gsPanel;
-    private final ScoreTimePanel scorePanel;
+    private final ScoreLifePanel scorePanel;
     private final JFrame frame;
     private final GameScreenImpl gamescreen;
     private final DrawableCanvas canvas;
@@ -42,7 +42,7 @@ public class GameFrame {
 
         final JPanel mainPanel = new JPanel(new BorderLayout());
         // creating new score panel
-        this.scorePanel = new ScoreTimePanel();
+        this.scorePanel = new ScoreLifePanel();
         mainPanel.add(this.scorePanel, BorderLayout.NORTH);
 
         frame.setSize((int) (screenRes.getWidth() * WIDHT), (int) (screenRes.getHeight() * HEIGHT));// prova

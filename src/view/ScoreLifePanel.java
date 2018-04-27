@@ -14,7 +14,7 @@ import javax.swing.SwingUtilities;
  * Panel on which display the time elapsed and the score during the game it will
  * be shown on the GameFrame beside the GameScreenPanel
  */
-public class ScoreTimePanel extends JPanel {
+public class ScoreLifePanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,7 @@ public class ScoreTimePanel extends JPanel {
      * Creates a new Panel.
      * 
      */
-    public ScoreTimePanel() {
+    public ScoreLifePanel() {
 
         score = new JLabel();
         score.setFont(this.font);
@@ -46,7 +46,7 @@ public class ScoreTimePanel extends JPanel {
      */
     public static void updateScore(final int lives, final int score) {
         SwingUtilities.invokeLater(() -> {
-            ScoreTimePanel.score.setText("Lives: " + lives + " | Score: " + score);
+            ScoreLifePanel.score.setText("Lives: " + lives + " | Score: " + score);
         });
     }
 

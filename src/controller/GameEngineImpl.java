@@ -14,7 +14,7 @@ import model.entities.Princess;
 import view.DrawableCanvas;
 import view.GameScreenImpl;
 import view.InputHandler;
-import view.ScoreTimePanel;
+import view.ScoreLifePanel;
 import view.Sprites;
 
 public class GameEngineImpl implements GameEngine {
@@ -235,7 +235,7 @@ public class GameEngineImpl implements GameEngine {
                 processInput();
                 updateGame();
                 render();
-                ScoreTimePanel.updateScore(model.getLife(),model.getScore());
+                ScoreLifePanel.updateScore(model.getLife(),model.getScore());
                 waitNextFrame(currentTime);
             }
         }

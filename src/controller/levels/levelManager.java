@@ -21,7 +21,6 @@ public class levelManager {
     
     public levelManager(){
         availableLevels = new ArrayList<>(Arrays.asList(DIR.listFiles())).stream().filter(X -> X.toString().contains(".txt")).sorted().collect(Collectors.toList());
-        //levels = availableLevels.stream().map(X -> buildBasicLevel(X)).collect(Collectors.toList()).listIterator();
         levels = availableLevels.stream().collect(Collectors.toList()).listIterator();
     }
     

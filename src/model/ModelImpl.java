@@ -154,4 +154,20 @@ public abstract class ModelImpl implements ModelInterface{
                 .isPresent()
                     ? true : false;
     }
+    
+    /**
+     * The function that check if the given entity is within the man border.
+     * This function checks only horizontal parameter.
+     * 
+     * @param entity
+     *          the DynamicEntity that is making the request.
+     *          
+     * @return a boolean, true if is within borders, false otherwise
+     */
+    public static boolean isWithinBorders(final DynamicEntity entity, final int x) {
+        if(entity.getHitbox().getWidth() + x > ModelImpl.WIDTH || x < 0) {
+            return false;
+        }
+        return true;
+    }
 }

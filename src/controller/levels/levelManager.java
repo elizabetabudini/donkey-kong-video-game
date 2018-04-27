@@ -35,19 +35,26 @@ public class levelManager {
      *          it always returns a level.
      */
     public GameLevel getNextLevel(){
+
         if(levels.hasNext()) {
             return buildBasicLevel(levels.next());
         }
         else {
-            while(levels.previousIndex() > 0) {
+            while(levels.previousIndex() >= 0) {
                 levels.previous();
             }
             return buildBasicLevel(levels.next());
         }
     }
     
+    /**
+     * A way to know if the avaible levels are over.
+     * 
+     * @return
+     *          a boolean, true is the current level is the last one.
+     */
     public boolean isLast() {
-        return !levels.hasNext() ? false : true;
+        return levels.hasNext() ? false : true;
     }
     
 }

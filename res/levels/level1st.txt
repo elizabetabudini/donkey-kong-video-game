@@ -4,7 +4,7 @@ name level1st
 
 image_directory imagedirectory/imagename.png
 
-mario 50.0 482.0 25 30
+mario 50.0 512.0 25 25
 donkey_kong 15.0 53.0 60 60
 princess 135.5 9.0 30 30
 

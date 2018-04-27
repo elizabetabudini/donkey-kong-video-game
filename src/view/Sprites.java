@@ -76,10 +76,21 @@ public enum Sprites {
      * The barrel sprite, falling down the stairs.
      */
     BARREL_FALLING_ON_STAIRS("barrel_falling_on_stair.gif", new Dimension(25, 20)),
-    
+
+    /**
+     * Test sprite of a floor for debug purpose.
+     */
     TEST_FLOOR("floor_tile_test.png", new Dimension(100, 22)),
-    TEST_STAIR("stair_test.png", new Dimension(12,50)),
-    TEST_STAIR_TRIGGER("stair_trigger_test.png", new Dimension(1,2));
+
+    /**
+     * Test sprite of a stair for debug purpose.
+     */
+    TEST_STAIR("stair_test.png", new Dimension(12, 50)),
+
+    /**
+     * Test sprite of a Trigger for debug purpose.
+     */
+    TEST_STAIR_TRIGGER("stair_trigger_test.png", new Dimension(1, 2));
 
     private static final String SPRITES_FOLDER = "sprites/";
     private final String imagePath;

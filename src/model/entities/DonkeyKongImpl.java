@@ -88,7 +88,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
 
             while (creatingBarrels && ModelImpl.isRunning()) {
                 this.randomCreationFlag = this.random.nextInt(TWO);
-                if (ModelImpl.isRunning()) {
+                if (ModelImpl.isRunning() && this.randomCreationTime.nextBoolean()) {
                     if (this.randomCreationFlag == ONE) {
                         this.barrel = DonkeyKongImpl.this.bf.createStandardBarrel(STARTING_X_BARREL_POSITION,
                                 STARTING_Y_BARREL_POSITION, new Dimension(BARREL_DIMENSION, BARREL_DIMENSION));

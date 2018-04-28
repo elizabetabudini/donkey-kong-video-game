@@ -93,13 +93,12 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
                         this.barrel = DonkeyKongImpl.this.bf.createStandardBarrel(STARTING_X_BARREL_POSITION,
                                 STARTING_Y_BARREL_POSITION, new Dimension(BARREL_DIMENSION, BARREL_DIMENSION));
                         barrelsList.add(this.barrel);
-                        this.launchBarrelAndSleep();
                     } else {
                         this.barrel = DonkeyKongImpl.this.bf.createClimbingBarrel(STARTING_X_BARREL_POSITION,
                                 STARTING_Y_BARREL_POSITION, new Dimension(BARREL_DIMENSION, BARREL_DIMENSION));
                         barrelsList.add(this.barrel);
-                        this.launchBarrelAndSleep();
                     }
+                    this.launchBarrelAndSleep();
                     this.checkBarrels();
                 }
             }

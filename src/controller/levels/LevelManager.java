@@ -1,8 +1,11 @@
 package controller.levels;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,6 +14,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
+
+import javax.imageio.ImageIO;
+
+import org.apache.commons.io.FileUtils;
 
 import model.levels.BasicLevel;
 import model.levels.BasicLevelBuilder;
@@ -34,8 +41,18 @@ public class LevelManager {
     }
     
     public File getLevel(final String path) {
-            final URL levelURL = LevelManager.class.getResource("/" + path);
-            return new File(levelURL.getPath());
+            try {
+                final File file = new File("level1.txt");
+                FileUtils.copyInputStreamToFile(this.getClass().getResourceAsStream("/" + path), file);
+                return file;
+                
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return null;
+        
+
     }
     
     /**

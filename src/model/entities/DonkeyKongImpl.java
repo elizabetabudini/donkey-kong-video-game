@@ -123,10 +123,10 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
                 this.interrupt();
             }
         }
-        
+
         private int getSleepTime() {
             return STARTING_TIME + this.randomCreationTime
-                    .nextInt((int)(MAX_TIME/ModelImpl.gameDifficulty));
+                    .nextInt((int) (MAX_TIME / ModelImpl.getGameDifficulty()));
         }
 
         protected void stopThread() {

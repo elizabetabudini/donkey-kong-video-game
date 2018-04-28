@@ -10,25 +10,32 @@ import model.entities.Princess;
 import model.levels.BasicLevel;
 
 /**
- * The class to manage a {@link BasicLevel}
+ * 
+ * The class to manage a {@link BasicLevel}.
  */
 
-public class BasicModel extends ModelImpl{
-    
-    private final static int BARREL_SCORE = 150;
+public class BasicModel extends ModelImpl {
 
+    private static final int BARREL_SCORE = 150;
+
+    /**
+     * The constructor of a basic model.
+     */
     public BasicModel() {
         super();
         start();
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public void start() {
         stairs = this.getCurrentLevel().getStairs();
         floor = this.getCurrentLevel().getFloor();
         this.restart();
         this.getDonkeyKong().startDonkeyKongThreads();
     }
-    
+
     private void restart() {
         setGameStatus(GameStatus.Running);
     }
@@ -69,51 +76,58 @@ public class BasicModel extends ModelImpl{
         return this.getDonkeyKong().getBarrelsList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected BasicLevel getCurrentLevel() {
         return (BasicLevel) super.getCurrentLevel();
     }
 
+    /**
+     * {@inheritDoc}}
+     */
     public void updateGame() {
-        if(isRunning()) {
+        if (isRunning()) {
             getMario().update();
-            if(!getBarrels().isEmpty()) {
+            if (!getBarrels().isEmpty()) {
                 getBarrels().forEach(X -> {
                     X.update();
                 });
             }
             checkCollisions();
         }
-        
-        if(this.getMario().getStatus().equals(EntityStatus.Dead)) {
+
+        if (this.getMario().getStatus().equals(EntityStatus.Dead)) {
             currentLives--;
-            if(!this.checkGameOver()) {
+            if (!this.checkGameOver()) {
                 getDonkeyKong().clearBarrelsList();
                 getMario().setX(this.getCurrentLevel().getMarioSpawn().getX());
                 getMario().setY(this.getCurrentLevel().getMarioSpawn().getY());
                 getMario().setStatus(EntityStatus.OnTheFloor);
                 restart();
-            }
-            else {
+            } else {
                 gameOver();
-            }   
+            }
         }
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     protected void checkCollisions() {
         checkStatus(this.getMario());
         checkBarrels(this.getMario());
         processBarrels(getBarrels());
         this.checkVictory(this.getMario());
     }
-    
+
     private void checkBarrels(final Mario mario) {
         this.getBarrels().forEach(X -> {
-            if(mario.isColliding(X)) {
+            if (mario.isColliding(X)) {
                 mario.setStatus(EntityStatus.Dead);
                 return;
-            }
-            else if(X.getTrigger().isPresent()) {
-                if(mario.isColliding(X.getTrigger().get()) && mario.getStatus().equals(EntityStatus.Falling)) {
+            } else if (X.getTrigger().isPresent()) {
+                if (mario.isColliding(X.getTrigger().get()) && mario.getStatus().equals(EntityStatus.Falling)) {
                     updateScore(BARREL_SCORE);
                     X.removeTrigger();
                     return;
@@ -124,13 +138,13 @@ public class BasicModel extends ModelImpl{
     }
 
     private void processBarrels(final List<AbstractBarrel> barrels) {
-        if(!barrels.isEmpty()) {
-        barrels.stream().forEach(X -> this.checkStatus(X));
+        if (!barrels.isEmpty()) {
+            barrels.stream().forEach(X -> this.checkStatus(X));
         }
     }
 
     private void checkVictory(final Mario mario) {
-        if(mario.isColliding(getPrincess())) {
+        if (mario.isColliding(getPrincess())) {
             victory();
         }
     }

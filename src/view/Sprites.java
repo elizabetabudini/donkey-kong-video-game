@@ -75,7 +75,7 @@ public enum Sprites {
     /**
      * The barrel sprite, falling down the stairs.
      */
-    BARREL_FALLING_ON_STAIRS("barrel_falling_on_stair.gif", new Dimension(25, 20)),
+    BARREL_CLIMBING("barrel_climbing.gif", new Dimension(25, 20)),
 
     /**
      * Test sprite of a floor for debug purpose.

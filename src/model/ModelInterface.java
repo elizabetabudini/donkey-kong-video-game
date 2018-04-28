@@ -1,7 +1,7 @@
 package model;
 
 /**
- * The interface that defines the main methods to build the game.
+ * The interface that defines the main methods to create the game.
  */
 
 public interface ModelInterface {
@@ -14,19 +14,29 @@ public interface ModelInterface {
     int getLife();
     
     /**
-     * set GameStatus to running.
+     * The method to call to update the model on a level switch.
+     * It is necessary to synchronize controller and model on a
+     *          victory event.
      */
     void start();
     
     /**
-     * set GameStatus to pause.
+     * The method used to stop the game momentarily.
      */
     void pause();
     
     /**
-     * set GameStatus to Over.
+     * Set GameStatus to Over.
      */
     void gameOver();
+    
+    /**
+     * The method to check if the current level has been accomplished.
+     * 
+     * @return boolean
+     *          true if the player completed the current level, false otherwise.
+     */
+    boolean won();
     
     /**
      * The main function that update the entities and the game itself.

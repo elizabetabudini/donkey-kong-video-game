@@ -63,7 +63,7 @@ public class GameFrame {
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 
                 if (GameEngineImpl.isGameOver()) {
-                    ViewImpl.getHighScoreManager().addScore(new Pair<>(JOptionPane.showInputDialog("inserire il nome"), GameEngineImpl.getScore()));
+                    ViewImpl.getHighScoreManager().addScore(new Pair<>(JOptionPane.showInputDialog("Registra il punteggio: "+ GameEngineImpl.getScore()), GameEngineImpl.getScore()));
                     frame.dispose();
                     gameEngine.abortGameLoop();
                     MenuFrame.getMenuFrame().showMenu();

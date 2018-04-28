@@ -19,7 +19,6 @@ public class HomePanel extends JPanel {
      * exit the application
      */
     private static final long serialVersionUID = 1L;
-    private GameFrame gameFrame;
     private final JButton newGame;
     private final JButton exit;
 
@@ -41,7 +40,7 @@ public class HomePanel extends JPanel {
         newGame.setBorderPainted(false);
 
         newGame.addActionListener(e -> {
-            this.gameFrame = new GameFrame();
+            new GameFrame();
             MenuFrame.getMenuFrame().dispose();
 
         });

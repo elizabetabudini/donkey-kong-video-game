@@ -27,6 +27,7 @@ public class GameEngineImpl implements GameEngine {
     private DonkeyKong dk;
     private Princess princess;
 
+    private boolean pause;
     private GameLoop gameLoop;
     private final GameScreenImpl gameScreen;
     private boolean gameRunning;
@@ -131,6 +132,10 @@ public class GameEngineImpl implements GameEngine {
                 return Movement.UP;
             case SPACE:
                 return Movement.JUMP;
+            case P:
+                return Movement.PAUSE;
+            case R:
+                return Movement.RESUME;
             default:
                 return null;
             }
@@ -239,6 +244,16 @@ public class GameEngineImpl implements GameEngine {
      */
     private void processInput() {
         final Set<Movement> parsedMovements = translator.inputParser(handler.parser(true));
+        if(parsedMovements.contains(Movement.PAUSE) && !pause) {
+            pause = true;
+            model.pause();
+        }
+        if(parsedMovements.contains(Movement.RESUME)) {
+            pause = false;
+            model.restart();
+        }
+        parsedMovements.remove(Movement.PAUSE);
+        parsedMovements.remove(Movement.RESUME);
 
         for (final Movement dir : parsedMovements) {
             mario.addMovement(dir);

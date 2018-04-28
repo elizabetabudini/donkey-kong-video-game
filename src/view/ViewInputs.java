@@ -5,6 +5,6 @@ package view;
  * 
  */
 public enum ViewInputs {
-    W, A, S, D, ARROW_UP, ARROW_LEFT, ARROW_RIGHT, ARROW_DOWN, SPACE;
+    W, A, S, D, ARROW_UP, ARROW_LEFT, ARROW_RIGHT, ARROW_DOWN, SPACE , P, R;
 
 }

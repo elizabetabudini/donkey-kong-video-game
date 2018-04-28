@@ -87,6 +87,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
         public void run() {
 
             while (creatingBarrels && ModelImpl.isRunning()) {
+                System.out.println("Donkey funziona");
                 this.randomCreationFlag = this.random.nextInt(TWO);
                 if (ModelImpl.isRunning() && this.randomCreationTime.nextBoolean()) {
                     if (this.randomCreationFlag == ONE) {

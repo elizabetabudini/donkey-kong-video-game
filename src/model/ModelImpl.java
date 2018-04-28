@@ -56,6 +56,10 @@ public abstract class ModelImpl implements ModelInterface{
         setCurrentLevel(levelManager.getNextLevel());
     }
     
+    public void restart() {
+        setGameStatus(GameStatus.Running);
+    }
+    
     public static int getScore() {
         return ModelImpl.score;
     }

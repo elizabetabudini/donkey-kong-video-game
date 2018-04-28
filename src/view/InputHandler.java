@@ -38,6 +38,8 @@ public final class InputHandler extends KeyAdapter {
         registeredKeys.put(KeyEvent.VK_LEFT, ViewInputs.ARROW_LEFT); 
         registeredKeys.put(KeyEvent.VK_A, ViewInputs.ARROW_LEFT);
         registeredKeys.put(KeyEvent.VK_SPACE, ViewInputs.SPACE); 
+        registeredKeys.put(KeyEvent.VK_P, ViewInputs.P); 
+        registeredKeys.put(KeyEvent.VK_R, ViewInputs.R); 
     }
 
     /**

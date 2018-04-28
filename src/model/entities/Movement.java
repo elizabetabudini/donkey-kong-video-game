@@ -28,6 +28,9 @@ public enum Movement {
     /**
      * The character tries to jump.
      */
-    JUMP;
+    JUMP,
+    
+    PAUSE,
+    RESUME;
 
 }

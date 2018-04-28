@@ -29,9 +29,7 @@ public class BasicModel extends ModelImpl{
         this.getDonkeyKong().startDonkeyKongThreads();
     }
     
-    private void restart() {
-        setGameStatus(GameStatus.Running);
-    }
+
 
     /**
      * Getter for {@link Mario}.

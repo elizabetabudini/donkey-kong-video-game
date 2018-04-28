@@ -262,10 +262,10 @@ public class GameEngineImpl implements GameEngine {
         }
 
         private void checkVictory() {
-            if (model.getGameStatus() == GameStatus.Won) {
+            if (model.won()) {
                 dk.stopThreads();
                 initCharacters();
-                model.startLevel();
+                model.start();
             }
         }
 

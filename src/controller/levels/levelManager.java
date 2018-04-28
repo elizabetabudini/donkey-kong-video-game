@@ -8,8 +8,16 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
 
+import model.levels.BasicLevel;
 import model.levels.BasicLevelBuilder;
 import model.levels.GameLevel;
+
+/**
+ * The level loader
+ * 
+ * WARNING : the loader cannot manage different types of {@link GameLevel} yet.
+ *              At the moment can manage only {@link BasicLevel}
+ */
 
 public class levelManager {
     static final String LEVELS_DIR = Paths.get(".").toAbsolutePath().normalize().toString() + File.separator + "res" + File.separator + "levels";

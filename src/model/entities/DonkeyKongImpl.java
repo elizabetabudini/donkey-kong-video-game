@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import controller.GameEngineImpl;
+import model.ModelImpl;
 
 /**
  *
@@ -20,8 +21,8 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
     private final AgentBarrelsCreator barrels;
     private final MovingBarrels barrelsMovement;
     private final static double ZERO = 0.0;
-    private final static int MAX_TIME = 2500;
-    private final static int STARTING_TIME = 500;
+    private final static int MAX_TIME = 2700;
+    private final static int STARTING_TIME = 450;
     private final static double STARTING_X_BARREL_POSITION = 75.0;
     private final static double STARTING_Y_BARREL_POSITION = 115.0;
     private final static int BARREL_DIMENSION = 20;
@@ -81,15 +82,19 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
 
         public void run() {
 
-            while (creatingBarrels) {
-                this.barrel = DonkeyKongImpl.this.bf.createStandardBarrel(STARTING_X_BARREL_POSITION,
+            while (creatingBarrels && ModelImpl.isRunning()) {
+                if(ModelImpl.isRunning()) {
+                    this.barrel = DonkeyKongImpl.this.bf.createStandardBarrel(STARTING_X_BARREL_POSITION,
                         STARTING_Y_BARREL_POSITION, new Dimension(BARREL_DIMENSION, BARREL_DIMENSION));
-                barrelsList.add(this.barrel);
-                this.launchBarrelAndSleep();
-                this.barrel = DonkeyKongImpl.this.bf.createClimbingBarrel(STARTING_X_BARREL_POSITION,
+                    barrelsList.add(this.barrel);
+                    this.launchBarrelAndSleep();
+                }
+                if(ModelImpl.isRunning()) {
+                    this.barrel = DonkeyKongImpl.this.bf.createClimbingBarrel(STARTING_X_BARREL_POSITION,
                         STARTING_Y_BARREL_POSITION, new Dimension(BARREL_DIMENSION, BARREL_DIMENSION));
-                barrelsList.add(this.barrel);
-                this.launchBarrelAndSleep();
+                    barrelsList.add(this.barrel);
+                    this.launchBarrelAndSleep();
+                }
                 this.checkBarrels();
             }
         }
@@ -108,10 +113,15 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
             }
             DonkeyKongImpl.this.launchingBarrel = false;
             try {
-                Thread.sleep(this.randomCreationTime.nextInt(MAX_TIME) + STARTING_TIME);
+                Thread.sleep(getSleepTime());
             } catch (InterruptedException ex) {
                 this.interrupt();
             }
+        }
+        
+        private int getSleepTime() {
+            return STARTING_TIME + this.randomCreationTime
+                    .nextInt((int)(MAX_TIME/ModelImpl.gameDifficulty));
         }
 
         protected void stopThread() {

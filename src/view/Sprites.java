@@ -69,24 +69,28 @@ public enum Sprites {
      */
     BARREL_LEFT("barrel_rolling_left.gif", new Dimension(20, 20)),
     /**
-     * The climbing barrelOnStair sprite, rotating.
+     * The barrel sprite, falling down the stairs.
      */
-    CLIMBING_BARREL_LEFT("climbing_barrel_right.gif", new Dimension(20, 20)),
+    BARREL_FALLING_ON_STAIRS("barrel_falling_on_stair.gif", new Dimension(24, 24)),
     /**
      * The climbing barrelOnStair sprite, rotating.
      */
-    CLIMBING_BARREL_RIGHT("climbing_barrel_left.gif", new Dimension(20, 20)),
+    CLIMBING_BARREL_LEFT("climbing_barrel_left.gif", new Dimension(20, 20)),
+    /**
+     * The climbing barrelOnStair sprite, rotating.
+     */
+    CLIMBING_BARREL_RIGHT("climbing_barrel_right.gif", new Dimension(20, 20)),
     /**
      * The climbing barrel sprite, falling down the stairs.
      */
     CLIMBING_BARREL("climbing_barrel.gif", new Dimension(25, 20)),
-
     /**
+     * 
      * Test sprite of a floor for debug purpose.
      */
     TEST_FLOOR("floor_tile_test.png", new Dimension(100, 22)),
-
     /**
+     * 
      * Test sprite of a stair for debug purpose.
      */
     TEST_STAIR("stair_test.png", new Dimension(12, 50)),

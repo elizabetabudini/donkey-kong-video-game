@@ -5,6 +5,7 @@ import javax.swing.SwingUtilities;
 import model.BasicModel;
 import model.GameStatus;
 import model.ModelImpl;
+import model.entities.AbstractBarrel;
 import model.entities.ClimbingBarrel;
 import model.entities.DonkeyKong;
 import model.entities.DynamicEntity;
@@ -201,16 +202,23 @@ public class GameEngineImpl implements GameEngine {
                     } else if (this.isMovingRight(br)) {
                         this.drawer.drawEntity(Sprites.CLIMBING_BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
                     } else {
+                        this.drawBarrelRightOrLeft(br);
                         this.drawer.drawEntity(Sprites.CLIMBING_BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
                     }
-                } else if (this.isMovingRight(br)) {
-                    this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
                 } else {
-                    this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
+                    this.drawBarrelRightOrLeft(br);
                 }
             });
         }
         SwingUtilities.invokeLater(() -> gameScreen.updateScreen());
+    }
+    
+    private void drawBarrelRightOrLeft(final AbstractBarrel br) {
+        if (this.isMovingRight(br)) {
+            this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
+        } else {
+            this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
+        }
     }
 
     private boolean isMarioMovingOnTheStair() {

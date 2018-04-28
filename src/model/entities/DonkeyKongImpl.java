@@ -83,13 +83,13 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
         public void run() {
 
             while (creatingBarrels && ModelImpl.isRunning()) {
-                if(ModelImpl.isRunning()) {
+                if(ModelImpl.isRunning() && this.randomCreationTime.nextBoolean()) {
                     this.barrel = DonkeyKongImpl.this.bf.createStandardBarrel(STARTING_X_BARREL_POSITION,
                         STARTING_Y_BARREL_POSITION, new Dimension(BARREL_DIMENSION, BARREL_DIMENSION));
                     barrelsList.add(this.barrel);
                     this.launchBarrelAndSleep();
                 }
-                if(ModelImpl.isRunning()) {
+                else {
                     this.barrel = DonkeyKongImpl.this.bf.createClimbingBarrel(STARTING_X_BARREL_POSITION,
                         STARTING_Y_BARREL_POSITION, new Dimension(BARREL_DIMENSION, BARREL_DIMENSION));
                     barrelsList.add(this.barrel);

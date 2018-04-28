@@ -196,12 +196,12 @@ public class GameEngineImpl implements GameEngine {
             this.dk.getBarrelsList().forEach(br -> {
                 if (br instanceof ClimbingBarrel) {
                     if (br.getStatus() == EntityStatus.Climbing) {
-                        this.drawer.drawEntity(Sprites.BARREL_CLIMBING, br.getX().intValue(),
+                        this.drawer.drawEntity(Sprites.CLIMBING_BARREL, br.getX().intValue(),
                                 br.getY().intValue());
                     } else if (this.isMovingRight(br)) {
-                        this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
+                        this.drawer.drawEntity(Sprites.CLIMBING_BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
                     } else {
-                        this.drawer.drawEntity(Sprites.BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
+                        this.drawer.drawEntity(Sprites.CLIMBING_BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
                     }
                 } else if (this.isMovingRight(br)) {
                     this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());

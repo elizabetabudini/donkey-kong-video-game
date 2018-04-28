@@ -21,8 +21,8 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
     private final AgentBarrelsCreator barrels;
     private final MovingBarrels barrelsMovement;
     private final static double ZERO = 0.0;
-    private final static int MAX_TIME = 2700;
-    private final static int STARTING_TIME = 450;
+    private final static int MAX_TIME = 3000;
+    private final static int STARTING_TIME = 1000;
     private final static double STARTING_X_BARREL_POSITION = 75.0;
     private final static double STARTING_Y_BARREL_POSITION = 115.0;
     private final static int BARREL_DIMENSION = 20;
@@ -107,7 +107,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
         private void launchBarrelAndSleep() {
             DonkeyKongImpl.this.launchingBarrel = true;
             try {
-                Thread.sleep(5000); // sleep to change Sprites of Dk launching barrels
+                Thread.sleep(DONKEY_SLEEP_TIME); // sleep to change Sprites of Dk launching barrels
             } catch (InterruptedException ex) {
                 this.interrupt();
             }

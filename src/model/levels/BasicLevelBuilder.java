@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import controller.levels.levelManager;
+import controller.levels.LevelManager;
 import model.entities.DonkeyKongImpl;
 import model.entities.FloorTile;
 import model.entities.FloorTileImpl;
@@ -17,7 +17,7 @@ import model.entities.Stair;
 import model.entities.StairImpl;
 
 /**
- * The class called by the {@link levelManager} to build a basic level.
+ * The class called by the {@link LevelManager} to build a basic level.
  */
 
 public class BasicLevelBuilder extends BasicLevelImpl{

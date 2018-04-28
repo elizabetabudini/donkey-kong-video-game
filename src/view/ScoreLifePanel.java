@@ -35,7 +35,7 @@ public class ScoreLifePanel extends JPanel {
         setBackground(Color.RED);
         score.setHorizontalAlignment(SwingConstants.CENTER);
         this.add(score);
-        updateScore(0,0);
+        updateScore(-1,-1);
     }
 
     /**
@@ -46,7 +46,13 @@ public class ScoreLifePanel extends JPanel {
      */
     public static void updateScore(final int lives, final int score) {
         SwingUtilities.invokeLater(() -> {
-            ScoreLifePanel.score.setText("Lives: " + lives + " | Score: " + score);
+            if(lives == 0) {
+                ScoreLifePanel.score.setText("GAME OVER");
+            }
+            else {
+                ScoreLifePanel.score.setText("Lives: " + lives + " | Score: " + score);
+            }
+
         });
     }
 

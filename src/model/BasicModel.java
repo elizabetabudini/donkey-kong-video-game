@@ -85,8 +85,8 @@ public class BasicModel extends ModelImpl{
         }
         
         if(this.getMario().getStatus().equals(EntityStatus.Dead)) {
+            currentLives--;
             if(!this.checkGameOver()) {
-                currentLives--;
                 getDonkeyKong().clearBarrelsList();
                 getMario().setX(this.getCurrentLevel().getMarioSpawn().getX());
                 getMario().setY(this.getCurrentLevel().getMarioSpawn().getY());

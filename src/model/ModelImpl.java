@@ -26,7 +26,7 @@ public abstract class ModelImpl implements ModelInterface{
     
 
     public final static int HEIGHT = 540;
-    public final static int WIDTH = 460;
+    public final static int WIDTH = 450;
     
     private final static double DIFFICULTY_OFFSET = 0.03;
     private final static int PLAYER_LIFE = 3;

@@ -42,12 +42,12 @@ public class LevelManager {
     
     public File getLevel(final String path) {
             try {
-                final File file = new File("level1.txt");
+                final File file = File.createTempFile("level", ".txt");
                 FileUtils.copyInputStreamToFile(this.getClass().getResourceAsStream("/" + path), file);
                 return file;
                 
             } catch (IOException e) {
-                // TODO Auto-generated catch block
+                System.out.println("Could not find level file ");
                 e.printStackTrace();
             }
             return null;

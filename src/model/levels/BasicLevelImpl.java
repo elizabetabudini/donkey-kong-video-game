@@ -122,13 +122,6 @@ public abstract class BasicLevelImpl extends ModelImpl implements BasicLevel , M
     }
 
     /**
-     * {@inheritDoc}
-     */
-    protected BasicLevel getCurrentLevel() {
-        return (BasicLevel) super.getCurrentLevel();
-    }
-
-    /**
      * {@inheritDoc}}
      */
     public void updateGame() {
@@ -146,8 +139,8 @@ public abstract class BasicLevelImpl extends ModelImpl implements BasicLevel , M
             currentLives--;
             if (!this.checkGameOver()) {
                 getDonkeyKong().clearBarrelsList();
-                getMario().setX(this.getCurrentLevel().getMarioSpawn().getX());
-                getMario().setY(this.getCurrentLevel().getMarioSpawn().getY());
+                getMario().setX(getMarioSpawn().getX());
+                getMario().setY(getMarioSpawn().getY());
                 getMario().setStatus(EntityStatus.OnTheFloor);
                 restart();
             } else {

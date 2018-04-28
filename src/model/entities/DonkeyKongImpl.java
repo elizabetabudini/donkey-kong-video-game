@@ -102,7 +102,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
         private void launchBarrelAndSleep() {
             DonkeyKongImpl.this.launchingBarrel = true;
             try {
-                Thread.sleep(DONKEY_SLEEP_TIME); // sleep to change Sprites of Dk launching barrels
+                Thread.sleep(5000); // sleep to change Sprites of Dk launching barrels
             } catch (InterruptedException ex) {
                 this.interrupt();
             }
@@ -139,7 +139,6 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
         public void run() {
             this.stopped = false;
             while (!stopped) {
-                // System.out.println(getBarrelsList().toString());
                 try {
                     Thread.sleep(GameEngineImpl.PERIOD);
                 } catch (InterruptedException ex) {

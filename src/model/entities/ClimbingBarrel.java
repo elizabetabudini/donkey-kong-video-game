@@ -16,18 +16,18 @@ public class ClimbingBarrel extends AbstractBarrelImpl {
 
     public ClimbingBarrel(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
-        lastDirX = getCurrentDirection();
+        lastDirX = this.getCurrentDirection();
     }
 
     @Override
     protected void checkDirection() {
-        if (ModelImpl.canClimbDown(this) && getStatus() != EntityStatus.Climbing) {
+        if (ModelImpl.canClimbDown(this) && this.getStatus() != EntityStatus.Climbing) {
             this.changeDirection();
             this.setStatus(EntityStatus.Climbing);
-        } else if (getStatus() == EntityStatus.OnTheFloor) {
+        } else if (this.getStatus() == EntityStatus.OnTheFloor) {
             this.setDirection(lastDirX);
         }
-        this.addMovement(getCurrentDirection());
+        this.addMovement(this.getCurrentDirection());
     }
 
     protected void changeDirection() {

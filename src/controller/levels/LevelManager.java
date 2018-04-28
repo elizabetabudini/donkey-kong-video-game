@@ -50,15 +50,14 @@ public class LevelManager {
      * 
      * @return the next level to be played, it always returns a level.
      */
-    public GameLevel getNextLevel() {
-
+    public File getNextLevel() {
         if (levels.hasNext()) {
-            return new BasicLevelBuilder(levels.next());
+            return levels.next();
         } else {
             while (levels.previousIndex() >= 0) {
                 levels.previous();
             }
-            return new BasicLevelBuilder(levels.next());
+            return levels.next();
         }
     }
 
@@ -68,6 +67,6 @@ public class LevelManager {
      * @return a boolean, true is the current level is the last one.
      */
     public boolean isLast() {
-        return levels.hasNext() ? false : true;
+        return levels.hasNext();
     }
 }

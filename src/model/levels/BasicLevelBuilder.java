@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import controller.levels.LevelManager;
 import model.entities.DonkeyKongImpl;
 import model.entities.FloorTile;
 import model.entities.FloorTileImpl;
@@ -20,20 +19,27 @@ import model.entities.StairImpl;
  * The class called by the {@link LevelManager} to build a basic level.
  */
 
-public class BasicLevelBuilder extends BasicLevelImpl{
-    
-    List<FloorTile> floor = new ArrayList<>();
-    List<Stair> stairs = new ArrayList<>();
-    Scanner sc;
+public class BasicLevelBuilder extends BasicLevelImpl {
+
+    private List<FloorTile> floor1 = new ArrayList<>();
+    private List<Stair> stairs1 = new ArrayList<>();
+    private Scanner sc;
     String tmp;
+
+    public BasicLevelBuilder() {
+        super();
+        floor1 = new ArrayList<>();
+        stairs1= new ArrayList<>();
+    }
     
-    public BasicLevelBuilder(final File level) {
-        
+    public void build(final File level) {
+        floor1 = new ArrayList<>();
+        stairs1= new ArrayList<>();
         try {
             sc = new Scanner(level);
             while(sc.hasNext()) {
                 tmp = new String(sc.next());
-                
+
                 if(tmp.equals("name")) {
                 super.setLevelName(tmp);
                 } else if(tmp.equals("image_directory")) {
@@ -45,18 +51,17 @@ public class BasicLevelBuilder extends BasicLevelImpl{
                 } else if (tmp.equals("princess")) {
                     super.setPrincess(new PrincessImpl(Double.parseDouble(sc.next()), Double.parseDouble(sc.next()), new Dimension(Integer.parseInt(sc.next()), Integer.parseInt(sc.next()))));
                 } else if (tmp.equals("floor")) {
-                    floor.add(new FloorTileImpl(Double.parseDouble(sc.next()), Double.parseDouble(sc.next()), new Dimension(Integer.parseInt(sc.next()), Integer.parseInt(sc.next()))));
+                    this.floor1.add(new FloorTileImpl(Double.parseDouble(sc.next()), Double.parseDouble(sc.next()), new Dimension(Integer.parseInt(sc.next()), Integer.parseInt(sc.next()))));
                 } else if (tmp.equals("stair")) {
-                    stairs.add(new StairImpl(Double.parseDouble(sc.next()), Double.parseDouble(sc.next()), new Dimension(Integer.parseInt(sc.next()), Integer.parseInt(sc.next()))));
+                    this.stairs1.add(new StairImpl(Double.parseDouble(sc.next()), Double.parseDouble(sc.next()), new Dimension(Integer.parseInt(sc.next()), Integer.parseInt(sc.next()))));
                 }
             }
-            
-            super.setStairs(stairs);
-            super.setFloor(floor);
-            
+
+            super.setStairs(stairs1);
+            super.setFloor(floor1);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        
     }
 }

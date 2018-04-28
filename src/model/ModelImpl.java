@@ -78,7 +78,6 @@ public abstract class ModelImpl implements ModelInterface {
         ModelImpl.currentLives = PLAYER_LIFE;
         gameDifficulty = 1;
         levelManager = new LevelManager();
-        setCurrentLevel(levelManager.getNextLevel());
     }
 
     /**
@@ -131,7 +130,7 @@ public abstract class ModelImpl implements ModelInterface {
      * {@inheritDoc}
      */
     public boolean won() {
-        return gameStatus == GameStatus.Won ? true : false;
+        return gameStatus == GameStatus.Won;
     }
 
     /**
@@ -140,7 +139,7 @@ public abstract class ModelImpl implements ModelInterface {
      * @return boolean true if the game is over, false otherwise.
      */
     public static Boolean isOver() {
-        return gameStatus == GameStatus.Over ? true : false;
+        return gameStatus == GameStatus.Over;
     }
 
     /**
@@ -192,7 +191,7 @@ public abstract class ModelImpl implements ModelInterface {
         if (levelManager.isLast()) {
             updateGameDifficulty();
         }
-        setCurrentLevel(levelManager.getNextLevel());
+        build(levelManager.getNextLevel());
         setGameStatus(GameStatus.Won);
     }
 
@@ -206,31 +205,10 @@ public abstract class ModelImpl implements ModelInterface {
         gameStatus = currentStatus;
     }
 
-    /**
-     * Getter for the {@link FloorTile}.
-     * 
-     * @return the list containing all the floor tiles.
-     */
-    protected List<? extends FloorTile> getFloor() {
-        return this.getCurrentLevel().getFloor();
-    }
-
-    /**
-     * Getter for the {@link Stair}.
-     * 
-     * @return the list containing all the stairs.
-     */
-    protected List<? extends Stair> getStairs() {
-        return this.getCurrentLevel().getStairs();
-    }
-
     private void updateGameDifficulty() {
         gameDifficulty = gameDifficulty + DIFFICULTY_OFFSET;
     }
 
-    private void setCurrentLevel(final GameLevel currentLevel) {
-        this.currentLevel = currentLevel;
-    }
 
     /**
      * The method that manage the status of the given entity.
@@ -242,8 +220,8 @@ public abstract class ModelImpl implements ModelInterface {
         Optional<? extends FloorTile> floorTile = Optional.empty();
         Optional<? extends Stair> stair = Optional.empty();
 
-        floorTile = this.getFloor().stream().filter(T -> entity.isColliding(T)).findFirst();
-        stair = this.getStairs().stream().filter(S -> entity.isColliding(S)).findFirst();
+        floorTile = floor.stream().filter(T -> entity.isColliding(T)).findFirst();
+        stair = stairs.stream().filter(S -> entity.isColliding(S)).findFirst();
 
         // upper stair end
         if (!stair.isPresent() && entity.getStatus() == EntityStatus.Climbing

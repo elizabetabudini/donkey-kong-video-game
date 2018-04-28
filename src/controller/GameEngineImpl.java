@@ -2,7 +2,6 @@ package controller;
 
 import java.util.Set;
 import javax.swing.SwingUtilities;
-import model.BasicModel;
 import model.GameStatus;
 import model.ModelImpl;
 import model.entities.AbstractBarrel;
@@ -13,6 +12,9 @@ import model.entities.EntityStatus;
 import model.entities.Mario;
 import model.entities.Movement;
 import model.entities.Princess;
+import model.levels.BasicLevel;
+import model.levels.BasicLevelBuilder;
+import model.levels.BasicLevelImpl;
 import view.DrawableCanvas;
 import view.GameScreenImpl;
 import view.InputHandler;
@@ -35,7 +37,7 @@ public class GameEngineImpl implements GameEngine {
     private DrawableCanvas drawer;
     private Sprites marioSprite;
     private Sprites donkeySprite;
-    private BasicModel model;
+    private BasicLevelImpl model;
 
     public GameEngineImpl(final GameScreenImpl gameScreen) {
         super();
@@ -54,7 +56,7 @@ public class GameEngineImpl implements GameEngine {
     }
 
     private void initModel() {
-        this.model = new BasicModel();
+        this.model = new BasicLevelBuilder();
         this.initCharacters();
     }
 

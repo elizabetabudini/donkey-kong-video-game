@@ -1,5 +1,7 @@
 package model;
 
+import java.io.File;
+
 /**
  * The interface that defines the main methods to create the game.
  */
@@ -36,5 +38,7 @@ public interface ModelInterface {
      * The main function that update the entities and the game itself.
      */
     void updateGame();
+    
+    abstract void build(final File file);
 
 }

@@ -69,13 +69,9 @@ public enum Sprites {
      */
     BARREL_LEFT("barrel_rolling_left.gif", new Dimension(20, 20)),
     /**
-     * The barrelOnStair sprite, rotating.
-     */
-    BARREL_ON_STAIR_ROLLING("barrel_rolling_right.gif", new Dimension(20, 20)),
-    /**
      * The barrel sprite, falling down the stairs.
      */
-    BARREL_FALLING_ON_STAIRS("barrel_falling_on_stair.gif", new Dimension(25, 20)),
+    BARREL_FALLING_ON_STAIRS("barrel_falling_on_stair.gif", new Dimension(24, 24)),
 
     /**
      * Test sprite of a floor for debug purpose.

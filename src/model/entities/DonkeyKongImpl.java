@@ -20,6 +20,8 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
     private boolean launchingBarrel;
     private final AgentBarrelsCreator barrels;
     private final MovingBarrels barrelsMovement;
+    private final static int TWO = 2;
+    private final static int ONE = 1;
     private final static double ZERO = 0.0;
     private final static int MAX_TIME = 3000;
     private final static int STARTING_TIME = 1000;
@@ -75,6 +77,8 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
         private volatile boolean creatingBarrels = true;
         private AbstractBarrel barrel;
         private final Random randomCreationTime = new Random();
+        private final Random random = new Random();
+        private int randomCreationFlag;
 
         protected AgentBarrelsCreator() {
             super();
@@ -83,19 +87,21 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
         public void run() {
 
             while (creatingBarrels && ModelImpl.isRunning()) {
-                if(ModelImpl.isRunning()) {
-                    this.barrel = DonkeyKongImpl.this.bf.createStandardBarrel(STARTING_X_BARREL_POSITION,
-                        STARTING_Y_BARREL_POSITION, new Dimension(BARREL_DIMENSION, BARREL_DIMENSION));
-                    barrelsList.add(this.barrel);
-                    this.launchBarrelAndSleep();
+                this.randomCreationFlag = this.random.nextInt(TWO);
+                if (ModelImpl.isRunning()) {
+                    if (this.randomCreationFlag == ONE) {
+                        this.barrel = DonkeyKongImpl.this.bf.createStandardBarrel(STARTING_X_BARREL_POSITION,
+                                STARTING_Y_BARREL_POSITION, new Dimension(BARREL_DIMENSION, BARREL_DIMENSION));
+                        barrelsList.add(this.barrel);
+                        this.launchBarrelAndSleep();
+                    } else {
+                        this.barrel = DonkeyKongImpl.this.bf.createClimbingBarrel(STARTING_X_BARREL_POSITION,
+                                STARTING_Y_BARREL_POSITION, new Dimension(BARREL_DIMENSION, BARREL_DIMENSION));
+                        barrelsList.add(this.barrel);
+                        this.launchBarrelAndSleep();
+                    }
+                    this.checkBarrels();
                 }
-                if(ModelImpl.isRunning()) {
-                    this.barrel = DonkeyKongImpl.this.bf.createClimbingBarrel(STARTING_X_BARREL_POSITION,
-                        STARTING_Y_BARREL_POSITION, new Dimension(BARREL_DIMENSION, BARREL_DIMENSION));
-                    barrelsList.add(this.barrel);
-                    this.launchBarrelAndSleep();
-                }
-                this.checkBarrels();
             }
         }
 

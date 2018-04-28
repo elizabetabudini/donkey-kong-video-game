@@ -54,6 +54,6 @@ public interface GameEngine {
      * @return
      *          {@link Mario}
      */
-    public Mario getMario();
+    Mario getMario();
 
 }

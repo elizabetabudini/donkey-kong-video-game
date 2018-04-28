@@ -170,12 +170,11 @@ public class GameEngineImpl implements GameEngine {
 
         // Draw DonkeyKong
         if (this.dk.isLaunchingBarrel()) {
-            this.drawer.drawEntity(Sprites.GORILLA_FACING_RIGHT, this.dk.getX().intValue(), this.dk.getY().intValue());
             this.donkeySprite = Sprites.GORILLA_FACING_RIGHT;
         } else {
-            this.drawer.drawEntity(Sprites.GORILLA_IDLE, this.dk.getX().intValue(), this.dk.getY().intValue());
             this.donkeySprite = Sprites.GORILLA_IDLE;
         }
+        this.drawer.drawEntity(this.donkeySprite, this.dk.getX().intValue(), this.dk.getY().intValue());
 
         // draw barrels
         if (!this.model.getBarrels().isEmpty()) {

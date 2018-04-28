@@ -1,5 +1,5 @@
 package model.entities;
 
-public interface Princess extends StaticEntity{
+public interface Princess extends Entity{
 
 }

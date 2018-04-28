@@ -96,7 +96,7 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     }
 
     @Override
-    public void setPrevStatus(final EntityStatus prevStatus) {
+    final public void setPrevStatus(final EntityStatus prevStatus) {
         this.prevStatus = prevStatus;
     }
 }

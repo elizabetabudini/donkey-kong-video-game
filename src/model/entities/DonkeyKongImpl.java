@@ -13,7 +13,7 @@ import model.ModelImpl;
  *
  * An implementation of {@link DonkeyKong}
  */
-public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKong {
+public class DonkeyKongImpl extends EntityImpl implements  DonkeyKong {
 
     private volatile List<AbstractBarrel> barrelsList;
     private final AgentBarrelsCreator barrels;

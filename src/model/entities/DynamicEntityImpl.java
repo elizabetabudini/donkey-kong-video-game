@@ -43,9 +43,6 @@ public abstract class DynamicEntityImpl extends EntityImpl implements DynamicEnt
                 this.setDirection(dir.get());
                 this.setX(this.getX() + deltaX);
             }
-            else if(dir.get() == Movement.DOWN) {
-                this.setY(this.getY() + deltaY);
-            }
             return;
         }
         this.setY(this.getY() + deltaY);

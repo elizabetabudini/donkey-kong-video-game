@@ -1,6 +1,10 @@
 package controller.levels;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,21 +23,19 @@ import model.levels.GameLevel;
  *              At the moment can manage only {@link BasicLevel}
  */
 
-public class levelManager {
-    static final String LEVELS_DIR = Paths.get(".").toAbsolutePath().normalize().toString() + File.separator + "res" + File.separator + "levels";
+public class LevelManager {
+    static final String LEVELS_DIR = "levels/";
     
-    private static final File DIR = new File(LEVELS_DIR);
-    
-    private final List<File> availableLevels;
+    private final List<String> availableLevels = new ArrayList<>(Arrays.asList("level1st.txt"));
     private final ListIterator<File> levels;
     
-    public levelManager(){
-        availableLevels = new ArrayList<>(Arrays.asList(DIR.listFiles())).stream().filter(X -> X.toString().contains(".txt")).sorted().collect(Collectors.toList());
-        levels = availableLevels.stream().collect(Collectors.toList()).listIterator();
+    public LevelManager(){
+        levels = availableLevels.stream().sorted().map(X -> getLevel(LEVELS_DIR+X)).collect(Collectors.toList()).listIterator();
     }
     
-    private GameLevel buildBasicLevel(final File level) {
-        return new BasicLevelBuilder(level);
+    public File getLevel(final String path) {
+            final URL levelURL = LevelManager.class.getResource("/" + path);
+            return new File(levelURL.getPath());
     }
     
     /**
@@ -44,13 +46,13 @@ public class levelManager {
     public GameLevel getNextLevel(){
 
         if(levels.hasNext()) {
-            return buildBasicLevel(levels.next());
+            return new BasicLevelBuilder(levels.next());
         }
         else {
             while(levels.previousIndex() >= 0) {
                 levels.previous();
             }
-            return buildBasicLevel(levels.next());
+            return new BasicLevelBuilder(levels.next());
         }
     }
     

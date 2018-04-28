@@ -3,7 +3,7 @@ package model;
 import java.util.List;
 import java.util.Optional;
 
-import controller.levels.levelManager;
+import controller.levels.LevelManager;
 import model.entities.DynamicEntity;
 import model.entities.EntityStatus;
 import model.entities.FloorTile;
@@ -43,7 +43,7 @@ public abstract class ModelImpl implements ModelInterface{
     protected static int currentLives;
     
     //level
-    protected levelManager levelManager;
+    protected LevelManager levelManager;
     
     protected static List<? extends Stair> stairs;
     protected static List<? extends FloorTile> floor;
@@ -52,7 +52,7 @@ public abstract class ModelImpl implements ModelInterface{
         ModelImpl.score = 0;
         ModelImpl.currentLives = PLAYER_LIFE;
         gameDifficulty = 1;
-        levelManager = new levelManager();
+        levelManager = new LevelManager();
         setCurrentLevel(levelManager.getNextLevel());
     }
     

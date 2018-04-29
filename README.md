@@ -16,6 +16,11 @@ Repository per "Donky Kong", una riedizione Java del famoso Donkey Kong, platfor
 ## Contacts
 
  **Luca.rispoli@studio.unibo.it** 
+ 
+## Instructions
+
+Download and run DonkyKong.jar . 
+Please make sure you have a working JRE installed.
 
 
 

@@ -109,7 +109,7 @@ public class GameEngineImpl implements GameEngine {
      * @return The current score.
      */
     public static Integer getScore() {
-        return ModelImpl.WIDTH;
+        return ModelImpl.getScore();
     }
 
     private void translateInputs() {

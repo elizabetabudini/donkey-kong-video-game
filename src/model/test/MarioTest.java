@@ -18,6 +18,7 @@ import model.entities.Movement;
  */
 public class MarioTest {
 
+    private static final double STEP = 1.4;
     /**
      * Testing Mario's movement inside the game's world.
      */
@@ -25,16 +26,16 @@ public class MarioTest {
     public void testMarioMovement() {
         final Mario tester = new MarioImpl(10.0, 20.0, new Dimension());
         tester.move(Optional.of(Movement.LEFT));
-        assertEquals("Testing base movement towards left", Double.valueOf(9.0), Double.valueOf(tester.getX()));
+        assertEquals("Testing base movement towards left", Double.valueOf(10 - STEP), Double.valueOf(tester.getX()));
         tester.move(Optional.of(Movement.RIGHT));
         assertEquals("Testing base movement towards right", Double.valueOf(10.0), Double.valueOf(tester.getX()));
         for (int i = 0; i < ModelImpl.WIDTH; i++) {
             tester.move(Optional.of(Movement.RIGHT));
         }
-        assertEquals("Mario is not supposed to go over game borders", Double.valueOf(ModelImpl.WIDTH),
-                Double.valueOf(tester.getX()));
+        assertTrue("Mario is not supposed to go over game borders", tester.getX() < ModelImpl.WIDTH);
+        final Double oldX = tester.getX();
         tester.move(Optional.empty());
-        assertEquals("If dir is empty, Mario should not move", Double.valueOf(ModelImpl.WIDTH), Double.valueOf(tester.getX()));
+        assertEquals("If dir is empty, Mario should not move", oldX, tester.getX());
     }
 
 

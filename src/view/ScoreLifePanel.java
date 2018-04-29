@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-//import controller.GameEngine;
 /**
  * Panel on which display the time elapsed and the score during the game it will
  * be shown on the GameFrame beside the GameScreenPanel

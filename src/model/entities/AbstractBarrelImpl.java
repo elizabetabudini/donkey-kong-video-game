@@ -34,7 +34,7 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     public AbstractBarrelImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
         this.setPrevStatus(getStatus());
-        this.trigger = Optional.of(new BarrelTriggerImpl(this.getHitbox().getCenterX(), this.getY() - TRIGGER_HEIGHT,
+        this.trigger = Optional.of(new EntityImpl(this.getHitbox().getCenterX(), this.getY() - TRIGGER_HEIGHT,
                 new Dimension(TRIGGER_WIDTH, TRIGGER_HEIGHT)));
     }
 

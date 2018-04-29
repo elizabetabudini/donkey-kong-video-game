@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 
-import model.levels.BasicLevelBuilder;
+import model.levels.BasicLevelImpl;
 import model.levels.GameLevel;
 
 /**
@@ -53,12 +53,12 @@ public class LevelManager {
     public GameLevel getNextLevel() {
 
         if (levels.hasNext()) {
-            return new BasicLevelBuilder(levels.next());
+            return new BasicLevelImpl(levels.next());
         } else {
             while (levels.previousIndex() >= 0) {
                 levels.previous();
             }
-            return new BasicLevelBuilder(levels.next());
+            return new BasicLevelImpl(levels.next());
         }
     }
 
@@ -68,6 +68,6 @@ public class LevelManager {
      * @return a boolean, true is the current level is the last one.
      */
     public boolean isLast() {
-        return levels.hasNext() ? false : true;
+        return !levels.hasNext();
     }
 }

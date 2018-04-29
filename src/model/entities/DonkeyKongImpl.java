@@ -24,7 +24,7 @@ public class DonkeyKongImpl extends EntityImpl implements StaticEntity, DonkeyKo
     private final static int ONE = 1;
     private final static double ZERO = 0.0;
     private final static int MAX_TIME = 3000;
-    private final static int STARTING_TIME = 1000;
+    private final static int STARTING_TIME = 850;
     private final static double STARTING_X_BARREL_POSITION = 75.0;
     private final static double STARTING_Y_BARREL_POSITION = 115.0;
     private final static int BARREL_DIMENSION = 20;

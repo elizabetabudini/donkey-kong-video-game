@@ -17,6 +17,7 @@ import model.levels.BasicLevel;
 public class BasicModel extends ModelImpl {
 
     private static final int BARREL_SCORE = 150;
+    private static final int SCORE_INCREASE_FACTOR = 8;
 
     /**
      * The constructor of a basic model.
@@ -128,7 +129,7 @@ public class BasicModel extends ModelImpl {
                 return;
             } else if (X.getTrigger().isPresent()) {
                 if (mario.isColliding(X.getTrigger().get()) && mario.getStatus().equals(EntityStatus.Falling)) {
-                    updateScore(BARREL_SCORE);
+                    updateScore((int) (BARREL_SCORE * Math.pow(getGameDifficulty(), SCORE_INCREASE_FACTOR)));
                     X.removeTrigger();
                     return;
                 }

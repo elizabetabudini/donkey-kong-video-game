@@ -15,7 +15,7 @@ import model.levels.GameLevel;
  * The main model class to be extended to create a new model type.
  *
  * Every model should change according to the different types of
- * {@link GameLevel} wants to be runned.
+ * {@link GameLevel} wants to be ran.
  * 
  * WARNING : the model switch based on the type of level has not been managed
  * yet. At the moment can be managed only {@link BasicLevel}
@@ -38,7 +38,7 @@ public abstract class ModelImpl implements ModelInterface {
      */
     public static final Double GRAVITY = 0.09;
 
-    private static final double DIFFICULTY_OFFSET = 0.03;
+    private static final double DIFFICULTY_OFFSET = 0.07;
     private static final int PLAYER_LIFE = 3;
 
     // game info
@@ -50,7 +50,7 @@ public abstract class ModelImpl implements ModelInterface {
     private static int score;
 
     /**
-     * Lifes the player can lost before lose.
+     * Lives the player can lost before lose.
      */
     protected static int currentLives;
 
@@ -78,7 +78,7 @@ public abstract class ModelImpl implements ModelInterface {
         ModelImpl.currentLives = PLAYER_LIFE;
         gameDifficulty = 1;
         levelManager = new LevelManager();
-        setCurrentLevel(levelManager.getNextLevel());
+        currentLevel = levelManager.getNextLevel();
     }
 
     /**
@@ -131,7 +131,7 @@ public abstract class ModelImpl implements ModelInterface {
      * {@inheritDoc}
      */
     public boolean won() {
-        return gameStatus == GameStatus.Won ? true : false;
+        return gameStatus == GameStatus.Won;
     }
 
     /**
@@ -140,7 +140,7 @@ public abstract class ModelImpl implements ModelInterface {
      * @return boolean true if the game is over, false otherwise.
      */
     public static Boolean isOver() {
-        return gameStatus == GameStatus.Over ? true : false;
+        return gameStatus == GameStatus.Over;
     }
 
     /**
@@ -192,7 +192,7 @@ public abstract class ModelImpl implements ModelInterface {
         if (levelManager.isLast()) {
             updateGameDifficulty();
         }
-        setCurrentLevel(levelManager.getNextLevel());
+        currentLevel = levelManager.getNextLevel();
         setGameStatus(GameStatus.Won);
     }
 
@@ -206,31 +206,10 @@ public abstract class ModelImpl implements ModelInterface {
         gameStatus = currentStatus;
     }
 
-    /**
-     * Getter for the {@link FloorTile}.
-     * 
-     * @return the list containing all the floor tiles.
-     */
-    protected List<? extends FloorTile> getFloor() {
-        return this.getCurrentLevel().getFloor();
-    }
-
-    /**
-     * Getter for the {@link Stair}.
-     * 
-     * @return the list containing all the stairs.
-     */
-    protected List<? extends Stair> getStairs() {
-        return this.getCurrentLevel().getStairs();
-    }
-
     private void updateGameDifficulty() {
         gameDifficulty = gameDifficulty + DIFFICULTY_OFFSET;
     }
 
-    private void setCurrentLevel(final GameLevel currentLevel) {
-        this.currentLevel = currentLevel;
-    }
 
     /**
      * The method that manage the status of the given entity.
@@ -242,8 +221,8 @@ public abstract class ModelImpl implements ModelInterface {
         Optional<? extends FloorTile> floorTile = Optional.empty();
         Optional<? extends Stair> stair = Optional.empty();
 
-        floorTile = this.getFloor().stream().filter(T -> entity.isColliding(T)).findFirst();
-        stair = this.getStairs().stream().filter(S -> entity.isColliding(S)).findFirst();
+        floorTile = floor.stream().filter(T -> entity.isColliding(T)).findFirst();
+        stair = stairs.stream().filter(S -> entity.isColliding(S)).findFirst();
 
         // upper stair end
         if (!stair.isPresent() && entity.getStatus() == EntityStatus.Climbing

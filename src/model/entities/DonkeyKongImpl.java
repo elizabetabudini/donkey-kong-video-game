@@ -11,9 +11,9 @@ import model.ModelImpl;
 
 /**
  *
- * An implementation of {@link DonkeyKong}
+ * An implementation of {@link DonkeyKong}.
  */
-public class DonkeyKongImpl extends EntityImpl implements  DonkeyKong {
+public class DonkeyKongImpl extends EntityImpl implements DonkeyKong {
 
     private volatile List<AbstractBarrel> barrelsList;
     private final AgentBarrelsCreator barrels;
@@ -39,8 +39,6 @@ public class DonkeyKongImpl extends EntityImpl implements  DonkeyKong {
     @Override
     public List<AbstractBarrel> getBarrelsList() {
         return new ArrayList<>(this.barrelsList);
-        // TODO change with unmodifiableList
-        // return Collections.unmodifiableList(this.barrelsList);
     }
 
     @Override
@@ -59,7 +57,7 @@ public class DonkeyKongImpl extends EntityImpl implements  DonkeyKong {
         this.barrels.stopThread();
         this.barrelsMovement.stopThread();
     }
-    
+
     public void clearBarrelsList() {
         this.barrelsList.clear();
     }
@@ -67,7 +65,7 @@ public class DonkeyKongImpl extends EntityImpl implements  DonkeyKong {
     /**
      * 
      * An inner class responsible of creating new barrels using a dedicated
-     * independent Thread
+     * independent Thread.
      *
      */
     private class AgentBarrelsCreator extends Thread {
@@ -123,7 +121,7 @@ public class DonkeyKongImpl extends EntityImpl implements  DonkeyKong {
 
         private int getSleepTime() {
             return STARTING_TIME + this.randomCreationTime
-                    .nextInt((int) (MAX_TIME / ModelImpl.getGameDifficulty()));
+                                   .nextInt((int) (MAX_TIME / ModelImpl.getGameDifficulty()));
         }
 
         protected void stopThread() {
@@ -137,7 +135,7 @@ public class DonkeyKongImpl extends EntityImpl implements  DonkeyKong {
     /**
      * 
      * An inner class responsible of moving each barrels actually created with a
-     * dedicated independent Thread
+     * dedicated independent Thread.
      *
      */
     private class MovingBarrels extends Thread {
@@ -167,5 +165,3 @@ public class DonkeyKongImpl extends EntityImpl implements  DonkeyKong {
     }
 
 }
-
-

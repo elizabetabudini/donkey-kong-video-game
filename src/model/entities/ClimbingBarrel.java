@@ -16,7 +16,7 @@ public class ClimbingBarrel extends AbstractBarrelImpl {
 
     public ClimbingBarrel(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
-        lastDirX = this.getCurrentDirection();
+        this.lastDirX = this.getCurrentDirection();
     }
 
     @Override
@@ -34,12 +34,12 @@ public class ClimbingBarrel extends AbstractBarrelImpl {
         this.setDirection(Movement.DOWN);
         this.addMovement(Movement.DOWN);
 
-        if (lastDirX == Movement.RIGHT) {
+        if (this.lastDirX == Movement.RIGHT) {
             this.addMovement(Movement.LEFT);
-            lastDirX = Movement.LEFT;
+            this.lastDirX = Movement.LEFT;
         } else if (lastDirX == Movement.LEFT) {
             this.addMovement(Movement.RIGHT);
-            lastDirX = Movement.RIGHT;
+            this.lastDirX = Movement.RIGHT;
         }
     }
 }

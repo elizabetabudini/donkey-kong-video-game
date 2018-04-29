@@ -91,20 +91,20 @@ public class GameEngineImpl implements GameEngine {
     }
 
     /**
-     * A method to know if the game is over
-     * Check if {@link ModelImpl} status is set on {@link GameStatus} OVER
-     * @return 
-     *          A boolean
+     * A method to know if the game is over Check if {@link ModelImpl} status is set
+     * on {@link GameStatus} OVER.
+     * 
+     * @return A boolean
      */
     public static Boolean isGameOver() {
         return ModelImpl.isOver();
     }
-    
+
     /**
-     * A method to get the score of the game
-     * Whenever {@link Mario} jump and avoid a {@link Barrel} it gets points
-     * @return 
-     *          The current score 
+     * A method to get the score of the game Whenever {@link Mario} jump and avoid a
+     * {@link Barrel} it gets points.
+     * 
+     * @return The current score
      */
     public static Integer getScore() {
         return ModelImpl.WIDTH;
@@ -181,13 +181,14 @@ public class GameEngineImpl implements GameEngine {
             this.dk.getBarrelsList().forEach(br -> {
                 if (br instanceof ClimbingBarrel) {
                     if (br.getStatus() == EntityStatus.Climbing) {
-                        this.drawer.drawEntity(Sprites.CLIMBING_BARREL, br.getX().intValue(),
-                                br.getY().intValue());
+                        this.drawer.drawEntity(Sprites.CLIMBING_BARREL, br.getX().intValue(), br.getY().intValue());
                     } else if (this.isMovingRight(br)) {
-                        this.drawer.drawEntity(Sprites.CLIMBING_BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
+                        this.drawer.drawEntity(Sprites.CLIMBING_BARREL_RIGHT, br.getX().intValue(),
+                                br.getY().intValue());
                     } else {
                         this.drawBarrelRightOrLeft(br);
-                        this.drawer.drawEntity(Sprites.CLIMBING_BARREL_LEFT, br.getX().intValue(), br.getY().intValue());
+                        this.drawer.drawEntity(Sprites.CLIMBING_BARREL_LEFT, br.getX().intValue(),
+                                br.getY().intValue());
                     }
                 } else {
                     this.drawBarrelRightOrLeft(br);
@@ -196,7 +197,7 @@ public class GameEngineImpl implements GameEngine {
         }
         SwingUtilities.invokeLater(() -> gameScreen.updateScreen());
     }
-    
+
     private void drawBarrelRightOrLeft(final AbstractBarrel br) {
         if (this.isMovingRight(br)) {
             this.drawer.drawEntity(Sprites.BARREL_RIGHT, br.getX().intValue(), br.getY().intValue());
@@ -244,7 +245,7 @@ public class GameEngineImpl implements GameEngine {
                 processInput();
                 updateGame();
                 render();
-                ScoreLifePanel.updateScore(model.getLife(),ModelImpl.getScore(),ModelImpl.getGameDifficulty());
+                ScoreLifePanel.updateScore(model.getLife(), ModelImpl.getScore(), ModelImpl.getGameDifficulty());
                 waitNextFrame(currentTime);
             }
         }

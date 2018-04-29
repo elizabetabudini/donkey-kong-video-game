@@ -2,6 +2,8 @@ package controller;
 
 import java.util.Set;
 import javax.swing.SwingUtilities;
+
+import controller.levels.LevelManager;
 import model.BasicModel;
 import model.GameStatus;
 import model.ModelImpl;
@@ -245,7 +247,7 @@ public class GameEngineImpl implements GameEngine {
                 processInput();
                 updateGame();
                 render();
-                ScoreLifePanel.updateScore(model.getLife(), ModelImpl.getScore(), ModelImpl.getGameDifficulty());
+                ScoreLifePanel.updateScore(model.getLife(), ModelImpl.getScore(),LevelManager.levelCounter());
                 waitNextFrame(currentTime);
             }
         }

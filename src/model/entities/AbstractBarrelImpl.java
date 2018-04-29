@@ -7,7 +7,7 @@ import model.ModelImpl;
 
 /**
  * 
- * An implementation of a {@link AbstractBarrel}
+ * An implementation of a {@link AbstractBarrel}.
  * 
  * Those kind of barrels will flip their horizontal direction at every fall.
  *
@@ -22,34 +22,34 @@ public abstract class AbstractBarrelImpl extends DynamicEntityImpl implements Ab
     private EntityStatus prevStatus;
 
     /**
-     * A constructor for a Barrel
+     * A constructor for a Barrel.
      * 
      * @param x
      *            The starting x Coordinate.
      * @param y
      *            The starting Y Coordinate.
      * @param dim
-     *            Dimension of a barrel's hitbox
+     *            Dimension of a barrel's hitbox.
      */
     public AbstractBarrelImpl(final Double x, final Double y, final Dimension dim) {
         super(x, y, dim);
-        this.setPrevStatus(getStatus());
+        this.setPrevStatus(this.getStatus());
         this.trigger = Optional.of(new EntityImpl(this.getHitbox().getCenterX(), this.getY() - TRIGGER_HEIGHT,
                 new Dimension(TRIGGER_WIDTH, TRIGGER_HEIGHT)));
     }
 
     @Override
     protected void tryToMove(final Movement dir) {
-        switch(dir) {
+        switch (dir) {
         case LEFT:
             this.setDeltaX(-STEP);
             this.setDeltaY(0);
             return;
-        case RIGHT:  
+        case RIGHT:
             this.setDeltaX(STEP);
             this.setDeltaY(0);
             return;
-        case DOWN:     
+        case DOWN:
             this.setDeltaY(getDeltaY() + ModelImpl.GRAVITY);
             this.setDeltaX(0);
             return;

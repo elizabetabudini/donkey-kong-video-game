@@ -22,6 +22,7 @@ import model.levels.GameLevel;
 
 public class LevelManager {
     static final String LEVELS_DIR = "levels/";
+    static private int levelCounter;
 
     private final List<String> availableLevels = new ArrayList<>(Arrays.asList("level1st.txt"));
     private final ListIterator<File> levels;
@@ -51,23 +52,30 @@ public class LevelManager {
      * @return the next level to be played, it always returns a level.
      */
     public GameLevel getNextLevel() {
-
-        if (levels.hasNext()) {
-            return new BasicLevelImpl(levels.next());
-        } else {
+        if (!levels.hasNext()) {
             while (levels.previousIndex() >= 0) {
                 levels.previous();
             }
-            return new BasicLevelImpl(levels.next());
         }
+        levelCounter++;
+        return new BasicLevelImpl(new BasicLevelBuilder(levels.next()));
     }
 
     /**
-     * A way to know if the avaible levels are over.
+     * A way to know if the available levels are over.
      * 
      * @return a boolean, true is the current level is the last one.
      */
     public boolean isLast() {
         return !levels.hasNext();
+    }
+
+    /**
+     * Getter for the number of victories.
+     * 
+     * @return int
+     */
+    public static int levelCounter() {
+        return levelCounter;
     }
 }

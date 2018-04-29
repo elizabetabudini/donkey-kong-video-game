@@ -74,16 +74,7 @@ public class GameEngineImpl implements GameEngine {
         this.handler = handler;
     }
 
-    // TODO remove test
-    /* just for the GameLoopTest */
-    public Sprites getMarioSpriteTest() {
-        return this.marioSprite;
-    }
-
-    public Sprites getDonkeySpriteTest() {
-        return this.donkeySprite;
-    }
-
+    @Override
     public Mario getMario() {
         return this.mario;
     }
@@ -94,6 +85,7 @@ public class GameEngineImpl implements GameEngine {
         this.model.getDonkeyKong().stopThreads();
     }
 
+    @Override
     public Boolean isGameRunning() {
         return this.gameRunning;
     }
@@ -137,13 +129,6 @@ public class GameEngineImpl implements GameEngine {
         };
     }
 
-    /**
-     * If the time elapsed between the currentTime and lastLoopTime is inferior to
-     * the period we have to wait.
-     * 
-     * @param currentTime
-     *            the current time
-     */
     private void waitNextFrame(final long currentTime) {
         final long delta = System.currentTimeMillis() - currentTime;
         if (delta < PERIOD) {
@@ -158,7 +143,7 @@ public class GameEngineImpl implements GameEngine {
     private void render() {
         this.drawer.drawEntity(Sprites.PRINCESS, this.princess.getX().intValue(), this.princess.getY().intValue());
 
-        // draw mario
+        // draw Mario
         if (this.mario.getStatus() == EntityStatus.Climbing) {
             if (this.isMarioMovingOnTheStair()) {
                 this.marioSprite = Sprites.MARIO_CLIMBING_STAIRS;
@@ -185,12 +170,11 @@ public class GameEngineImpl implements GameEngine {
 
         // Draw DonkeyKong
         if (this.dk.isLaunchingBarrel()) {
-            this.drawer.drawEntity(Sprites.GORILLA_FACING_RIGHT, this.dk.getX().intValue(), this.dk.getY().intValue());
             this.donkeySprite = Sprites.GORILLA_FACING_RIGHT;
         } else {
-            this.drawer.drawEntity(Sprites.GORILLA_IDLE, this.dk.getX().intValue(), this.dk.getY().intValue());
             this.donkeySprite = Sprites.GORILLA_IDLE;
         }
+        this.drawer.drawEntity(this.donkeySprite, this.dk.getX().intValue(), this.dk.getY().intValue());
 
         // draw barrels
         if (!this.model.getBarrels().isEmpty()) {

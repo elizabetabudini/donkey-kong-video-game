@@ -106,7 +106,7 @@ public class GameEngineImpl implements GameEngine {
      * A method to get the score of the game Whenever {@link Mario} jump and avoid a
      * {@link Barrel} it gets points.
      * 
-     * @return The current score
+     * @return The current score.
      */
     public static Integer getScore() {
         return ModelImpl.WIDTH;

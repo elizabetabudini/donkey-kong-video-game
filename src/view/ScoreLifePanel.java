@@ -48,7 +48,7 @@ public class ScoreLifePanel extends JPanel {
             if (lives == 0) {
                 ScoreLifePanel.score.setText("GAME OVER");
             } else {
-                ScoreLifePanel.score.setText("Lives: " + lives + " | Score: " + score + " | Level:" + level);
+                ScoreLifePanel.score.setText("Lives: " + lives + " | Score: " + score + " | Lvl:" + level);
             }
 
         });

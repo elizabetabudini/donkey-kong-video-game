@@ -1,9 +1,13 @@
 package model.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.awt.Dimension;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+
 import org.junit.jupiter.api.Test;
 
 import model.ModelImpl;
@@ -13,7 +17,7 @@ import model.entities.Movement;
 
 /**
  * Testing class for the main character's features.
- * @author Luca
+ * 
  *
  */
 public class MarioTest {

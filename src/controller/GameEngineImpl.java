@@ -244,7 +244,7 @@ public class GameEngineImpl implements GameEngine {
                 processInput();
                 updateGame();
                 render();
-                ScoreLifePanel.updateScore(model.getLife(),ModelImpl.getScore(),ModelImpl.getGameDifficulty());
+                ScoreLifePanel.updateScore(model.getLife(), ModelImpl.getScore());
                 waitNextFrame(currentTime);
             }
         }

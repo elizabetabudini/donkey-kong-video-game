@@ -15,10 +15,10 @@ Repository per "Donky Kong", una riedizione Java del famoso Donkey Kong, platfor
 
 ## Contacts
 
-*luca.rispoli@studio.unibo.it
-*elizabeta.budini@studio.unibo.it
-*samuele.gregori@studio.unibo.it
-*marco.creta@studio.unibo.it
+* luca.rispoli@studio.unibo.it
+* elizabeta.budini@studio.unibo.it
+* samuele.gregori@studio.unibo.it
+* marco.creta@studio.unibo.it
 
 ## Instructions
 

@@ -1,5 +1,6 @@
 # Project Title
 Repository per "Donky Kong", una riedizione Java del famoso Donkey Kong, platform sviluppato da Nintendo nel 1981.
+Il progetto è stato corretto e discusso, il voto medio assegnato è 28/30
 
 ## Built With
 

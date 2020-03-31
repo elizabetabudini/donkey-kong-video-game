@@ -1,6 +1,6 @@
 # Project Title
 Repository for "Donky Kong", a Java reissue of the famous Donkey Kong platform developed by Nintendo in 1981.
-The project has been corrected and discussed with the professor, the score given is 28/30
+The project has been evaluated by the University of Bologna, the score given is 28/30 on date 03/07/2018.
 
 ## Built With
 
